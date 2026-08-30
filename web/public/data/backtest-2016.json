@@ -1,0 +1,299 @@
+{
+  "season": 2016,
+  "generated_at": "2026-08-29T21:12:43+00:00",
+  "protocol": "Walk-forward: rate using only prior slates, then predict the next slate. TabPFN-3 is fit only on earlier games' pre-game features. Features are locked Pom plus extras (Elo, form, SOS). NIL and market spreads are never inputs. Logistic Pom+HFA is the fallback and uses the locked 10 only.",
+  "features": [
+    "pom_diff",
+    "home_pom",
+    "away_pom",
+    "adjo_diff",
+    "adjd_diff",
+    "st_diff",
+    "tempo_diff",
+    "is_home",
+    "home_games",
+    "away_games",
+    "elo_diff",
+    "form4_win_diff",
+    "form4_margin_diff",
+    "winpct_diff",
+    "avg_margin_diff",
+    "close_win_diff",
+    "sos_diff",
+    "rest_diff",
+    "luck_diff",
+    "quality_win_diff"
+  ],
+  "extra_features": [
+    "elo_diff",
+    "form4_win_diff",
+    "form4_margin_diff",
+    "winpct_diff",
+    "avg_margin_diff",
+    "close_win_diff",
+    "sos_diff",
+    "rest_diff",
+    "luck_diff",
+    "quality_win_diff"
+  ],
+  "engine_counts": {
+    "tabpfn-3": 815
+  },
+  "tabpfn_error": null,
+  "all_fbs": {
+    "fbs_n": 706,
+    "fbs_accuracy": 0.7082,
+    "fbs_brier": 0.1867,
+    "fbs_logloss": 0.5523,
+    "fbs_mae": 13.79,
+    "fbs_ats": 0.5211,
+    "fbs_ats_n": 687
+  },
+  "tabpfn": {
+    "tabpfn_n": 706,
+    "tabpfn_accuracy": 0.7082,
+    "tabpfn_brier": 0.1867,
+    "tabpfn_logloss": 0.5523,
+    "tabpfn_mae": 13.79,
+    "tabpfn_ats": 0.5211,
+    "tabpfn_ats_n": 687
+  },
+  "logistic": {
+    "logistic_n": 0
+  },
+  "calibration": [
+    {
+      "bucket": "0.0-0.1",
+      "n": 23,
+      "pred": 0.081,
+      "actual": 0.087
+    },
+    {
+      "bucket": "0.1-0.2",
+      "n": 46,
+      "pred": 0.152,
+      "actual": 0.239
+    },
+    {
+      "bucket": "0.2-0.3",
+      "n": 66,
+      "pred": 0.248,
+      "actual": 0.288
+    },
+    {
+      "bucket": "0.3-0.4",
+      "n": 66,
+      "pred": 0.359,
+      "actual": 0.348
+    },
+    {
+      "bucket": "0.4-0.5",
+      "n": 71,
+      "pred": 0.453,
+      "actual": 0.521
+    },
+    {
+      "bucket": "0.5-0.6",
+      "n": 62,
+      "pred": 0.551,
+      "actual": 0.532
+    },
+    {
+      "bucket": "0.6-0.7",
+      "n": 93,
+      "pred": 0.647,
+      "actual": 0.624
+    },
+    {
+      "bucket": "0.7-0.8",
+      "n": 92,
+      "pred": 0.752,
+      "actual": 0.674
+    },
+    {
+      "bucket": "0.8-0.9",
+      "n": 110,
+      "pred": 0.852,
+      "actual": 0.864
+    },
+    {
+      "bucket": "0.9-1.0",
+      "n": 77,
+      "pred": 0.936,
+      "actual": 0.935
+    }
+  ],
+  "by_week": [
+    {
+      "slate": 1,
+      "week": 1,
+      "week_n": 40,
+      "week_accuracy": 0.65,
+      "week_brier": 0.2353,
+      "week_logloss": 0.7087,
+      "week_mae": 16.93,
+      "week_ats": 0.5128,
+      "week_ats_n": 39
+    },
+    {
+      "slate": 2,
+      "week": 2,
+      "week_n": 46,
+      "week_accuracy": 0.8261,
+      "week_brier": 0.1344,
+      "week_logloss": 0.4187,
+      "week_mae": 14.13,
+      "week_ats": 0.4783,
+      "week_ats_n": 46
+    },
+    {
+      "slate": 3,
+      "week": 3,
+      "week_n": 55,
+      "week_accuracy": 0.8364,
+      "week_brier": 0.1443,
+      "week_logloss": 0.4514,
+      "week_mae": 12.65,
+      "week_ats": 0.5094,
+      "week_ats_n": 53
+    },
+    {
+      "slate": 4,
+      "week": 4,
+      "week_n": 52,
+      "week_accuracy": 0.6923,
+      "week_brier": 0.2057,
+      "week_logloss": 0.5973,
+      "week_mae": 13.18,
+      "week_ats": 0.4082,
+      "week_ats_n": 49
+    },
+    {
+      "slate": 5,
+      "week": 5,
+      "week_n": 57,
+      "week_accuracy": 0.6667,
+      "week_brier": 0.1857,
+      "week_logloss": 0.5421,
+      "week_mae": 12.88,
+      "week_ats": 0.4107,
+      "week_ats_n": 56
+    },
+    {
+      "slate": 6,
+      "week": 6,
+      "week_n": 53,
+      "week_accuracy": 0.5849,
+      "week_brier": 0.2164,
+      "week_logloss": 0.6125,
+      "week_mae": 13.77,
+      "week_ats": 0.6154,
+      "week_ats_n": 52
+    },
+    {
+      "slate": 7,
+      "week": 7,
+      "week_n": 50,
+      "week_accuracy": 0.76,
+      "week_brier": 0.1755,
+      "week_logloss": 0.5352,
+      "week_mae": 11.27,
+      "week_ats": 0.54,
+      "week_ats_n": 50
+    },
+    {
+      "slate": 8,
+      "week": 8,
+      "week_n": 52,
+      "week_accuracy": 0.6923,
+      "week_brier": 0.1926,
+      "week_logloss": 0.5779,
+      "week_mae": 12.79,
+      "week_ats": 0.5714,
+      "week_ats_n": 49
+    },
+    {
+      "slate": 9,
+      "week": 9,
+      "week_n": 52,
+      "week_accuracy": 0.6538,
+      "week_brier": 0.2107,
+      "week_logloss": 0.601,
+      "week_mae": 14.01,
+      "week_ats": 0.48,
+      "week_ats_n": 50
+    },
+    {
+      "slate": 10,
+      "week": 10,
+      "week_n": 59,
+      "week_accuracy": 0.7797,
+      "week_brier": 0.1489,
+      "week_logloss": 0.46,
+      "week_mae": 15.21,
+      "week_ats": 0.5439,
+      "week_ats_n": 57
+    },
+    {
+      "slate": 11,
+      "week": 11,
+      "week_n": 55,
+      "week_accuracy": 0.6909,
+      "week_brier": 0.2099,
+      "week_logloss": 0.608,
+      "week_mae": 13.65,
+      "week_ats": 0.5273,
+      "week_ats_n": 55
+    },
+    {
+      "slate": 12,
+      "week": 12,
+      "week_n": 58,
+      "week_accuracy": 0.7069,
+      "week_brier": 0.1823,
+      "week_logloss": 0.5335,
+      "week_mae": 14.59,
+      "week_ats": 0.6667,
+      "week_ats_n": 57
+    },
+    {
+      "slate": 13,
+      "week": 13,
+      "week_n": 60,
+      "week_accuracy": 0.6667,
+      "week_brier": 0.2048,
+      "week_logloss": 0.5905,
+      "week_mae": 14.86,
+      "week_ats": 0.5088,
+      "week_ats_n": 57
+    },
+    {
+      "slate": 14,
+      "week": 14,
+      "week_n": 16,
+      "week_accuracy": 0.75,
+      "week_brier": 0.1364,
+      "week_logloss": 0.4369,
+      "week_mae": 12.93,
+      "week_ats": 0.4375,
+      "week_ats_n": 16
+    },
+    {
+      "slate": 15,
+      "week": 15,
+      "week_n": 1,
+      "week_accuracy": 0.0,
+      "week_brier": 0.4363,
+      "week_logloss": 1.0803,
+      "week_mae": 10.92,
+      "week_ats": 1.0,
+      "week_ats_n": 1
+    }
+  ],
+  "calibration_applied": {
+    "id": "temperature",
+    "params": {
+      "T": 0.7167
+    }
+  }
+}

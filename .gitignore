@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+node_modules/
+web/dist/
+
+data/raw/
+data/cache/
+*.parquet
+
+.DS_Store
+.env
+.env.local

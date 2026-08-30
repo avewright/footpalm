@@ -1,0 +1,28 @@
+{
+  "season": 2026,
+  "generated_at": "2026-08-30T15:03:40+00:00",
+  "note": "Scores stamped onto frozen projections. TabPFN is not refit.",
+  "last_day": "2026-08-29",
+  "last": {
+    "n": 8,
+    "su_w": 6,
+    "su_l": 2,
+    "ats_w": 6,
+    "ats_l": 2,
+    "ats_n": 8,
+    "brier": 0.1637,
+    "logloss": 0.4997,
+    "mae": 10.79
+  },
+  "to_date": {
+    "n": 8,
+    "su_w": 6,
+    "su_l": 2,
+    "ats_w": 6,
+    "ats_l": 2,
+    "ats_n": 8,
+    "brier": 0.1637,
+    "logloss": 0.4997,
+    "mae": 10.79
+  }
+}

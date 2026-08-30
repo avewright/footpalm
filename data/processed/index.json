@@ -1,0 +1,56 @@
+{
+  "seasons": [
+    {
+      "season": 2014,
+      "teams": 128
+    },
+    {
+      "season": 2015,
+      "teams": 128
+    },
+    {
+      "season": 2016,
+      "teams": 128
+    },
+    {
+      "season": 2017,
+      "teams": 130
+    },
+    {
+      "season": 2018,
+      "teams": 130
+    },
+    {
+      "season": 2019,
+      "teams": 130
+    },
+    {
+      "season": 2020,
+      "teams": 76
+    },
+    {
+      "season": 2021,
+      "teams": 130
+    },
+    {
+      "season": 2022,
+      "teams": 131
+    },
+    {
+      "season": 2023,
+      "teams": 133
+    },
+    {
+      "season": 2024,
+      "teams": 134
+    },
+    {
+      "season": 2025,
+      "teams": 136
+    },
+    {
+      "season": 2026,
+      "teams": 138
+    }
+  ]
+}

@@ -1,0 +1,365 @@
+{
+  "seasons": [
+    {
+      "season": 2014,
+      "engines": {
+        "logistic": 80,
+        "tabpfn-3": 730
+      },
+      "fbs": {
+        "fbs_n": 705,
+        "fbs_accuracy": 0.6837,
+        "fbs_brier": 0.2051,
+        "fbs_logloss": 0.5968,
+        "fbs_mae": 14.69,
+        "fbs_ats": 0.5197,
+        "fbs_ats_n": 687
+      },
+      "tabpfn": {
+        "tabpfn_n": 669,
+        "tabpfn_accuracy": 0.6891,
+        "tabpfn_brier": 0.2032,
+        "tabpfn_logloss": 0.5926,
+        "tabpfn_mae": 14.4,
+        "tabpfn_ats": 0.5207,
+        "tabpfn_ats_n": 651
+      },
+      "logistic": {
+        "logistic_n": 36,
+        "logistic_accuracy": 0.5833,
+        "logistic_brier": 0.2412,
+        "logistic_logloss": 0.6756,
+        "logistic_mae": 20.04,
+        "logistic_ats": 0.5,
+        "logistic_ats_n": 36
+      }
+    },
+    {
+      "season": 2015,
+      "engines": {
+        "tabpfn-3": 822
+      },
+      "fbs": {
+        "fbs_n": 717,
+        "fbs_accuracy": 0.7503,
+        "fbs_brier": 0.1716,
+        "fbs_logloss": 0.5152,
+        "fbs_mae": 13.47,
+        "fbs_ats": 0.5107,
+        "fbs_ats_n": 699
+      },
+      "tabpfn": {
+        "tabpfn_n": 717,
+        "tabpfn_accuracy": 0.7503,
+        "tabpfn_brier": 0.1716,
+        "tabpfn_logloss": 0.5152,
+        "tabpfn_mae": 13.47,
+        "tabpfn_ats": 0.5107,
+        "tabpfn_ats_n": 699
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2016,
+      "engines": {
+        "tabpfn-3": 815
+      },
+      "fbs": {
+        "fbs_n": 706,
+        "fbs_accuracy": 0.7082,
+        "fbs_brier": 0.1867,
+        "fbs_logloss": 0.5523,
+        "fbs_mae": 13.79,
+        "fbs_ats": 0.5211,
+        "fbs_ats_n": 687
+      },
+      "tabpfn": {
+        "tabpfn_n": 706,
+        "tabpfn_accuracy": 0.7082,
+        "tabpfn_brier": 0.1867,
+        "tabpfn_logloss": 0.5523,
+        "tabpfn_mae": 13.79,
+        "tabpfn_ats": 0.5211,
+        "tabpfn_ats_n": 687
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2017,
+      "engines": {
+        "tabpfn-3": 828
+      },
+      "fbs": {
+        "fbs_n": 731,
+        "fbs_accuracy": 0.7086,
+        "fbs_brier": 0.1802,
+        "fbs_logloss": 0.534,
+        "fbs_mae": 13.35,
+        "fbs_ats": 0.4682,
+        "fbs_ats_n": 707
+      },
+      "tabpfn": {
+        "tabpfn_n": 731,
+        "tabpfn_accuracy": 0.7086,
+        "tabpfn_brier": 0.1802,
+        "tabpfn_logloss": 0.534,
+        "tabpfn_mae": 13.35,
+        "tabpfn_ats": 0.4682,
+        "tabpfn_ats_n": 707
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2018,
+      "engines": {
+        "tabpfn-3": 842
+      },
+      "fbs": {
+        "fbs_n": 731,
+        "fbs_accuracy": 0.7346,
+        "fbs_brier": 0.1735,
+        "fbs_logloss": 0.5185,
+        "fbs_mae": 13.05,
+        "fbs_ats": 0.4937,
+        "fbs_ats_n": 711
+      },
+      "tabpfn": {
+        "tabpfn_n": 731,
+        "tabpfn_accuracy": 0.7346,
+        "tabpfn_brier": 0.1735,
+        "tabpfn_logloss": 0.5185,
+        "tabpfn_mae": 13.05,
+        "tabpfn_ats": 0.4937,
+        "tabpfn_ats_n": 711
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2019,
+      "engines": {
+        "tabpfn-3": 847
+      },
+      "fbs": {
+        "fbs_n": 733,
+        "fbs_accuracy": 0.7503,
+        "fbs_brier": 0.1668,
+        "fbs_logloss": 0.5035,
+        "fbs_mae": 12.74,
+        "fbs_ats": 0.516,
+        "fbs_ats_n": 721
+      },
+      "tabpfn": {
+        "tabpfn_n": 733,
+        "tabpfn_accuracy": 0.7503,
+        "tabpfn_brier": 0.1668,
+        "tabpfn_logloss": 0.5035,
+        "tabpfn_mae": 12.74,
+        "tabpfn_ats": 0.516,
+        "tabpfn_ats_n": 721
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2020,
+      "engines": {
+        "tabpfn-3": 523
+      },
+      "fbs": {
+        "fbs_n": 489,
+        "fbs_accuracy": 0.726,
+        "fbs_brier": 0.1903,
+        "fbs_logloss": 0.5667,
+        "fbs_mae": 13.68,
+        "fbs_ats": 0.4864,
+        "fbs_ats_n": 479
+      },
+      "tabpfn": {
+        "tabpfn_n": 489,
+        "tabpfn_accuracy": 0.726,
+        "tabpfn_brier": 0.1903,
+        "tabpfn_logloss": 0.5667,
+        "tabpfn_mae": 13.68,
+        "tabpfn_ats": 0.4864,
+        "tabpfn_ats_n": 479
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2021,
+      "engines": {
+        "tabpfn-3": 847
+      },
+      "fbs": {
+        "fbs_n": 731,
+        "fbs_accuracy": 0.7059,
+        "fbs_brier": 0.1837,
+        "fbs_logloss": 0.5432,
+        "fbs_mae": 13.35,
+        "fbs_ats": 0.4779,
+        "fbs_ats_n": 724
+      },
+      "tabpfn": {
+        "tabpfn_n": 731,
+        "tabpfn_accuracy": 0.7059,
+        "tabpfn_brier": 0.1837,
+        "tabpfn_logloss": 0.5432,
+        "tabpfn_mae": 13.35,
+        "tabpfn_ats": 0.4779,
+        "tabpfn_ats_n": 724
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2022,
+      "engines": {
+        "tabpfn-3": 854
+      },
+      "fbs": {
+        "fbs_n": 734,
+        "fbs_accuracy": 0.6975,
+        "fbs_brier": 0.1934,
+        "fbs_logloss": 0.567,
+        "fbs_mae": 12.65,
+        "fbs_ats": 0.4917,
+        "fbs_ats_n": 722
+      },
+      "tabpfn": {
+        "tabpfn_n": 734,
+        "tabpfn_accuracy": 0.6975,
+        "tabpfn_brier": 0.1934,
+        "tabpfn_logloss": 0.567,
+        "tabpfn_mae": 12.65,
+        "tabpfn_ats": 0.4917,
+        "tabpfn_ats_n": 722
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2023,
+      "engines": {
+        "tabpfn-3": 910
+      },
+      "fbs": {
+        "fbs_n": 792,
+        "fbs_accuracy": 0.7298,
+        "fbs_brier": 0.1811,
+        "fbs_logloss": 0.5385,
+        "fbs_mae": 12.77,
+        "fbs_ats": 0.5084,
+        "fbs_ats_n": 777
+      },
+      "tabpfn": {
+        "tabpfn_n": 792,
+        "tabpfn_accuracy": 0.7298,
+        "tabpfn_brier": 0.1811,
+        "tabpfn_logloss": 0.5385,
+        "tabpfn_mae": 12.77,
+        "tabpfn_ats": 0.5084,
+        "tabpfn_ats_n": 777
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2024,
+      "engines": {
+        "tabpfn-3": 916
+      },
+      "fbs": {
+        "fbs_n": 796,
+        "fbs_accuracy": 0.706,
+        "fbs_brier": 0.191,
+        "fbs_logloss": 0.5591,
+        "fbs_mae": 12.83,
+        "fbs_ats": 0.4949,
+        "fbs_ats_n": 780
+      },
+      "tabpfn": {
+        "tabpfn_n": 796,
+        "tabpfn_accuracy": 0.706,
+        "tabpfn_brier": 0.191,
+        "tabpfn_logloss": 0.5591,
+        "tabpfn_mae": 12.83,
+        "tabpfn_ats": 0.4949,
+        "tabpfn_ats_n": 780
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    },
+    {
+      "season": 2025,
+      "engines": {
+        "tabpfn-3": 933
+      },
+      "fbs": {
+        "fbs_n": 807,
+        "fbs_accuracy": 0.7162,
+        "fbs_brier": 0.1817,
+        "fbs_logloss": 0.5367,
+        "fbs_mae": 12.26,
+        "fbs_ats": 0.5201,
+        "fbs_ats_n": 796
+      },
+      "tabpfn": {
+        "tabpfn_n": 807,
+        "tabpfn_accuracy": 0.7162,
+        "tabpfn_brier": 0.1817,
+        "tabpfn_logloss": 0.5367,
+        "tabpfn_mae": 12.26,
+        "tabpfn_ats": 0.5201,
+        "tabpfn_ats_n": 796
+      },
+      "logistic": {
+        "logistic_n": 0
+      }
+    }
+  ],
+  "nil_residual": {
+    "used": true,
+    "note": "One coefficient fit on 2024 residuals, scored on 2025. Not in the live model.",
+    "coef": 2.2637,
+    "train_n": 796,
+    "test_n": 807,
+    "test_mse_before": 239.799,
+    "test_mse_after": 236.596,
+    "helped": true
+  },
+  "rule": "TabPFN-3 is the live model when it has enough prior games. Logistic is the locked baseline. NIL is a holdout diagnostic only.",
+  "calibration": {
+    "id": "temperature",
+    "params": {
+      "T": 0.7167
+    },
+    "fit_on": [
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  }
+}

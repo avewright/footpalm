@@ -1,0 +1,458 @@
+{
+  "protocol": "Fit on 2014\u20132024 walk-forward features. Score 2025 FBS\u2013FBS once. TabPFN last 8000 train rows, isolated process. Temperature fit on train only. Blend is the mean of extras probs.",
+  "features": [
+    "pom_diff",
+    "home_pom",
+    "away_pom",
+    "adjo_diff",
+    "adjd_diff",
+    "st_diff",
+    "tempo_diff",
+    "is_home",
+    "home_games",
+    "away_games"
+  ],
+  "extra_features": [
+    "elo_diff",
+    "form4_win_diff",
+    "form4_margin_diff",
+    "winpct_diff",
+    "avg_margin_diff",
+    "close_win_diff",
+    "sos_diff",
+    "rest_diff",
+    "luck_diff",
+    "quality_win_diff"
+  ],
+  "signal_features": [
+    "elo_diff",
+    "elo_momentum_diff",
+    "avg_margin_diff",
+    "median_margin_diff",
+    "form2_margin_diff",
+    "form4_margin_diff",
+    "form8_margin_diff",
+    "ewma_margin_diff",
+    "pf_diff",
+    "pa_diff",
+    "form4_pf_diff",
+    "form4_pa_diff",
+    "pythag_diff",
+    "venue_margin_diff",
+    "sos_diff",
+    "residual_margin_diff",
+    "form4_residual_diff",
+    "h2h_margin"
+  ],
+  "holdout_n": 807,
+  "best": "tabpfn/signal+T",
+  "rows": [
+    {
+      "id": "lightgbm/locked",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7639,
+        "brier": 0.1552,
+        "logloss": 0.4671
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.689,
+        "brier": 0.1909,
+        "logloss": 0.5586
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "locked",
+      "delta_vs_tabpfn_locked": -0.0017
+    },
+    {
+      "id": "lightgbm/locked+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7639,
+        "brier": 0.1548,
+        "logloss": 0.4635
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.689,
+        "brier": 0.1922,
+        "logloss": 0.562
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "locked",
+      "T": 0.8282,
+      "delta_vs_tabpfn_locked": -0.0004
+    },
+    {
+      "id": "xgboost/locked",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7595,
+        "brier": 0.1609,
+        "logloss": 0.4854
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6902,
+        "brier": 0.1924,
+        "logloss": 0.5626
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "locked",
+      "delta_vs_tabpfn_locked": -0.0002
+    },
+    {
+      "id": "xgboost/locked+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7595,
+        "brier": 0.1607,
+        "logloss": 0.4843
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6902,
+        "brier": 0.193,
+        "logloss": 0.5641
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "locked",
+      "T": 0.9008,
+      "delta_vs_tabpfn_locked": 0.0004
+    },
+    {
+      "id": "tabpfn/locked",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7,
+        "brier": 0.1972,
+        "logloss": 0.5778
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6989,
+        "brier": 0.1926,
+        "logloss": 0.5666
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "locked",
+      "delta_vs_tabpfn_locked": 0.0
+    },
+    {
+      "id": "tabpfn/locked+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7,
+        "brier": 0.1926,
+        "logloss": 0.5626
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6989,
+        "brier": 0.1889,
+        "logloss": 0.5526
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "locked",
+      "T": 0.6121,
+      "delta_vs_tabpfn_locked": -0.0037
+    },
+    {
+      "id": "lightgbm/extras",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7791,
+        "brier": 0.1469,
+        "logloss": 0.4458
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7076,
+        "brier": 0.1845,
+        "logloss": 0.5425
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras",
+      "delta_vs_tabpfn_locked": -0.0081
+    },
+    {
+      "id": "lightgbm/extras+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7791,
+        "brier": 0.1461,
+        "logloss": 0.4398
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7076,
+        "brier": 0.1863,
+        "logloss": 0.5471
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras",
+      "T": 0.7877,
+      "delta_vs_tabpfn_locked": -0.0063
+    },
+    {
+      "id": "xgboost/extras",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7749,
+        "brier": 0.1535,
+        "logloss": 0.466
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7051,
+        "brier": 0.1834,
+        "logloss": 0.5397
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras",
+      "delta_vs_tabpfn_locked": -0.0092
+    },
+    {
+      "id": "xgboost/extras+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7749,
+        "brier": 0.153,
+        "logloss": 0.4637
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7051,
+        "brier": 0.1842,
+        "logloss": 0.5407
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras",
+      "T": 0.8668,
+      "delta_vs_tabpfn_locked": -0.0084
+    },
+    {
+      "id": "tabpfn/extras",
+      "train": {
+        "n": 400,
+        "accuracy": 0.735,
+        "brier": 0.187,
+        "logloss": 0.555
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.1861,
+        "logloss": 0.552
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras",
+      "delta_vs_tabpfn_locked": -0.0065
+    },
+    {
+      "id": "tabpfn/extras+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.735,
+        "brier": 0.1793,
+        "logloss": 0.5324
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.1814,
+        "logloss": 0.5335
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras",
+      "T": 0.5662,
+      "delta_vs_tabpfn_locked": -0.0112
+    },
+    {
+      "id": "lightgbm/signal",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7839,
+        "brier": 0.1445,
+        "logloss": 0.4396
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7088,
+        "brier": 0.1836,
+        "logloss": 0.5395
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "signal",
+      "delta_vs_tabpfn_locked": -0.009
+    },
+    {
+      "id": "lightgbm/signal+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7839,
+        "brier": 0.1435,
+        "logloss": 0.4322
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7088,
+        "brier": 0.186,
+        "logloss": 0.5456
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "signal",
+      "T": 0.7677,
+      "delta_vs_tabpfn_locked": -0.0066
+    },
+    {
+      "id": "xgboost/signal",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7752,
+        "brier": 0.1515,
+        "logloss": 0.4609
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7063,
+        "brier": 0.1851,
+        "logloss": 0.5433
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "signal",
+      "delta_vs_tabpfn_locked": -0.0075
+    },
+    {
+      "id": "xgboost/signal+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7752,
+        "brier": 0.1509,
+        "logloss": 0.458
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7063,
+        "brier": 0.1863,
+        "logloss": 0.5457
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "signal",
+      "T": 0.8517,
+      "delta_vs_tabpfn_locked": -0.0063
+    },
+    {
+      "id": "tabpfn/signal",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7425,
+        "brier": 0.1834,
+        "logloss": 0.5474
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.715,
+        "brier": 0.186,
+        "logloss": 0.552
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "signal",
+      "delta_vs_tabpfn_locked": -0.0066
+    },
+    {
+      "id": "tabpfn/signal+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7425,
+        "brier": 0.1745,
+        "logloss": 0.5201
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.715,
+        "brier": 0.1813,
+        "logloss": 0.5336
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "signal",
+      "T": 0.5417,
+      "delta_vs_tabpfn_locked": -0.0113
+    },
+    {
+      "id": "blend/extras",
+      "train": {
+        "n": 400,
+        "accuracy": 0.75,
+        "brier": 0.1764,
+        "logloss": 0.5272
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7088,
+        "brier": 0.1832,
+        "logloss": 0.5409
+      },
+      "delta_holdout_brier": null,
+      "engine": "blend",
+      "set": "extras",
+      "delta_vs_tabpfn_locked": -0.0094
+    },
+    {
+      "id": "blend/extras+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.75,
+        "brier": 0.1731,
+        "logloss": 0.5169
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7088,
+        "brier": 0.1839,
+        "logloss": 0.5395
+      },
+      "delta_holdout_brier": null,
+      "engine": "blend",
+      "set": "extras",
+      "T": 0.7043,
+      "delta_vs_tabpfn_locked": -0.0087
+    }
+  ],
+  "walk": [
+    {
+      "id": "tabpfn/extras-walk",
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.1865,
+        "logloss": 0.5529
+      },
+      "n_scored": 807,
+      "engine": "tabpfn",
+      "set": "extras",
+      "mode": "walk-forward"
+    }
+  ],
+  "promoted": false,
+  "note": "Diagnostic. Live TabPFN stays on the locked 10 until a walk-forward rebuild is shipped."
+}

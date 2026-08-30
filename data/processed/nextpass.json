@@ -1,0 +1,915 @@
+{
+  "protocol": "Next pass locked before the score. extras vs thin; equal blend vs train weights; TabPFN derived margin vs regressor. Not live.",
+  "thin": {
+    "features": [
+      "thin"
+    ],
+    "rows": [
+      {
+        "family": "lightgbm",
+        "set": "thin",
+        "locked_brier": 0.1845,
+        "full_brier": 0.1848,
+        "locked_logloss": 0.5425,
+        "full_logloss": 0.543,
+        "delta_brier": 0.0003,
+        "pass": false,
+        "thin_rate_train": 0.3211,
+        "thin_rate_hold": 0.1995
+      },
+      {
+        "family": "xgboost",
+        "set": "thin",
+        "locked_brier": 0.1834,
+        "full_brier": 0.1842,
+        "locked_logloss": 0.5397,
+        "full_logloss": 0.5416,
+        "delta_brier": 0.0008,
+        "pass": false,
+        "thin_rate_train": 0.3211,
+        "thin_rate_hold": 0.1995
+      }
+    ],
+    "would_promote": false,
+    "models": [
+      {
+        "id": "lightgbm-extras",
+        "note": "baseline extras",
+        "params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05
+        },
+        "train": {
+          "n": 9014,
+          "accuracy": 0.7791,
+          "brier": 0.1469,
+          "logloss": 0.4458
+        },
+        "holdout": {
+          "n": 807,
+          "accuracy": 0.7076,
+          "brier": 0.1845,
+          "logloss": 0.5425,
+          "mae": 12.34
+        },
+        "gain": [
+          {
+            "feature": "pom_diff",
+            "gain": 19021.87455,
+            "share": 0.476
+          },
+          {
+            "feature": "elo_diff",
+            "gain": 7415.68423,
+            "share": 0.1856
+          },
+          {
+            "feature": "avg_margin_diff",
+            "gain": 1869.23942,
+            "share": 0.0468
+          },
+          {
+            "feature": "adjo_diff",
+            "gain": 1642.77397,
+            "share": 0.0411
+          },
+          {
+            "feature": "adjd_diff",
+            "gain": 1477.62021,
+            "share": 0.037
+          },
+          {
+            "feature": "away_pom",
+            "gain": 1248.56267,
+            "share": 0.0312
+          },
+          {
+            "feature": "sos_diff",
+            "gain": 1141.0879,
+            "share": 0.0286
+          },
+          {
+            "feature": "form4_margin_diff",
+            "gain": 1106.54296,
+            "share": 0.0277
+          },
+          {
+            "feature": "tempo_diff",
+            "gain": 800.42331,
+            "share": 0.02
+          },
+          {
+            "feature": "away_games",
+            "gain": 744.75353,
+            "share": 0.0186
+          },
+          {
+            "feature": "st_diff",
+            "gain": 667.91021,
+            "share": 0.0167
+          },
+          {
+            "feature": "home_pom",
+            "gain": 585.2983,
+            "share": 0.0146
+          },
+          {
+            "feature": "luck_diff",
+            "gain": 509.55942,
+            "share": 0.0128
+          },
+          {
+            "feature": "winpct_diff",
+            "gain": 392.26457,
+            "share": 0.0098
+          },
+          {
+            "feature": "close_win_diff",
+            "gain": 294.45021,
+            "share": 0.0074
+          },
+          {
+            "feature": "home_games",
+            "gain": 286.76252,
+            "share": 0.0072
+          },
+          {
+            "feature": "quality_win_diff",
+            "gain": 232.86802,
+            "share": 0.0058
+          },
+          {
+            "feature": "form4_win_diff",
+            "gain": 232.15679,
+            "share": 0.0058
+          },
+          {
+            "feature": "rest_diff",
+            "gain": 199.10425,
+            "share": 0.005
+          },
+          {
+            "feature": "is_home",
+            "gain": 92.03408,
+            "share": 0.0023
+          }
+        ],
+        "permutation": [
+          {
+            "feature": "pom_diff",
+            "brier_increase": 0.02469
+          },
+          {
+            "feature": "elo_diff",
+            "brier_increase": 0.00633
+          },
+          {
+            "feature": "avg_margin_diff",
+            "brier_increase": 0.00549
+          },
+          {
+            "feature": "form4_margin_diff",
+            "brier_increase": 0.00506
+          },
+          {
+            "feature": "sos_diff",
+            "brier_increase": 0.00177
+          },
+          {
+            "feature": "winpct_diff",
+            "brier_increase": 0.00088
+          },
+          {
+            "feature": "adjd_diff",
+            "brier_increase": 0.0008
+          },
+          {
+            "feature": "away_pom",
+            "brier_increase": 0.00043
+          },
+          {
+            "feature": "away_games",
+            "brier_increase": 0.00043
+          },
+          {
+            "feature": "tempo_diff",
+            "brier_increase": 0.00017
+          },
+          {
+            "feature": "home_games",
+            "brier_increase": 0.00014
+          },
+          {
+            "feature": "quality_win_diff",
+            "brier_increase": 6e-05
+          },
+          {
+            "feature": "form4_win_diff",
+            "brier_increase": -1e-05
+          },
+          {
+            "feature": "st_diff",
+            "brier_increase": -2e-05
+          },
+          {
+            "feature": "home_pom",
+            "brier_increase": -3e-05
+          },
+          {
+            "feature": "adjo_diff",
+            "brier_increase": -0.0001
+          },
+          {
+            "feature": "is_home",
+            "brier_increase": -0.00026
+          },
+          {
+            "feature": "rest_diff",
+            "brier_increase": -0.00035
+          },
+          {
+            "feature": "close_win_diff",
+            "brier_increase": -0.00037
+          },
+          {
+            "feature": "luck_diff",
+            "brier_increase": -0.00051
+          }
+        ]
+      },
+      {
+        "id": "lightgbm-thin",
+        "note": "extras plus thin",
+        "params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05
+        },
+        "train": {
+          "n": 9014,
+          "accuracy": 0.7789,
+          "brier": 0.1469,
+          "logloss": 0.4459
+        },
+        "holdout": {
+          "n": 807,
+          "accuracy": 0.7076,
+          "brier": 0.1848,
+          "logloss": 0.543,
+          "mae": 12.37
+        },
+        "gain": [
+          {
+            "feature": "pom_diff",
+            "gain": 20804.29271,
+            "share": 0.521
+          },
+          {
+            "feature": "elo_diff",
+            "gain": 5123.53733,
+            "share": 0.1283
+          },
+          {
+            "feature": "avg_margin_diff",
+            "gain": 2440.93499,
+            "share": 0.0611
+          },
+          {
+            "feature": "adjo_diff",
+            "gain": 1593.2005,
+            "share": 0.0399
+          },
+          {
+            "feature": "adjd_diff",
+            "gain": 1392.71979,
+            "share": 0.0349
+          },
+          {
+            "feature": "form4_margin_diff",
+            "gain": 1212.11488,
+            "share": 0.0304
+          },
+          {
+            "feature": "sos_diff",
+            "gain": 1115.92928,
+            "share": 0.0279
+          },
+          {
+            "feature": "away_pom",
+            "gain": 1084.94787,
+            "share": 0.0272
+          },
+          {
+            "feature": "tempo_diff",
+            "gain": 923.32868,
+            "share": 0.0231
+          },
+          {
+            "feature": "st_diff",
+            "gain": 690.33758,
+            "share": 0.0173
+          },
+          {
+            "feature": "away_games",
+            "gain": 676.07775,
+            "share": 0.0169
+          },
+          {
+            "feature": "luck_diff",
+            "gain": 607.67453,
+            "share": 0.0152
+          },
+          {
+            "feature": "home_pom",
+            "gain": 599.56817,
+            "share": 0.015
+          },
+          {
+            "feature": "winpct_diff",
+            "gain": 387.0427,
+            "share": 0.0097
+          },
+          {
+            "feature": "close_win_diff",
+            "gain": 377.87287,
+            "share": 0.0095
+          },
+          {
+            "feature": "form4_win_diff",
+            "gain": 245.8046,
+            "share": 0.0062
+          },
+          {
+            "feature": "home_games",
+            "gain": 193.46498,
+            "share": 0.0048
+          },
+          {
+            "feature": "rest_diff",
+            "gain": 193.45954,
+            "share": 0.0048
+          },
+          {
+            "feature": "quality_win_diff",
+            "gain": 165.69441,
+            "share": 0.0041
+          },
+          {
+            "feature": "is_home",
+            "gain": 79.30245,
+            "share": 0.002
+          },
+          {
+            "feature": "thin",
+            "gain": 25.42433,
+            "share": 0.0006
+          }
+        ],
+        "permutation": [
+          {
+            "feature": "pom_diff",
+            "brier_increase": 0.02748
+          },
+          {
+            "feature": "form4_margin_diff",
+            "brier_increase": 0.00558
+          },
+          {
+            "feature": "elo_diff",
+            "brier_increase": 0.00543
+          },
+          {
+            "feature": "avg_margin_diff",
+            "brier_increase": 0.00506
+          },
+          {
+            "feature": "sos_diff",
+            "brier_increase": 0.00178
+          },
+          {
+            "feature": "winpct_diff",
+            "brier_increase": 0.00102
+          },
+          {
+            "feature": "adjd_diff",
+            "brier_increase": 0.00094
+          },
+          {
+            "feature": "away_games",
+            "brier_increase": 0.00094
+          },
+          {
+            "feature": "tempo_diff",
+            "brier_increase": 0.00051
+          },
+          {
+            "feature": "home_games",
+            "brier_increase": 0.00034
+          },
+          {
+            "feature": "away_pom",
+            "brier_increase": 0.00012
+          },
+          {
+            "feature": "st_diff",
+            "brier_increase": -8e-05
+          },
+          {
+            "feature": "home_pom",
+            "brier_increase": -9e-05
+          },
+          {
+            "feature": "thin",
+            "brier_increase": -0.00011
+          },
+          {
+            "feature": "quality_win_diff",
+            "brier_increase": -0.00015
+          },
+          {
+            "feature": "adjo_diff",
+            "brier_increase": -0.00019
+          },
+          {
+            "feature": "form4_win_diff",
+            "brier_increase": -0.00024
+          },
+          {
+            "feature": "luck_diff",
+            "brier_increase": -0.00035
+          },
+          {
+            "feature": "rest_diff",
+            "brier_increase": -0.00037
+          },
+          {
+            "feature": "close_win_diff",
+            "brier_increase": -0.00047
+          },
+          {
+            "feature": "is_home",
+            "brier_increase": -0.0005
+          }
+        ]
+      },
+      {
+        "id": "xgboost-extras",
+        "note": "baseline extras",
+        "params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05
+        },
+        "train": {
+          "n": 9014,
+          "accuracy": 0.7749,
+          "brier": 0.1535,
+          "logloss": 0.466
+        },
+        "holdout": {
+          "n": 807,
+          "accuracy": 0.7051,
+          "brier": 0.1834,
+          "logloss": 0.5397,
+          "mae": 12.33
+        },
+        "gain": [
+          {
+            "feature": "pom_diff",
+            "gain": 0.33091,
+            "share": 0.3309
+          },
+          {
+            "feature": "elo_diff",
+            "gain": 0.13669,
+            "share": 0.1367
+          },
+          {
+            "feature": "adjo_diff",
+            "gain": 0.07427,
+            "share": 0.0743
+          },
+          {
+            "feature": "avg_margin_diff",
+            "gain": 0.05671,
+            "share": 0.0567
+          },
+          {
+            "feature": "adjd_diff",
+            "gain": 0.03975,
+            "share": 0.0397
+          },
+          {
+            "feature": "away_games",
+            "gain": 0.03025,
+            "share": 0.0302
+          },
+          {
+            "feature": "form4_margin_diff",
+            "gain": 0.02865,
+            "share": 0.0286
+          },
+          {
+            "feature": "form4_win_diff",
+            "gain": 0.02847,
+            "share": 0.0285
+          },
+          {
+            "feature": "rest_diff",
+            "gain": 0.0283,
+            "share": 0.0283
+          },
+          {
+            "feature": "away_pom",
+            "gain": 0.02771,
+            "share": 0.0277
+          },
+          {
+            "feature": "winpct_diff",
+            "gain": 0.02736,
+            "share": 0.0274
+          },
+          {
+            "feature": "sos_diff",
+            "gain": 0.02508,
+            "share": 0.0251
+          },
+          {
+            "feature": "st_diff",
+            "gain": 0.02193,
+            "share": 0.0219
+          },
+          {
+            "feature": "close_win_diff",
+            "gain": 0.02177,
+            "share": 0.0218
+          },
+          {
+            "feature": "quality_win_diff",
+            "gain": 0.02158,
+            "share": 0.0216
+          },
+          {
+            "feature": "is_home",
+            "gain": 0.02083,
+            "share": 0.0208
+          },
+          {
+            "feature": "tempo_diff",
+            "gain": 0.02058,
+            "share": 0.0206
+          },
+          {
+            "feature": "home_games",
+            "gain": 0.0201,
+            "share": 0.0201
+          },
+          {
+            "feature": "home_pom",
+            "gain": 0.01957,
+            "share": 0.0196
+          },
+          {
+            "feature": "luck_diff",
+            "gain": 0.01951,
+            "share": 0.0195
+          }
+        ],
+        "permutation": [
+          {
+            "feature": "pom_diff",
+            "brier_increase": 0.02277
+          },
+          {
+            "feature": "elo_diff",
+            "brier_increase": 0.00565
+          },
+          {
+            "feature": "avg_margin_diff",
+            "brier_increase": 0.00565
+          },
+          {
+            "feature": "form4_margin_diff",
+            "brier_increase": 0.00408
+          },
+          {
+            "feature": "sos_diff",
+            "brier_increase": 0.00232
+          },
+          {
+            "feature": "away_games",
+            "brier_increase": 0.00122
+          },
+          {
+            "feature": "winpct_diff",
+            "brier_increase": 0.00055
+          },
+          {
+            "feature": "away_pom",
+            "brier_increase": 0.00048
+          },
+          {
+            "feature": "tempo_diff",
+            "brier_increase": 0.00042
+          },
+          {
+            "feature": "adjd_diff",
+            "brier_increase": 0.00032
+          },
+          {
+            "feature": "home_games",
+            "brier_increase": 6e-05
+          },
+          {
+            "feature": "quality_win_diff",
+            "brier_increase": 1e-05
+          },
+          {
+            "feature": "form4_win_diff",
+            "brier_increase": -6e-05
+          },
+          {
+            "feature": "is_home",
+            "brier_increase": -7e-05
+          },
+          {
+            "feature": "st_diff",
+            "brier_increase": -0.00016
+          },
+          {
+            "feature": "adjo_diff",
+            "brier_increase": -0.0002
+          },
+          {
+            "feature": "home_pom",
+            "brier_increase": -0.00024
+          },
+          {
+            "feature": "close_win_diff",
+            "brier_increase": -0.0003
+          },
+          {
+            "feature": "luck_diff",
+            "brier_increase": -0.00045
+          },
+          {
+            "feature": "rest_diff",
+            "brier_increase": -0.00069
+          }
+        ]
+      },
+      {
+        "id": "xgboost-thin",
+        "note": "extras plus thin",
+        "params": {
+          "max_depth": 4,
+          "n_estimators": 200,
+          "learning_rate": 0.05
+        },
+        "train": {
+          "n": 9014,
+          "accuracy": 0.7738,
+          "brier": 0.1533,
+          "logloss": 0.4657
+        },
+        "holdout": {
+          "n": 807,
+          "accuracy": 0.7063,
+          "brier": 0.1842,
+          "logloss": 0.5416,
+          "mae": 12.38
+        },
+        "gain": [
+          {
+            "feature": "pom_diff",
+            "gain": 0.35793,
+            "share": 0.3579
+          },
+          {
+            "feature": "elo_diff",
+            "gain": 0.09941,
+            "share": 0.0994
+          },
+          {
+            "feature": "adjo_diff",
+            "gain": 0.05911,
+            "share": 0.0591
+          },
+          {
+            "feature": "avg_margin_diff",
+            "gain": 0.05246,
+            "share": 0.0525
+          },
+          {
+            "feature": "adjd_diff",
+            "gain": 0.03378,
+            "share": 0.0338
+          },
+          {
+            "feature": "form4_margin_diff",
+            "gain": 0.03357,
+            "share": 0.0336
+          },
+          {
+            "feature": "away_games",
+            "gain": 0.03015,
+            "share": 0.0302
+          },
+          {
+            "feature": "away_pom",
+            "gain": 0.02848,
+            "share": 0.0285
+          },
+          {
+            "feature": "form4_win_diff",
+            "gain": 0.0284,
+            "share": 0.0284
+          },
+          {
+            "feature": "rest_diff",
+            "gain": 0.02781,
+            "share": 0.0278
+          },
+          {
+            "feature": "sos_diff",
+            "gain": 0.02638,
+            "share": 0.0264
+          },
+          {
+            "feature": "winpct_diff",
+            "gain": 0.02554,
+            "share": 0.0255
+          },
+          {
+            "feature": "is_home",
+            "gain": 0.02371,
+            "share": 0.0237
+          },
+          {
+            "feature": "st_diff",
+            "gain": 0.02307,
+            "share": 0.0231
+          },
+          {
+            "feature": "home_games",
+            "gain": 0.02282,
+            "share": 0.0228
+          },
+          {
+            "feature": "quality_win_diff",
+            "gain": 0.02219,
+            "share": 0.0222
+          },
+          {
+            "feature": "luck_diff",
+            "gain": 0.02191,
+            "share": 0.0219
+          },
+          {
+            "feature": "thin",
+            "gain": 0.0217,
+            "share": 0.0217
+          },
+          {
+            "feature": "tempo_diff",
+            "gain": 0.02134,
+            "share": 0.0213
+          },
+          {
+            "feature": "close_win_diff",
+            "gain": 0.0202,
+            "share": 0.0202
+          },
+          {
+            "feature": "home_pom",
+            "gain": 0.02006,
+            "share": 0.0201
+          }
+        ],
+        "permutation": [
+          {
+            "feature": "pom_diff",
+            "brier_increase": 0.0281
+          },
+          {
+            "feature": "avg_margin_diff",
+            "brier_increase": 0.00616
+          },
+          {
+            "feature": "elo_diff",
+            "brier_increase": 0.00483
+          },
+          {
+            "feature": "form4_margin_diff",
+            "brier_increase": 0.00389
+          },
+          {
+            "feature": "sos_diff",
+            "brier_increase": 0.00223
+          },
+          {
+            "feature": "away_games",
+            "brier_increase": 0.00107
+          },
+          {
+            "feature": "winpct_diff",
+            "brier_increase": 0.00043
+          },
+          {
+            "feature": "quality_win_diff",
+            "brier_increase": 0.00038
+          },
+          {
+            "feature": "adjd_diff",
+            "brier_increase": 0.00026
+          },
+          {
+            "feature": "away_pom",
+            "brier_increase": 0.00014
+          },
+          {
+            "feature": "home_games",
+            "brier_increase": 6e-05
+          },
+          {
+            "feature": "is_home",
+            "brier_increase": 1e-05
+          },
+          {
+            "feature": "tempo_diff",
+            "brier_increase": -2e-05
+          },
+          {
+            "feature": "form4_win_diff",
+            "brier_increase": -2e-05
+          },
+          {
+            "feature": "thin",
+            "brier_increase": -2e-05
+          },
+          {
+            "feature": "home_pom",
+            "brier_increase": -0.00011
+          },
+          {
+            "feature": "close_win_diff",
+            "brier_increase": -0.00027
+          },
+          {
+            "feature": "st_diff",
+            "brier_increase": -0.0004
+          },
+          {
+            "feature": "adjo_diff",
+            "brier_increase": -0.00053
+          },
+          {
+            "feature": "rest_diff",
+            "brier_increase": -0.00055
+          },
+          {
+            "feature": "luck_diff",
+            "brier_increase": -0.00055
+          }
+        ]
+      }
+    ]
+  },
+  "blend_train": {
+    "weights": {
+      "lightgbm": 1.0,
+      "xgboost": 0.0,
+      "tabpfn": 0.0
+    },
+    "fit_on": "train tail 8000 log loss",
+    "tabpfn": "board-shaped: sigmoid(regressor margin / 14.5)",
+    "equal": {
+      "n": 807,
+      "accuracy": 0.7088,
+      "brier": 0.1832,
+      "logloss": 0.5409
+    },
+    "weighted": {
+      "n": 807,
+      "accuracy": 0.7076,
+      "brier": 0.1845,
+      "logloss": 0.5425
+    },
+    "delta_brier": 0.0013,
+    "pass": false
+  },
+  "tabpfn_margin": {
+    "mae_derived": null,
+    "mae_regressor": null,
+    "delta_mae": null,
+    "brier": null,
+    "logloss": null,
+    "has_regressor": true,
+    "has_classifier": false,
+    "pass": false,
+    "note": "Skipped. No local TabPFN classifier checkpoint; download needs a Prior Labs token. Did not write a classifier into the live cache."
+  },
+  "promoted": false,
+  "would_promote": false
+}

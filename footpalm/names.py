@@ -1,0 +1,100 @@
+from __future__ import annotations
+
+import re
+
+ALIASES = {
+    "louisiana state": "LSU",
+    "lsu": "LSU",
+    "southern california": "USC",
+    "southern cal": "USC",
+    "usc": "USC",
+    "pennsylvania state": "Penn State",
+    "penn state": "Penn State",
+    "texas a & m": "Texas A&M",
+    "texas a and m": "Texas A&M",
+    "texas am": "Texas A&M",
+    "mississippi": "Ole Miss",
+    "ole miss": "Ole Miss",
+    "brigham young": "BYU",
+    "byu": "BYU",
+    "texas christian": "TCU",
+    "tcu": "TCU",
+    "southern methodist": "SMU",
+    "smu": "SMU",
+    "north carolina state": "NC State",
+    "nc state": "NC State",
+    "n c state": "NC State",
+    "central florida": "UCF",
+    "ucf": "UCF",
+    "connecticut": "UConn",
+    "uconn": "UConn",
+    "massachusetts": "Massachusetts",
+    "umass": "Massachusetts",
+    "miami oh": "Miami (OH)",
+    "miami ohio": "Miami (OH)",
+    "miami (oh)": "Miami (OH)",
+    "miami (ohio)": "Miami (OH)",
+    "louisiana": "Louisiana",
+    "louisiana lafayette": "Louisiana",
+    "ul lafayette": "Louisiana",
+    "southern mississippi": "Southern Miss",
+    "southern miss": "Southern Miss",
+    "texas san antonio": "UTSA",
+    "utsa": "UTSA",
+    "florida international": "Florida International",
+    "fiu": "Florida International",
+    "florida atlantic": "Florida Atlantic",
+    "fau": "Florida Atlantic",
+    "alabama birmingham": "UAB",
+    "uab": "UAB",
+    "middle tennessee": "Middle Tennessee",
+    "middle tennessee state": "Middle Tennessee",
+    "appalachian state": "Appalachian State",
+    "james madison": "James Madison",
+    "coastal carolina": "Coastal Carolina",
+    "georgia state": "Georgia State",
+    "georgia southern": "Georgia Southern",
+    "old dominion": "Old Dominion",
+    "kennesaw state": "Kennesaw State",
+    "sam houston": "Sam Houston",
+    "jacksonville state": "Jacksonville State",
+    "new mexico state": "New Mexico State",
+    "western kentucky": "Western Kentucky",
+    "south florida": "South Florida",
+    "usf": "South Florida",
+    "east carolina": "East Carolina",
+    "north texas": "North Texas",
+    "ul monroe": "UL Monroe",
+    "louisiana monroe": "UL Monroe",
+    "louisiana-monroe": "UL Monroe",
+    "ulm": "UL Monroe",
+    "san diego state": "San Diego State",
+    "san jose state": "San José State",
+    "san josé state": "San José State",
+    "fresno state": "Fresno State",
+    "colorado state": "Colorado State",
+    "utah state": "Utah State",
+    "nevada las vegas": "UNLV",
+    "unlv": "UNLV",
+    "texas state": "Texas State",
+    "oregon state": "Oregon State",
+    "washington state": "Washington State",
+    "hawaii": "Hawai'i",
+    "hawai'i": "Hawai'i",
+    "miami fl": "Miami",
+    "miami (fl)": "Miami",
+    "miami florida": "Miami",
+}
+
+
+def key(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", name.lower()).strip()
+
+
+def canon(name: str, conference: str | None = None) -> str:
+    cleaned = key(name)
+    if cleaned == "miami" and conference and "mid-american" in conference.lower():
+        return "Miami (OH)"
+    if cleaned in ALIASES:
+        return ALIASES[cleaned]
+    return name.strip()

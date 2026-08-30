@@ -1,0 +1,1366 @@
+{
+  "source": "https://nil-ncaa.com/",
+  "note": "Football roster estimate: revenue share to football plus third-party NIL. P4 is a median of nil-ncaa.com, College Front Office, NIL Standard, and Sideline football splits, then floored by the Aug 2026 CBS/247 industry tiers. Sideline school totals (Texas $73.9M) are all-sports and live in that column. G6 typical is modeled; named G6 spenders use the USA Today ~$10M ceiling. None of this is a TabPFN feature.",
+  "teams": [
+    {
+      "team": "Ohio State",
+      "conf": "B1G",
+      "nil_roster": 40420000,
+      "nil_quality": "blended",
+      "nil_all_sports": 54900000,
+      "athletic_spend": 295265883,
+      "staff_payroll": 24205387,
+      "pom": 31.27
+    },
+    {
+      "team": "Oregon",
+      "conf": "B1G",
+      "nil_roster": 42800000,
+      "nil_quality": "blended",
+      "nil_all_sports": 58900000,
+      "athletic_spend": 164742082,
+      "staff_payroll": 24205387,
+      "pom": 24.48
+    },
+    {
+      "team": "Indiana",
+      "conf": "B1G",
+      "nil_roster": 29500000,
+      "nil_quality": "blended",
+      "nil_all_sports": 53400000,
+      "athletic_spend": 159331697,
+      "staff_payroll": 24205387,
+      "pom": 24.36
+    },
+    {
+      "team": "Notre Dame",
+      "conf": "Ind",
+      "nil_roster": 40000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 46000000,
+      "athletic_spend": 244698449,
+      "staff_payroll": 10000000,
+      "pom": 21.84
+    },
+    {
+      "team": "Texas",
+      "conf": "SEC",
+      "nil_roster": 48280000,
+      "nil_quality": "blended",
+      "nil_all_sports": 73900000,
+      "athletic_spend": 277413781,
+      "staff_payroll": 26931774,
+      "pom": 21.47
+    },
+    {
+      "team": "Penn State",
+      "conf": "B1G",
+      "nil_roster": 29210000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 231709762,
+      "staff_payroll": 24205387,
+      "pom": 21.12
+    },
+    {
+      "team": "USC",
+      "conf": "B1G",
+      "nil_roster": 36000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 55900000,
+      "athletic_spend": 234029848,
+      "staff_payroll": 24205387,
+      "pom": 20.59
+    },
+    {
+      "team": "Miami",
+      "conf": "ACC",
+      "nil_roster": 40000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 56400000,
+      "athletic_spend": 40792930,
+      "staff_payroll": 22082473,
+      "pom": 19.59
+    },
+    {
+      "team": "Georgia",
+      "conf": "SEC",
+      "nil_roster": 36000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 46000000,
+      "athletic_spend": 226736834,
+      "staff_payroll": 26931774,
+      "pom": 19.39
+    },
+    {
+      "team": "Oklahoma",
+      "conf": "SEC",
+      "nil_roster": 32240000,
+      "nil_quality": "blended",
+      "nil_all_sports": null,
+      "athletic_spend": 234426470,
+      "staff_payroll": 26931774,
+      "pom": 18.19
+    },
+    {
+      "team": "Texas A&M",
+      "conf": "SEC",
+      "nil_roster": 37600000,
+      "nil_quality": "blended",
+      "nil_all_sports": 62200000,
+      "athletic_spend": null,
+      "staff_payroll": 26931774,
+      "pom": 18.12
+    },
+    {
+      "team": "Texas Tech",
+      "conf": "B12",
+      "nil_roster": 34810000,
+      "nil_quality": "blended",
+      "nil_all_sports": 52800000,
+      "athletic_spend": 127895343,
+      "staff_payroll": 16541521,
+      "pom": 18.09
+    },
+    {
+      "team": "Alabama",
+      "conf": "SEC",
+      "nil_roster": 36840000,
+      "nil_quality": "blended",
+      "nil_all_sports": 47000000,
+      "athletic_spend": 229908712,
+      "staff_payroll": 26931774,
+      "pom": 17.98
+    },
+    {
+      "team": "Vanderbilt",
+      "conf": "SEC",
+      "nil_roster": 25460000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 146388389,
+      "staff_payroll": 26931774,
+      "pom": 17.34
+    },
+    {
+      "team": "Iowa",
+      "conf": "B1G",
+      "nil_roster": 23650000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 150892055,
+      "staff_payroll": 24205387,
+      "pom": 16.92
+    },
+    {
+      "team": "Missouri",
+      "conf": "SEC",
+      "nil_roster": 27500000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 181114849,
+      "staff_payroll": 26931774,
+      "pom": 15.58
+    },
+    {
+      "team": "Ole Miss",
+      "conf": "SEC",
+      "nil_roster": 36000000,
+      "nil_quality": "blended",
+      "nil_all_sports": null,
+      "athletic_spend": 171119339,
+      "staff_payroll": 26931774,
+      "pom": 15.57
+    },
+    {
+      "team": "Utah",
+      "conf": "B12",
+      "nil_roster": 21950000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 118667209,
+      "staff_payroll": 16541521,
+      "pom": 15.41
+    },
+    {
+      "team": "Louisville",
+      "conf": "ACC",
+      "nil_roster": 21910000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 154819604,
+      "staff_payroll": 22082473,
+      "pom": 15.14
+    },
+    {
+      "team": "BYU",
+      "conf": "B12",
+      "nil_roster": 23040000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 136864784,
+      "staff_payroll": 16541521,
+      "pom": 14.79
+    },
+    {
+      "team": "Washington",
+      "conf": "B1G",
+      "nil_roster": 26360000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 174834634,
+      "staff_payroll": 24205387,
+      "pom": 14.76
+    },
+    {
+      "team": "LSU",
+      "conf": "SEC",
+      "nil_roster": 44000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 57400000,
+      "athletic_spend": 219649408,
+      "staff_payroll": 26931774,
+      "pom": 14.26
+    },
+    {
+      "team": "Auburn",
+      "conf": "SEC",
+      "nil_roster": 28850000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 195930163,
+      "staff_payroll": 26931774,
+      "pom": 13.65
+    },
+    {
+      "team": "Florida",
+      "conf": "SEC",
+      "nil_roster": 28520000,
+      "nil_quality": "published",
+      "nil_all_sports": 51000000,
+      "athletic_spend": 199237539,
+      "staff_payroll": 26931774,
+      "pom": 13.65
+    },
+    {
+      "team": "Tennessee",
+      "conf": "SEC",
+      "nil_roster": 36000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 51000000,
+      "athletic_spend": 285364027,
+      "staff_payroll": 26931774,
+      "pom": 13.65
+    },
+    {
+      "team": "TCU",
+      "conf": "B12",
+      "nil_roster": 22680000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 155989500,
+      "staff_payroll": 16541521,
+      "pom": 12.95
+    },
+    {
+      "team": "Michigan",
+      "conf": "B1G",
+      "nil_roster": 36000000,
+      "nil_quality": "blended",
+      "nil_all_sports": 48000000,
+      "athletic_spend": 222088909,
+      "staff_payroll": 24205387,
+      "pom": 12.92
+    },
+    {
+      "team": "SMU",
+      "conf": "ACC",
+      "nil_roster": 22040000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 150225313,
+      "staff_payroll": 22082473,
+      "pom": 12.6
+    },
+    {
+      "team": "Iowa State",
+      "conf": "B12",
+      "nil_roster": 20100000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 103893160,
+      "staff_payroll": 16541521,
+      "pom": 12.58
+    },
+    {
+      "team": "Arizona",
+      "conf": "B12",
+      "nil_roster": 20400000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 132661899,
+      "staff_payroll": 16541521,
+      "pom": 12.18
+    },
+    {
+      "team": "Baylor",
+      "conf": "B12",
+      "nil_roster": 20970000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 144126427,
+      "staff_payroll": 16541521,
+      "pom": 11.43
+    },
+    {
+      "team": "Florida State",
+      "conf": "ACC",
+      "nil_roster": 26390000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 192717172,
+      "staff_payroll": 22082473,
+      "pom": 11.31
+    },
+    {
+      "team": "Kansas State",
+      "conf": "B12",
+      "nil_roster": 21690000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 100807499,
+      "staff_payroll": 16541521,
+      "pom": 10.61
+    },
+    {
+      "team": "Kansas",
+      "conf": "B12",
+      "nil_roster": 19900000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 159866627,
+      "staff_payroll": 16541521,
+      "pom": 10.56
+    },
+    {
+      "team": "Clemson",
+      "conf": "ACC",
+      "nil_roster": 27790000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 186106774,
+      "staff_payroll": 22082473,
+      "pom": 10.52
+    },
+    {
+      "team": "Pittsburgh",
+      "conf": "ACC",
+      "nil_roster": 21240000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 151337808,
+      "staff_payroll": 22082473,
+      "pom": 10.03
+    },
+    {
+      "team": "Nebraska",
+      "conf": "B1G",
+      "nil_roster": 27440000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 198462402,
+      "staff_payroll": 24205387,
+      "pom": 9.37
+    },
+    {
+      "team": "Georgia Tech",
+      "conf": "ACC",
+      "nil_roster": 21750000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 140430227,
+      "staff_payroll": 22082473,
+      "pom": 8.83
+    },
+    {
+      "team": "Minnesota",
+      "conf": "B1G",
+      "nil_roster": 22580000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 146804169,
+      "staff_payroll": 24205387,
+      "pom": 8.81
+    },
+    {
+      "team": "Colorado",
+      "conf": "B12",
+      "nil_roster": 23180000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 161512069,
+      "staff_payroll": 16541521,
+      "pom": 8.33
+    },
+    {
+      "team": "Cincinnati",
+      "conf": "B12",
+      "nil_roster": 20050000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 119327103,
+      "staff_payroll": 16541521,
+      "pom": 7.89
+    },
+    {
+      "team": "Arizona State",
+      "conf": "B12",
+      "nil_roster": 21520000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 149346605,
+      "staff_payroll": 16541521,
+      "pom": 7.44
+    },
+    {
+      "team": "Virginia",
+      "conf": "ACC",
+      "nil_roster": 21080000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 150622194,
+      "staff_payroll": 22082473,
+      "pom": 7.43
+    },
+    {
+      "team": "UCF",
+      "conf": "B12",
+      "nil_roster": 19800000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 103615446,
+      "staff_payroll": 16541521,
+      "pom": 7.33
+    },
+    {
+      "team": "Memphis",
+      "conf": "AAC",
+      "nil_roster": 10500000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 65857423,
+      "staff_payroll": 7392211,
+      "pom": 6.28
+    },
+    {
+      "team": "Illinois",
+      "conf": "B1G",
+      "nil_roster": 21850000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 174612181,
+      "staff_payroll": 24205387,
+      "pom": 6.09
+    },
+    {
+      "team": "Kentucky",
+      "conf": "SEC",
+      "nil_roster": 24540000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 186609679,
+      "staff_payroll": 26931774,
+      "pom": 6.04
+    },
+    {
+      "team": "UCLA",
+      "conf": "B1G",
+      "nil_roster": 24330000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 173429394,
+      "staff_payroll": 24205387,
+      "pom": 5.54
+    },
+    {
+      "team": "NC State",
+      "conf": "ACC",
+      "nil_roster": 20460000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 129009673,
+      "staff_payroll": 22082473,
+      "pom": 5.5
+    },
+    {
+      "team": "Arkansas",
+      "conf": "SEC",
+      "nil_roster": 23940000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 188988863,
+      "staff_payroll": 26931774,
+      "pom": 5.43
+    },
+    {
+      "team": "Mississippi State",
+      "conf": "SEC",
+      "nil_roster": 22940000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 157301826,
+      "staff_payroll": 26931774,
+      "pom": 5.15
+    },
+    {
+      "team": "South Florida",
+      "conf": "AAC",
+      "nil_roster": 8500000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 122093386,
+      "staff_payroll": 7392211,
+      "pom": 5.12
+    },
+    {
+      "team": "Toledo",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 39498134,
+      "staff_payroll": 3817671,
+      "pom": 5.02
+    },
+    {
+      "team": "South Carolina",
+      "conf": "SEC",
+      "nil_roster": 27360000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 203259302,
+      "staff_payroll": 26931774,
+      "pom": 4.2
+    },
+    {
+      "team": "Maryland",
+      "conf": "B1G",
+      "nil_roster": 23720000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 128662116,
+      "staff_payroll": 24205387,
+      "pom": 4.13
+    },
+    {
+      "team": "Tulane",
+      "conf": "AAC",
+      "nil_roster": 9500000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 66211945,
+      "staff_payroll": 7392211,
+      "pom": 3.65
+    },
+    {
+      "team": "James Madison",
+      "conf": "SBC",
+      "nil_roster": 8500000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 68384574,
+      "staff_payroll": 4613206,
+      "pom": 3.43
+    },
+    {
+      "team": "Virginia Tech",
+      "conf": "ACC",
+      "nil_roster": 21910000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 148984818,
+      "staff_payroll": 22082473,
+      "pom": 2.94
+    },
+    {
+      "team": "North Texas",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 58119360,
+      "staff_payroll": 7392211,
+      "pom": 2.87
+    },
+    {
+      "team": "Houston",
+      "conf": "B12",
+      "nil_roster": 24460000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 100162965,
+      "staff_payroll": 16541521,
+      "pom": 2.73
+    },
+    {
+      "team": "Michigan State",
+      "conf": "B1G",
+      "nil_roster": 23120000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 160697176,
+      "staff_payroll": 24205387,
+      "pom": 1.56
+    },
+    {
+      "team": "Boise State",
+      "conf": "MWC",
+      "nil_roster": 10000000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 69810118,
+      "staff_payroll": 5086308,
+      "pom": 1.54
+    },
+    {
+      "team": "Navy",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 7392211,
+      "pom": 1.48
+    },
+    {
+      "team": "Duke",
+      "conf": "ACC",
+      "nil_roster": 20490000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 180590186,
+      "staff_payroll": 22082473,
+      "pom": 1.47
+    },
+    {
+      "team": "UNLV",
+      "conf": "MWC",
+      "nil_roster": 9000000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 74767674,
+      "staff_payroll": 5086308,
+      "pom": 0.85
+    },
+    {
+      "team": "Rutgers",
+      "conf": "B1G",
+      "nil_roster": 21320000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 171679918,
+      "staff_payroll": 24205387,
+      "pom": 0.83
+    },
+    {
+      "team": "Purdue",
+      "conf": "B1G",
+      "nil_roster": 20370000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 135140397,
+      "staff_payroll": 24205387,
+      "pom": 0.61
+    },
+    {
+      "team": "Wisconsin",
+      "conf": "B1G",
+      "nil_roster": 30000000,
+      "nil_quality": "blended",
+      "nil_all_sports": null,
+      "athletic_spend": 180525755,
+      "staff_payroll": 24205387,
+      "pom": 0.39
+    },
+    {
+      "team": "Syracuse",
+      "conf": "ACC",
+      "nil_roster": 20070000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 108994576,
+      "staff_payroll": 22082473,
+      "pom": 0.18
+    },
+    {
+      "team": "Northwestern",
+      "conf": "B1G",
+      "nil_roster": 21040000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 131779238,
+      "staff_payroll": 24205387,
+      "pom": -0.06
+    },
+    {
+      "team": "Wake Forest",
+      "conf": "ACC",
+      "nil_roster": 20020000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 114628069,
+      "staff_payroll": 22082473,
+      "pom": -0.07
+    },
+    {
+      "team": "Old Dominion",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 53232824,
+      "staff_payroll": 4613206,
+      "pom": -0.38
+    },
+    {
+      "team": "San Diego State",
+      "conf": "MWC",
+      "nil_roster": 5500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 89827012,
+      "staff_payroll": 5086308,
+      "pom": -0.46
+    },
+    {
+      "team": "North Carolina",
+      "conf": "ACC",
+      "nil_roster": 21880000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 180835031,
+      "staff_payroll": 22082473,
+      "pom": -1.13
+    },
+    {
+      "team": "East Carolina",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 64764468,
+      "staff_payroll": 7392211,
+      "pom": -1.37
+    },
+    {
+      "team": "California",
+      "conf": "ACC",
+      "nil_roster": 20380000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 173116318,
+      "staff_payroll": 22082473,
+      "pom": -1.69
+    },
+    {
+      "team": "Boston College",
+      "conf": "ACC",
+      "nil_roster": 18800000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 142122049,
+      "staff_payroll": 22082473,
+      "pom": -2.05
+    },
+    {
+      "team": "UConn",
+      "conf": "Ind",
+      "nil_roster": 4000000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 97050998,
+      "staff_payroll": 10000000,
+      "pom": -2.19
+    },
+    {
+      "team": "UTSA",
+      "conf": "AAC",
+      "nil_roster": 8000000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 49898232,
+      "staff_payroll": 7392211,
+      "pom": -2.61
+    },
+    {
+      "team": "West Virginia",
+      "conf": "B12",
+      "nil_roster": 20920000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 117413366,
+      "staff_payroll": 16541521,
+      "pom": -2.98
+    },
+    {
+      "team": "Army",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 7392211,
+      "pom": -3.09
+    },
+    {
+      "team": "Texas State",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 52238898,
+      "staff_payroll": 4613206,
+      "pom": -3.74
+    },
+    {
+      "team": "Washington State",
+      "conf": "P12",
+      "nil_roster": 7000000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 68573910,
+      "staff_payroll": 8259208,
+      "pom": -3.9
+    },
+    {
+      "team": "Stanford",
+      "conf": "ACC",
+      "nil_roster": 20320000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 192802320,
+      "staff_payroll": 22082473,
+      "pom": -5.1
+    },
+    {
+      "team": "Ohio",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 33031821,
+      "staff_payroll": 3817671,
+      "pom": -5.79
+    },
+    {
+      "team": "Marshall",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 47042862,
+      "staff_payroll": 4613206,
+      "pom": -6.24
+    },
+    {
+      "team": "Temple",
+      "conf": "AAC",
+      "nil_roster": 6500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 71198560,
+      "staff_payroll": 7392211,
+      "pom": -7.01
+    },
+    {
+      "team": "Fresno State",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 63439685,
+      "staff_payroll": 5086308,
+      "pom": -7.12
+    },
+    {
+      "team": "Western Michigan",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 43722663,
+      "staff_payroll": 3817671,
+      "pom": -7.47
+    },
+    {
+      "team": "Wyoming",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 50399891,
+      "staff_payroll": 5086308,
+      "pom": -7.81
+    },
+    {
+      "team": "Miami (OH)",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 3817671,
+      "pom": -8.12
+    },
+    {
+      "team": "South Alabama",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 32559740,
+      "staff_payroll": 4613206,
+      "pom": -8.24
+    },
+    {
+      "team": "Hawai'i",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 53793049,
+      "staff_payroll": 5086308,
+      "pom": -8.27
+    },
+    {
+      "team": "Oklahoma State",
+      "conf": "B12",
+      "nil_roster": 22150000,
+      "nil_quality": "published",
+      "nil_all_sports": null,
+      "athletic_spend": 153679234,
+      "staff_payroll": 16541521,
+      "pom": -8.39
+    },
+    {
+      "team": "New Mexico",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 56544018,
+      "staff_payroll": 5086308,
+      "pom": -8.62
+    },
+    {
+      "team": "Florida Atlantic",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 49292817,
+      "staff_payroll": 7392211,
+      "pom": -8.75
+    },
+    {
+      "team": "Troy",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 39742013,
+      "staff_payroll": 4613206,
+      "pom": -9.53
+    },
+    {
+      "team": "San Jos\u00e9 State",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 42944067,
+      "staff_payroll": 5086308,
+      "pom": -9.59
+    },
+    {
+      "team": "Utah State",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 48349839,
+      "staff_payroll": 5086308,
+      "pom": -9.72
+    },
+    {
+      "team": "Jacksonville State",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 34639572,
+      "staff_payroll": 3475314,
+      "pom": -11.49
+    },
+    {
+      "team": "Colorado State",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 55794198,
+      "staff_payroll": 5086308,
+      "pom": -11.61
+    },
+    {
+      "team": "UAB",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 40789883,
+      "staff_payroll": 7392211,
+      "pom": -11.78
+    },
+    {
+      "team": "App State",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 4613206,
+      "pom": -11.81
+    },
+    {
+      "team": "Air Force",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 5086308,
+      "pom": -11.87
+    },
+    {
+      "team": "Florida International",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 42392051,
+      "staff_payroll": 3475314,
+      "pom": -11.91
+    },
+    {
+      "team": "Arkansas State",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 33754642,
+      "staff_payroll": 4613206,
+      "pom": -11.93
+    },
+    {
+      "team": "Western Kentucky",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 31319105,
+      "staff_payroll": 3475314,
+      "pom": -12.26
+    },
+    {
+      "team": "Missouri State",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 28059311,
+      "staff_payroll": 3475314,
+      "pom": -12.67
+    },
+    {
+      "team": "Louisiana Tech",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 33952161,
+      "staff_payroll": 3475314,
+      "pom": -12.87
+    },
+    {
+      "team": "Georgia Southern",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 38133784,
+      "staff_payroll": 4613206,
+      "pom": -13.11
+    },
+    {
+      "team": "Oregon State",
+      "conf": "P12",
+      "nil_roster": 7000000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 100306447,
+      "staff_payroll": 8259208,
+      "pom": -13.22
+    },
+    {
+      "team": "Coastal Carolina",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 46978290,
+      "staff_payroll": 4613206,
+      "pom": -13.45
+    },
+    {
+      "team": "Bowling Green",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 35288178,
+      "staff_payroll": 3817671,
+      "pom": -13.85
+    },
+    {
+      "team": "Georgia State",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 39979520,
+      "staff_payroll": 4613206,
+      "pom": -14.22
+    },
+    {
+      "team": "Louisiana",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 42959075,
+      "staff_payroll": 4613206,
+      "pom": -14.35
+    },
+    {
+      "team": "Southern Miss",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 31875542,
+      "staff_payroll": 4613206,
+      "pom": -14.54
+    },
+    {
+      "team": "Central Michigan",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 38536340,
+      "staff_payroll": 3817671,
+      "pom": -14.67
+    },
+    {
+      "team": "Rice",
+      "conf": "AAC",
+      "nil_roster": 6500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 70408131,
+      "staff_payroll": 7392211,
+      "pom": -14.83
+    },
+    {
+      "team": "Delaware",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 65523927,
+      "staff_payroll": 3475314,
+      "pom": -14.9
+    },
+    {
+      "team": "Northern Illinois",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 34342695,
+      "staff_payroll": 3817671,
+      "pom": -15.42
+    },
+    {
+      "team": "New Mexico State",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 37088598,
+      "staff_payroll": 3475314,
+      "pom": -15.44
+    },
+    {
+      "team": "UTEP",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 32413794,
+      "staff_payroll": 3475314,
+      "pom": -15.83
+    },
+    {
+      "team": "Buffalo",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 49986844,
+      "staff_payroll": 3817671,
+      "pom": -15.98
+    },
+    {
+      "team": "Tulsa",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 59760481,
+      "staff_payroll": 7392211,
+      "pom": -16.52
+    },
+    {
+      "team": "Charlotte",
+      "conf": "AAC",
+      "nil_roster": 4500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 54956032,
+      "staff_payroll": 7392211,
+      "pom": -16.7
+    },
+    {
+      "team": "Liberty",
+      "conf": "CUSA",
+      "nil_roster": 8000000,
+      "nil_quality": "reported",
+      "nil_all_sports": null,
+      "athletic_spend": 62067210,
+      "staff_payroll": 3475314,
+      "pom": -17.14
+    },
+    {
+      "team": "UL Monroe",
+      "conf": "SBC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 20557764,
+      "staff_payroll": 4613206,
+      "pom": -17.38
+    },
+    {
+      "team": "Eastern Michigan",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 38924556,
+      "staff_payroll": 3817671,
+      "pom": -17.71
+    },
+    {
+      "team": "Kennesaw State",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 42344569,
+      "staff_payroll": 3475314,
+      "pom": -17.94
+    },
+    {
+      "team": "Nevada",
+      "conf": "MWC",
+      "nil_roster": 3500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 53153531,
+      "staff_payroll": 5086308,
+      "pom": -18.54
+    },
+    {
+      "team": "Middle Tennessee",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 40006612,
+      "staff_payroll": 3475314,
+      "pom": -19.33
+    },
+    {
+      "team": "Ball State",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 30329090,
+      "staff_payroll": 3817671,
+      "pom": -20.93
+    },
+    {
+      "team": "Sam Houston",
+      "conf": "CUSA",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": null,
+      "staff_payroll": 3475314,
+      "pom": -21.1
+    },
+    {
+      "team": "Kent State",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 37209656,
+      "staff_payroll": 3817671,
+      "pom": -23.16
+    },
+    {
+      "team": "Akron",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 33581788,
+      "staff_payroll": 3817671,
+      "pom": -23.96
+    },
+    {
+      "team": "Massachusetts",
+      "conf": "MAC",
+      "nil_roster": 2500000,
+      "nil_quality": "modeled",
+      "nil_all_sports": null,
+      "athletic_spend": 57654295,
+      "staff_payroll": 3817671,
+      "pom": -27.51
+    }
+  ]
+}

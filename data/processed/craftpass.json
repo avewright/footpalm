@@ -1,0 +1,2248 @@
+{
+  "protocol": "Craft menu locked before the score. 2014\u20132024 train, 2025 FBS\u2013FBS once. Trees + batch TabPFN + walk-forward TabPFN on extras+craft. Not live.",
+  "craft_features": [
+    "srs_diff",
+    "colley_diff",
+    "ncsos_diff",
+    "margin_std_diff",
+    "pom_sum",
+    "pom_abs",
+    "tempo_abs",
+    "log_pom_diff",
+    "tanh_elo_diff",
+    "pom_elo_prod",
+    "form_sos_prod",
+    "srs_elo_prod"
+  ],
+  "comparisons": [
+    {
+      "family": "lightgbm",
+      "set": "craft",
+      "locked_brier": 0.1909,
+      "full_brier": 0.1843,
+      "locked_logloss": 0.5586,
+      "full_logloss": 0.5427,
+      "delta_brier": -0.0066,
+      "pass": true
+    },
+    {
+      "family": "lightgbm",
+      "set": "extras+craft",
+      "locked_brier": 0.1845,
+      "full_brier": 0.1825,
+      "locked_logloss": 0.5425,
+      "full_logloss": 0.5383,
+      "delta_brier": -0.002,
+      "pass": true
+    },
+    {
+      "family": "xgboost",
+      "set": "craft",
+      "locked_brier": 0.1924,
+      "full_brier": 0.1838,
+      "locked_logloss": 0.5626,
+      "full_logloss": 0.5418,
+      "delta_brier": -0.0086,
+      "pass": true
+    },
+    {
+      "family": "xgboost",
+      "set": "extras+craft",
+      "locked_brier": 0.1834,
+      "full_brier": 0.184,
+      "locked_logloss": 0.5397,
+      "full_logloss": 0.5421,
+      "delta_brier": 0.0006,
+      "pass": false
+    }
+  ],
+  "rows": [
+    {
+      "id": "lightgbm/locked",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7639,
+        "brier": 0.1552,
+        "logloss": 0.4671
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.689,
+        "brier": 0.1909,
+        "logloss": 0.5586
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "locked"
+    },
+    {
+      "id": "lightgbm/locked+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7639,
+        "brier": 0.1548,
+        "logloss": 0.4635
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.689,
+        "brier": 0.1922,
+        "logloss": 0.562
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "locked",
+      "T": 0.8282
+    },
+    {
+      "id": "xgboost/locked",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7595,
+        "brier": 0.1609,
+        "logloss": 0.4854
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6902,
+        "brier": 0.1924,
+        "logloss": 0.5626
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "locked"
+    },
+    {
+      "id": "xgboost/locked+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7595,
+        "brier": 0.1607,
+        "logloss": 0.4843
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6902,
+        "brier": 0.193,
+        "logloss": 0.5641
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "locked",
+      "T": 0.9008
+    },
+    {
+      "id": "tabpfn/locked",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7,
+        "brier": 0.1972,
+        "logloss": 0.5778
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6989,
+        "brier": 0.1926,
+        "logloss": 0.5666
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "locked"
+    },
+    {
+      "id": "tabpfn/locked+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.7,
+        "brier": 0.1926,
+        "logloss": 0.5626
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6989,
+        "brier": 0.1889,
+        "logloss": 0.5526
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "locked",
+      "T": 0.6121
+    },
+    {
+      "id": "lightgbm/extras",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7791,
+        "brier": 0.1469,
+        "logloss": 0.4458
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7076,
+        "brier": 0.1845,
+        "logloss": 0.5425
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras"
+    },
+    {
+      "id": "lightgbm/extras+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7791,
+        "brier": 0.1461,
+        "logloss": 0.4398
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7076,
+        "brier": 0.1863,
+        "logloss": 0.5471
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras",
+      "T": 0.7877
+    },
+    {
+      "id": "xgboost/extras",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7749,
+        "brier": 0.1535,
+        "logloss": 0.466
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7051,
+        "brier": 0.1834,
+        "logloss": 0.5397
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras"
+    },
+    {
+      "id": "xgboost/extras+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7749,
+        "brier": 0.153,
+        "logloss": 0.4637
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7051,
+        "brier": 0.1842,
+        "logloss": 0.5407
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras",
+      "T": 0.8668
+    },
+    {
+      "id": "tabpfn/extras",
+      "train": {
+        "n": 400,
+        "accuracy": 0.735,
+        "brier": 0.187,
+        "logloss": 0.555
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.1861,
+        "logloss": 0.552
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras"
+    },
+    {
+      "id": "tabpfn/extras+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.735,
+        "brier": 0.1793,
+        "logloss": 0.5324
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.1814,
+        "logloss": 0.5335
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras",
+      "T": 0.5662
+    },
+    {
+      "id": "lightgbm/craft",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7824,
+        "brier": 0.1457,
+        "logloss": 0.4427
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.1843,
+        "logloss": 0.5427
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "craft"
+    },
+    {
+      "id": "lightgbm/craft+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7824,
+        "brier": 0.1447,
+        "logloss": 0.4357
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.1863,
+        "logloss": 0.5489
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "craft",
+      "T": 0.7713
+    },
+    {
+      "id": "xgboost/craft",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7735,
+        "brier": 0.1533,
+        "logloss": 0.4657
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7026,
+        "brier": 0.1838,
+        "logloss": 0.5418
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "craft"
+    },
+    {
+      "id": "xgboost/craft+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7735,
+        "brier": 0.1527,
+        "logloss": 0.4631
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7026,
+        "brier": 0.1844,
+        "logloss": 0.5432
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "craft",
+      "T": 0.8583
+    },
+    {
+      "id": "tabpfn/craft",
+      "train": {
+        "n": 400,
+        "accuracy": 0.6975,
+        "brier": 0.1946,
+        "logloss": 0.5716
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7125,
+        "brier": 0.186,
+        "logloss": 0.5522
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "craft"
+    },
+    {
+      "id": "tabpfn/craft+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.6975,
+        "brier": 0.1905,
+        "logloss": 0.5576
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7125,
+        "brier": 0.1808,
+        "logloss": 0.5334
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "craft",
+      "T": 0.6329
+    },
+    {
+      "id": "lightgbm/extras+craft",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7924,
+        "brier": 0.1424,
+        "logloss": 0.4353
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7125,
+        "brier": 0.1825,
+        "logloss": 0.5383
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras+craft"
+    },
+    {
+      "id": "lightgbm/extras+craft+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7924,
+        "brier": 0.1411,
+        "logloss": 0.4271
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7125,
+        "brier": 0.1847,
+        "logloss": 0.5452
+      },
+      "delta_holdout_brier": null,
+      "engine": "lightgbm",
+      "set": "extras+craft",
+      "T": 0.7565
+    },
+    {
+      "id": "xgboost/extras+craft",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7769,
+        "brier": 0.1517,
+        "logloss": 0.4618
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.71,
+        "brier": 0.184,
+        "logloss": 0.5421
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras+craft"
+    },
+    {
+      "id": "xgboost/extras+craft+T",
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7769,
+        "brier": 0.1511,
+        "logloss": 0.459
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.71,
+        "brier": 0.1849,
+        "logloss": 0.5442
+      },
+      "delta_holdout_brier": null,
+      "engine": "xgboost",
+      "set": "extras+craft",
+      "T": 0.8519
+    },
+    {
+      "id": "tabpfn/extras+craft",
+      "train": {
+        "n": 400,
+        "accuracy": 0.705,
+        "brier": 0.1925,
+        "logloss": 0.5671
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.186,
+        "logloss": 0.5519
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras+craft"
+    },
+    {
+      "id": "tabpfn/extras+craft+T",
+      "train": {
+        "n": 400,
+        "accuracy": 0.705,
+        "brier": 0.1875,
+        "logloss": 0.5512
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.1808,
+        "logloss": 0.5331
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras+craft",
+      "T": 0.6161
+    }
+  ],
+  "walk": [
+    {
+      "id": "tabpfn/extras+craft-walk",
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.715,
+        "brier": 0.1862,
+        "logloss": 0.5525
+      },
+      "n_scored": 807,
+      "engine": "tabpfn",
+      "set": "extras+craft",
+      "mode": "walk-forward",
+      "delta_vs_extras_walk": -0.0003,
+      "pass": false
+    }
+  ],
+  "models": [
+    {
+      "id": "lightgbm-locked",
+      "note": "Diagnostic only. locked. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7639,
+        "brier": 0.1552,
+        "logloss": 0.4671
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.689,
+        "brier": 0.1909,
+        "logloss": 0.5586,
+        "mae": 12.53
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 21587.85681,
+          "share": 0.5995
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 4795.13862,
+          "share": 0.1332
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 3313.97441,
+          "share": 0.092
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 1423.75485,
+          "share": 0.0395
+        },
+        {
+          "feature": "away_pom",
+          "gain": 1372.04065,
+          "share": 0.0381
+        },
+        {
+          "feature": "st_diff",
+          "gain": 1199.09976,
+          "share": 0.0333
+        },
+        {
+          "feature": "home_pom",
+          "gain": 895.88023,
+          "share": 0.0249
+        },
+        {
+          "feature": "away_games",
+          "gain": 817.3157,
+          "share": 0.0227
+        },
+        {
+          "feature": "home_games",
+          "gain": 506.0899,
+          "share": 0.0141
+        },
+        {
+          "feature": "is_home",
+          "gain": 98.18537,
+          "share": 0.0027
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.05192
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.00347
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": 0.00233
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.00111
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.001
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00097
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00059
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": 0.00031
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00066
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -0.00076
+        }
+      ]
+    },
+    {
+      "id": "xgboost-locked",
+      "note": "Diagnostic only. locked. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7595,
+        "brier": 0.1609,
+        "logloss": 0.4854
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6902,
+        "brier": 0.1924,
+        "logloss": 0.5626,
+        "mae": 12.55
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 0.55311,
+          "share": 0.5531
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 0.09897,
+          "share": 0.099
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 0.07151,
+          "share": 0.0715
+        },
+        {
+          "feature": "away_games",
+          "gain": 0.05127,
+          "share": 0.0513
+        },
+        {
+          "feature": "away_pom",
+          "gain": 0.04047,
+          "share": 0.0405
+        },
+        {
+          "feature": "st_diff",
+          "gain": 0.03911,
+          "share": 0.0391
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 0.0382,
+          "share": 0.0382
+        },
+        {
+          "feature": "home_games",
+          "gain": 0.03643,
+          "share": 0.0364
+        },
+        {
+          "feature": "home_pom",
+          "gain": 0.03599,
+          "share": 0.036
+        },
+        {
+          "feature": "is_home",
+          "gain": 0.03494,
+          "share": 0.0349
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.0609
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.00126
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00052
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.00043
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -2e-05
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -7e-05
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.00012
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": -0.00012
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": -0.00028
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00069
+        }
+      ]
+    },
+    {
+      "id": "lightgbm-extras",
+      "note": "Diagnostic only. extras. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7791,
+        "brier": 0.1469,
+        "logloss": 0.4458
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7076,
+        "brier": 0.1845,
+        "logloss": 0.5425,
+        "mae": 12.34
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 19021.87455,
+          "share": 0.476
+        },
+        {
+          "feature": "elo_diff",
+          "gain": 7415.68423,
+          "share": 0.1856
+        },
+        {
+          "feature": "avg_margin_diff",
+          "gain": 1869.23942,
+          "share": 0.0468
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 1642.77397,
+          "share": 0.0411
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 1477.62021,
+          "share": 0.037
+        },
+        {
+          "feature": "away_pom",
+          "gain": 1248.56267,
+          "share": 0.0312
+        },
+        {
+          "feature": "sos_diff",
+          "gain": 1141.0879,
+          "share": 0.0286
+        },
+        {
+          "feature": "form4_margin_diff",
+          "gain": 1106.54296,
+          "share": 0.0277
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 800.42331,
+          "share": 0.02
+        },
+        {
+          "feature": "away_games",
+          "gain": 744.75353,
+          "share": 0.0186
+        },
+        {
+          "feature": "st_diff",
+          "gain": 667.91021,
+          "share": 0.0167
+        },
+        {
+          "feature": "home_pom",
+          "gain": 585.2983,
+          "share": 0.0146
+        },
+        {
+          "feature": "luck_diff",
+          "gain": 509.55942,
+          "share": 0.0128
+        },
+        {
+          "feature": "winpct_diff",
+          "gain": 392.26457,
+          "share": 0.0098
+        },
+        {
+          "feature": "close_win_diff",
+          "gain": 294.45021,
+          "share": 0.0074
+        },
+        {
+          "feature": "home_games",
+          "gain": 286.76252,
+          "share": 0.0072
+        },
+        {
+          "feature": "quality_win_diff",
+          "gain": 232.86802,
+          "share": 0.0058
+        },
+        {
+          "feature": "form4_win_diff",
+          "gain": 232.15679,
+          "share": 0.0058
+        },
+        {
+          "feature": "rest_diff",
+          "gain": 199.10425,
+          "share": 0.005
+        },
+        {
+          "feature": "is_home",
+          "gain": 92.03408,
+          "share": 0.0023
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.02469
+        },
+        {
+          "feature": "elo_diff",
+          "brier_increase": 0.00633
+        },
+        {
+          "feature": "avg_margin_diff",
+          "brier_increase": 0.00549
+        },
+        {
+          "feature": "form4_margin_diff",
+          "brier_increase": 0.00506
+        },
+        {
+          "feature": "sos_diff",
+          "brier_increase": 0.00177
+        },
+        {
+          "feature": "winpct_diff",
+          "brier_increase": 0.00088
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.0008
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.00043
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00043
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00017
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.00014
+        },
+        {
+          "feature": "quality_win_diff",
+          "brier_increase": 6e-05
+        },
+        {
+          "feature": "form4_win_diff",
+          "brier_increase": -1e-05
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -2e-05
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -3e-05
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.0001
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -0.00026
+        },
+        {
+          "feature": "rest_diff",
+          "brier_increase": -0.00035
+        },
+        {
+          "feature": "close_win_diff",
+          "brier_increase": -0.00037
+        },
+        {
+          "feature": "luck_diff",
+          "brier_increase": -0.00051
+        }
+      ]
+    },
+    {
+      "id": "xgboost-extras",
+      "note": "Diagnostic only. extras. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7749,
+        "brier": 0.1535,
+        "logloss": 0.466
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7051,
+        "brier": 0.1834,
+        "logloss": 0.5397,
+        "mae": 12.33
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 0.33091,
+          "share": 0.3309
+        },
+        {
+          "feature": "elo_diff",
+          "gain": 0.13669,
+          "share": 0.1367
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 0.07427,
+          "share": 0.0743
+        },
+        {
+          "feature": "avg_margin_diff",
+          "gain": 0.05671,
+          "share": 0.0567
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 0.03975,
+          "share": 0.0397
+        },
+        {
+          "feature": "away_games",
+          "gain": 0.03025,
+          "share": 0.0302
+        },
+        {
+          "feature": "form4_margin_diff",
+          "gain": 0.02865,
+          "share": 0.0286
+        },
+        {
+          "feature": "form4_win_diff",
+          "gain": 0.02847,
+          "share": 0.0285
+        },
+        {
+          "feature": "rest_diff",
+          "gain": 0.0283,
+          "share": 0.0283
+        },
+        {
+          "feature": "away_pom",
+          "gain": 0.02771,
+          "share": 0.0277
+        },
+        {
+          "feature": "winpct_diff",
+          "gain": 0.02736,
+          "share": 0.0274
+        },
+        {
+          "feature": "sos_diff",
+          "gain": 0.02508,
+          "share": 0.0251
+        },
+        {
+          "feature": "st_diff",
+          "gain": 0.02193,
+          "share": 0.0219
+        },
+        {
+          "feature": "close_win_diff",
+          "gain": 0.02177,
+          "share": 0.0218
+        },
+        {
+          "feature": "quality_win_diff",
+          "gain": 0.02158,
+          "share": 0.0216
+        },
+        {
+          "feature": "is_home",
+          "gain": 0.02083,
+          "share": 0.0208
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 0.02058,
+          "share": 0.0206
+        },
+        {
+          "feature": "home_games",
+          "gain": 0.0201,
+          "share": 0.0201
+        },
+        {
+          "feature": "home_pom",
+          "gain": 0.01957,
+          "share": 0.0196
+        },
+        {
+          "feature": "luck_diff",
+          "gain": 0.01951,
+          "share": 0.0195
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.02277
+        },
+        {
+          "feature": "elo_diff",
+          "brier_increase": 0.00565
+        },
+        {
+          "feature": "avg_margin_diff",
+          "brier_increase": 0.00565
+        },
+        {
+          "feature": "form4_margin_diff",
+          "brier_increase": 0.00408
+        },
+        {
+          "feature": "sos_diff",
+          "brier_increase": 0.00232
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00122
+        },
+        {
+          "feature": "winpct_diff",
+          "brier_increase": 0.00055
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.00048
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00042
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.00032
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 6e-05
+        },
+        {
+          "feature": "quality_win_diff",
+          "brier_increase": 1e-05
+        },
+        {
+          "feature": "form4_win_diff",
+          "brier_increase": -6e-05
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -7e-05
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00016
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.0002
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -0.00024
+        },
+        {
+          "feature": "close_win_diff",
+          "brier_increase": -0.0003
+        },
+        {
+          "feature": "luck_diff",
+          "brier_increase": -0.00045
+        },
+        {
+          "feature": "rest_diff",
+          "brier_increase": -0.00069
+        }
+      ]
+    },
+    {
+      "id": "lightgbm-craft",
+      "note": "Diagnostic only. craft. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7824,
+        "brier": 0.1457,
+        "logloss": 0.4427
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7175,
+        "brier": 0.1843,
+        "logloss": 0.5427,
+        "mae": 12.31
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 20017.34026,
+          "share": 0.4939
+        },
+        {
+          "feature": "pom_elo_prod",
+          "gain": 4387.26016,
+          "share": 0.1082
+        },
+        {
+          "feature": "pom_abs",
+          "gain": 1588.48528,
+          "share": 0.0392
+        },
+        {
+          "feature": "srs_diff",
+          "gain": 1255.7655,
+          "share": 0.031
+        },
+        {
+          "feature": "colley_diff",
+          "gain": 1246.98108,
+          "share": 0.0308
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 1170.55701,
+          "share": 0.0289
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "gain": 1133.93637,
+          "share": 0.028
+        },
+        {
+          "feature": "srs_elo_prod",
+          "gain": 1082.1193,
+          "share": 0.0267
+        },
+        {
+          "feature": "log_pom_diff",
+          "gain": 942.55543,
+          "share": 0.0233
+        },
+        {
+          "feature": "away_pom",
+          "gain": 938.37397,
+          "share": 0.0232
+        },
+        {
+          "feature": "margin_std_diff",
+          "gain": 867.91814,
+          "share": 0.0214
+        },
+        {
+          "feature": "st_diff",
+          "gain": 808.966,
+          "share": 0.02
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 787.97328,
+          "share": 0.0194
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 736.49942,
+          "share": 0.0182
+        },
+        {
+          "feature": "form_sos_prod",
+          "gain": 641.5971,
+          "share": 0.0158
+        },
+        {
+          "feature": "tempo_abs",
+          "gain": 638.07946,
+          "share": 0.0157
+        },
+        {
+          "feature": "ncsos_diff",
+          "gain": 619.80633,
+          "share": 0.0153
+        },
+        {
+          "feature": "away_games",
+          "gain": 541.22756,
+          "share": 0.0134
+        },
+        {
+          "feature": "pom_sum",
+          "gain": 430.10892,
+          "share": 0.0106
+        },
+        {
+          "feature": "home_pom",
+          "gain": 400.47905,
+          "share": 0.0099
+        },
+        {
+          "feature": "home_games",
+          "gain": 210.41364,
+          "share": 0.0052
+        },
+        {
+          "feature": "is_home",
+          "gain": 84.52604,
+          "share": 0.0021
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.04115
+        },
+        {
+          "feature": "pom_elo_prod",
+          "brier_increase": 0.00441
+        },
+        {
+          "feature": "srs_diff",
+          "brier_increase": 0.00329
+        },
+        {
+          "feature": "srs_elo_prod",
+          "brier_increase": 0.00234
+        },
+        {
+          "feature": "colley_diff",
+          "brier_increase": 0.00232
+        },
+        {
+          "feature": "form_sos_prod",
+          "brier_increase": 0.00115
+        },
+        {
+          "feature": "ncsos_diff",
+          "brier_increase": 0.00093
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00074
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "brier_increase": 0.00072
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.00037
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.00035
+        },
+        {
+          "feature": "log_pom_diff",
+          "brier_increase": 0.00027
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.00022
+        },
+        {
+          "feature": "margin_std_diff",
+          "brier_increase": 0.00019
+        },
+        {
+          "feature": "pom_abs",
+          "brier_increase": 5e-05
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -0.00014
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.00015
+        },
+        {
+          "feature": "tempo_abs",
+          "brier_increase": -0.00016
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": -0.0002
+        },
+        {
+          "feature": "pom_sum",
+          "brier_increase": -0.00021
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -0.00033
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00068
+        }
+      ]
+    },
+    {
+      "id": "xgboost-craft",
+      "note": "Diagnostic only. craft. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7735,
+        "brier": 0.1533,
+        "logloss": 0.4657
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7026,
+        "brier": 0.1838,
+        "logloss": 0.5418,
+        "mae": 12.28
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 0.31374,
+          "share": 0.3137
+        },
+        {
+          "feature": "log_pom_diff",
+          "gain": 0.28614,
+          "share": 0.2861
+        },
+        {
+          "feature": "pom_elo_prod",
+          "gain": 0.06019,
+          "share": 0.0602
+        },
+        {
+          "feature": "pom_abs",
+          "gain": 0.04328,
+          "share": 0.0433
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "gain": 0.02865,
+          "share": 0.0287
+        },
+        {
+          "feature": "srs_diff",
+          "gain": 0.02523,
+          "share": 0.0252
+        },
+        {
+          "feature": "colley_diff",
+          "gain": 0.02365,
+          "share": 0.0236
+        },
+        {
+          "feature": "srs_elo_prod",
+          "gain": 0.0231,
+          "share": 0.0231
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 0.01858,
+          "share": 0.0186
+        },
+        {
+          "feature": "away_games",
+          "gain": 0.01781,
+          "share": 0.0178
+        },
+        {
+          "feature": "away_pom",
+          "gain": 0.01506,
+          "share": 0.0151
+        },
+        {
+          "feature": "tempo_abs",
+          "gain": 0.01452,
+          "share": 0.0145
+        },
+        {
+          "feature": "home_pom",
+          "gain": 0.01441,
+          "share": 0.0144
+        },
+        {
+          "feature": "margin_std_diff",
+          "gain": 0.01411,
+          "share": 0.0141
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 0.01381,
+          "share": 0.0138
+        },
+        {
+          "feature": "st_diff",
+          "gain": 0.01341,
+          "share": 0.0134
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 0.01326,
+          "share": 0.0133
+        },
+        {
+          "feature": "is_home",
+          "gain": 0.01292,
+          "share": 0.0129
+        },
+        {
+          "feature": "ncsos_diff",
+          "gain": 0.01288,
+          "share": 0.0129
+        },
+        {
+          "feature": "form_sos_prod",
+          "gain": 0.0122,
+          "share": 0.0122
+        },
+        {
+          "feature": "home_games",
+          "gain": 0.01155,
+          "share": 0.0115
+        },
+        {
+          "feature": "pom_sum",
+          "gain": 0.01148,
+          "share": 0.0115
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.03359
+        },
+        {
+          "feature": "srs_diff",
+          "brier_increase": 0.00284
+        },
+        {
+          "feature": "pom_elo_prod",
+          "brier_increase": 0.00257
+        },
+        {
+          "feature": "colley_diff",
+          "brier_increase": 0.00249
+        },
+        {
+          "feature": "srs_elo_prod",
+          "brier_increase": 0.00155
+        },
+        {
+          "feature": "form_sos_prod",
+          "brier_increase": 0.00085
+        },
+        {
+          "feature": "log_pom_diff",
+          "brier_increase": 0.00068
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "brier_increase": 0.00068
+        },
+        {
+          "feature": "ncsos_diff",
+          "brier_increase": 0.0006
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00052
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00028
+        },
+        {
+          "feature": "pom_abs",
+          "brier_increase": 0.00015
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.0001
+        },
+        {
+          "feature": "pom_sum",
+          "brier_increase": 4e-05
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 2e-05
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": -8e-05
+        },
+        {
+          "feature": "margin_std_diff",
+          "brier_increase": -9e-05
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -0.00014
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -0.00016
+        },
+        {
+          "feature": "tempo_abs",
+          "brier_increase": -0.00032
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00075
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.00083
+        }
+      ]
+    },
+    {
+      "id": "lightgbm-extras+craft",
+      "note": "Diagnostic only. extras+craft. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7924,
+        "brier": 0.1424,
+        "logloss": 0.4353
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7125,
+        "brier": 0.1825,
+        "logloss": 0.5383,
+        "mae": 12.26
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 18492.16857,
+          "share": 0.4414
+        },
+        {
+          "feature": "pom_elo_prod",
+          "gain": 4410.91333,
+          "share": 0.1053
+        },
+        {
+          "feature": "log_pom_diff",
+          "gain": 2655.20773,
+          "share": 0.0634
+        },
+        {
+          "feature": "pom_abs",
+          "gain": 1871.14332,
+          "share": 0.0447
+        },
+        {
+          "feature": "avg_margin_diff",
+          "gain": 1335.80837,
+          "share": 0.0319
+        },
+        {
+          "feature": "srs_elo_prod",
+          "gain": 951.85608,
+          "share": 0.0227
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 850.55164,
+          "share": 0.0203
+        },
+        {
+          "feature": "away_pom",
+          "gain": 806.06237,
+          "share": 0.0192
+        },
+        {
+          "feature": "form4_margin_diff",
+          "gain": 713.14972,
+          "share": 0.017
+        },
+        {
+          "feature": "st_diff",
+          "gain": 695.93772,
+          "share": 0.0166
+        },
+        {
+          "feature": "colley_diff",
+          "gain": 675.15329,
+          "share": 0.0161
+        },
+        {
+          "feature": "margin_std_diff",
+          "gain": 656.22659,
+          "share": 0.0157
+        },
+        {
+          "feature": "srs_diff",
+          "gain": 655.268,
+          "share": 0.0156
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 618.53582,
+          "share": 0.0148
+        },
+        {
+          "feature": "tempo_abs",
+          "gain": 616.09272,
+          "share": 0.0147
+        },
+        {
+          "feature": "away_games",
+          "gain": 602.42212,
+          "share": 0.0144
+        },
+        {
+          "feature": "sos_diff",
+          "gain": 598.93975,
+          "share": 0.0143
+        },
+        {
+          "feature": "form_sos_prod",
+          "gain": 598.45382,
+          "share": 0.0143
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 535.82592,
+          "share": 0.0128
+        },
+        {
+          "feature": "ncsos_diff",
+          "gain": 527.92376,
+          "share": 0.0126
+        },
+        {
+          "feature": "pom_sum",
+          "gain": 520.01935,
+          "share": 0.0124
+        },
+        {
+          "feature": "luck_diff",
+          "gain": 432.11841,
+          "share": 0.0103
+        },
+        {
+          "feature": "elo_diff",
+          "gain": 412.26937,
+          "share": 0.0098
+        },
+        {
+          "feature": "home_pom",
+          "gain": 278.95909,
+          "share": 0.0067
+        },
+        {
+          "feature": "close_win_diff",
+          "gain": 271.55197,
+          "share": 0.0065
+        },
+        {
+          "feature": "winpct_diff",
+          "gain": 238.31916,
+          "share": 0.0057
+        },
+        {
+          "feature": "home_games",
+          "gain": 204.16762,
+          "share": 0.0049
+        },
+        {
+          "feature": "rest_diff",
+          "gain": 153.15766,
+          "share": 0.0037
+        },
+        {
+          "feature": "quality_win_diff",
+          "gain": 150.63448,
+          "share": 0.0036
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "gain": 141.6485,
+          "share": 0.0034
+        },
+        {
+          "feature": "form4_win_diff",
+          "gain": 138.7476,
+          "share": 0.0033
+        },
+        {
+          "feature": "is_home",
+          "gain": 80.42591,
+          "share": 0.0019
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.03652
+        },
+        {
+          "feature": "pom_elo_prod",
+          "brier_increase": 0.00463
+        },
+        {
+          "feature": "avg_margin_diff",
+          "brier_increase": 0.00311
+        },
+        {
+          "feature": "form4_margin_diff",
+          "brier_increase": 0.00294
+        },
+        {
+          "feature": "srs_elo_prod",
+          "brier_increase": 0.00239
+        },
+        {
+          "feature": "log_pom_diff",
+          "brier_increase": 0.00124
+        },
+        {
+          "feature": "margin_std_diff",
+          "brier_increase": 0.00097
+        },
+        {
+          "feature": "srs_diff",
+          "brier_increase": 0.00089
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00064
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.0006
+        },
+        {
+          "feature": "colley_diff",
+          "brier_increase": 0.00056
+        },
+        {
+          "feature": "elo_diff",
+          "brier_increase": 0.00046
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": 0.00043
+        },
+        {
+          "feature": "sos_diff",
+          "brier_increase": 0.00038
+        },
+        {
+          "feature": "pom_abs",
+          "brier_increase": 0.00033
+        },
+        {
+          "feature": "form_sos_prod",
+          "brier_increase": 0.00033
+        },
+        {
+          "feature": "pom_sum",
+          "brier_increase": 0.00023
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.00018
+        },
+        {
+          "feature": "ncsos_diff",
+          "brier_increase": 0.00016
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": 0.00015
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.00014
+        },
+        {
+          "feature": "winpct_diff",
+          "brier_increase": 0.00012
+        },
+        {
+          "feature": "form4_win_diff",
+          "brier_increase": 8e-05
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "brier_increase": 6e-05
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": 4e-05
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": 4e-05
+        },
+        {
+          "feature": "tempo_abs",
+          "brier_increase": 4e-05
+        },
+        {
+          "feature": "quality_win_diff",
+          "brier_increase": 2e-05
+        },
+        {
+          "feature": "rest_diff",
+          "brier_increase": -0.00011
+        },
+        {
+          "feature": "luck_diff",
+          "brier_increase": -0.00018
+        },
+        {
+          "feature": "close_win_diff",
+          "brier_increase": -0.0002
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.00052
+        }
+      ]
+    },
+    {
+      "id": "xgboost-extras+craft",
+      "note": "Diagnostic only. extras+craft. Not the live model.",
+      "params": {
+        "max_depth": 4,
+        "n_estimators": 200,
+        "learning_rate": 0.05
+      },
+      "train": {
+        "n": 9014,
+        "accuracy": 0.7769,
+        "brier": 0.1517,
+        "logloss": 0.4618
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.71,
+        "brier": 0.184,
+        "logloss": 0.5421,
+        "mae": 12.26
+      },
+      "gain": [
+        {
+          "feature": "pom_diff",
+          "gain": 0.27722,
+          "share": 0.2772
+        },
+        {
+          "feature": "log_pom_diff",
+          "gain": 0.26834,
+          "share": 0.2683
+        },
+        {
+          "feature": "pom_elo_prod",
+          "gain": 0.05102,
+          "share": 0.051
+        },
+        {
+          "feature": "pom_abs",
+          "gain": 0.03343,
+          "share": 0.0334
+        },
+        {
+          "feature": "avg_margin_diff",
+          "gain": 0.02691,
+          "share": 0.0269
+        },
+        {
+          "feature": "srs_elo_prod",
+          "gain": 0.02201,
+          "share": 0.022
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "gain": 0.01775,
+          "share": 0.0178
+        },
+        {
+          "feature": "colley_diff",
+          "gain": 0.01697,
+          "share": 0.017
+        },
+        {
+          "feature": "form4_margin_diff",
+          "gain": 0.01606,
+          "share": 0.0161
+        },
+        {
+          "feature": "adjo_diff",
+          "gain": 0.01537,
+          "share": 0.0154
+        },
+        {
+          "feature": "srs_diff",
+          "gain": 0.01534,
+          "share": 0.0153
+        },
+        {
+          "feature": "away_games",
+          "gain": 0.01481,
+          "share": 0.0148
+        },
+        {
+          "feature": "form4_win_diff",
+          "gain": 0.01418,
+          "share": 0.0142
+        },
+        {
+          "feature": "rest_diff",
+          "gain": 0.0138,
+          "share": 0.0138
+        },
+        {
+          "feature": "winpct_diff",
+          "gain": 0.01365,
+          "share": 0.0137
+        },
+        {
+          "feature": "elo_diff",
+          "gain": 0.01364,
+          "share": 0.0136
+        },
+        {
+          "feature": "away_pom",
+          "gain": 0.01203,
+          "share": 0.012
+        },
+        {
+          "feature": "ncsos_diff",
+          "gain": 0.01158,
+          "share": 0.0116
+        },
+        {
+          "feature": "is_home",
+          "gain": 0.01148,
+          "share": 0.0115
+        },
+        {
+          "feature": "home_pom",
+          "gain": 0.01128,
+          "share": 0.0113
+        },
+        {
+          "feature": "st_diff",
+          "gain": 0.0112,
+          "share": 0.0112
+        },
+        {
+          "feature": "tempo_abs",
+          "gain": 0.01111,
+          "share": 0.0111
+        },
+        {
+          "feature": "tempo_diff",
+          "gain": 0.01083,
+          "share": 0.0108
+        },
+        {
+          "feature": "margin_std_diff",
+          "gain": 0.01082,
+          "share": 0.0108
+        },
+        {
+          "feature": "sos_diff",
+          "gain": 0.01068,
+          "share": 0.0107
+        },
+        {
+          "feature": "adjd_diff",
+          "gain": 0.01027,
+          "share": 0.0103
+        },
+        {
+          "feature": "home_games",
+          "gain": 0.01012,
+          "share": 0.0101
+        },
+        {
+          "feature": "close_win_diff",
+          "gain": 0.01006,
+          "share": 0.0101
+        },
+        {
+          "feature": "form_sos_prod",
+          "gain": 0.00993,
+          "share": 0.0099
+        },
+        {
+          "feature": "luck_diff",
+          "gain": 0.00991,
+          "share": 0.0099
+        },
+        {
+          "feature": "pom_sum",
+          "gain": 0.00966,
+          "share": 0.0097
+        },
+        {
+          "feature": "quality_win_diff",
+          "gain": 0.00851,
+          "share": 0.0085
+        }
+      ],
+      "permutation": [
+        {
+          "feature": "pom_diff",
+          "brier_increase": 0.02778
+        },
+        {
+          "feature": "pom_elo_prod",
+          "brier_increase": 0.00324
+        },
+        {
+          "feature": "form4_margin_diff",
+          "brier_increase": 0.00297
+        },
+        {
+          "feature": "avg_margin_diff",
+          "brier_increase": 0.00287
+        },
+        {
+          "feature": "log_pom_diff",
+          "brier_increase": 0.00224
+        },
+        {
+          "feature": "srs_elo_prod",
+          "brier_increase": 0.00158
+        },
+        {
+          "feature": "colley_diff",
+          "brier_increase": 0.00099
+        },
+        {
+          "feature": "margin_std_diff",
+          "brier_increase": 0.00065
+        },
+        {
+          "feature": "sos_diff",
+          "brier_increase": 0.00064
+        },
+        {
+          "feature": "away_games",
+          "brier_increase": 0.00055
+        },
+        {
+          "feature": "srs_diff",
+          "brier_increase": 0.0005
+        },
+        {
+          "feature": "elo_diff",
+          "brier_increase": 0.00038
+        },
+        {
+          "feature": "tempo_diff",
+          "brier_increase": 0.00025
+        },
+        {
+          "feature": "away_pom",
+          "brier_increase": 0.00018
+        },
+        {
+          "feature": "home_games",
+          "brier_increase": 0.0001
+        },
+        {
+          "feature": "tanh_elo_diff",
+          "brier_increase": 9e-05
+        },
+        {
+          "feature": "winpct_diff",
+          "brier_increase": 8e-05
+        },
+        {
+          "feature": "pom_sum",
+          "brier_increase": 8e-05
+        },
+        {
+          "feature": "pom_abs",
+          "brier_increase": 7e-05
+        },
+        {
+          "feature": "quality_win_diff",
+          "brier_increase": 2e-05
+        },
+        {
+          "feature": "is_home",
+          "brier_increase": -4e-05
+        },
+        {
+          "feature": "adjd_diff",
+          "brier_increase": -6e-05
+        },
+        {
+          "feature": "form4_win_diff",
+          "brier_increase": -9e-05
+        },
+        {
+          "feature": "ncsos_diff",
+          "brier_increase": -0.00012
+        },
+        {
+          "feature": "home_pom",
+          "brier_increase": -0.00021
+        },
+        {
+          "feature": "close_win_diff",
+          "brier_increase": -0.00022
+        },
+        {
+          "feature": "rest_diff",
+          "brier_increase": -0.00035
+        },
+        {
+          "feature": "form_sos_prod",
+          "brier_increase": -0.00041
+        },
+        {
+          "feature": "st_diff",
+          "brier_increase": -0.00047
+        },
+        {
+          "feature": "luck_diff",
+          "brier_increase": -0.00053
+        },
+        {
+          "feature": "tempo_abs",
+          "brier_increase": -0.00063
+        },
+        {
+          "feature": "adjo_diff",
+          "brier_increase": -0.00082
+        }
+      ]
+    }
+  ],
+  "would_promote": true,
+  "would_promote_live": false,
+  "promoted": false,
+  "note": "Do not carve a subset after seeing 2025. Live TabPFN stays on the locked 10."
+}
