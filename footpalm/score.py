@@ -130,6 +130,13 @@ def refresh_scores(root: Path, *, season: int = LIVE_SEASON, refresh: bool = Tru
     payload = json.loads(pred_path.read_text())
     slate, _, _ = load_cfbd_slate(root, season)
     payload, stamped = stamp_payload(payload, slate)
+    from footpalm.markets import apply_log, snapshot
+
+    try:
+        snapshot(root, season, payload["games"])
+    except Exception as exc:
+        print(f"market log: {exc}", flush=True)
+        apply_log(root, season, payload["games"])
     card = scorecard(payload["games"])
     live = {
         "season": season,

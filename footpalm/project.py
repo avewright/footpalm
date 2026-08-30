@@ -232,6 +232,9 @@ def project_live(root: Path, *, season: int = LIVE_SEASON, refresh: bool = False
     print(f"predicting {len(slate)} games", flush=True)
     preds = predict_slate(book, slate, model, X=X_live)
     games = [{**row, **pred} for row, pred in zip(slate, preds, strict=True)]
+    from footpalm.markets import apply_log
+
+    apply_log(root, season, games)
 
     report = _load_calibration(root)
     if report:
