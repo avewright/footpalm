@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { signed } from "./format";
+import { TeamLink } from "./TeamView";
 import type { GraphFile } from "./types";
 
 type Node = GraphFile["nodes"][number];
@@ -175,9 +176,19 @@ function layoutColumns(teams: Team[], pad: { l: number; r: number; t: number; b:
   };
 }
 
-export function GraphView({ graph }: { graph: GraphFile }) {
+export function GraphView({
+  graph,
+  team,
+  onSelectTeam,
+  onOpenTeam,
+}: {
+  graph: GraphFile;
+  team: string;
+  onSelectTeam: (team: string) => void;
+  onOpenTeam: (team: string) => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [focus, setFocus] = useState(() => new URLSearchParams(window.location.search).get("team") ?? "");
+  const focus = team;
   const [hover, setHover] = useState("");
   const [conf, setConf] = useState(() => new URLSearchParams(window.location.search).get("conf") ?? "all");
   const [query, setQuery] = useState("");
@@ -241,12 +252,10 @@ export function GraphView({ graph }: { graph: GraphFile }) {
     const q = new URLSearchParams(window.location.search);
     if (conf !== "all") q.set("conf", conf);
     else q.delete("conf");
-    if (focus) q.set("team", focus);
-    else q.delete("team");
     q.delete("view");
     const next = `?${q}`;
     if (window.location.search !== next) window.history.replaceState(null, "", next);
-  }, [conf, focus]);
+  }, [conf]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -411,7 +420,7 @@ export function GraphView({ graph }: { graph: GraphFile }) {
         bestD = d;
       }
     }
-    if (ev.type === "click") setFocus(best ? (ego && best.id === focus ? "" : best.id) : "");
+    if (ev.type === "click") onSelectTeam(best ? (ego && best.id === focus ? "" : best.id) : "");
     setHover(best?.id ?? "");
   }
 
@@ -443,7 +452,7 @@ export function GraphView({ graph }: { graph: GraphFile }) {
           aria-label="Find a team"
         />
         {focus && (
-          <button type="button" onClick={() => setFocus("")}>
+          <button type="button" onClick={() => onSelectTeam("")}>
             All teams
           </button>
         )}
@@ -459,9 +468,9 @@ export function GraphView({ graph }: { graph: GraphFile }) {
       />
       {tip && (
         <div className="graph-card">
-          <strong>{tip.team}</strong> {tip.conf} · {tip.wins}-{tip.losses} · Pom {signed(tip.pom)}
+          <TeamLink team={tip.team} onOpen={onOpenTeam} /> {tip.conf} · {tip.wins}-{tip.losses} · Pom {signed(tip.pom)}
           {games ? ` · ${games} FBS games` : ""}
-          {!ego && <div className="lede-note">Click to see every game.</div>}
+          {!ego && <div className="lede-note">Click the name for the team page, or the node for every game.</div>}
         </div>
       )}
     </div>

@@ -16,6 +16,18 @@ export function etDay(start?: string | null): string | null {
   return new Date(start).toLocaleDateString("en-CA", { timeZone: "America/New_York" });
 }
 
+export function prettyWhen(start?: string | null): string | null {
+  if (!start) return null;
+  return new Date(start).toLocaleString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "America/New_York",
+  });
+}
+
 export function prettyDay(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d, 16)).toLocaleDateString("en-US", {

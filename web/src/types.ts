@@ -61,6 +61,10 @@ export type GamePred = {
   start?: string;
   home: string;
   away: string;
+  home_conf?: string;
+  away_conf?: string;
+  home_pom?: number;
+  away_pom?: number;
   neutral: boolean;
   fbs_fbs: boolean;
   completed?: boolean;

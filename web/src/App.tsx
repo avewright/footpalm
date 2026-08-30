@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { AskView } from "./AskView";
 import { GamesView } from "./GamesView";
+import { GameView } from "./GameView";
 import { GraphView } from "./GraphView";
 import { MoneyView } from "./MoneyView";
 import { RatingsTable } from "./RatingsTable";
+import { TeamView } from "./TeamView";
+import { findGame } from "./game";
 import { signed } from "./format";
 import type { GamePred, GraphFile, IndexFile, MoneyFile, RatingsFile } from "./types";
 
 const TABS = ["ratings", "games", "graph", "ask", "money"] as const;
 type Tab = (typeof TABS)[number];
+type View = Tab | "team" | "game";
 
 const TAB_LABEL: Record<Tab, string> = {
   ratings: "Ratings",
@@ -32,10 +36,15 @@ async function loadJson<T>(url: string, fallback: T): Promise<T> {
 export function App() {
   const [seasons, setSeasons] = useState<number[]>([2026, 2025]);
   const [season, setSeason] = useState(() => Number(search().get("season")) || 2026);
-  const [tab, setTab] = useState<Tab>(() => {
+  const [tab, setTab] = useState<View>(() => {
     const q = search().get("tab");
+    if (q === "team" && search().get("team")) return "team";
+    if (q === "game" && search().get("game")) return "game";
     return TABS.includes(q as Tab) ? (q as Tab) : "games";
   });
+  const [back, setBack] = useState<View>("games");
+  const [team, setTeam] = useState(() => search().get("team") ?? "");
+  const [game, setGame] = useState(() => search().get("game") ?? "");
   const [ratings, setRatings] = useState<RatingsFile | null>(null);
   const [games, setGames] = useState<GamePred[]>([]);
   const [graph, setGraph] = useState<GraphFile | null>(null);
@@ -56,9 +65,13 @@ export function App() {
     const q = search();
     q.set("tab", tab);
     q.set("season", String(season));
+    if (team) q.set("team", team);
+    else q.delete("team");
+    if (game) q.set("game", game);
+    else q.delete("game");
     const next = `?${q}`;
     if (window.location.search !== next) window.history.replaceState(null, "", next);
-  }, [tab, season]);
+  }, [tab, season, team, game]);
 
   useEffect(() => {
     setError(null);
@@ -77,6 +90,30 @@ export function App() {
       })
       .catch((err: Error) => setError(err.message));
   }, [season]);
+
+  function openTeam(name: string) {
+    if (tab !== "team") setBack(tab);
+    setTeam(name);
+    setTab("team");
+  }
+
+  function closeTeam() {
+    setTeam("");
+    setTab(back === "team" ? "games" : back);
+  }
+
+  function openGame(key: string) {
+    if (tab !== "game") setBack(tab);
+    setGame(key);
+    setTab("game");
+  }
+
+  function closeGame() {
+    setGame("");
+    setTab(back === "game" ? "games" : back);
+  }
+
+  const selected = findGame(games, game);
 
   return (
     <div className={`page${tab === "ask" ? " page-ask" : ""}`}>
@@ -98,17 +135,19 @@ export function App() {
               New chat
             </button>
           )}
-          <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
-            {seasons.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+          {tab !== "team" && tab !== "game" && (
+            <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
+              {seasons.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
       </header>
 
-      {tab !== "ask" && (
+      {tab !== "ask" && tab !== "team" && tab !== "game" && (
         <p className="meta">
           {ratings
             ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
@@ -117,12 +156,36 @@ export function App() {
       )}
       {tab === "ratings" && ratings?.method && <p className="lede-note">{ratings.method}</p>}
 
-      {tab === "ratings" && ratings && <RatingsTable data={ratings} />}
-      {tab === "games" && <GamesView games={games} />}
-      {tab === "graph" && graph && <GraphView graph={graph} />}
+      {tab === "ratings" && ratings && <RatingsTable data={ratings} onOpenTeam={openTeam} />}
+      {tab === "games" && <GamesView games={games} onOpenTeam={openTeam} onOpenGame={openGame} />}
+      {tab === "team" && team && (
+        <TeamView
+          team={team}
+          seasons={seasons}
+          season={season}
+          onSeason={setSeason}
+          onOpen={openTeam}
+          onOpenGame={openGame}
+          onClose={closeTeam}
+          ratings={ratings}
+          games={games}
+        />
+      )}
+      {tab === "game" && selected && <GameView game={selected} onOpenTeam={openTeam} onClose={closeGame} />}
+      {tab === "game" && game && !selected && (
+        <p className="lede-note">
+          No game {game} in {season}.{" "}
+          <button type="button" className="team-link" onClick={closeGame}>
+            Back
+          </button>
+        </p>
+      )}
+      {tab === "graph" && graph && (
+        <GraphView graph={graph} team={team} onSelectTeam={setTeam} onOpenTeam={openTeam} />
+      )}
       {tab === "graph" && !graph && <p className="lede-note">No graph file for {season} yet.</p>}
       {tab === "ask" && <AskView key={askTick} season={season} />}
-      {tab === "money" && money && <MoneyView data={money} />}
+      {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
 
       {tab === "ratings" && (
         <details className="glossary">

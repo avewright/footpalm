@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { signed } from "./format";
+import { TeamLink } from "./TeamView";
 import type { RatingsFile, SortKey, TeamRow } from "./types";
 
 const COLUMNS: { key: SortKey; label: string; title: string; cls?: string }[] = [
@@ -50,7 +51,7 @@ function cell(row: TeamRow, key: SortKey) {
   }
 }
 
-export function RatingsTable({ data }: { data: RatingsFile }) {
+export function RatingsTable({ data, onOpenTeam }: { data: RatingsFile; onOpenTeam: (team: string) => void }) {
   const [sortKey, setSortKey] = useState<SortKey>("pom");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [q, setQ] = useState("");
@@ -125,7 +126,7 @@ export function RatingsTable({ data }: { data: RatingsFile }) {
               <tr key={row.team}>
                 {COLUMNS.map((col) => (
                   <td key={col.key} className={col.cls}>
-                    {cell(row, col.key)}
+                    {col.key === "team" ? <TeamLink team={row.team} onOpen={onOpenTeam} /> : cell(row, col.key)}
                   </td>
                 ))}
               </tr>
