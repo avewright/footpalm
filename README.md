@@ -1,4 +1,4 @@
-# FootPom
+# FootPalm
 
 Opponent-adjusted EPA ratings for FBS, with walk-forward **TabPFN-3** game predictions.
 

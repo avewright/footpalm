@@ -1,14 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { signed } from "./format";
-import { drawClusters, hitCluster, layoutClusters } from "./clusters";
-import { drawCircuits, drawEmbedded, drawHive, drawMap, drawPaths, placeHive, placeMap } from "./network";
-import { buildSlate, drawSlate, placeSlate, slateLine } from "./slate";
 import type { GraphFile } from "./types";
 
-type Mode = "clusters" | "paths" | "map" | "spectral" | "weights" | "hive" | "circuits" | "scatter" | "slate" | "upsets" | "matrix";
-const NETWORK: Mode[] = ["paths", "map", "spectral", "weights", "hive", "circuits", "clusters"];
-const EMBED: Mode[] = ["map", "spectral", "weights", "hive", "circuits"];
-type Edge = GraphFile["edges"][number];
 type Node = GraphFile["nodes"][number];
 
 type Team = {
@@ -18,28 +11,11 @@ type Team = {
   pom: number;
   wins: number;
   losses: number;
-  vsNeighbors: number;
-  wr: number;
-  winningness: number;
-  pagerank: number;
-  degree: number;
-  betweenness: number;
-  eccentricity: number;
-  fiedler: number;
-  nx: number;
-  ny: number;
-  tx: number;
-  ty: number;
-  sx: number;
-  sy: number;
-  wx: number;
-  wy: number;
   x: number;
   y: number;
 };
 
 type Hit = { id: string; x: number; y: number; r: number };
-type Tip = { title: string; line: string };
 
 const WIDTH = 960;
 const HEIGHT = 700;
@@ -52,13 +28,7 @@ const LOSS = "#b42318";
 const FONT = "12px ui-sans-serif, system-ui, sans-serif";
 const UPSET_GAP = 3;
 
-function winRate(wins: number, losses: number) {
-  const games = wins + losses;
-  return games ? wins / games : 0;
-}
-
 function fromRow(n: Node): Team {
-  const wr = winRate(n.wins, n.losses);
   return {
     id: n.id,
     team: n.team,
@@ -66,29 +36,9 @@ function fromRow(n: Node): Team {
     pom: n.pom ?? (n as { palm?: number }).palm ?? 0,
     wins: n.wins,
     losses: n.losses,
-    vsNeighbors: n.vs_neighbors ?? 0,
-    wr,
-    winningness: n.winningness ?? wr,
-    pagerank: n.pagerank ?? 0,
-    degree: n.degree ?? 0,
-    betweenness: n.betweenness ?? 0,
-    eccentricity: n.eccentricity ?? 0,
-    fiedler: n.fiedler ?? 0,
-    nx: n.nx ?? 0,
-    ny: n.ny ?? 0,
-    tx: n.tx ?? n.nx ?? 0,
-    ty: n.ty ?? n.ny ?? 0,
-    sx: n.sx ?? n.nx ?? 0,
-    sy: n.sy ?? n.ny ?? 0,
-    wx: n.wx ?? n.nx ?? 0,
-    wy: n.wy ?? n.ny ?? 0,
     x: 0,
     y: 0,
   };
-}
-
-function short(name: string, n = 10) {
-  return name.length > n ? `${name.slice(0, n - 1)}…` : name;
 }
 
 function map(v: number, a: number, b: number, lo: number, hi: number) {
@@ -96,65 +46,34 @@ function map(v: number, a: number, b: number, lo: number, hi: number) {
   return lo + ((v - a) / (b - a)) * (hi - lo);
 }
 
-function isUpset(winner: Team, loser: Team) {
-  return loser.pom - winner.pom >= UPSET_GAP;
+function clamp(v: number, lo: number, hi: number) {
+  return Math.max(lo, Math.min(hi, v));
 }
 
-function residual(t: Team) {
-  return t.wr - (t.pom + 30) / 60;
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
 }
 
-function pickScatterLabels(placed: Team[], max = 7): Team[] {
-  const minAbs = placed.length < 20 ? 0.12 : 0.28;
-  const minDist = placed.length < 20 ? 36 : 58;
-  const byResid = [...placed].sort((a, b) => Math.abs(residual(b)) - Math.abs(residual(a)));
-  const picked: Team[] = [];
-  const tryAdd = (t: Team | undefined) => {
-    if (!t || picked.some((p) => p.id === t.id)) return;
-    if (picked.some((p) => Math.hypot(p.x - t.x, p.y - t.y) < minDist)) return;
-    picked.push(t);
-  };
-  tryAdd([...placed].sort((a, b) => b.pom - a.pom)[0]);
-  tryAdd(byResid.find((t) => residual(t) < -minAbs));
-  tryAdd(byResid.find((t) => residual(t) > minAbs));
-  for (const t of byResid) {
-    if (picked.length >= max) break;
-    if (Math.abs(residual(t)) < minAbs) continue;
-    tryAdd(t);
-  }
-  return picked;
+function hex(c: string) {
+  return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
 }
 
-function boxesOverlap(a: { x: number; y: number; w: number; h: number }, b: { x: number; y: number; w: number; h: number }) {
-  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+function mix(a: string, b: string, t: number) {
+  const A = hex(a);
+  const B = hex(b);
+  const r = Math.round(lerp(A[0], B[0], t));
+  const g = Math.round(lerp(A[1], B[1], t));
+  const bl = Math.round(lerp(A[2], B[2], t));
+  return `rgb(${r},${g},${bl})`;
 }
 
-function drawScatterLabel(
-  ctx: CanvasRenderingContext2D,
-  t: Team,
-  occupied: { x: number; y: number; w: number; h: number }[],
-) {
-  const w = ctx.measureText(t.team).width;
-  const h = 14;
-  const towardOpen = t.x < WIDTH / 2 ? 1 : -1;
-  const spots = [
-    { x: t.x + 8 * towardOpen, y: t.y - 7, align: towardOpen > 0 ? "left" : "right" },
-    { x: t.x - 8 * towardOpen, y: t.y - 7, align: towardOpen > 0 ? "right" : "left" },
-    { x: t.x + 8 * towardOpen, y: t.y + 15, align: towardOpen > 0 ? "left" : "right" },
-    { x: t.x - 8 * towardOpen, y: t.y + 15, align: towardOpen > 0 ? "right" : "left" },
-    { x: t.x + 8 * towardOpen, y: t.y - 22, align: towardOpen > 0 ? "left" : "right" },
-    { x: t.x - 8 * towardOpen, y: t.y + 28, align: towardOpen > 0 ? "right" : "left" },
-  ] as const;
-  for (const spot of spots) {
-    const left = spot.align === "left" ? spot.x : spot.x - w;
-    const box = { x: left - 2, y: spot.y - h + 2, w: w + 4, h };
-    if (box.x < 50 || box.x + box.w > WIDTH - 6 || box.y < 6 || box.y + box.h > HEIGHT - 28) continue;
-    if (occupied.some((o) => boxesOverlap(box, o))) continue;
-    occupied.push(box);
-    ctx.textAlign = spot.align;
-    ctx.fillText(t.team, spot.x, spot.y);
-    return;
-  }
+function pomColor(pom: number, lo: number, hi: number) {
+  const t = clamp((pom - lo) / Math.max(hi - lo, 1), 0, 1);
+  return t < 0.5 ? mix(LOSS, INK, t * 2) : mix(INK, WIN, (t - 0.5) * 2);
+}
+
+function short(name: string, n = 11) {
+  return name.length > n ? `${name.slice(0, n - 1)}…` : name;
 }
 
 function placeByPom<T extends { team: Team }>(items: T[], x: number, top: number, bottom: number) {
@@ -199,7 +118,7 @@ function arrow(
   ctx.moveTo(sx, sy);
   ctx.lineTo(ex, ey);
   ctx.stroke();
-  const ah = 8 + width;
+  const ah = 7 + width;
   ctx.beginPath();
   ctx.moveTo(ex, ey);
   ctx.lineTo(ex - ux * ah + uy * ah * 0.42, ey - uy * ah - ux * ah * 0.42);
@@ -214,182 +133,97 @@ function drawPaper(ctx: CanvasRenderingContext2D) {
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 }
 
-function axis(ctx: CanvasRenderingContext2D, x0: number, y0: number, x1: number, y1: number) {
-  ctx.strokeStyle = LINE;
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(x0, y0);
-  ctx.lineTo(x1, y1);
-  ctx.stroke();
+function layoutColumns(teams: Team[], pad: { l: number; r: number; t: number; b: number }) {
+  const poms = teams.map((t) => t.pom);
+  const lo = Math.min(...poms, -20);
+  const hi = Math.max(...poms, 20);
+  const groups = [...new Set(teams.map((t) => t.conf))].map((conf) => {
+    const members = teams.filter((t) => t.conf === conf);
+    const mean = members.reduce((s, t) => s + t.pom, 0) / members.length;
+    return { conf, members, mean };
+  });
+  groups.sort((a, b) => b.mean - a.mean);
+
+  const n = Math.max(groups.length, 1);
+  const placed: Team[] = [];
+  groups.forEach((g, i) => {
+    const x = n === 1 ? WIDTH / 2 : map(i, 0, n - 1, pad.l + 28, WIDTH - pad.r - 28);
+    const col = g.members
+      .map((t) => ({ ...t, x, y: map(t.pom, hi, lo, pad.t, HEIGHT - pad.b) }))
+      .sort((a, b) => a.y - b.y);
+    for (let j = 1; j < col.length; j++) {
+      if (col[j].y - col[j - 1].y < 13) col[j].y = col[j - 1].y + 13;
+    }
+    const extra = col.length ? col[col.length - 1].y - (HEIGHT - pad.b) : 0;
+    if (extra > 0) {
+      const span = Math.max(HEIGHT - pad.b - pad.t, 1);
+      for (const t of col) t.y -= extra * ((t.y - pad.t) / span);
+    }
+    placed.push(...col);
+  });
+
+  return {
+    placed,
+    lo,
+    hi,
+    pad,
+    headers: groups.map((g, i) => ({
+      conf: g.conf,
+      x: n === 1 ? WIDTH / 2 : map(i, 0, n - 1, pad.l + 28, WIDTH - pad.r - 28),
+      mean: g.mean,
+    })),
+  };
 }
 
 export function GraphView({ graph }: { graph: GraphFile }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mode, setMode] = useState<Mode>(() => {
-    const q = new URLSearchParams(window.location.search).get("view");
-    return q === "upsets" || q === "matrix" || q === "scatter" || q === "slate" || q === "clusters" || q === "planets" || q === "paths" || q === "map" || q === "spectral" || q === "weights" || q === "hive" || q === "circuits"
-      ? q === "planets"
-        ? "clusters"
-        : q
-      : "scatter";
-  });
   const [focus, setFocus] = useState(() => new URLSearchParams(window.location.search).get("team") ?? "");
   const [hover, setHover] = useState("");
   const [conf, setConf] = useState(() => new URLSearchParams(window.location.search).get("conf") ?? "all");
-  const [cellTip, setCellTip] = useState<Tip | null>(null);
+  const [query, setQuery] = useState("");
 
   const conferences = useMemo(
     () => ["all", ...[...new Set(graph.nodes.map((n) => n.conf).filter(Boolean))].sort()],
     [graph],
   );
 
-  const { teams, edges, byId } = useMemo(() => {
-    const filtered = graph.nodes.filter((n) => conf === "all" || n.conf === conf).map(fromRow);
-    const idSet = new Set(filtered.map((t) => t.id));
-    const edges = graph.edges.filter((e) => e.fbs_fbs && idSet.has(e.source) && idSet.has(e.target));
-    return { teams: filtered, edges, byId: new Map(filtered.map((t) => [t.id, t])) };
-  }, [graph, conf]);
+  const allTeams = useMemo(() => graph.nodes.map(fromRow), [graph]);
+  const allById = useMemo(() => new Map(allTeams.map((t) => [t.id, t])), [allTeams]);
+  const allEdges = useMemo(() => graph.edges.filter((e) => e.fbs_fbs), [graph]);
 
-  const clusterChart = useMemo(
-    () =>
-      layoutClusters(
-        teams.map((t) => ({ id: t.id, team: t.team, conf: t.conf, wr: t.winningness })),
-        edges,
-        WIDTH,
-        HEIGHT,
-      ),
-    [teams, edges],
-  );
+  const overview = useMemo(() => {
+    const pad = { l: 52, r: 16, t: 40, b: 36 };
+    const chart = layoutColumns(allTeams, pad);
+    const byId = new Map(chart.placed.map((t) => [t.id, t]));
+    return { ...chart, byId, edges: allEdges };
+  }, [allTeams, allEdges]);
 
-  const slateAll = useMemo(() => {
-    const allTeams = graph.nodes.map(fromRow);
-    const allEdges = graph.edges.filter((e) => e.fbs_fbs);
-    return buildSlate(allTeams, allEdges);
-  }, [graph]);
-  const slateChart = useMemo(() => {
-    const rows = conf === "all" ? slateAll : slateAll.filter((r) => r.team.conf === conf);
-    return placeSlate(rows, conf);
-  }, [slateAll, conf]);
-  const slateById = useMemo(() => new Map(slateAll.map((r) => [r.team.id, r])), [slateAll]);
+  const matches = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return new Set<string>();
+    return new Set(overview.placed.filter((t) => t.team.toLowerCase().includes(q)).map((t) => t.id));
+  }, [overview, query]);
 
-  const net = graph.network;
-  const laid = useMemo(() => {
-    const seed = teams.map((t) => ({
-      id: t.id,
-      team: t.team,
-      conf: t.conf,
-      nx: 0,
-      ny: 0,
-      betweenness: t.betweenness,
-      degree: t.degree,
-      eccentricity: t.eccentricity,
-    }));
-    return {
-      map: placeMap(seed.map((t, i) => ({ ...t, nx: teams[i].tx, ny: teams[i].ty }))),
-      spectral: placeMap(seed.map((t, i) => ({ ...t, nx: teams[i].sx, ny: teams[i].sy }))),
-      weights: placeMap(seed.map((t, i) => ({ ...t, nx: teams[i].wx, ny: teams[i].wy }))),
-      hive: placeHive(seed),
-    };
-  }, [teams]);
-
-  const scatter = useMemo(() => {
-    const pad = { l: 58, r: 20, t: 28, b: 48 };
-    const poms = teams.map((t) => t.pom);
-    const lo = Math.min(...poms, -20);
-    const hi = Math.max(...poms, 20);
-    const placed = teams.map((t) => ({
-      ...t,
-      x: map(t.wr, 0, 1, pad.l, WIDTH - pad.r),
-      y: map(t.pom, hi, lo, pad.t, HEIGHT - pad.b),
-    }));
-    const labels = new Set(pickScatterLabels(placed).map((t) => t.id));
-    return { placed, labels, lo, hi, pad };
-  }, [teams]);
-
-  const upsetChart = useMemo(() => {
-    const upsets = edges
-      .map((e) => {
-        const w = byId.get(e.source);
-        const l = byId.get(e.target);
-        if (!w || !l || !isUpset(w, l)) return null;
-        return { e, w, l, gap: l.pom - w.pom };
-      })
-      .filter((x): x is { e: Edge; w: Team; l: Team; gap: number } => Boolean(x))
-      .sort((a, b) => b.gap - a.gap);
-    const ids = [...new Set(upsets.flatMap((u) => [u.w.id, u.l.id]))];
-    const ranked = ids
-      .map((id) => byId.get(id)!)
-      .filter(Boolean)
-      .sort((a, b) => a.pom - b.pom);
-    const pad = 28;
-    const y = HEIGHT - 88;
-    const placed = ranked.map((t, i) => ({
-      ...t,
-      x: map(i, 0, Math.max(ranked.length - 1, 1), pad, WIDTH - pad),
-      y,
-    }));
-    const at = new Map(placed.map((t) => [t.id, t]));
-    return { upsets, placed, at, y };
-  }, [edges, byId]);
-
-  const matrix = useMemo(() => {
-    if (conf !== "all") {
-      const ranked = [...teams].sort((a, b) => b.pom - a.pom);
-      const n = ranked.length;
-      const left = 92;
-      const top = 92;
-      const size = Math.min(36, (WIDTH - left - 16) / Math.max(n, 1), (HEIGHT - top - 16) / Math.max(n, 1));
-      const cells: { r: number; c: number; margin: number; upset: boolean; a: Team; b: Team }[] = [];
-      for (const e of edges) {
-        const a = ranked.findIndex((t) => t.id === e.source);
-        const b = ranked.findIndex((t) => t.id === e.target);
-        if (a < 0 || b < 0) continue;
-        const winner = ranked[a];
-        const loser = ranked[b];
-        cells.push({ r: a, c: b, margin: e.margin, upset: isUpset(winner, loser), a: winner, b: loser });
-      }
-      return { kind: "teams" as const, ranked, cells, left, top, size };
-    }
-    const confs = [...new Set(teams.map((t) => t.conf))].sort();
-    const n = confs.length;
-    const left = 88;
-    const top = 72;
-    const size = Math.min(52, (WIDTH - left - 24) / Math.max(n, 1), (HEIGHT - top - 24) / Math.max(n, 1));
-    const wins = confs.map(() => confs.map(() => ({ n: 0, margin: 0 })));
-    for (const e of edges) {
-      const w = byId.get(e.source);
-      const l = byId.get(e.target);
-      if (!w || !l) continue;
-      const i = confs.indexOf(w.conf);
-      const j = confs.indexOf(l.conf);
-      if (i < 0 || j < 0) continue;
-      wins[i][j].n += 1;
-      wins[i][j].margin += e.margin;
-    }
-    return { kind: "confs" as const, confs, wins, left, top, size };
-  }, [conf, teams, edges, byId]);
+  const active = hover || (matches.size === 1 ? [...matches][0] : "");
 
   const ego = useMemo(() => {
     if (!focus) return null;
-    const self = byId.get(focus);
+    const self = allById.get(focus);
     if (!self) return null;
-    const wins = edges
+    const wins = allEdges
       .filter((e) => e.source === focus)
-      .map((e) => ({ edge: e, team: byId.get(e.target)! }))
+      .map((e) => ({ edge: e, team: allById.get(e.target)! }))
       .filter((x) => x.team);
-    const losses = edges
+    const losses = allEdges
       .filter((e) => e.target === focus)
-      .map((e) => ({ edge: e, team: byId.get(e.source)! }))
+      .map((e) => ({ edge: e, team: allById.get(e.source)! }))
       .filter((x) => x.team);
-    const selfNode = { ...self, x: WIDTH / 2, y: map(self.pom, 32, -28, 80, HEIGHT - 40) };
     return {
-      self: selfNode,
+      self: { ...self, x: WIDTH / 2, y: map(self.pom, 32, -28, 80, HEIGHT - 40) },
       wins: placeByPom(wins, 200, 72, HEIGHT - 36),
       losses: placeByPom(losses, WIDTH - 200, 72, HEIGHT - 36),
     };
-  }, [focus, edges, byId]);
-
-  const sky = mode === "clusters" && !ego;
+  }, [focus, allEdges, allById]);
 
   const hits = useMemo(() => {
     const list: Hit[] = [];
@@ -399,106 +233,26 @@ export function GraphView({ graph }: { graph: GraphFile }) {
       for (const row of ego.losses) list.push({ id: row.team.id, x: row.team.x, y: row.team.y, r: 10 });
       return list;
     }
-    if (mode === "clusters") {
-      for (const b of clusterChart.bodies) list.push({ id: b.id, x: b.x, y: b.y, r: b.r });
-    } else if (mode === "map") {
-      for (const t of laid.map) list.push({ id: t.id, x: t.x, y: t.y, r: t.r });
-    } else if (mode === "spectral" || mode === "circuits") {
-      for (const t of laid.spectral) list.push({ id: t.id, x: t.x, y: t.y, r: t.r });
-    } else if (mode === "weights") {
-      for (const t of laid.weights) list.push({ id: t.id, x: t.x, y: t.y, r: t.r });
-    } else if (mode === "hive") {
-      for (const t of laid.hive) list.push({ id: t.id, x: t.x, y: t.y, r: t.r });
-    } else if (mode === "scatter") {
-      for (const t of scatter.placed) list.push({ id: t.id, x: t.x, y: t.y, r: 6 });
-    } else if (mode === "slate") {
-      for (const r of slateChart.rows) {
-        list.push({ id: r.team.id, x: r.x, y: r.y, r: slateChart.kind === "rows" ? 16 : 7 });
-      }
-    } else if (mode === "upsets") {
-      for (const t of upsetChart.placed) list.push({ id: t.id, x: t.x, y: t.y, r: 7 });
-    } else if (matrix.kind === "teams") {
-      for (let i = 0; i < matrix.ranked.length; i++) {
-        const t = matrix.ranked[i];
-        list.push({ id: t.id, x: 46, y: matrix.top + i * matrix.size + matrix.size / 2, r: 10 });
-      }
-    }
+    for (const t of overview.placed) list.push({ id: t.id, x: t.x, y: t.y, r: 7 });
     return list;
-  }, [ego, mode, scatter, slateChart, upsetChart, matrix, clusterChart, laid]);
-
-  const prevFilter = useRef({ conf, mode });
-  useEffect(() => {
-    if (prevFilter.current.conf === conf && prevFilter.current.mode === mode) return;
-    prevFilter.current = { conf, mode };
-    setFocus("");
-    setHover("");
-    setCellTip(null);
-  }, [conf, mode]);
+  }, [ego, overview]);
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    q.set("view", mode);
     if (conf !== "all") q.set("conf", conf);
     else q.delete("conf");
     if (focus) q.set("team", focus);
     else q.delete("team");
+    q.delete("view");
     const next = `?${q}`;
     if (window.location.search !== next) window.history.replaceState(null, "", next);
-  }, [mode, conf, focus]);
+  }, [conf, focus]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    if (!ego && mode === "paths" && net) {
-      drawPaths(ctx, net);
-      return;
-    }
-    if (!ego && mode === "map" && net) {
-      drawMap(ctx, laid.map, net.mst, hover);
-      return;
-    }
-    if (!ego && mode === "spectral") {
-      drawEmbedded(
-        ctx,
-        laid.spectral,
-        edges,
-        hover,
-        "Laplacian spectral layout. The Fiedler cut is the long axis. Thickness is margin.",
-        { maxIdle: 70 },
-      );
-      return;
-    }
-    if (!ego && mode === "weights") {
-      drawEmbedded(
-        ctx,
-        laid.weights,
-        edges,
-        hover,
-        "NetworkX spring with margin as spring weight. Blowouts sit close. Thickness is margin.",
-        { minMargin: teams.length > 40 ? 24 : 0, maxIdle: 48 },
-      );
-      return;
-    }
-    if (!ego && mode === "hive") {
-      drawHive(ctx, laid.hive, edges, hover);
-      return;
-    }
-    if (!ego && mode === "circuits" && net) {
-      drawCircuits(ctx, laid.spectral, net.cycles, hover);
-      return;
-    }
-    if (sky) {
-      drawClusters(ctx, clusterChart.bodies, clusterChart.links, hover, WIDTH, HEIGHT);
-      return;
-    }
-    if (!ego && mode === "slate") {
-      drawSlate(ctx, slateChart, hover);
-      return;
-    }
-
     drawPaper(ctx);
     ctx.font = FONT;
 
@@ -513,11 +267,7 @@ export function GraphView({ graph }: { graph: GraphFile }) {
       ctx.fillText(ego.self.team, ego.self.x, 32);
       ctx.font = FONT;
       ctx.fillStyle = MUTED;
-      ctx.fillText(
-        `${ego.self.conf} · ${ego.self.wins}-${ego.self.losses} · Pom ${signed(ego.self.pom)}${slateById.get(ego.self.id) ? ` · ${slateLine(slateById.get(ego.self.id)!)}` : ""}`,
-        ego.self.x,
-        50,
-      );
+      ctx.fillText(`${ego.self.conf} · ${ego.self.wins}-${ego.self.losses} · Pom ${signed(ego.self.pom)}`, ego.self.x, 50);
       ctx.fillText("better ↑", 28, 80);
       ctx.fillText("worse ↓", 28, HEIGHT - 24);
 
@@ -555,162 +305,96 @@ export function GraphView({ graph }: { graph: GraphFile }) {
       return;
     }
 
-    if (mode === "scatter") {
-      const { placed, labels, lo, hi, pad } = scatter;
-      axis(ctx, pad.l, pad.t, pad.l, HEIGHT - pad.b);
-      axis(ctx, pad.l, HEIGHT - pad.b, WIDTH - pad.r, HEIGHT - pad.b);
-      ctx.fillStyle = MUTED;
-      ctx.textAlign = "center";
-      ctx.fillText("Win rate →", WIDTH / 2, HEIGHT - 14);
-      ctx.save();
-      ctx.translate(16, HEIGHT / 2);
-      ctx.rotate(-Math.PI / 2);
-      ctx.fillText("Pom (quality)", 0, 0);
-      ctx.restore();
-      ctx.textAlign = "right";
-      ctx.fillText(signed(hi, 0), pad.l - 8, pad.t + 4);
-      ctx.fillText(signed(lo, 0), pad.l - 8, HEIGHT - pad.b + 4);
-      ctx.textAlign = "center";
-      ctx.fillText("0%", pad.l, HEIGHT - pad.b + 16);
-      ctx.fillText("100%", WIDTH - pad.r, HEIGHT - pad.b + 16);
-      ctx.strokeStyle = "rgba(102,102,102,0.35)";
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(pad.l, HEIGHT - pad.b);
-      ctx.lineTo(WIDTH - pad.r, pad.t);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      for (const t of placed) {
-        const active = hover === t.id;
-        ctx.beginPath();
-        ctx.fillStyle = t.vsNeighbors > 2 ? WIN : t.vsNeighbors < -2 ? LOSS : INK;
-        ctx.globalAlpha = hover && !active ? 0.22 : 1;
-        ctx.arc(t.x, t.y, active ? 7 : 4.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.globalAlpha = 1;
+    const { placed, lo, hi, pad, headers, byId, edges } = overview;
+    const linked = new Set<string>();
+    if (active) {
+      linked.add(active);
+      for (const e of edges) {
+        if (e.source === active) linked.add(e.target);
+        if (e.target === active) linked.add(e.source);
       }
-      ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
-      ctx.fillStyle = INK;
-      const occupied: { x: number; y: number; w: number; h: number }[] = [];
-      const named = placed.filter((t) => labels.has(t.id) || hover === t.id);
-      named.sort((a, b) => a.y - b.y || a.x - b.x);
-      for (const t of named) drawScatterLabel(ctx, t, occupied);
-      return;
     }
 
-    if (mode === "upsets") {
-      const { upsets, placed, at, y } = upsetChart;
-      ctx.fillStyle = MUTED;
-      ctx.textAlign = "left";
-      ctx.fillText(`${upsets.length} games where the worse team (by Pom) won`, 24, 28);
-      ctx.textAlign = "left";
-      ctx.fillText("worse", 24, y + 48);
-      ctx.textAlign = "right";
-      ctx.fillText("better", WIDTH - 24, y + 48);
-      for (const u of upsets) {
-        const a = at.get(u.w.id);
-        const b = at.get(u.l.id);
-        if (!a || !b) continue;
-        const on = !hover || hover === u.w.id || hover === u.l.id;
-        const mid = (a.x + b.x) / 2;
-        const h = 28 + Math.min(160, u.gap * 5);
-        ctx.beginPath();
-        ctx.strokeStyle = on ? "rgba(180,35,24,0.7)" : "rgba(180,35,24,0.08)";
-        ctx.lineWidth = on ? Math.max(1.1, Math.min(3.2, u.e.margin / 14)) : 1;
-        ctx.moveTo(a.x, y);
-        ctx.quadraticCurveTo(mid, y - h, b.x, y);
-        ctx.stroke();
-      }
-      for (const t of placed) {
-        const on = hover === t.id;
-        ctx.beginPath();
-        ctx.fillStyle = on ? LOSS : INK;
-        ctx.arc(t.x, y, on ? 4.5 : 2.4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      if (hover) {
-        const t = at.get(hover);
-        if (t) {
-          ctx.fillStyle = INK;
-          ctx.textAlign = "center";
-          ctx.fillText(`${t.team}  ${t.wins}-${t.losses}  ${signed(t.pom)}`, t.x, y + 28);
-        }
-      } else if (placed[0] && placed[placed.length - 1]) {
-        ctx.fillStyle = MUTED;
-        ctx.textAlign = "left";
-        ctx.fillText(placed[0].team, placed[0].x, y + 28);
-        ctx.textAlign = "right";
-        ctx.fillText(placed[placed.length - 1].team, placed[placed.length - 1].x, y + 28);
-      }
-      return;
-    }
-
-    if (matrix.kind === "confs") {
-      ctx.fillStyle = MUTED;
-      ctx.textAlign = "left";
-      ctx.fillText("Row beat column. Darker = more wins.", 24, 28);
-      const { confs, wins, left, top, size } = matrix;
-      let maxN = 1;
-      for (const row of wins) for (const c of row) maxN = Math.max(maxN, c.n);
-      for (let i = 0; i < confs.length; i++) {
-        ctx.fillStyle = MUTED;
-        ctx.textAlign = "right";
-        ctx.textBaseline = "middle";
-        ctx.fillText(confs[i], left - 8, top + i * size + size / 2);
-        ctx.save();
-        ctx.translate(left + i * size + size / 2, top - 8);
-        ctx.rotate(-Math.PI / 4);
-        ctx.textAlign = "left";
-        ctx.textBaseline = "alphabetic";
-        ctx.fillText(confs[i], 0, 0);
-        ctx.restore();
-        for (let j = 0; j < confs.length; j++) {
-          const cell = wins[i][j];
-          const x = left + j * size;
-          const y = top + i * size;
-          const t = cell.n / maxN;
-          ctx.fillStyle = i === j ? "rgba(17,17,17,0.08)" : `rgba(180,35,24,${0.08 + t * 0.72})`;
-          ctx.fillRect(x + 1, y + 1, size - 2, size - 2);
-          if (cell.n && (hover === `${confs[i]}>${confs[j]}` || size > 36)) {
-            ctx.fillStyle = t > 0.55 ? PAPER : INK;
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
-            ctx.fillText(String(cell.n), x + size / 2, y + size / 2);
-            ctx.font = FONT;
-          }
-        }
-      }
-      ctx.textBaseline = "alphabetic";
-      return;
-    }
-
-    const { ranked, cells, left, top, size } = matrix;
     ctx.fillStyle = MUTED;
-    ctx.textAlign = "left";
-    ctx.fillText("Ordered by Pom. Oxblood mark = worse team won.", 24, 28);
-    for (let i = 0; i < ranked.length; i++) {
-      ctx.fillStyle = hover === ranked[i].id ? INK : MUTED;
-      ctx.textAlign = "right";
-      ctx.textBaseline = "middle";
-      ctx.fillText(short(ranked[i].team, 11), left - 6, top + i * size + size / 2);
-      ctx.save();
-      ctx.translate(left + i * size + size / 2, top - 6);
-      ctx.rotate(-Math.PI / 3);
-      ctx.textAlign = "left";
-      ctx.textBaseline = "alphabetic";
-      ctx.fillText(short(ranked[i].team, 10), 0, 0);
-      ctx.restore();
+    ctx.textAlign = "center";
+    ctx.fillText("better ↑", 28, pad.t);
+    ctx.fillText("worse ↓", 28, HEIGHT - 14);
+    ctx.textAlign = "right";
+    ctx.fillText(signed(hi, 0), pad.l - 8, pad.t + 4);
+    ctx.fillText(signed(lo, 0), pad.l - 8, HEIGHT - pad.b + 4);
+
+    ctx.strokeStyle = LINE;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.l, pad.t);
+    ctx.lineTo(pad.l, HEIGHT - pad.b);
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+    for (const h of headers) {
+      ctx.globalAlpha = conf === "all" || h.conf === conf ? 1 : 0.28;
+      ctx.fillStyle = MUTED;
+      ctx.fillText(short(h.conf, 8), h.x, 22);
+      ctx.globalAlpha = 1;
     }
-    for (const cell of cells) {
-      const x = left + cell.c * size;
-      const y = top + cell.r * size;
-      const t = Math.min(1, cell.margin / 35);
-      ctx.fillStyle = cell.upset ? `rgba(180,35,24,${0.35 + t * 0.5})` : `rgba(26,127,55,${0.2 + t * 0.45})`;
-      ctx.fillRect(x + 0.6, y + 0.6, size - 1.2, size - 1.2);
+
+    if (active) {
+      for (const e of edges) {
+        if (e.source !== active && e.target !== active) continue;
+        const a = byId.get(e.source);
+        const b = byId.get(e.target);
+        if (!a || !b) continue;
+        arrow(
+          ctx,
+          a.x,
+          a.y,
+          b.x,
+          b.y,
+          5,
+          5,
+          e.source === active ? WIN : LOSS,
+          Math.max(1.2, Math.min(2.6, e.margin / 16)),
+        );
+      }
     }
-    ctx.textBaseline = "alphabetic";
-  }, [ego, mode, scatter, slateChart, upsetChart, matrix, hover, clusterChart, sky, net, laid, edges, teams.length]);
+
+    const labeled = new Set<string>();
+    if (active) for (const id of linked) labeled.add(id);
+    else if (matches.size) for (const id of matches) labeled.add(id);
+    else if (conf === "all") {
+      for (const h of headers) {
+        const best = placed.filter((t) => t.conf === h.conf).sort((a, b) => b.pom - a.pom)[0];
+        if (best) labeled.add(best.id);
+      }
+    } else {
+      const top = placed.filter((t) => t.conf === conf).sort((a, b) => b.pom - a.pom).slice(0, 10);
+      for (const t of top) labeled.add(t.id);
+    }
+
+    for (const t of placed) {
+      const inConf = conf === "all" || t.conf === conf;
+      const on = (!active || linked.has(t.id)) && inConf;
+      const connected = Boolean(active && linked.has(t.id));
+      const hot = t.id === active;
+      const r = hot ? 6.5 : 4.2;
+      ctx.beginPath();
+      ctx.globalAlpha = on || connected ? 1 : 0.12;
+      ctx.fillStyle = pomColor(t.pom, lo, hi);
+      ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.font = "11px ui-sans-serif, system-ui, sans-serif";
+    for (const t of placed) {
+      if (!labeled.has(t.id)) continue;
+      ctx.fillStyle = t.id === active ? INK : MUTED;
+      ctx.textAlign = t.x < WIDTH / 2 ? "left" : "right";
+      const dx = t.x < WIDTH / 2 ? 8 : -8;
+      ctx.fillText(short(t.team, 14), t.x + dx, t.y - 8);
+    }
+    ctx.font = FONT;
+  }, [ego, overview, active, matches, conf]);
 
   function pick(ev: React.MouseEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current;
@@ -718,64 +402,6 @@ export function GraphView({ graph }: { graph: GraphFile }) {
     const box = canvas.getBoundingClientRect();
     const x = ((ev.clientX - box.left) * canvas.width) / box.width;
     const y = ((ev.clientY - box.top) * canvas.height) / box.height;
-
-    if (!ego && mode === "matrix" && matrix.kind === "confs") {
-      const { confs, wins, left, top, size } = matrix;
-      const c = Math.floor((x - left) / size);
-      const r = Math.floor((y - top) / size);
-      if (r >= 0 && c >= 0 && r < confs.length && c < confs.length) {
-        const cell = wins[r][c];
-        const id = `${confs[r]}>${confs[c]}`;
-        setHover(id);
-        setCellTip({
-          title: `${confs[r]} over ${confs[c]}`,
-          line: cell.n ? `${cell.n} wins · mean margin ${(cell.margin / cell.n).toFixed(0)}` : "no games",
-        });
-        if (ev.type === "click") setFocus("");
-        return;
-      }
-    }
-
-    if (!ego && mode === "matrix" && matrix.kind === "teams") {
-      const { cells, left, top, size } = matrix;
-      const c = Math.floor((x - left) / size);
-      const r = Math.floor((y - top) / size);
-      const hit = cells.find((cell) => cell.r === r && cell.c === c);
-      if (hit) {
-        setHover(hit.a.id);
-        setCellTip({
-          title: `${hit.a.team} beat ${hit.b.team}`,
-          line: `margin ${hit.margin.toFixed(0)}${hit.upset ? " · upset" : ""}`,
-        });
-        if (ev.type === "click") setFocus(hit.a.id);
-        return;
-      }
-    }
-
-    if (!ego && mode === "slate" && slateChart.kind === "rows") {
-      let best = "";
-      let bestD = 11;
-      for (const r of slateChart.rows) {
-        const d = Math.abs(r.y - y);
-        if (d < bestD) {
-          best = r.team.id;
-          bestD = d;
-        }
-      }
-      if (ev.type === "click") setFocus(best);
-      setHover(best);
-      setCellTip(null);
-      return;
-    }
-
-    if (sky) {
-      const body = hitCluster(clusterChart.bodies, x, y);
-      if (ev.type === "click") setFocus(body?.kind === "team" ? body.id : "");
-      setHover(body?.id ?? "");
-      return;
-    }
-
-    setCellTip(null);
     let best: Hit | null = null;
     let bestD = Infinity;
     for (const n of hits) {
@@ -789,58 +415,19 @@ export function GraphView({ graph }: { graph: GraphFile }) {
     setHover(best?.id ?? "");
   }
 
-  const tipCluster = clusterChart.bodies.find((b) => b.kind === "cluster" && b.id === hover);
-  const tipTeam = byId.get(hover) ?? byId.get(focus);
-  const lede =
-    ego
-      ? "Better teams higher. Green = beat a better team. Red = lost to a worse one. Click empty space to go back."
-      : mode === "paths"
-        ? "How far apart two teams are on the schedule graph. The pale bars are the diameter-2 floor."
-        : mode === "map"
-          ? "NetworkX maximum spanning tree by margin. Size is betweenness."
-          : mode === "spectral"
-            ? "Laplacian embedding. Left–right is the Fiedler cut — the weakest place to split the schedule."
-            : mode === "weights"
-              ? "Margin-weighted spring. A 50-point win pulls harder than a field goal."
-              : mode === "hive"
-                ? "Three axes: Power 4, Group of 5, everyone else. Curves are cross-group games."
-          : mode === "circuits"
-            ? "Directed 3-cycles on the spectral map: A beat B beat C beat A."
-            : mode === "clusters"
-        ? "Who played whom. Color is conference."
-        : mode === "scatter"
-          ? "Win rate vs Pom. Named points are the mismatches."
-          : mode === "slate"
-            ? "How good they were vs who they played. The bar is the opponent-quality span. Hover to see each game."
-          : mode === "upsets"
-            ? "Worse team won. Arc height is the Pom gap."
-            : conf === "all"
-              ? "Row beat column."
-              : "Teams by Pom. Green = expected, red = upset.";
+  const tip = allById.get(hover) ?? allById.get(focus);
+  const games = tip
+    ? allEdges.filter((e) => e.source === tip.id || e.target === tip.id).length
+    : 0;
 
   return (
     <div>
-      <p className="lede-note">{lede}</p>
+      <p className="lede-note">
+        {ego
+          ? "Better teams higher. Green = beat a better team. Red = lost to a worse one. Click empty space to go back."
+          : "Columns are conferences, strongest on the left. Higher is better. Color is Pom. Hover to see who they played."}
+      </p>
       <div className="toolbar">
-        <div className="seg">
-          {(["scatter", "slate", "upsets", "matrix"] as Mode[]).map((id) => (
-            <button key={id} type="button" aria-pressed={mode === id} onClick={() => setMode(id)}>
-              {id}
-            </button>
-          ))}
-          <button type="button" aria-pressed={NETWORK.includes(mode)} onClick={() => setMode("paths")}>
-            network
-          </button>
-        </div>
-        {NETWORK.includes(mode) && (
-          <div className="seg">
-            {NETWORK.map((id) => (
-              <button key={id} type="button" aria-pressed={mode === id} onClick={() => setMode(id)}>
-                {id}
-              </button>
-            ))}
-          </div>
-        )}
         <select value={conf} onChange={(e) => setConf(e.target.value)} aria-label="Conference">
           {conferences.map((c) => (
             <option key={c} value={c}>
@@ -848,6 +435,18 @@ export function GraphView({ graph }: { graph: GraphFile }) {
             </option>
           ))}
         </select>
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Find a team"
+          aria-label="Find a team"
+        />
+        {focus && (
+          <button type="button" onClick={() => setFocus("")}>
+            All teams
+          </button>
+        )}
       </div>
       <canvas
         ref={canvasRef}
@@ -856,33 +455,13 @@ export function GraphView({ graph }: { graph: GraphFile }) {
         className="graph-canvas"
         onClick={pick}
         onMouseMove={pick}
-        onMouseLeave={() => {
-          setHover("");
-          setCellTip(null);
-        }}
+        onMouseLeave={() => setHover("")}
       />
-      {cellTip && !ego && (
+      {tip && (
         <div className="graph-card">
-          <strong>{cellTip.title}</strong> · {cellTip.line}
-        </div>
-      )}
-      {tipCluster && !tipTeam && (
-        <div className="graph-card">
-          <strong>{tipCluster.label}</strong> · {tipCluster.members} teams
-        </div>
-      )}
-      {tipTeam && !cellTip && (
-        <div className="graph-card">
-          <strong>{tipTeam.team}</strong> {tipTeam.conf} · {tipTeam.wins}-{tipTeam.losses} · Pom{" "}
-          {signed(tipTeam.pom)}
-          {mode === "slate" && slateById.get(tipTeam.id)
-            ? ` · ${slateLine(slateById.get(tipTeam.id)!)}`
-            : EMBED.includes(mode)
-            ? ` · degree ${tipTeam.degree} · betweenness ${tipTeam.betweenness.toFixed(3)} · ecc ${tipTeam.eccentricity}`
-            : sky
-              ? ` · ${(tipTeam.winningness * 100).toFixed(0)}% wins`
-              : ` · ${signed(tipTeam.vsNeighbors)} vs neighbors`}
-          {!ego && <div className="lede-note">Click for their games.</div>}
+          <strong>{tip.team}</strong> {tip.conf} · {tip.wins}-{tip.losses} · Pom {signed(tip.pom)}
+          {games ? ` · ${games} FBS games` : ""}
+          {!ego && <div className="lede-note">Click to see every game.</div>}
         </div>
       )}
     </div>

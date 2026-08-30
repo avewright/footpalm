@@ -142,7 +142,7 @@ def book_ready_for_live(root: Path) -> bool:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build FootPom ratings, predictions, and backtests")
+    parser = argparse.ArgumentParser(description="Build FootPalm ratings, predictions, and backtests")
     parser.add_argument("--seasons", nargs="+", type=int, default=DEFAULT_SEASONS)
     parser.add_argument("--no-tabpfn", action="store_true", help="logistic baseline only")
     args = parser.parse_args()

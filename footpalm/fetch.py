@@ -75,6 +75,11 @@ def main() -> None:
 
     if not args.pbp_only:
         pull_cfbd(root, seasons, refresh=args.refresh)
+        from footpalm.draft import pull_and_write
+        from footpalm.people import pull_and_write as pull_people
+
+        pull_and_write(root, refresh=args.refresh)
+        pull_people(root, refresh=args.refresh)
 
 
 if __name__ == "__main__":

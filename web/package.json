@@ -1,5 +1,5 @@
 {
-  "name": "footpom-web",
+  "name": "footpalm-web",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.1.12",

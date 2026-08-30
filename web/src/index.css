@@ -55,7 +55,7 @@ input:focus-visible {
 
 .top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 20px 24px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--line);
@@ -64,8 +64,19 @@ input:focus-visible {
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 600;
+}
+
+.brand-mark {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  display: block;
+  fill: currentColor;
 }
 
 .tabs {
@@ -370,7 +381,7 @@ tr:hover td.team {
   height: auto;
   border: 1px solid var(--line);
   background: var(--bg);
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 .graph-card {
@@ -378,17 +389,12 @@ tr:hover td.team {
   font-size: 13px;
 }
 
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px 32px;
-  margin: 16px 0;
-}
-
-.metric-block h3 {
-  font-size: 14px;
-  font-weight: 500;
-  margin: 16px 0 8px;
+.toolbar button {
+  appearance: none;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  padding: 3px 9px;
+  cursor: pointer;
 }
 
 .metrics {
@@ -407,35 +413,278 @@ tr:hover td.team {
   margin: 0;
 }
 
-.imp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  margin: 16px 0;
+.page-ask {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0 0;
+  overflow: hidden;
 }
 
-.imp-row {
-  display: grid;
-  grid-template-columns: 110px 1fr 56px;
-  gap: 8px;
-  align-items: center;
+.ask {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: min(768px, 100%);
+  margin: 0 auto;
+  position: relative;
+}
+
+.ask-new {
+  appearance: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  padding: 0;
+  cursor: pointer;
   font-size: 13px;
-  margin: 4px 0;
 }
 
-.imp-row span:first-child {
+.ask-log {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow: auto;
+  padding: 28px 0 20px;
+}
+
+.ask-empty {
+  margin: auto;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.ask-wait {
+  display: flex;
+  gap: 5px;
+  padding: 4px 2px;
+}
+
+.ask-wait i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: ask-dot 1s ease-in-out infinite;
+}
+
+.ask-wait i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.ask-wait i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes ask-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.ask-msg {
+  width: 100%;
+}
+
+.ask-msg.user {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ask-bubble {
+  max-width: 72%;
+  padding: 10px 14px;
+  background: var(--header);
+  border-radius: 18px;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.ask-reply {
+  max-width: 100%;
+}
+
+.ask-copy {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  padding: 8px 0 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.ask-tools {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.ask-md {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.ask-md > :first-child {
+  margin-top: 0;
+}
+
+.ask-md > :last-child {
+  margin-bottom: 0;
+}
+
+.ask-md p,
+.ask-md ul,
+.ask-md ol,
+.ask-md pre,
+.ask-md table {
+  margin: 0 0 10px;
+}
+
+.ask-md h1,
+.ask-md h2,
+.ask-md h3 {
+  margin: 14px 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ask-md ul,
+.ask-md ol {
+  padding-left: 1.2em;
+}
+
+.ask-md code {
+  font-size: 13px;
+  background: var(--hover);
+  padding: 1px 4px;
+}
+
+.ask-md pre {
+  overflow: auto;
+  background: var(--hover);
+  padding: 10px 12px;
+}
+
+.ask-md pre code {
+  padding: 0;
+  background: none;
+}
+
+.ask-md table {
+  width: 100%;
+  border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
 
-.imp-bar {
-  height: 6px;
-  background: var(--line);
+.ask-md th,
+.ask-md td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
 }
 
-.imp-bar i {
+.ask-svg {
   display: block;
-  height: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.ask-svg-label,
+.ask-svg-num {
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+.ask-svg-num {
+  font-variant-numeric: tabular-nums;
+}
+
+.ask-svg-axis,
+.ask-svg-edge {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.ask-card {
+  margin: 12px 0 0;
+}
+
+.ask-card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ask-stat {
+  display: contents;
+}
+
+.ask-table {
+  max-height: 360px;
+  margin-top: 4px;
+}
+
+.ask-form {
+  padding: 0 0 24px;
+  background: var(--bg);
+}
+
+.ask-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px 10px 10px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 26px;
+  background: var(--bg);
+}
+
+.ask-composer:focus-within {
+  border-color: var(--ink);
+}
+
+.ask-composer textarea {
+  flex: 1;
+  resize: none;
+  min-height: 24px;
+  max-height: 160px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  line-height: 1.45;
+  outline: none;
+}
+
+.ask-composer button {
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
   background: var(--ink);
+  color: var(--bg);
+  cursor: pointer;
+  flex: none;
+}
+
+.ask-composer button:disabled {
+  opacity: 0.2;
+  cursor: default;
 }
 
 @media (max-width: 720px) {

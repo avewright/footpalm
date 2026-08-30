@@ -1,4 +1,4 @@
-# FootPom research protocol
+# FootPalm research protocol
 
 Goal: lower Brier without overfitting.
 

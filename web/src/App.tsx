@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { BacktestView } from "./BacktestView";
+import { AskView } from "./AskView";
 import { GamesView } from "./GamesView";
 import { GraphView } from "./GraphView";
 import { MoneyView } from "./MoneyView";
 import { RatingsTable } from "./RatingsTable";
-import { ResearchView } from "./ResearchView";
 import { signed } from "./format";
-import type { BacktestFile, BacktestSummary, GamePred, GraphFile, IndexFile, MoneyFile, RatingsFile, ResearchFile, TreeReport } from "./types";
+import type { GamePred, GraphFile, IndexFile, MoneyFile, RatingsFile } from "./types";
 
-const TABS = ["ratings", "games", "graph", "money", "backtest", "research"] as const;
+const TABS = ["ratings", "games", "graph", "ask", "money"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_LABEL: Record<Tab, string> = {
   ratings: "Ratings",
   games: "Games",
   graph: "Graph",
+  ask: "Ask",
   money: "Money",
-  backtest: "Backtest",
-  research: "Research",
 };
 
 function search() {
@@ -42,10 +40,6 @@ export function App() {
   const [games, setGames] = useState<GamePred[]>([]);
   const [graph, setGraph] = useState<GraphFile | null>(null);
   const [money, setMoney] = useState<MoneyFile | null>(null);
-  const [backtest, setBacktest] = useState<BacktestFile | null>(null);
-  const [summary, setSummary] = useState<BacktestSummary | null>(null);
-  const [research, setResearch] = useState<ResearchFile | null>(null);
-  const [trees, setTrees] = useState<TreeReport | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -72,29 +66,24 @@ export function App() {
       loadJson<{ games: GamePred[] }>(`/data/predictions-${season}.json`, { games: [] }),
       loadJson<GraphFile | null>(`/data/graph-${season}.json`, null),
       loadJson<MoneyFile | null>("/data/money.json", null),
-      loadJson<BacktestFile | null>(`/data/backtest-${season}.json`, null),
-      loadJson<BacktestSummary | null>("/data/backtest-summary.json", null),
-      loadJson<ResearchFile | null>("/data/research.json", null),
-      loadJson<TreeReport | null>("/data/trees.json", null),
     ])
-      .then(([rt, pred, g, m, bt, sum, rs, tr]) => {
+      .then(([rt, pred, g, m]) => {
         setRatings(rt);
         setGames(pred?.games ?? []);
         setGraph(g);
         setMoney(m);
-        setBacktest(bt);
-        setSummary(sum);
-        setResearch(rs);
-        setTrees(tr);
         if (!rt) setError(`missing ${season} ratings — run the build`);
       })
       .catch((err: Error) => setError(err.message));
   }, [season]);
 
   return (
-    <div className="page">
+    <div className={`page${tab === "ask" ? " page-ask" : ""}`}>
       <header className="top">
-        <div className="brand">FootPom</div>
+        <div className="brand">
+          <img className="brand-mark" src="/logo.svg" width="22" height="22" alt="" />
+          FootPalm
+        </div>
         <nav className="tabs">
           {TABS.map((id) => (
             <button key={id} type="button" aria-pressed={tab === id} onClick={() => setTab(id)}>
@@ -111,20 +100,21 @@ export function App() {
         </select>
       </header>
 
-      <p className="meta">
-        {ratings
-          ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
-          : (error ?? "Loading…")}
-      </p>
+      {tab !== "ask" && (
+        <p className="meta">
+          {ratings
+            ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
+            : (error ?? "Loading…")}
+        </p>
+      )}
       {tab === "ratings" && ratings?.method && <p className="lede-note">{ratings.method}</p>}
 
       {tab === "ratings" && ratings && <RatingsTable data={ratings} />}
       {tab === "games" && <GamesView games={games} />}
       {tab === "graph" && graph && <GraphView graph={graph} />}
       {tab === "graph" && !graph && <p className="lede-note">No graph file for {season} yet.</p>}
+      {tab === "ask" && <AskView season={season} />}
       {tab === "money" && money && <MoneyView data={money} />}
-      {tab === "backtest" && <BacktestView season={season} backtest={backtest} summary={summary} />}
-      {tab === "research" && <ResearchView data={research} trees={trees} />}
 
       {tab === "ratings" && (
         <details className="glossary">

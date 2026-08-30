@@ -77,6 +77,8 @@ ALIASES = {
     "nevada las vegas": "UNLV",
     "unlv": "UNLV",
     "texas state": "Texas State",
+    "osu": "Ohio State",
+    "ohio st": "Ohio State",
     "oregon state": "Oregon State",
     "washington state": "Washington State",
     "hawaii": "Hawai'i",
