@@ -87,20 +87,10 @@ export function AskView({ season }: { season: number }) {
     window.setTimeout(() => setCopied((cur) => (cur === i ? null : cur)), 1200);
   }
 
-  function fresh() {
-    setMessages([]);
-    setError(null);
-    box.current?.focus();
-  }
-
   return (
     <div className="ask">
-      {messages.length > 0 && (
-        <button type="button" className="ask-new" onClick={fresh}>
-          New chat
-        </button>
-      )}
       <div className="ask-log">
+        <div className="ask-thread">
         {messages.length === 0 && !busy && <p className="ask-empty">Ask anything</p>}
         {messages.map((msg, i) => (
           <article key={i} className={`ask-msg ${msg.role}`}>
@@ -108,10 +98,10 @@ export function AskView({ season }: { season: number }) {
               <div className="ask-bubble">{msg.content}</div>
             ) : (
               <div className="ask-reply">
-                {msg.content && <AskMarkdown text={msg.content} />}
                 {msg.cards?.map((card, j) => (
                   <CardView key={j} card={card} />
                 ))}
+                {msg.content && <AskMarkdown text={msg.content} />}
                 {!!msg.tools?.length && <p className="ask-tools">{msg.tools.join(" · ")}</p>}
                 {msg.content && (
                   <button type="button" className="ask-copy" onClick={() => copy(i, msg.content)}>
@@ -131,6 +121,7 @@ export function AskView({ season }: { season: number }) {
         )}
         {error && <p className="warn">{error}</p>}
         <div ref={end} />
+        </div>
       </div>
       <form className="ask-form" onSubmit={onSubmit}>
         <div className="ask-composer">

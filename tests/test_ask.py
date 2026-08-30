@@ -294,6 +294,46 @@ def test_clean_answer_drops_markdown_table():
     assert "|" not in text
 
 
+def test_clean_answer_drops_numbered_dump():
+    from footpalm.ask import _clean_answer, _prune_cards
+
+    blob = (
+        "The 2026 NFL draft's first round (top 32): "
+        "1. Fernando Mendoza, QB (Indiana) -> Las Vegas "
+        "2. David Bailey, EDGE (Texas Tech) -> New York "
+        "3. Jeremiyah Love, RB (Notre Dame) -> Arizona "
+        "Ohio State leads with four first-rounders; Miami has three."
+    )
+    text = _clean_answer(blob, [{"kind": "table", "title": "NFL draft · 2026"}])
+    assert "Ohio State leads" in text
+    assert "Fernando Mendoza" not in text
+    assert "1." not in text
+
+    bold = (
+        "The 2026 NFL draft's first round (top 32): "
+        "**1. Fernando Mendoza, QB** (Indiana) -> Las Vegas "
+        "**2. David Bailey, EDGE** (Texas Tech) -> New York "
+        "**3. Jeremiyah Love, RB** (Notre Dame) -> Arizona"
+    )
+    text = _clean_answer(bold, [{"kind": "table", "title": "NFL draft · 2026"}])
+    assert "Fernando Mendoza" not in text
+    assert text == ""
+
+    caption = _clean_answer(
+        "32 first-round picks. Fernando Mendoza (Indiana QB) went No. 1 to Las Vegas.",
+        [{"kind": "table", "title": "NFL draft · 2026"}],
+    )
+    assert caption == "32 first-round picks. Fernando Mendoza (Indiana QB) went No. 1 to Las Vegas."
+
+    cards = _prune_cards(
+        [
+            {"kind": "table", "title": "NFL draft · 2026", "rows": []},
+            {"kind": "stats", "title": "NFL draft · 2026", "items": []},
+        ]
+    )
+    assert [c["kind"] for c in cards] == ["table"]
+
+
 def test_search_open_list(tmp_path: Path):
     session = Session(_warehouse(tmp_path), 2025)
     found = session.search("stowers", kind="player")

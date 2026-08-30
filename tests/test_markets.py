@@ -1,4 +1,15 @@
-from footpalm.markets import american, attach, bind_book, match_team, parse_event
+from datetime import datetime, timezone
+
+from footpalm.markets import (
+    american,
+    attach,
+    bind_book,
+    empty_log,
+    live_ml,
+    match_team,
+    parse_event,
+    upsert_log,
+)
 
 
 def test_american_odds():
@@ -72,3 +83,66 @@ def test_attach_requires_same_day():
     assert n == 1
     assert games[0]["books"]["polymarket"]["ml_home"] == 0.98
     assert "books" not in games[1]
+
+
+def test_parse_skips_settled_moneyline():
+    event = parse_event(
+        {
+            "title": "Hawai'i vs. Stanford",
+            "slug": "cfb-haw-stan-2026-08-30",
+            "markets": [
+                {
+                    "sportsMarketType": "moneyline",
+                    "outcomes": '["Hawai\'i", "Stanford"]',
+                    "outcomePrices": '["0.0", "1.0"]',
+                    "gameStartTime": "2026-08-30 02:30:00+00",
+                },
+                {
+                    "sportsMarketType": "spreads",
+                    "line": -4.0,
+                    "outcomes": '["Stanford", "Hawai\'i"]',
+                    "outcomePrices": '["0.52", "0.48"]',
+                },
+            ],
+        }
+    )
+    assert event is not None
+    assert "ml" not in event
+    book = bind_book(event, home="Stanford", away="Hawai'i")
+    assert book is not None
+    assert "ml_home" not in book
+    assert book["spread"] == -4.0
+
+
+def test_attach_keeps_existing_books_when_event_is_gone():
+    games = [
+        {
+            "home": "Stanford",
+            "away": "Hawai'i",
+            "start": "2026-08-30T02:30:00.000Z",
+            "books": {"polymarket": {"ml_home": 0.68, "spread": -4.0}},
+        }
+    ]
+    log = empty_log(2026)
+    assert attach(games, [], log) == 1
+    assert games[0]["books"]["polymarket"]["ml_home"] == 0.68
+    assert live_ml(list(log["games"].values())[0]["polymarket"]["ml_home"])
+
+
+def test_log_locks_moneyline_after_kickoff():
+    now = datetime(2026, 8, 30, 12, tzinfo=timezone.utc)
+    game = {
+        "season": 2026,
+        "week": 1,
+        "home": "Stanford",
+        "away": "Hawai'i",
+        "start": "2026-08-30T02:30:00.000Z",
+        "completed": True,
+    }
+    log = empty_log(2026)
+    upsert_log(log, game, {"ml_home": 0.68, "ml_away": 0.32, "spread": -4.0}, now)
+    upsert_log(log, game, {"ml_home": 0.91, "ml_away": 0.09, "spread": -5.5}, now)
+    book = list(log["games"].values())[0]
+    assert book["locked"] is True
+    assert book["polymarket"]["ml_home"] == 0.68
+    assert book["polymarket"]["spread"] == -5.5

@@ -8,6 +8,12 @@ export function marketSpread(g: GamePred): number | null {
   return g.spread;
 }
 
+export function marketMl(g: GamePred): number | null {
+  const p = g.books?.polymarket?.ml_home;
+  if (p == null || Number.isNaN(p)) return null;
+  return p;
+}
+
 export const JUICE = 110;
 export const BREAKEVEN = JUICE / (JUICE + 100);
 export const BIG_NUMBER = 17.5;

@@ -41,6 +41,7 @@ export function App() {
   const [graph, setGraph] = useState<GraphFile | null>(null);
   const [money, setMoney] = useState<MoneyFile | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [askTick, setAskTick] = useState(0);
 
   useEffect(() => {
     loadJson<IndexFile>("/data/index.json", { seasons: [] }).then((idx) => {
@@ -91,13 +92,20 @@ export function App() {
             </button>
           ))}
         </nav>
-        <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
-          {seasons.map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+        <div className="top-right">
+          {tab === "ask" && (
+            <button type="button" className="ask-new" onClick={() => setAskTick((n) => n + 1)}>
+              New chat
+            </button>
+          )}
+          <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
+            {seasons.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
       </header>
 
       {tab !== "ask" && (
@@ -113,7 +121,7 @@ export function App() {
       {tab === "games" && <GamesView games={games} />}
       {tab === "graph" && graph && <GraphView graph={graph} />}
       {tab === "graph" && !graph && <p className="lede-note">No graph file for {season} yet.</p>}
-      {tab === "ask" && <AskView season={season} />}
+      {tab === "ask" && <AskView key={askTick} season={season} />}
       {tab === "money" && money && <MoneyView data={money} />}
 
       {tab === "ratings" && (

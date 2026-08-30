@@ -35,7 +35,7 @@ Pom = points vs an average FBS team on a neutral field. Elo is not the board. Sp
 3. list — a board: ratings, games, leaders, draft, people, backtest. One table.
 4. show — a chart only if they asked for one. list/open already draw the card.
 
-One short line. The card is the answer. Do not dump markdown tables.
+The card is the answer. One or two sentences. Never restate card rows, numbered picks, or a markdown table.
 
 Default season is {season}. Last year for teams and player stats is {last_year}. Draft last year is the {draft_year} NFL draft. Do not pass year={last_year} for draft unless they said the {last_year} draft.
 Player stats: rushing, receiving, yac, yac_avg, passing. yac_avg is YAC per catch-point play. 2026 has no play-by-play; boards stop at {last_year}.
@@ -278,13 +278,55 @@ def _game_score_line(game: dict) -> str:
 
 
 _MD_TABLE = re.compile(r"(?m)(?:^\s*\|.*\|\s*$\n?)+")
+_NFL_CITY = (
+    "Las Vegas|Los Angeles|New England|New Orleans|New York|Green Bay|"
+    "Kansas City|San Francisco|Tampa Bay|Arizona|Atlanta|Baltimore|Buffalo|"
+    "Carolina|Chicago|Cincinnati|Cleveland|Dallas|Denver|Detroit|Houston|"
+    "Indianapolis|Jacksonville|Miami|Minnesota|Philadelphia|Pittsburgh|"
+    "Seattle|Tennessee|Washington"
+)
+_PICK_ARROW = re.compile(rf"\d+\.\s+.+?\s*->\s+(?:{_NFL_CITY})")
+_PICK_RUN = re.compile(r"(?:^|\s)\d+\.\s+\S.{8,160}?(?=\s+\d+\.\s+|$)")
+_LINE_NUMBERED = re.compile(r"(?m)(?:^\s*\d+\.\s+.+\n?){3,}")
+
+
+def _strip_numbered_dump(text: str) -> str:
+    items = list(_PICK_ARROW.finditer(text))
+    if len(items) < 3:
+        items = list(_PICK_RUN.finditer(text))
+    if len(items) < 3:
+        return text
+    return (text[: items[0].start()] + " " + text[items[-1].end() :]).strip()
+
+
+_SENTENCE = re.compile(r"(?<!\bNo\.)(?<!\bRd\.)(?<!\bvs\.)(?<=[.!?])\s+")
+
+
+def _sentences(text: str) -> list[str]:
+    return [p.strip() for p in _SENTENCE.split(text) if p.strip()]
+
+
+def _looks_like_dump(text: str) -> bool:
+    return text.count("->") >= 2 or len(re.findall(r"\d+\.", text)) >= 3
 
 
 def _clean_answer(text: str, cards: list) -> str:
     out = (text or "").strip()
-    if any(c.get("kind") == "table" for c in cards):
-        out = _MD_TABLE.sub("", out)
-    return re.sub(r"\n{3,}", "\n\n", out).strip()
+    if not any(c.get("kind") == "table" for c in cards):
+        return out
+    out = re.sub(r"[*_`]", "", out)
+    out = _MD_TABLE.sub("", out)
+    out = _LINE_NUMBERED.sub("", out)
+    out = _strip_numbered_dump(out)
+    out = re.sub(r"^[^.\n]{0,120}:\s*", "", out)
+    keep = [s for s in _sentences(out) if not _looks_like_dump(s)]
+    out = " ".join(keep[:2])
+    return re.sub(r"\s+", " ", out).strip()
+
+
+def _prune_cards(cards: list) -> list:
+    tables = {c.get("title") for c in cards if c.get("kind") == "table"}
+    return [c for c in cards if not (c.get("kind") == "stats" and c.get("title") in tables)]
 
 
 def _with_yac_avg(row: dict) -> dict:
@@ -1194,6 +1236,8 @@ class Session:
             card["edges"] = (edges or [])[:36]
         if any(c.get("kind") == kind and c.get("title") == title for c in self.cards):
             return {"ok": True, "n": len(self.cards)}
+        if kind == "stats" and any(c.get("kind") == "table" and c.get("title") == title for c in self.cards):
+            return {"ok": True, "n": len(self.cards)}
         self.cards.append(card)
         return {"ok": True, "n": len(self.cards)}
 
@@ -1324,8 +1368,9 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
         history.append({k: message[k] for k in message if k in {"role", "content", "tool_calls", "reasoning_content"}})
         calls = message.get("tool_calls") or []
         if not calls:
-            text = _clean_answer(message.get("content") or "", session.cards)
-            return {"text": text, "cards": session.cards, "tools": used, "model": model}
+            cards = _prune_cards(session.cards)
+            text = _clean_answer(message.get("content") or "", cards)
+            return {"text": text, "cards": cards, "tools": used, "model": model}
         for call in calls:
             fn = (call.get("function") or {}) if isinstance(call, dict) else {}
             name = fn.get("name") or ""

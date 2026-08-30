@@ -100,8 +100,11 @@ input:focus-visible {
   box-shadow: inset 0 -1px 0 var(--ink);
 }
 
-.top select {
+.top-right {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 select,
@@ -414,11 +417,20 @@ tr:hover td.team {
 }
 
 .page-ask {
+  width: 100%;
+  max-width: none;
   height: 100vh;
+  height: 100dvh;
+  margin: 0;
   display: flex;
   flex-direction: column;
   padding: 16px 0 0;
   overflow: hidden;
+}
+
+.page-ask .top {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
 }
 
 .ask {
@@ -426,17 +438,11 @@ tr:hover td.team {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  width: min(768px, 100%);
-  margin: 0 auto;
-  position: relative;
+  width: 100%;
 }
 
 .ask-new {
   appearance: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
   border: 0;
   background: none;
   color: var(--muted);
@@ -445,13 +451,26 @@ tr:hover td.team {
   font-size: 13px;
 }
 
+.ask-new:hover {
+  color: var(--ink);
+}
+
 .ask-log {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ask-thread {
+  width: min(768px, calc(100% - 32px));
+  margin: 0 auto;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 22px;
-  overflow: auto;
-  padding: 28px 0 20px;
+  padding: 20px 0 24px;
 }
 
 .ask-empty {
@@ -620,7 +639,11 @@ tr:hover td.team {
 }
 
 .ask-card {
-  margin: 12px 0 0;
+  margin: 0 0 12px;
+}
+
+.ask-reply .ask-md {
+  margin-top: 4px;
 }
 
 .ask-card h3 {
@@ -633,14 +656,19 @@ tr:hover td.team {
   display: contents;
 }
 
-.ask-table {
-  max-height: 360px;
+.ask-table.table-wrap {
+  max-height: none;
+  overflow: visible;
+  border: 0;
   margin-top: 4px;
 }
 
 .ask-form {
+  width: min(768px, calc(100% - 32px));
+  margin: 0 auto;
   padding: 0 0 24px;
   background: var(--bg);
+  flex: none;
 }
 
 .ask-composer {

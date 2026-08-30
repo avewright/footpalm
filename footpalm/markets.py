@@ -68,6 +68,10 @@ def _prices(market: dict) -> list[tuple[str, float]]:
     return list(zip(names, prices, strict=False))
 
 
+def _settled(prices: list) -> bool:
+    return bool(prices) and all(p <= 0.001 or p >= 0.999 for _name, p in prices)
+
+
 def parse_event(event: dict) -> dict | None:
     split = _split_vs(event.get("title") or "")
     if not split:
@@ -85,7 +89,9 @@ def parse_event(event: dict) -> dict | None:
         "start": None,
     }
     if moneyline:
-        row["ml"] = _prices(moneyline)
+        prices = _prices(moneyline)
+        if prices and not _settled(prices):
+            row["ml"] = prices
         row["start"] = moneyline.get("gameStartTime") or moneyline.get("endDate")
     if spreads:
         main = spreads[0]
@@ -99,17 +105,27 @@ def parse_event(event: dict) -> dict | None:
 
 def fetch_polymarket() -> list[dict]:
     events: list[dict] = []
-    offset = 0
-    while True:
-        page = _get(f"{POLY_EVENTS}?series_id={POLY_SERIES}&closed=false&limit=100&offset={offset}")
-        if not isinstance(page, list) or not page:
-            break
-        events.extend(page)
-        if len(page) < 100:
-            break
-        offset += 100
-        if offset > 800:
-            break
+    seen: set[str] = set()
+    for closed, cap in ((False, 800), (True, 200)):
+        offset = 0
+        while True:
+            page = _get(
+                f"{POLY_EVENTS}?series_id={POLY_SERIES}&closed={str(closed).lower()}&limit=100&offset={offset}"
+            )
+            if not isinstance(page, list) or not page:
+                break
+            for event in page:
+                slug = str(event.get("slug") or "")
+                if slug and slug in seen:
+                    continue
+                if slug:
+                    seen.add(slug)
+                events.append(event)
+            if len(page) < 100:
+                break
+            offset += 100
+            if offset > cap:
+                break
     parsed = []
     for event in events:
         row = parse_event(event)
@@ -165,12 +181,128 @@ def bind_book(event: dict, home: str, away: str) -> dict | None:
     return book
 
 
-def attach(games: list[dict], events: list[dict]) -> int:
+def log_path(root: Path, season: int) -> Path:
+    return root / "data" / "processed" / f"markets-{season}.json"
+
+
+def empty_log(season: int) -> dict:
+    return {
+        "source": "polymarket",
+        "season": season,
+        "note": "Pre-game snapshots. Locked at kickoff. Do not train TabPFN on this.",
+        "games": {},
+    }
+
+
+def load_log(root: Path, season: int) -> dict:
+    path = log_path(root, season)
+    if not path.exists():
+        return empty_log(season)
+    raw = json.loads(path.read_text())
+    if not isinstance(raw, dict) or not isinstance(raw.get("games"), dict):
+        return empty_log(season)
+    raw.setdefault("season", season)
+    return raw
+
+
+def save_log(root: Path, season: int, log: dict) -> Path:
+    path = log_path(root, season)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    log["updated_at"] = datetime.now(timezone.utc).isoformat()
+    path.write_text(json.dumps(log, indent=2) + "\n")
+    return path
+
+
+def game_key(game: dict) -> str:
+    gid = game.get("game_id")
+    if gid is not None:
+        return f"id:{int(gid)}"
+    return "|".join(
+        str(x)
+        for x in (
+            game.get("season") or "",
+            game.get("week") or "",
+            game.get("away"),
+            game.get("home"),
+            _start_day(game.get("start")) or "",
+        )
+    )
+
+
+def live_ml(value) -> bool:
+    try:
+        return 0.02 < float(value) < 0.98
+    except (TypeError, ValueError):
+        return False
+
+
+def _kickoff_passed(game: dict, now: datetime) -> bool:
+    if game.get("completed") or game.get("actual_home") is not None:
+        return True
+    start = game.get("start")
+    if not start:
+        return False
+    try:
+        when = datetime.fromisoformat(str(start).replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=timezone.utc)
+    return when <= now
+
+
+def upsert_log(log: dict, game: dict, book: dict, now: datetime) -> None:
+    key = game_key(game)
+    prev = (log.setdefault("games", {})).get(key) or {}
+    merged = dict(prev.get("polymarket") or {})
+    incoming = dict(book)
+    locked = bool(prev.get("locked")) or _kickoff_passed(game, now)
+    if locked and live_ml(merged.get("ml_home")):
+        for field in ("ml_home", "ml_away", "ml_home_american", "ml_away_american"):
+            incoming.pop(field, None)
+            if field in merged:
+                incoming[field] = merged[field]
+    elif not live_ml(incoming.get("ml_home")) and live_ml(merged.get("ml_home")):
+        for field in ("ml_home", "ml_away", "ml_home_american", "ml_away_american"):
+            if field in merged:
+                incoming[field] = merged[field]
+    if incoming.get("spread") is None and merged.get("spread") is not None:
+        incoming["spread"] = merged["spread"]
+        if "spread_p_home" in merged:
+            incoming["spread_p_home"] = merged["spread_p_home"]
+    if "ml_home" not in incoming and "spread" not in incoming:
+        return
+    has_ml = live_ml(incoming.get("ml_home"))
+    log["games"][key] = {
+        "home": game["home"],
+        "away": game["away"],
+        "start": game.get("start"),
+        "logged_at": prev.get("logged_at") if locked and has_ml else now.isoformat(),
+        "locked": bool(locked and has_ml),
+        "polymarket": incoming,
+    }
+
+
+def stamp_log(games: list[dict], log: dict) -> int:
     n = 0
     for game in games:
+        entry = (log.get("games") or {}).get(game_key(game))
+        if not entry:
+            continue
+        game["books"] = {"polymarket": entry["polymarket"]}
+        n += 1
+    return n
+
+
+def attach(games: list[dict], events: list[dict], log: dict | None = None) -> int:
+    log = log if log is not None else empty_log(0)
+    now = datetime.now(timezone.utc)
+    for game in games:
+        existing = ((game.get("books") or {}).get("polymarket")) or {}
+        if live_ml(existing.get("ml_home")) or existing.get("spread") is not None:
+            upsert_log(log, game, existing, now)
         home, away = game["home"], game["away"]
         game_day = _start_day(game.get("start"))
-        hits = []
         for event in events:
             book = bind_book(event, home, away)
             if not book:
@@ -178,36 +310,47 @@ def attach(games: list[dict], events: list[dict]) -> int:
             ev_day = _start_day(event.get("start"))
             if game_day and ev_day and game_day != ev_day:
                 continue
-            hits.append(book)
-        if not hits:
-            game.pop("books", None)
-            continue
-        game["books"] = {"polymarket": hits[0]}
-        n += 1
+            upsert_log(log, game, book, now)
+    return stamp_log(games, log)
+
+
+def apply_log(root: Path, season: int, games: list[dict]) -> int:
+    return stamp_log(games, load_log(root, season))
+
+
+def snapshot(root: Path, season: int, games: list[dict], events: list[dict] | None = None) -> int:
+    log = load_log(root, season)
+    if events is None:
+        events = fetch_polymarket()
+    n = attach(games, events, log)
+    save_log(root, season, log)
     return n
 
 
 def run(root: Path | None = None, season: int = 2026) -> dict:
     root = root or _repo_root()
     events = fetch_polymarket()
+    log = load_log(root, season)
     matched = 0
     for dest in (root / "data" / "processed", root / "web" / "public" / "data"):
         path = dest / f"predictions-{season}.json"
         if not path.exists():
             continue
         body = json.loads(path.read_text())
-        matched = attach(body["games"], events)
+        matched = attach(body["games"], events, log)
         body["books"] = {
             "source": "polymarket",
             "series_id": POLY_SERIES,
             "pulled_at": datetime.now(timezone.utc).isoformat(),
             "events": len(events),
             "matched": matched,
+            "logged": len(log.get("games") or {}),
             "note": "Display only. Do not train on Polymarket or any market line.",
         }
         _write_json(path, body)
-    print(f"polymarket events={len(events)} matched={matched} season={season}")
-    return {"events": len(events), "matched": matched}
+    save_log(root, season, log)
+    print(f"polymarket events={len(events)} matched={matched} logged={len(log.get('games') or {})} season={season}")
+    return {"events": len(events), "matched": matched, "logged": len(log.get("games") or {})}
 
 
 def main() -> None:

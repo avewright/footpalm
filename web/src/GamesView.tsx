@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { atsHit, atsSide, betLabel, marketSpread, mlPlay } from "./ev";
+import { atsHit, atsSide, betLabel, marketMl, marketSpread, mlPlay } from "./ev";
 import { signed } from "./format";
 import { atsPickLabel, etDay, isFinal, lastDay, prettyDay, record, suHit, summarize } from "./score";
 import type { GamePred, ModelPick } from "./types";
@@ -108,6 +108,7 @@ export function GamesView({ games }: { games: GamePred[] }) {
         ml,
         us: ens ? -ens.pred_margin : null,
         mkt: marketSpread(g),
+        mktMl: marketMl(g),
         agree,
         hit: play ? atsHit(g, play) : null,
         su: suHit(g),
@@ -184,7 +185,7 @@ export function GamesView({ games }: { games: GamePred[] }) {
         </span>
       </div>
       <div className="slips">
-        {rows.map(({ g, ens, play, ml, us, mkt, agree, hit, su, rank }) => (
+        {rows.map(({ g, ens, play, ml, us, mkt, mktMl, agree, hit, su, rank }) => (
           <article key={`${g.week}-${g.home}-${g.away}`} className="slip">
             <header className="slip-head">
               <div className="slip-rank">{view === "final" ? (su ? "W" : su === false ? "L" : "—") : (rank ?? "—")}</div>
@@ -233,7 +234,7 @@ export function GamesView({ games }: { games: GamePred[] }) {
                     <Row label="Edge" value={ml ? pp(ml.edge) : "—"} tone={tone(ml?.edge, "pp")} />
                   </>
                 )}
-                <Row label="Market" value={ml ? `${g.home} ${pct(ml.mktHome)}` : mkt == null ? "—" : "—"} />
+                <Row label="Market" value={mktMl == null ? "—" : `${g.home} ${pct(mktMl)}`} />
                 <Row label="Us" value={ens ? `${g.home} ${pct(ens.home_win_prob)}` : "—"} />
               </section>
             </div>
