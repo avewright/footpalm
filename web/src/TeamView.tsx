@@ -1,11 +1,19 @@
 import { useMemo } from "react";
 import { signed } from "./format";
+import { gameKey } from "./game";
 import { isFinal, prettyDay, etDay } from "./score";
 import type { GamePred, RatingsFile, TeamRow } from "./types";
 
 export function TeamLink({ team, onOpen }: { team: string; onOpen: (team: string) => void }) {
   return (
-    <button type="button" className="team-link" onClick={() => onOpen(team)}>
+    <button
+      type="button"
+      className="team-link"
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen(team);
+      }}
+    >
       {team}
     </button>
   );
@@ -38,6 +46,7 @@ export function TeamView({
   season,
   onSeason,
   onOpen,
+  onOpenGame,
   onClose,
   ratings,
   games,
@@ -47,6 +56,7 @@ export function TeamView({
   season: number;
   onSeason: (season: number) => void;
   onOpen: (team: string) => void;
+  onOpenGame: (key: string) => void;
   onClose: () => void;
   ratings: RatingsFile | null;
   games: GamePred[];
@@ -162,7 +172,7 @@ export function TeamView({
             </thead>
             <tbody>
               {schedule.map(({ g, opp, loc, predMargin, winProb, ours, theirs, won, day }) => (
-                <tr key={`${g.week}-${g.home}-${g.away}-${g.game_id ?? ""}`}>
+                <tr key={gameKey(g)} className="game-row" onClick={() => onOpenGame(gameKey(g))}>
                   <td>{g.week}</td>
                   <td className="left">{day ? prettyDay(day) : "—"}</td>
                   <td className="team">

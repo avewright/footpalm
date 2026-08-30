@@ -510,6 +510,60 @@ tr:hover td.team {
   max-height: none;
 }
 
+.game-row {
+  cursor: pointer;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px 20px;
+  align-items: start;
+  margin: 0 0 12px;
+}
+
+.game-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.game-side:last-child {
+  text-align: right;
+}
+
+.game-side .team-link {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.game-score {
+  font-size: 32px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 6px 0 2px;
+}
+
+.game-at {
+  padding-top: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.game-page .slip-cols {
+  margin-left: 0;
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.game-page .team-sched-title {
+  margin-top: 24px;
+}
+
 .ask {
   flex: 1;
   display: flex;
