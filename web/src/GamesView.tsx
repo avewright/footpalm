@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { atsHit, atsSide, betLabel, marketSpread, mlPlay } from "./ev";
 import { signed } from "./format";
 import { atsPickLabel, etDay, isFinal, lastDay, prettyDay, record, suHit, summarize } from "./score";
+import { TeamLink } from "./TeamView";
 import type { GamePred, ModelPick } from "./types";
 
 const MODEL_IDS = ["lightgbm", "xgboost", "tabpfn"] as const;
@@ -63,7 +64,7 @@ function Card({ title, card }: { title: string; card: ReturnType<typeof summariz
   );
 }
 
-export function GamesView({ games }: { games: GamePred[] }) {
+export function GamesView({ games, onOpenTeam }: { games: GamePred[]; onOpenTeam: (team: string) => void }) {
   const weeks = useMemo(() => [...new Set(games.map((g) => g.week))].sort((a, b) => a - b), [games]);
   const finals = useMemo(() => games.filter((g) => g.fbs_fbs && isFinal(g)), [games]);
   const hasFinals = finals.length > 0;
@@ -190,7 +191,7 @@ export function GamesView({ games }: { games: GamePred[] }) {
               <div className="slip-rank">{view === "final" ? (su ? "W" : su === false ? "L" : "—") : (rank ?? "—")}</div>
               <div>
                 <div className="slip-game">
-                  {g.away} @ {g.home}
+                  <TeamLink team={g.away} onOpen={onOpenTeam} /> @ <TeamLink team={g.home} onOpen={onOpenTeam} />
                   {g.neutral ? " (N)" : ""}
                   {isFinal(g) ? ` · ${g.actual_away?.toFixed(0)}–${g.actual_home?.toFixed(0)}` : ""}
                 </div>
