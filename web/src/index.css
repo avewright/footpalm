@@ -48,7 +48,7 @@ input:focus-visible {
 }
 
 .page {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
   padding: 16px 0 48px;
 }
@@ -294,6 +294,43 @@ th {
   background: var(--header);
   font-size: 12px;
   font-weight: 500;
+}
+
+th.group {
+  text-align: center;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+th.split,
+td.split {
+  border-left: 1px solid var(--line-strong);
+}
+
+.games-table thead tr:first-child th {
+  z-index: 3;
+  border-bottom: 0;
+}
+
+.games-table thead tr:nth-child(2) th {
+  top: 26px;
+  z-index: 3;
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+
+tr.lean td:first-child {
+  box-shadow: inset 2px 0 0 var(--ink);
+}
+
+.odds-compare {
+  margin-bottom: 4px;
+}
+
+.odds-lean {
+  margin: 8px 0 0;
+  font-size: 13px;
 }
 
 th button {
@@ -779,6 +816,41 @@ tr:hover td.team {
 .ask-svg-edge {
   stroke: var(--line-strong);
   stroke-width: 1;
+}
+
+.ask-svg-hit {
+  cursor: pointer;
+}
+
+.ask-svg-hit.is-dim {
+  opacity: 0.12;
+}
+
+.ask-svg-dot {
+  fill: var(--ink);
+}
+
+.ask-scatter-find {
+  display: block;
+  width: min(220px, 100%);
+  margin: 0 0 8px;
+  padding: 4px 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+}
+
+.ask-svg-label.is-on {
+  font-weight: 600;
+}
+
+.ask-scatter-tip {
+  margin-top: 8px;
+  min-height: 1.4em;
+  font-size: 13px;
+}
+
+.ask-scatter-tip .team-link {
+  font-weight: 600;
 }
 
 .ask-card {

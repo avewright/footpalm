@@ -15,6 +15,13 @@ POLY_SERIES = 12756
 POLY_EVENTS = "https://gamma-api.polymarket.com/events"
 POLY_EVENT_URL = "https://polymarket.com/event/{slug}"
 
+KALSHI_API = "https://external-api.kalshi.com/trade-api/v2"
+KALSHI_GAME = "KXNCAAFGAME"
+KALSHI_SPREAD = "KXNCAAFSPREAD"
+KALSHI_EVENT_URL = "https://kalshi.com/markets/{series}/{ticker}"
+KALSHI_WINS = re.compile(r"^(.+?) wins by over ([\d.]+) points$", re.I)
+BOOK_SOURCES = ("kalshi", "polymarket")
+
 
 def american(p: float) -> int:
     p = min(1 - 1e-6, max(1e-6, p))
@@ -38,7 +45,8 @@ def _as_list(value) -> list:
 
 
 def _split_vs(title: str) -> tuple[str, str] | None:
-    parts = re.split(r"\s+vs\.?\s+", title.strip(), maxsplit=1, flags=re.I)
+    text = re.sub(r":\s*spread\s*$", "", (title or "").strip(), flags=re.I)
+    parts = re.split(r"\s+vs\.?\s+", text, maxsplit=1, flags=re.I)
     if len(parts) != 2:
         return None
     return parts[0].strip(), parts[1].strip()
@@ -134,6 +142,142 @@ def fetch_polymarket() -> list[dict]:
     return parsed
 
 
+def _dollar(market: dict, *keys: str) -> float | None:
+    for key_name in keys:
+        raw = market.get(key_name)
+        if raw is None or raw == "":
+            continue
+        try:
+            return float(raw)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def mid_price(market: dict) -> float | None:
+    bid = _dollar(market, "yes_bid_dollars")
+    ask = _dollar(market, "yes_ask_dollars")
+    last = _dollar(market, "last_price_dollars")
+    if bid is not None and ask is not None and ask > 0:
+        return (bid + ask) / 2
+    return last if last is not None else bid if bid is not None else ask
+
+
+def _kalshi_url(series: str, ticker: str) -> str:
+    return KALSHI_EVENT_URL.format(series=series.lower(), ticker=ticker.lower())
+
+
+def fetch_kalshi_series(series: str) -> list[dict]:
+    events: list[dict] = []
+    cursor = None
+    while True:
+        url = f"{KALSHI_API}/events?series_ticker={series}&status=open&limit=200&with_nested_markets=true"
+        if cursor:
+            url += f"&cursor={cursor}"
+        page = _get(url)
+        if not isinstance(page, dict):
+            break
+        batch = page.get("events") or []
+        events.extend(batch)
+        cursor = page.get("cursor")
+        if not cursor or not batch or len(events) > 800:
+            break
+    return events
+
+
+def parse_kalshi_game(event: dict) -> dict | None:
+    split = _split_vs(event.get("title") or "")
+    if not split:
+        return None
+    away_raw, home_raw = split
+    ticker = str(event.get("event_ticker") or "")
+    row = {
+        "source": "kalshi",
+        "title": event.get("title"),
+        "slug": ticker,
+        "url": _kalshi_url(KALSHI_GAME, ticker),
+        "away_raw": away_raw,
+        "home_raw": home_raw,
+        "start": None,
+    }
+    ml = []
+    for market in event.get("markets") or []:
+        name = market.get("yes_sub_title") or ""
+        price = mid_price(market)
+        row["start"] = row["start"] or market.get("occurrence_datetime") or market.get("close_time")
+        if name and price is not None and not (price <= 0.001 or price >= 0.999):
+            ml.append((name, price))
+    if ml:
+        row["ml"] = ml
+    return row if ml else None
+
+
+def parse_kalshi_spread(event: dict) -> dict | None:
+    split = _split_vs(event.get("title") or "")
+    if not split:
+        return None
+    away_raw, home_raw = split
+    ticker = str(event.get("event_ticker") or "")
+    best = None
+    start = None
+    for market in event.get("markets") or []:
+        start = start or market.get("occurrence_datetime") or market.get("close_time")
+        hit = KALSHI_WINS.match(str(market.get("yes_sub_title") or market.get("title") or ""))
+        price = mid_price(market)
+        if not hit or price is None:
+            continue
+        line = _dollar(market, "floor_strike")
+        if line is None:
+            try:
+                line = float(hit.group(2))
+            except ValueError:
+                continue
+        bid = _dollar(market, "yes_bid_dollars")
+        ask = _dollar(market, "yes_ask_dollars")
+        width = abs(ask - bid) if bid is not None and ask is not None else 1.0
+        score = (abs(price - 0.5), width)
+        cand = (score, hit.group(1).strip(), float(line), price)
+        if best is None or cand[0] < best[0]:
+            best = cand
+    if best is None:
+        return None
+    _, team, line, price = best
+    return {
+        "source": "kalshi",
+        "title": event.get("title"),
+        "slug": ticker,
+        "url": _kalshi_url(KALSHI_SPREAD, ticker),
+        "away_raw": away_raw,
+        "home_raw": home_raw,
+        "start": start,
+        "spread_line": -line,
+        "spread_outcomes": [(team, price)],
+    }
+
+
+def _kalshi_match_key(row: dict) -> tuple[str, str, str | None]:
+    return (key(row["home_raw"]), key(row["away_raw"]), _start_day(row.get("start")))
+
+
+def fetch_kalshi() -> list[dict]:
+    by: dict[tuple[str, str, str | None], dict] = {}
+    for raw in fetch_kalshi_series(KALSHI_GAME):
+        row = parse_kalshi_game(raw)
+        if row:
+            by[_kalshi_match_key(row)] = row
+    for raw in fetch_kalshi_series(KALSHI_SPREAD):
+        row = parse_kalshi_spread(raw)
+        if not row:
+            continue
+        k = _kalshi_match_key(row)
+        if k in by:
+            by[k]["spread_line"] = row["spread_line"]
+            by[k]["spread_outcomes"] = row["spread_outcomes"]
+        else:
+            by[k] = row
+    return list(by.values())
+
+
 def _start_day(value: str | None) -> str | None:
     if not value:
         return None
@@ -151,7 +295,7 @@ def bind_book(event: dict, home: str, away: str) -> dict | None:
     if {ev_home, ev_away} != known:
         return None
     book = {
-        "source": "polymarket",
+        "source": event.get("source") or "polymarket",
         "slug": event.get("slug"),
         "url": event.get("url"),
         "title": event.get("title"),
@@ -187,7 +331,7 @@ def log_path(root: Path, season: int) -> Path:
 
 def empty_log(season: int) -> dict:
     return {
-        "source": "polymarket",
+        "source": "kalshi+polymarket",
         "season": season,
         "note": "Pre-game snapshots. Locked at kickoff. Do not train TabPFN on this.",
         "games": {},
@@ -252,10 +396,12 @@ def _kickoff_passed(game: dict, now: datetime) -> bool:
 
 
 def upsert_log(log: dict, game: dict, book: dict, now: datetime) -> None:
-    key = game_key(game)
-    prev = (log.setdefault("games", {})).get(key) or {}
-    merged = dict(prev.get("polymarket") or {})
+    source = book.get("source") if book.get("source") in BOOK_SOURCES else "polymarket"
+    gkey = game_key(game)
+    prev = (log.setdefault("games", {})).get(gkey) or {}
+    merged = dict(prev.get(source) or {})
     incoming = dict(book)
+    incoming["source"] = source
     locked = bool(prev.get("locked")) or _kickoff_passed(game, now)
     if locked and live_ml(merged.get("ml_home")):
         for field in ("ml_home", "ml_away", "ml_home_american", "ml_away_american"):
@@ -273,14 +419,18 @@ def upsert_log(log: dict, game: dict, book: dict, now: datetime) -> None:
     if "ml_home" not in incoming and "spread" not in incoming:
         return
     has_ml = live_ml(incoming.get("ml_home"))
-    log["games"][key] = {
+    row = {
         "home": game["home"],
         "away": game["away"],
         "start": game.get("start"),
         "logged_at": prev.get("logged_at") if locked and has_ml else now.isoformat(),
         "locked": bool(locked and has_ml),
-        "polymarket": incoming,
     }
+    for src in BOOK_SOURCES:
+        if src != source and prev.get(src):
+            row[src] = prev[src]
+    row[source] = incoming
+    log["games"][gkey] = row
 
 
 def stamp_log(games: list[dict], log: dict) -> int:
@@ -289,18 +439,21 @@ def stamp_log(games: list[dict], log: dict) -> int:
         entry = (log.get("games") or {}).get(game_key(game))
         if not entry:
             continue
-        game["books"] = {"polymarket": entry["polymarket"]}
+        books = {src: entry[src] for src in BOOK_SOURCES if entry.get(src)}
+        if not books:
+            continue
+        game["books"] = books
         n += 1
     return n
 
 
-def attach(games: list[dict], events: list[dict], log: dict | None = None) -> int:
+def attach(games: list[dict], events: list[dict], log: dict | None = None, source: str = "polymarket") -> int:
     log = log if log is not None else empty_log(0)
     now = datetime.now(timezone.utc)
     for game in games:
-        existing = ((game.get("books") or {}).get("polymarket")) or {}
-        if live_ml(existing.get("ml_home")) or existing.get("spread") is not None:
-            upsert_log(log, game, existing, now)
+        existing = ((game.get("books") or {}).get(source)) or {}
+        if existing and (live_ml(existing.get("ml_home")) or existing.get("spread") is not None):
+            upsert_log(log, game, {**existing, "source": source}, now)
         home, away = game["home"], game["away"]
         game_day = _start_day(game.get("start"))
         for event in events:
@@ -318,46 +471,74 @@ def apply_log(root: Path, season: int, games: list[dict]) -> int:
     return stamp_log(games, load_log(root, season))
 
 
-def snapshot(root: Path, season: int, games: list[dict], events: list[dict] | None = None) -> int:
+def snapshot(
+    root: Path,
+    season: int,
+    games: list[dict],
+    events: list[dict] | None = None,
+    *,
+    sources: tuple[str, ...] | None = None,
+) -> int:
     log = load_log(root, season)
-    if events is None:
-        events = fetch_polymarket()
-    n = attach(games, events, log)
+    wanted = sources or (("polymarket",) if events is not None else BOOK_SOURCES)
+    if "kalshi" in wanted:
+        attach(games, fetch_kalshi(), log, source="kalshi")
+    if "polymarket" in wanted:
+        poly = events if events is not None else fetch_polymarket()
+        attach(games, poly, log, source="polymarket")
+    n = stamp_log(games, log)
     save_log(root, season, log)
     return n
 
 
-def run(root: Path | None = None, season: int = 2026) -> dict:
+def run(root: Path | None = None, season: int = 2026, sources: tuple[str, ...] = BOOK_SOURCES) -> dict:
     root = root or _repo_root()
-    events = fetch_polymarket()
     log = load_log(root, season)
+    fetched: dict[str, int] = {}
     matched = 0
+    events_by: dict[str, list[dict]] = {}
+    if "kalshi" in sources:
+        events_by["kalshi"] = fetch_kalshi()
+        fetched["kalshi"] = len(events_by["kalshi"])
+    if "polymarket" in sources:
+        events_by["polymarket"] = fetch_polymarket()
+        fetched["polymarket"] = len(events_by["polymarket"])
     for dest in (root / "data" / "processed", root / "web" / "public" / "data"):
         path = dest / f"predictions-{season}.json"
         if not path.exists():
             continue
         body = json.loads(path.read_text())
-        matched = attach(body["games"], events, log)
+        for source, rows in events_by.items():
+            matched = attach(body["games"], rows, log, source=source)
         body["books"] = {
-            "source": "polymarket",
-            "series_id": POLY_SERIES,
+            "source": "+".join(sources),
             "pulled_at": datetime.now(timezone.utc).isoformat(),
-            "events": len(events),
+            "events": fetched,
             "matched": matched,
             "logged": len(log.get("games") or {}),
-            "note": "Display only. Do not train on Polymarket or any market line.",
+            "note": "Display only. Do not train on Kalshi, Polymarket, or any market line.",
         }
         _write_json(path, body)
     save_log(root, season, log)
-    print(f"polymarket events={len(events)} matched={matched} logged={len(log.get('games') or {})} season={season}")
-    return {"events": len(events), "matched": matched, "logged": len(log.get("games") or {})}
+    print(
+        f"markets sources={'+'.join(sources)} events={fetched} "
+        f"matched={matched} logged={len(log.get('games') or {})} season={season}"
+    )
+    return {"events": fetched, "matched": matched, "logged": len(log.get("games") or {})}
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Pull Polymarket CFB moneyline/spread onto predictions")
+    parser = argparse.ArgumentParser(description="Pull Kalshi/Polymarket CFB lines onto predictions")
     parser.add_argument("--season", type=int, default=2026)
+    parser.add_argument(
+        "--source",
+        choices=("kalshi", "polymarket", "all"),
+        default="all",
+        help="kalshi is free and what the 15-minute job uses. all also hits Polymarket.",
+    )
     args = parser.parse_args()
-    run(season=args.season)
+    sources = BOOK_SOURCES if args.source == "all" else (args.source,)
+    run(season=args.season, sources=sources)
 
 
 if __name__ == "__main__":

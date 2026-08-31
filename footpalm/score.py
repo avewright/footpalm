@@ -5,9 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import os
-import shutil
-import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -17,8 +14,6 @@ from footpalm.fetch import LIVE_SEASON, repo_root
 from footpalm.project import _publish, load_cfbd_slate
 
 ET = ZoneInfo("America/New_York")
-LAUNCH_LABEL = "com.footpalm.score"
-INTERVAL_S = 2 * 60 * 60
 
 
 def et_day(start: str | None) -> str | None:
@@ -155,63 +150,17 @@ def refresh_scores(root: Path, *, season: int = LIVE_SEASON, refresh: bool = Tru
     return live
 
 
-def plist_body(root: Path, uv: Path) -> str:
-    log = root / "data" / "processed" / "score.log"
-    return f"""<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>{LAUNCH_LABEL}</string>
-  <key>WorkingDirectory</key>
-  <string>{root}</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>{uv}</string>
-    <string>run</string>
-    <string>python</string>
-    <string>-m</string>
-    <string>footpalm.score</string>
-  </array>
-  <key>StartInterval</key>
-  <integer>{INTERVAL_S}</integer>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StandardOutPath</key>
-  <string>{log}</string>
-  <key>StandardErrorPath</key>
-  <string>{log}</string>
-</dict>
-</plist>
-"""
-
-
-def install_launchd(root: Path) -> Path:
-    uv = shutil.which("uv")
-    if not uv:
-        raise SystemExit("uv is not on PATH; cannot install the score job")
-    dest = Path.home() / "Library" / "LaunchAgents" / f"{LAUNCH_LABEL}.plist"
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(plist_body(root, Path(uv)))
-    uid = os.getuid()
-    target = f"gui/{uid}/{LAUNCH_LABEL}"
-    subprocess.run(["launchctl", "bootout", target], check=False, capture_output=True)
-    loaded = subprocess.run(["launchctl", "bootstrap", f"gui/{uid}", str(dest)], capture_output=True, text=True)
-    if loaded.returncode != 0:
-        raise SystemExit(loaded.stderr.strip() or loaded.stdout.strip() or "launchctl bootstrap failed")
-    print(f"installed {dest} every {INTERVAL_S // 3600}h")
-    return dest
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Stamp CFBD scores onto live projections")
     parser.add_argument("--season", type=int, default=LIVE_SEASON)
     parser.add_argument("--no-refresh", action="store_true", help="use cached CFBD games/lines")
-    parser.add_argument("--install", action="store_true", help="install a macOS launchd job (every 2h)")
+    parser.add_argument("--install", action="store_true", help="install Kalshi/score/project launchd jobs")
     args = parser.parse_args()
     root = repo_root()
     if args.install:
-        install_launchd(root)
+        from footpalm.cron import install
+
+        install(root)
         return
     refresh_scores(root, season=args.season, refresh=not args.no_refresh)
 

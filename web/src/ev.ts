@@ -1,17 +1,35 @@
 import { american, signed } from "./format";
-import type { GamePred } from "./types";
+import type { GamePred, MarketBook } from "./types";
+
+export function listedBook(g: GamePred): MarketBook | null {
+  return g.books?.kalshi ?? g.books?.polymarket ?? null;
+}
 
 export function marketSpread(g: GamePred): number | null {
-  const poly = g.books?.polymarket?.spread;
-  if (poly != null && !Number.isNaN(poly)) return poly;
+  const book = listedBook(g)?.spread;
+  if (book != null && !Number.isNaN(book)) return book;
   if (g.spread == null || Number.isNaN(g.spread)) return null;
   return g.spread;
 }
 
 export function marketMl(g: GamePred): number | null {
-  const p = g.books?.polymarket?.ml_home;
+  const p = listedBook(g)?.ml_home;
   if (p == null || Number.isNaN(p)) return null;
   return p;
+}
+
+export function marketMlAmerican(g: GamePred): { home: number; away: number } | null {
+  const book = listedBook(g);
+  if (!book) return null;
+  const home = book.ml_home_american;
+  const away = book.ml_away_american;
+  if (home != null && away != null && !Number.isNaN(home) && !Number.isNaN(away)) {
+    return { home, away };
+  }
+  if (book.ml_home != null && !Number.isNaN(book.ml_home)) {
+    return { home: american(book.ml_home), away: american(book.ml_away ?? 1 - book.ml_home) };
+  }
+  return null;
 }
 
 export const JUICE = 110;
@@ -111,12 +129,13 @@ export type MlPlay = {
 };
 
 export function mlPlay(g: GamePred, pHome: number): MlPlay | null {
-  const mkt = g.books?.polymarket?.ml_home;
+  const book = listedBook(g);
+  const mkt = book?.ml_home;
   if (mkt == null || Number.isNaN(mkt)) return null;
   const takeHome = pHome >= mkt;
   const edge = takeHome ? pHome - mkt : mkt - pHome;
-  const mktAway = g.books?.polymarket?.ml_away_american;
-  const mktHomeAm = g.books?.polymarket?.ml_home_american;
+  const mktAway = book?.ml_away_american;
+  const mktHomeAm = book?.ml_home_american;
   return {
     who: takeHome ? g.home : g.away,
     ourHome: pHome,

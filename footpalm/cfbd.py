@@ -17,12 +17,17 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
+
+ET = ZoneInfo("America/New_York")
 
 BASE = "https://api.collegefootballdata.com"
 PAUSE_S = 0.4
 USER_AGENT = "footpalm/0.1 (local research; cache-first)"
 
-# One call per (dataset, season). Stay well under the free 1000/month cap.
+# One call per (dataset, season). Free tier is ~1000/month. Live jobs
+# should only refresh games+lines. Do not cron the full satellite pull.
+USAGE_CAP = 1000
 DATASETS: tuple[tuple[str, str, dict[str, str]], ...] = (
     ("teams", "/teams/fbs", {}),
     ("calendar", "/calendar", {}),
@@ -64,6 +69,70 @@ def cfbd_dir(root: Path) -> Path:
 
 def dataset_path(root: Path, name: str, season: int) -> Path:
     return cfbd_dir(root) / name / f"{season}.json"
+
+
+def usage_path(root: Path) -> Path:
+    return root / "data" / "processed" / "cfbd-usage.json"
+
+
+def month_key(now: datetime | None = None) -> str:
+    return (now or datetime.now(timezone.utc)).strftime("%Y-%m")
+
+
+def load_usage(root: Path, now: datetime | None = None) -> dict:
+    month = month_key(now)
+    path = usage_path(root)
+    empty = {
+        "month": month,
+        "calls": 0,
+        "cap": USAGE_CAP,
+        "note": "Free tier ~1000/month. Score/project should stay under ~350. Kalshi is free.",
+    }
+    if not path.exists():
+        return empty
+    try:
+        raw = json.loads(path.read_text())
+    except json.JSONDecodeError:
+        return empty
+    if not isinstance(raw, dict) or raw.get("month") != month:
+        empty["prior"] = {"month": raw.get("month"), "calls": raw.get("calls")} if isinstance(raw, dict) else None
+        return empty
+    raw.setdefault("cap", USAGE_CAP)
+    return raw
+
+
+def note_calls(root: Path, n: int = 1, now: datetime | None = None) -> dict:
+    row = load_usage(root, now)
+    row["calls"] = int(row.get("calls") or 0) + n
+    row["updated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    dest = usage_path(root)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(row, indent=2) + "\n")
+    if row["calls"] >= 700:
+        print(f"cfbd usage {row['calls']}/{USAGE_CAP} this month — slow down", flush=True)
+    return row
+
+
+def cache_age_s(root: Path, name: str, season: int) -> float | None:
+    dest = dataset_path(root, name, season)
+    if not cached(dest):
+        return None
+    return time.time() - dest.stat().st_mtime
+
+
+def should_refresh_cfbd(now: datetime, age_s: float | None, calls: int = 0) -> bool:
+    """Throttle auto CFBD pulls. Manual `footpalm.score` still refreshes."""
+    if age_s is None:
+        return True
+    if calls >= 900:
+        return False
+    local = now.astimezone(ET) if now.tzinfo else now.replace(tzinfo=ET)
+    weekday = local.weekday()
+    # Fri–Sun: scores land often. Mon–Thu: 6h is enough.
+    min_s = 3 * 3600 if weekday >= 4 else 6 * 3600
+    if calls >= 700:
+        min_s = max(min_s, 12 * 3600)
+    return age_s >= min_s
 
 
 def cached(path: Path) -> bool:
@@ -120,6 +189,7 @@ def pull_dataset(root: Path, name: str, route: str, season: int, extra: dict[str
     payload = get(route, {"year": str(season), **extra})
     time.sleep(PAUSE_S)
     _write(dest, payload)
+    note_calls(root, 1)
     n = len(payload) if isinstance(payload, list) else 1
     print(f"  cfbd {name} {season}: {n} rows")
     return {"dataset": name, "season": season, "rows": n, "cached": False, "path": str(dest)}

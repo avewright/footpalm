@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { signed } from "./format";
-import { evPct, gameFacts, gameKey, hitTone, pct, tone } from "./game";
+import { evPct, gameFacts, gameKey, hitTone, lineOf, mlPair, pp, tone } from "./game";
 import { etDay, isFinal, lastDay, prettyDay, record, summarize } from "./score";
 import { TeamLink } from "./TeamView";
 import type { GamePred } from "./types";
@@ -38,7 +37,7 @@ export function GamesView({
   const weeks = useMemo(() => [...new Set(games.map((g) => g.week))].sort((a, b) => a - b), [games]);
   const finals = useMemo(() => games.filter((g) => g.fbs_fbs && isFinal(g)), [games]);
   const hasFinals = finals.length > 0;
-  const hasBooks = games.some((g) => g.books?.polymarket);
+  const hasBooks = games.some((g) => g.books?.kalshi || g.books?.polymarket);
   const day = lastDay(finals);
   const last = useMemo(() => summarize(day ? finals.filter((g) => etDay(g.start) === day) : []), [finals, day]);
   const season = useMemo(() => summarize(finals), [finals]);
@@ -61,7 +60,7 @@ export function GamesView({
       const done = isFinal(g);
       if (view === "final" && !done) return false;
       if (view === "upcoming" && done) return false;
-      if (listed && hasBooks && view !== "final" && !g.books?.polymarket) return false;
+      if (listed && hasBooks && view !== "final" && !g.books?.kalshi && !g.books?.polymarket) return false;
       if (week !== "all" && g.week !== week) return false;
       if (needle && !`${g.away} ${g.home}`.toLowerCase().includes(needle)) return false;
       return true;
@@ -107,8 +106,8 @@ export function GamesView({
       )}
       <p className="lede-note">
         {view === "final"
-          ? "Frozen pre-game numbers vs the final score. ATS is a holdout, not a training target. Click a row for the game."
-          : "Spread = cover the number at −110. Market is Polymarket when listed. Us is our ensemble. Click a row for the game."}
+          ? "Frozen pre-game Vegas vs us, then the final. ATS is a holdout, not a training target. Click a row for the game."
+          : "Vegas is the listed book (Kalshi / Polymarket). Our Prediction is the ensemble. Line is the home number. ML is home/away. Δ is who we like more than Vegas, in points and win probability. Click a row."}
       </p>
       <div className="toolbar">
         <div className="seg" role="group" aria-label="Games view">
@@ -152,8 +151,19 @@ export function GamesView({
         </span>
       </div>
       <div className="table-wrap">
-        <table>
+        <table className="games-table">
           <thead>
+            <tr>
+              <th colSpan={5} />
+              <th className="group split" colSpan={2}>
+                Vegas
+              </th>
+              <th className="group split" colSpan={2}>
+                Our Prediction
+              </th>
+              <th className="group split">Difference</th>
+              <th colSpan={2} />
+            </tr>
             <tr>
               <th>
                 <button type="button" onClick={() => onSort("week")}>
@@ -176,15 +186,16 @@ export function GamesView({
                 </button>
               </th>
               <th>Score</th>
-              <th>Pred</th>
-              <th>Home%</th>
-              <th>
+              <th className="split">
                 <button type="button" onClick={() => onSort("spread")}>
-                  {mark("spread", "Mkt")}
+                  {mark("spread", "Line")}
                 </button>
               </th>
-              <th>Us</th>
-              <th>Pick</th>
+              <th>ML</th>
+              <th className="split">Line</th>
+              <th>ML</th>
+              <th className="split left">Δ</th>
+              <th className="left">Pick</th>
               <th>
                 <button type="button" onClick={() => onSort("ev")}>
                   {mark("ev", view === "final" ? "ATS" : "EV")}
@@ -193,7 +204,7 @@ export function GamesView({
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ g, play, us, mkt, hit, su, pick, score, pred }) => {
+            {rows.map(({ g, play, us, mkt, mktAm, ourAm, dSpread, dMl, lean, hit, su, pick, score }) => {
               const kick = etDay(g.start);
               return (
                 <tr key={gameKey(g)} className="game-row" onClick={() => onOpenGame(gameKey(g))}>
@@ -207,10 +218,23 @@ export function GamesView({
                     <TeamLink team={g.home} onOpen={onOpenTeam} />
                   </td>
                   <td className={hitTone(su)}>{score ?? "—"}</td>
-                  <td>{pred}</td>
-                  <td>{pct(g.home_win_prob)}</td>
-                  <td>{mkt == null ? "—" : signed(mkt)}</td>
-                  <td>{us == null ? "—" : signed(us)}</td>
+                  <td className="split">{lineOf(mkt)}</td>
+                  <td>{mlPair(mktAm)}</td>
+                  <td className="split">{lineOf(us)}</td>
+                  <td>{mlPair(ourAm)}</td>
+                  <td className={`split left ${tone(play?.ev) ?? ""}`}>
+                    {lean == null && dSpread == null && dMl == null ? (
+                      "—"
+                    ) : lean == null ? (
+                      "Even"
+                    ) : (
+                      <>
+                        {lean}
+                        {dSpread != null ? ` ${Math.abs(dSpread).toFixed(1)}` : ""}
+                        {dMl != null && Math.abs(dMl) >= 0.005 ? <div className="quiet">{pp(Math.abs(dMl))}</div> : null}
+                      </>
+                    )}
+                  </td>
                   <td className="left">{pick ?? "—"}</td>
                   <td className={view === "final" ? hitTone(hit) : tone(play?.ev)}>
                     {view === "final" ? (hit == null ? "—" : hit ? "Cover" : "Miss") : play ? evPct(play.ev) : "—"}

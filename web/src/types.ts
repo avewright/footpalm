@@ -39,7 +39,7 @@ export type ModelPick = {
   pred_margin: number;
 };
 
-export type PolyBook = {
+export type MarketBook = {
   source: string;
   slug?: string;
   url?: string;
@@ -51,6 +51,8 @@ export type PolyBook = {
   ml_home_american?: number;
   ml_away_american?: number;
 };
+
+export type PolyBook = MarketBook;
 
 export type GamePred = {
   season: number;
@@ -78,7 +80,7 @@ export type GamePred = {
   home_won: number | null;
   spread: number | null;
   engine: string;
-  books?: { polymarket?: PolyBook };
+  books?: { kalshi?: MarketBook; polymarket?: MarketBook };
   models?: Partial<Record<"lightgbm" | "xgboost" | "tabpfn" | "ensemble", ModelPick>>;
 };
 

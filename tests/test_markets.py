@@ -8,6 +8,8 @@ from footpalm.markets import (
     live_ml,
     match_team,
     parse_event,
+    parse_kalshi_game,
+    parse_kalshi_spread,
     upsert_log,
 )
 
@@ -146,3 +148,75 @@ def test_log_locks_moneyline_after_kickoff():
     assert book["locked"] is True
     assert book["polymarket"]["ml_home"] == 0.68
     assert book["polymarket"]["spread"] == -5.5
+
+
+def test_parse_kalshi_game_and_spread_main_line():
+    game = parse_kalshi_game(
+        {
+            "title": "UMass vs Rutgers",
+            "event_ticker": "KXNCAAFGAME-26SEP03MASSRUTG",
+            "markets": [
+                {
+                    "yes_sub_title": "Rutgers",
+                    "yes_bid_dollars": "0.9700",
+                    "yes_ask_dollars": "0.9800",
+                    "occurrence_datetime": "2026-09-04T01:00:00Z",
+                },
+                {
+                    "yes_sub_title": "UMass",
+                    "yes_bid_dollars": "0.0200",
+                    "yes_ask_dollars": "0.0300",
+                    "occurrence_datetime": "2026-09-04T01:00:00Z",
+                },
+            ],
+        }
+    )
+    assert game is not None
+    assert game["source"] == "kalshi"
+    assert game["home_raw"] == "Rutgers"
+    assert {name for name, _p in game["ml"]} == {"Rutgers", "UMass"}
+
+    spread = parse_kalshi_spread(
+        {
+            "title": "UMass vs Rutgers: Spread",
+            "event_ticker": "KXNCAAFSPREAD-26SEP03MASSRUTG",
+            "markets": [
+                {
+                    "yes_sub_title": "Rutgers wins by over 51.5 points",
+                    "floor_strike": 51.5,
+                    "yes_bid_dollars": "0.0700",
+                    "yes_ask_dollars": "0.1500",
+                },
+                {
+                    "yes_sub_title": "Rutgers wins by over 27.5 points",
+                    "floor_strike": 27.5,
+                    "yes_bid_dollars": "0.5200",
+                    "yes_ask_dollars": "0.5400",
+                },
+                {
+                    "yes_sub_title": "Rutgers wins by over 21.5 points",
+                    "floor_strike": 21.5,
+                    "yes_bid_dollars": "0.6500",
+                    "yes_ask_dollars": "0.7000",
+                },
+            ],
+        }
+    )
+    assert spread is not None
+    assert spread["spread_line"] == -27.5
+    book = bind_book({**game, **spread}, home="Rutgers", away="Massachusetts")
+    assert book is not None
+    assert book["source"] == "kalshi"
+    assert book["spread"] == -27.5
+    assert book["ml_home"] == 0.975
+
+
+def test_kalshi_upsert_does_not_wipe_polymarket():
+    now = datetime(2026, 9, 3, 12, tzinfo=timezone.utc)
+    game = {"home": "Rutgers", "away": "Massachusetts", "start": "2026-09-04T01:00:00Z"}
+    log = empty_log(2026)
+    upsert_log(log, game, {"source": "polymarket", "spread": -40.5, "ml_home": 0.91}, now)
+    upsert_log(log, game, {"source": "kalshi", "spread": -27.5, "ml_home": 0.97}, now)
+    row = list(log["games"].values())[0]
+    assert row["polymarket"]["spread"] == -40.5
+    assert row["kalshi"]["spread"] == -27.5

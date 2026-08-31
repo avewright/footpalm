@@ -20,6 +20,7 @@ dev = ["pytest>=8.0"]
 footpalm = "footpalm.build:main"
 footpalm-project = "footpalm.project:main"
 footpalm-score = "footpalm.score:main"
+footpalm-cron = "footpalm.cron:main"
 footpalm-ask = "footpalm.ask:main"
 
 [build-system]

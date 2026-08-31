@@ -8,7 +8,7 @@ export type ChatMessage = {
   tools?: string[];
 };
 
-export function AskView({ season }: { season: number }) {
+export function AskView({ season, onOpenTeam }: { season: number; onOpenTeam?: (team: string) => void }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
@@ -43,8 +43,19 @@ export function AskView({ season }: { season: number }) {
           messages: next.map(({ role, content }) => ({ role, content })),
         }),
       });
-      const payload = await response.json();
-      if (!response.ok) throw new Error(payload.error || `ask ${response.status}`);
+      const raw = await response.text();
+      let payload: { error?: string; text?: string; cards?: Card[]; tools?: string[] } = {};
+      if (raw.trim()) {
+        try {
+          payload = JSON.parse(raw);
+        } catch {
+          throw new Error(`ask ${response.status}`);
+        }
+      }
+      if (!response.ok) {
+        throw new Error(payload.error || (raw.trim() ? `ask ${response.status}` : "Ask server is not running"));
+      }
+      if (!raw.trim()) throw new Error("Ask server is not running");
       const parsed = splitViz(payload.text || "");
       setMessages([
         ...next,
@@ -99,10 +110,9 @@ export function AskView({ season }: { season: number }) {
             ) : (
               <div className="ask-reply">
                 {msg.cards?.map((card, j) => (
-                  <CardView key={j} card={card} />
+                  <CardView key={j} card={card} onOpen={onOpenTeam} />
                 ))}
                 {msg.content && <AskMarkdown text={msg.content} />}
-                {!!msg.tools?.length && <p className="ask-tools">{msg.tools.join(" · ")}</p>}
                 {msg.content && (
                   <button type="button" className="ask-copy" onClick={() => copy(i, msg.content)}>
                     {copied === i ? "Copied" : "Copy"}

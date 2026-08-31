@@ -1,4 +1,5 @@
-import { atsHit, atsSide, betLabel, marketMl, marketSpread, mlPlay } from "./ev";
+import { atsHit, atsSide, betLabel, marketMl, marketMlAmerican, marketSpread, mlPlay } from "./ev";
+import { american, formatAmerican, signed } from "./format";
 import { isFinal, suHit } from "./score";
 import type { GamePred, ModelPick } from "./types";
 
@@ -41,19 +42,48 @@ export function hitTone(hit: boolean | null) {
   return hit ? "good" : "bad";
 }
 
+export function mlPair(am: { home: number; away: number } | null) {
+  if (!am) return "—";
+  return `${formatAmerican(am.home)} / ${formatAmerican(am.away)}`;
+}
+
+export function lineOf(n: number | null) {
+  return n == null ? "—" : signed(n);
+}
+
 export function gameFacts(g: GamePred) {
   const ens = pickOf(g, "ensemble");
   const play = atsSide(g);
   const ml = ens ? mlPlay(g, ens.home_win_prob) : null;
   const fairs = MODEL_IDS.map((id) => pickOf(g, id));
   const agree = play ? fairs.filter((p) => p && atsSide(g, p)?.who === play.who).length : 0;
+  const us = ens ? -ens.pred_margin : null;
+  const mkt = marketSpread(g);
+  const mktMl = marketMl(g);
+  const dSpread = us != null && mkt != null ? us - mkt : null;
+  const dMl = ens && mktMl != null ? ens.home_win_prob - mktMl : null;
+  const lean =
+    dSpread != null && Math.abs(dSpread) >= 0.05
+      ? dSpread < 0
+        ? g.home
+        : g.away
+      : dMl != null && Math.abs(dMl) >= 0.005
+        ? dMl > 0
+          ? g.home
+          : g.away
+        : null;
   return {
     ens,
     play,
     ml,
-    us: ens ? -ens.pred_margin : null,
-    mkt: marketSpread(g),
-    mktMl: marketMl(g),
+    us,
+    mkt,
+    mktMl,
+    mktAm: marketMlAmerican(g),
+    ourAm: ens ? { home: american(ens.home_win_prob), away: american(1 - ens.home_win_prob) } : null,
+    dSpread,
+    dMl,
+    lean,
     agree,
     hit: play ? atsHit(g, play) : null,
     su: suHit(g),

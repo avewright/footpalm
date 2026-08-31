@@ -184,7 +184,7 @@ export function App() {
         <GraphView graph={graph} team={team} onSelectTeam={setTeam} onOpenTeam={openTeam} />
       )}
       {tab === "graph" && !graph && <p className="lede-note">No graph file for {season} yet.</p>}
-      {tab === "ask" && <AskView key={askTick} season={season} />}
+      {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
       {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
 
       {tab === "ratings" && (

@@ -359,12 +359,12 @@
           "slug": "cfb-umass-rutger-2026-09-03",
           "url": "https://polymarket.com/event/cfb-umass-rutger-2026-09-03",
           "title": "UMass vs. Rutgers",
-          "ml_home": 0.966,
-          "ml_away": 0.034,
-          "ml_home_american": -2841,
-          "ml_away_american": 2841,
+          "ml_home": 0.9675,
+          "ml_away": 0.0325,
+          "ml_home_american": -2977,
+          "ml_away_american": 2977,
           "spread": -29.5,
-          "spread_p_home": 0.465
+          "spread_p_home": 0.47
         }
       }
     },
@@ -431,10 +431,10 @@
           "slug": "cfb-merri-del-2026-09-03",
           "url": "https://polymarket.com/event/cfb-merri-del-2026-09-03",
           "title": "Merrimack vs. Delaware",
-          "ml_home": 0.967,
-          "ml_away": 0.033,
-          "ml_home_american": -2930,
-          "ml_away_american": 2930,
+          "ml_home": 0.9795,
+          "ml_away": 0.0205,
+          "ml_home_american": -4778,
+          "ml_away_american": 4778,
           "spread": -28.5,
           "spread_p_home": 0.505
         }
@@ -479,7 +479,7 @@
           "ml_home_american": -1718,
           "ml_away_american": 1718,
           "spread": -22.5,
-          "spread_p_home": 0.51
+          "spread_p_home": 0.495
         }
       }
     },
@@ -598,6 +598,18 @@
       "home_win_prob_raw": 0.5948,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP03COLOGT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03cologt",
+          "title": "Colorado vs Georgia Tech",
+          "ml_home": 0.685,
+          "ml_away": 0.315,
+          "ml_home_american": -217,
+          "ml_away_american": 217,
+          "spread": -6.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-col-gtech-2026-09-03",
@@ -641,17 +653,29 @@
       "home_win_prob_raw": 0.9282,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP03EIUMINN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03eiuminn",
+          "title": "Eastern Illinois vs Minnesota",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -43.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-eill-minnst-2026-09-03",
           "url": "https://polymarket.com/event/cfb-eill-minnst-2026-09-03",
           "title": "Eastern Illinois vs. Minnesota",
-          "ml_home": 0.882,
-          "ml_away": 0.118,
-          "ml_home_american": -747,
-          "ml_away_american": 747,
+          "ml_home": 0.8465,
+          "ml_away": 0.1535,
+          "ml_home_american": -551,
+          "ml_away_american": 551,
           "spread": -43.5,
-          "spread_p_home": 0.48
+          "spread_p_home": 0.485
         }
       }
     },
@@ -684,17 +708,29 @@
       "home_win_prob_raw": 0.9623,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP03ARPBMIZZ",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03arpbmizz",
+          "title": "Arkansas-Pine Bluff vs Missouri",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -54.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-arpb-missr-2026-09-03",
           "url": "https://polymarket.com/event/cfb-arpb-missr-2026-09-03",
           "title": "Arkansas-Pine Bluff vs. Missouri",
-          "ml_home": 0.996,
-          "ml_away": 0.004,
-          "ml_home_american": -24900,
-          "ml_away_american": 24900,
+          "ml_home": 0.9965,
+          "ml_away": 0.0035,
+          "ml_home_american": -28471,
+          "ml_away_american": 28471,
           "spread": -54.5,
-          "spread_p_home": 0.475
+          "spread_p_home": 0.48
         }
       }
     },
@@ -727,6 +763,18 @@
       "home_win_prob_raw": 0.8169,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP03UABILL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03uabill",
+          "title": "UAB vs Illinois",
+          "ml_home": 0.965,
+          "ml_away": 0.035,
+          "ml_home_american": -2757,
+          "ml_away_american": 2757,
+          "spread": -27.5,
+          "spread_p_home": 0.535
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-uab-ill-2026-09-03",
@@ -737,7 +785,7 @@
           "ml_home_american": -2841,
           "ml_away_american": 2841,
           "spread": -28.5,
-          "spread_p_home": 0.475
+          "spread_p_home": 0.48
         }
       }
     },
@@ -770,15 +818,27 @@
       "home_win_prob_raw": 0.9054,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP03IDHOUTAH",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03idhoutah",
+          "title": "Idaho vs Utah",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -33.5,
+          "spread_p_home": 0.515
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-idaho-utah-2026-09-03",
           "url": "https://polymarket.com/event/cfb-idaho-utah-2026-09-03",
           "title": "Idaho vs. Utah",
-          "ml_home": 0.9855,
-          "ml_away": 0.0145,
-          "ml_home_american": -6797,
-          "ml_away_american": 6797,
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900,
           "spread": -33.5,
           "spread_p_home": 0.505
         }
@@ -818,12 +878,12 @@
           "slug": "cfb-sjst-emich-2026-09-04",
           "url": "https://polymarket.com/event/cfb-sjst-emich-2026-09-04",
           "title": "San Jose State vs. Eastern Michigan",
-          "ml_home": 0.62,
-          "ml_away": 0.38,
-          "ml_home_american": -163,
-          "ml_away_american": 163,
+          "ml_home": 0.63,
+          "ml_away": 0.37,
+          "ml_home_american": -170,
+          "ml_away_american": 170,
           "spread": -4.5,
-          "spread_p_home": 0.45
+          "spread_p_home": 0.44
         }
       }
     },
@@ -861,12 +921,12 @@
           "slug": "cfb-ncat-gast-2026-09-04",
           "url": "https://polymarket.com/event/cfb-ncat-gast-2026-09-04",
           "title": "North Carolina A&T vs. Georgia State",
-          "ml_home": 0.955,
-          "ml_away": 0.045,
-          "ml_home_american": -2122,
-          "ml_away_american": 2122,
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900,
           "spread": -28.5,
-          "spread_p_home": 0.49
+          "spread_p_home": 0.5
         }
       }
     },
@@ -904,12 +964,12 @@
           "slug": "cfb-indst-pur-2026-09-04",
           "url": "https://polymarket.com/event/cfb-indst-pur-2026-09-04",
           "title": "Indiana State vs. Purdue",
-          "ml_home": 0.9825,
-          "ml_away": 0.0175,
-          "ml_home_american": -5614,
-          "ml_away_american": 5614,
+          "ml_home": 0.9335,
+          "ml_away": 0.0665,
+          "ml_home_american": -1404,
+          "ml_away_american": 1404,
           "spread": -35.5,
-          "spread_p_home": 0.48
+          "spread_p_home": 0.5
         }
       }
     },
@@ -971,6 +1031,18 @@
       "home_win_prob_raw": 0.5292,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP04TOLMSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04tolmsu",
+          "title": "Toledo vs Michigan St.",
+          "ml_home": 0.785,
+          "ml_away": 0.225,
+          "ml_home_american": -365,
+          "ml_away_american": 344,
+          "spread": -9.5,
+          "spread_p_home": 0.515
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-toledo-mst-2026-09-04",
@@ -1014,15 +1086,27 @@
       "home_win_prob_raw": 0.9061,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP04UTEPOKLA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04utepokla",
+          "title": "UTEP vs Oklahoma",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -41.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-utep-okl-2026-09-04",
           "url": "https://polymarket.com/event/cfb-utep-okl-2026-09-04",
           "title": "UTEP vs. Oklahoma",
-          "ml_home": 0.9865,
-          "ml_away": 0.0135,
-          "ml_home_american": -7307,
-          "ml_away_american": 7307,
+          "ml_home": 0.9755,
+          "ml_away": 0.0245,
+          "ml_home_american": -3982,
+          "ml_away_american": 3982,
           "spread": -41.5,
           "spread_p_home": 0.51
         }
@@ -1057,17 +1141,28 @@
       "home_win_prob_raw": 0.2621,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP04MIASTAN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04miastan",
+          "title": "Miami (FL) vs Stanford",
+          "ml_home": 0.055,
+          "ml_away": 0.955,
+          "ml_home_american": 1718,
+          "ml_away_american": -2122,
+          "spread": 24.5
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-mia-stan-2026-09-04",
           "url": "https://polymarket.com/event/cfb-mia-stan-2026-09-04",
           "title": "Miami (FL) vs. Stanford",
-          "ml_home": 0.055,
-          "ml_away": 0.945,
-          "ml_home_american": 1718,
-          "ml_away_american": -1718,
+          "ml_home": 0.05,
+          "ml_away": 0.95,
+          "ml_home_american": 1900,
+          "ml_away_american": -1900,
           "spread": 24.5,
-          "spread_p_home": 0.53
+          "spread_p_home": 0.52
         }
       }
     },
@@ -1100,17 +1195,29 @@
       "home_win_prob_raw": 0.8494,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP04FRESUSC",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04fresusc",
+          "title": "Fresno St. vs USC",
+          "ml_home": 0.925,
+          "ml_away": 0.075,
+          "ml_home_american": -1233,
+          "ml_away_american": 1233,
+          "spread": -21.5,
+          "spread_p_home": 0.51
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-frest-usc-2026-09-04",
           "url": "https://polymarket.com/event/cfb-frest-usc-2026-09-04",
           "title": "Fresno State vs. USC",
-          "ml_home": 0.955,
-          "ml_away": 0.045,
-          "ml_home_american": -2122,
-          "ml_away_american": 2122,
+          "ml_home": 0.95,
+          "ml_away": 0.05,
+          "ml_home_american": -1900,
+          "ml_away_american": 1900,
           "spread": -22.5,
-          "spread_p_home": 0.505
+          "spread_p_home": 0.49
         }
       }
     },
@@ -1143,15 +1250,27 @@
       "home_win_prob_raw": 0.7926,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05ECUALA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ecuala",
+          "title": "East Carolina vs Alabama",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567,
+          "spread": -28.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ecar-ala-2026-09-05",
           "url": "https://polymarket.com/event/cfb-ecar-ala-2026-09-05",
           "title": "East Carolina vs. Alabama",
-          "ml_home": 0.981,
-          "ml_away": 0.019,
-          "ml_home_american": -5163,
-          "ml_away_american": 5163,
+          "ml_home": 0.932,
+          "ml_away": 0.068,
+          "ml_home_american": -1371,
+          "ml_away_american": 1371,
           "spread": -28.5,
           "spread_p_home": 0.5
         }
@@ -1186,6 +1305,18 @@
       "home_win_prob_raw": 0.9055,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05BRYARMY",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05bryarmy",
+          "title": "Bryant vs Army",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567,
+          "spread": -38.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-bryant-army-2026-09-05",
@@ -1196,7 +1327,7 @@
           "ml_home_american": -3025,
           "ml_away_american": 3025,
           "spread": -36.5,
-          "spread_p_home": 0.48
+          "spread_p_home": 0.49
         }
       }
     },
@@ -1229,17 +1360,29 @@
       "home_win_prob_raw": 0.5714,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05TARLBGSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05tarlbgsu",
+          "title": "Tarleton St. vs Bowling Green",
+          "ml_home": 0.555,
+          "ml_away": 0.445,
+          "ml_home_american": -125,
+          "ml_away_american": 125,
+          "spread": -2.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-tarl-bowlgr-2026-09-05",
           "url": "https://polymarket.com/event/cfb-tarl-bowlgr-2026-09-05",
           "title": "Tarleton State vs. Bowling Green",
-          "ml_home": 0.55,
-          "ml_away": 0.45,
-          "ml_home_american": -122,
-          "ml_away_american": 122,
+          "ml_home": 0.555,
+          "ml_away": 0.445,
+          "ml_home_american": -125,
+          "ml_away_american": 125,
           "spread": -2.5,
-          "spread_p_home": 0.51
+          "spread_p_home": 0.495
         }
       }
     },
@@ -1272,6 +1415,18 @@
       "home_win_prob_raw": 0.8059,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05ORSTHOU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05orsthou",
+          "title": "Oregon St. vs Houston",
+          "ml_home": 0.925,
+          "ml_away": 0.075,
+          "ml_home_american": -1233,
+          "ml_away_american": 1233,
+          "spread": -20.5,
+          "spread_p_home": 0.51
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-oregst-hou-2026-09-05",
@@ -1315,15 +1470,27 @@
       "home_win_prob_raw": 0.8138,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UNTIND",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05untind",
+          "title": "North Texas vs Indiana",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -40.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ntx-ind-2026-09-05",
           "url": "https://polymarket.com/event/cfb-ntx-ind-2026-09-05",
           "title": "North Texas vs. Indiana",
-          "ml_home": 0.987,
-          "ml_away": 0.013,
-          "ml_home_american": -7592,
-          "ml_away_american": 7592,
+          "ml_home": 0.9435,
+          "ml_away": 0.0565,
+          "ml_home_american": -1670,
+          "ml_away_american": 1670,
           "spread": -40.5,
           "spread_p_home": 0.5
         }
@@ -1358,6 +1525,18 @@
       "home_win_prob_raw": 0.8357,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05LIBJMU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05libjmu",
+          "title": "Liberty vs James Madison",
+          "ml_home": 0.705,
+          "ml_away": 0.305,
+          "ml_home_american": -239,
+          "ml_away_american": 228,
+          "spread": -6.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-librty-jmad-2026-09-05",
@@ -1401,6 +1580,18 @@
       "home_win_prob_raw": 0.7359,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05OHIONEB",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ohioneb",
+          "title": "Ohio vs Nebraska",
+          "ml_home": 0.935,
+          "ml_away": 0.055,
+          "ml_home_american": -1438,
+          "ml_away_american": 1718,
+          "spread": -23.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ohio-nebr-2026-09-05",
@@ -1444,6 +1635,18 @@
       "home_win_prob_raw": 0.8566,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UNHSYR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05unhsyr",
+          "title": "New Hampshire vs Syracuse",
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900,
+          "spread": -32.5,
+          "spread_p_home": 0.5
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-nhamp-syra-2026-09-05",
@@ -1454,7 +1657,7 @@
           "ml_home_american": -2122,
           "ml_away_american": 2122,
           "spread": -32.5,
-          "spread_p_home": 0.485
+          "spread_p_home": 0.55
         }
       }
     },
@@ -1487,17 +1690,29 @@
       "home_win_prob_raw": 0.8948,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05LAFCONN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05lafconn",
+          "title": "Lafayette vs UConn",
+          "ml_home": 0.895,
+          "ml_away": 0.085,
+          "ml_home_american": -852,
+          "ml_away_american": 1076,
+          "spread": -19.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-lafay-uconn-2026-09-05",
           "url": "https://polymarket.com/event/cfb-lafay-uconn-2026-09-05",
           "title": "Lafayette vs. UConn",
-          "ml_home": 0.91,
-          "ml_away": 0.09,
-          "ml_home_american": -1011,
-          "ml_away_american": 1011,
+          "ml_home": 0.9,
+          "ml_away": 0.1,
+          "ml_home_american": -900,
+          "ml_away_american": 900,
           "spread": -19.5,
-          "spread_p_home": 0.47
+          "spread_p_home": 0.48
         }
       }
     },
@@ -1530,6 +1745,18 @@
       "home_win_prob_raw": 0.7428,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05CCARWVU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ccarwvu",
+          "title": "Coastal Carolina vs West Virginia",
+          "ml_home": 0.93,
+          "ml_away": 0.07,
+          "ml_home_american": -1329,
+          "ml_away_american": 1329,
+          "spread": -21.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-coast-wvir-2026-09-05",
@@ -1573,6 +1800,18 @@
       "home_win_prob_raw": 0.9485,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05BALLOSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ballosu",
+          "title": "Ball St. vs Ohio St.",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -50.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ballst-ohiost-2026-09-05",
@@ -1583,7 +1822,7 @@
           "ml_home_american": -28471,
           "ml_away_american": 28471,
           "spread": -50.5,
-          "spread_p_home": 0.495
+          "spread_p_home": 0.505
         }
       }
     },
@@ -1616,6 +1855,18 @@
       "home_win_prob_raw": 0.789,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05MOHPITT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05mohpitt",
+          "title": "Miami (OH) vs Pittsburgh",
+          "ml_home": 0.865,
+          "ml_away": 0.145,
+          "ml_home_american": -641,
+          "ml_away_american": 590,
+          "spread": -16.5,
+          "spread_p_home": 0.505
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-miaoh-pitt-2026-09-05",
@@ -1626,7 +1877,7 @@
           "ml_home_american": -669,
           "ml_away_american": 669,
           "spread": -16.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.49
         }
       }
     },
@@ -1659,15 +1910,27 @@
       "home_win_prob_raw": 0.8732,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05KENTSCAR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05kentscar",
+          "title": "Kent St. vs South Carolina",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567,
+          "spread": -36.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-kentst-sc-2026-09-05",
           "url": "https://polymarket.com/event/cfb-kentst-sc-2026-09-05",
           "title": "Kent State vs. South Carolina",
-          "ml_home": 0.9865,
-          "ml_away": 0.0135,
-          "ml_home_american": -7307,
-          "ml_away_american": 7307,
+          "ml_home": 0.9395,
+          "ml_away": 0.0605,
+          "ml_home_american": -1553,
+          "ml_away_american": 1553,
           "spread": -36.5,
           "spread_p_home": 0.49
         }
@@ -1702,6 +1965,18 @@
       "home_win_prob_raw": 0.8336,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05DUQAFA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05duqafa",
+          "title": "Duquesne vs Air Force",
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900,
+          "spread": -30.5,
+          "spread_p_home": 0.48
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-duq-airf-2026-09-05",
@@ -1712,7 +1987,7 @@
           "ml_home_american": -1900,
           "ml_away_american": 1900,
           "spread": -30.5,
-          "spread_p_home": 0.49
+          "spread_p_home": 0.485
         }
       }
     },
@@ -1745,17 +2020,29 @@
       "home_win_prob_raw": 0.9009,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05SEMOISU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05semoisu",
+          "title": "Southeast Missouri St. vs Iowa St.",
+          "ml_home": 0.965,
+          "ml_away": 0.035,
+          "ml_home_american": -2757,
+          "ml_away_american": 2757,
+          "spread": -29.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-semst-iowast-2026-09-05",
           "url": "https://polymarket.com/event/cfb-semst-iowast-2026-09-05",
           "title": "Southeast Missouri State vs. Iowa State",
-          "ml_home": 0.95,
-          "ml_away": 0.05,
-          "ml_home_american": -1900,
-          "ml_away_american": 1900,
+          "ml_home": 0.955,
+          "ml_away": 0.045,
+          "ml_home_american": -2122,
+          "ml_away_american": 2122,
           "spread": -29.5,
-          "spread_p_home": 0.47
+          "spread_p_home": 0.455
         }
       }
     },
@@ -1788,6 +2075,18 @@
       "home_win_prob_raw": 0.8597,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05YSUUK",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ysuuk",
+          "title": "Youngstown St. vs Kentucky",
+          "ml_home": 0.95,
+          "ml_away": 0.045,
+          "ml_home_american": -1900,
+          "ml_away_american": 2122,
+          "spread": -23.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-yngst-uk-2026-09-05",
@@ -1798,7 +2097,7 @@
           "ml_home_american": -1567,
           "ml_away_american": 1567,
           "spread": -23.5,
-          "spread_p_home": 0.485
+          "spread_p_home": 0.5
         }
       }
     },
@@ -1831,6 +2130,18 @@
       "home_win_prob_raw": 0.7937,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05URITEM",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05uritem",
+          "title": "Rhode Island vs Temple",
+          "ml_home": 0.805,
+          "ml_away": 0.195,
+          "ml_home_american": -413,
+          "ml_away_american": 413,
+          "spread": -10.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ri-templ-2026-09-05",
@@ -1874,6 +2185,18 @@
       "home_win_prob_raw": 0.9487,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05TNSTUGA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05tnstuga",
+          "title": "Tennessee St. vs Georgia",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900,
+          "spread": -45.5,
+          "spread_p_home": 0.515
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-tenst-ga-2026-09-05",
@@ -1884,7 +2207,7 @@
           "ml_home_american": -28471,
           "ml_away_american": 28471,
           "spread": -47.5,
-          "spread_p_home": 0.46
+          "spread_p_home": 0.49
         }
       }
     },
@@ -1946,6 +2269,18 @@
       "home_win_prob_raw": 0.5643,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05BAYAUB",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05bayaub",
+          "title": "Baylor vs Auburn",
+          "ml_home": 0.725,
+          "ml_away": 0.295,
+          "ml_home_american": -264,
+          "ml_away_american": 239,
+          "spread": -6.5,
+          "spread_p_home": 0.535
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-bayl-aubrn-2026-09-05",
@@ -1989,6 +2324,18 @@
       "home_win_prob_raw": 0.8142,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05CITCHAR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05citchar",
+          "title": "The Citadel vs Charlotte",
+          "ml_home": 0.925,
+          "ml_away": 0.075,
+          "ml_home_american": -1233,
+          "ml_away_american": 1233,
+          "spread": -17.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-cita-charlt-2026-09-05",
@@ -1999,7 +2346,7 @@
           "ml_home_american": -1150,
           "ml_away_american": 1150,
           "spread": -15.5,
-          "spread_p_home": 0.505
+          "spread_p_home": 0.52
         }
       }
     },
@@ -2032,15 +2379,27 @@
       "home_win_prob_raw": 0.7201,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05BCCIN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05bccin",
+          "title": "Boston College vs Cincinnati",
+          "ml_home": 0.725,
+          "ml_away": 0.285,
+          "ml_home_american": -264,
+          "ml_away_american": 251,
+          "spread": -7.5,
+          "spread_p_home": 0.475
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-boscol-cin-2026-09-05",
           "url": "https://polymarket.com/event/cfb-boscol-cin-2026-09-05",
           "title": "Boston College vs. Cincinnati",
-          "ml_home": 0.72,
-          "ml_away": 0.28,
-          "ml_home_american": -257,
-          "ml_away_american": 257,
+          "ml_home": 0.725,
+          "ml_away": 0.275,
+          "ml_home_american": -264,
+          "ml_away_american": 264,
           "spread": -7.5,
           "spread_p_home": 0.48
         }
@@ -2075,6 +2434,18 @@
       "home_win_prob_raw": 0.5567,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05TULNDUKE",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05tulnduke",
+          "title": "Tulane vs Duke",
+          "ml_home": 0.76,
+          "ml_away": 0.245,
+          "ml_home_american": -317,
+          "ml_away_american": 308,
+          "spread": -7.5,
+          "spread_p_home": 0.5
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-tulane-duke-2026-09-05",
@@ -2118,17 +2489,29 @@
       "home_win_prob_raw": 0.8915,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05TOWSNAVY",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05towsnavy",
+          "title": "Towson vs Navy",
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900,
+          "spread": -30.5,
+          "spread_p_home": 0.5
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-tows-navy-2026-09-05",
           "url": "https://polymarket.com/event/cfb-tows-navy-2026-09-05",
           "title": "Towson vs. Navy",
-          "ml_home": 0.96,
-          "ml_away": 0.04,
-          "ml_home_american": -2400,
-          "ml_away_american": 2400,
+          "ml_home": 0.967,
+          "ml_away": 0.033,
+          "ml_home_american": -2930,
+          "ml_away_american": 2930,
           "spread": -30.5,
-          "spread_p_home": 0.48
+          "spread_p_home": 0.505
         }
       }
     },
@@ -2161,15 +2544,27 @@
       "home_win_prob_raw": 0.9067,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05FORNDSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05forndsu",
+          "title": "Fordham vs North Dakota St.",
+          "ml_home": 0.975,
+          "ml_away": 0.015,
+          "ml_home_american": -3900,
+          "ml_away_american": 6567,
+          "spread": -38.5,
+          "spread_p_home": 0.48
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-fordm-ndkst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-fordm-ndkst-2026-09-05",
           "title": "Fordham vs. North Dakota State",
-          "ml_home": 0.739,
-          "ml_away": 0.261,
-          "ml_home_american": -283,
-          "ml_away_american": 283,
+          "ml_home": 0.9565,
+          "ml_away": 0.0435,
+          "ml_home_american": -2199,
+          "ml_away_american": 2199,
           "spread": -39.5,
           "spread_p_home": 0.5
         }
@@ -2204,15 +2599,27 @@
       "home_win_prob_raw": 0.8256,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05BSUORE",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05bsuore",
+          "title": "Boise St. vs Oregon",
+          "ml_home": 0.955,
+          "ml_away": 0.045,
+          "ml_home_american": -2122,
+          "ml_away_american": 2122,
+          "spread": -24.5,
+          "spread_p_home": 0.49
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-boise-ore-2026-09-05",
           "url": "https://polymarket.com/event/cfb-boise-ore-2026-09-05",
           "title": "Boise State vs. Oregon",
-          "ml_home": 0.935,
-          "ml_away": 0.065,
-          "ml_home_american": -1438,
-          "ml_away_american": 1438,
+          "ml_home": 0.94,
+          "ml_away": 0.06,
+          "ml_home_american": -1567,
+          "ml_away_american": 1567,
           "spread": -24.5,
           "spread_p_home": 0.485
         }
@@ -2247,6 +2654,18 @@
       "home_win_prob_raw": 0.8505,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05MRSHPSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05mrshpsu",
+          "title": "Marshall vs Penn St.",
+          "ml_home": 0.945,
+          "ml_away": 0.055,
+          "ml_home_american": -1718,
+          "ml_away_american": 1718,
+          "spread": -24.5,
+          "spread_p_home": 0.485
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-marsh-pennst-2026-09-05",
@@ -2290,17 +2709,29 @@
       "home_win_prob_raw": 0.934,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05FURTENN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05furtenn",
+          "title": "Furman vs Tennessee",
+          "ml_home": 0.995,
+          "ml_away": 0.01,
+          "ml_home_american": -19900,
+          "ml_away_american": 9900,
+          "spread": -45.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-furman-tenn-2026-09-05",
           "url": "https://polymarket.com/event/cfb-furman-tenn-2026-09-05",
           "title": "Furman vs. Tennessee",
-          "ml_home": 0.9865,
-          "ml_away": 0.0135,
-          "ml_home_american": -7307,
-          "ml_away_american": 7307,
+          "ml_home": 0.9765,
+          "ml_away": 0.0235,
+          "ml_home_american": -4155,
+          "ml_away_american": 4155,
           "spread": -46.5,
-          "spread_p_home": 0.365
+          "spread_p_home": 0.385
         }
       }
     },
@@ -2338,10 +2769,10 @@
           "slug": "cfb-txst-tx-2026-09-05",
           "url": "https://polymarket.com/event/cfb-txst-tx-2026-09-05",
           "title": "Texas State vs. Texas",
-          "ml_home": 0.9815,
-          "ml_away": 0.0185,
-          "ml_home_american": -5305,
-          "ml_away_american": 5305,
+          "ml_home": 0.986,
+          "ml_away": 0.014,
+          "ml_home_american": -7043,
+          "ml_away_american": 7043,
           "spread": -30.5,
           "spread_p_home": 0.485
         }
@@ -2376,17 +2807,29 @@
       "home_win_prob_raw": 0.9014,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UTRGVUTSA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05utrgvutsa",
+          "title": "UT Rio Grande Valley vs UTSA",
+          "ml_home": 0.955,
+          "ml_away": 0.045,
+          "ml_home_american": -2122,
+          "ml_away_american": 2122,
+          "spread": -28.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-utrgv-utsa-2026-09-05",
           "url": "https://polymarket.com/event/cfb-utrgv-utsa-2026-09-05",
           "title": "UT Rio Grande Valley vs. UTSA",
-          "ml_home": 0.94,
-          "ml_away": 0.06,
-          "ml_home_american": -1567,
-          "ml_away_american": 1567,
+          "ml_home": 0.965,
+          "ml_away": 0.035,
+          "ml_home_american": -2757,
+          "ml_away_american": 2757,
           "spread": -28.5,
-          "spread_p_home": 0.455
+          "spread_p_home": 0.485
         }
       }
     },
@@ -2419,6 +2862,17 @@
       "home_win_prob_raw": 0.5119,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05OKSTTLSA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05oksttlsa",
+          "title": "Oklahoma St. vs Tulsa",
+          "ml_home": 0.175,
+          "ml_away": 0.835,
+          "ml_home_american": 471,
+          "ml_away_american": -506,
+          "spread": 13.5
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-okst-tulsa-2026-09-05",
@@ -2429,7 +2883,7 @@
           "ml_home_american": 488,
           "ml_away_american": -488,
           "spread": 14.5,
-          "spread_p_home": 0.555
+          "spread_p_home": 0.55
         }
       }
     },
@@ -2462,15 +2916,27 @@
       "home_win_prob_raw": 0.9167,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UNAARK",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05unaark",
+          "title": "North Alabama vs Arkansas",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567,
+          "spread": -40.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-nal-ark-2026-09-05",
           "url": "https://polymarket.com/event/cfb-nal-ark-2026-09-05",
           "title": "North Alabama vs. Arkansas",
-          "ml_home": 0.969,
-          "ml_away": 0.031,
-          "ml_home_american": -3126,
-          "ml_away_american": 3126,
+          "ml_home": 0.9465,
+          "ml_away": 0.0535,
+          "ml_home_american": -1769,
+          "ml_away_american": 1769,
           "spread": -40.5,
           "spread_p_home": 0.5
         }
@@ -2505,6 +2971,18 @@
       "home_win_prob_raw": 0.8978,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05NIUIOWA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05niuiowa",
+          "title": "Northern Illinois vs Iowa",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567,
+          "spread": -31.5,
+          "spread_p_home": 0.495
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-nill-iowa-2026-09-05",
@@ -2515,7 +2993,7 @@
           "ml_home_american": -5163,
           "ml_away_american": 5163,
           "spread": -31.5,
-          "spread_p_home": 0.485
+          "spread_p_home": 0.505
         }
       }
     },
@@ -2639,12 +3117,12 @@
           "slug": "cfb-norfst-old-2026-09-05",
           "url": "https://polymarket.com/event/cfb-norfst-old-2026-09-05",
           "title": "Norfolk State vs. Old Dominion",
-          "ml_home": 0.921,
-          "ml_away": 0.079,
-          "ml_home_american": -1166,
-          "ml_away_american": 1166,
+          "ml_home": 0.977,
+          "ml_away": 0.023,
+          "ml_home_american": -4248,
+          "ml_away_american": 4248,
           "spread": -41.5,
-          "spread_p_home": 0.465
+          "spread_p_home": 0.49
         }
       }
     },
@@ -2682,12 +3160,12 @@
           "slug": "cfb-chsou-gas-2026-09-05",
           "url": "https://polymarket.com/event/cfb-chsou-gas-2026-09-05",
           "title": "Charleston Southern vs. Georgia Southern",
-          "ml_home": 0.94,
-          "ml_away": 0.06,
-          "ml_home_american": -1567,
-          "ml_away_american": 1567,
+          "ml_home": 0.945,
+          "ml_away": 0.055,
+          "ml_home_american": -1718,
+          "ml_away_american": 1718,
           "spread": -25.5,
-          "spread_p_home": 0.51
+          "spread_p_home": 0.515
         }
       }
     },
@@ -2768,12 +3246,12 @@
           "slug": "cfb-nichls-kanst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-nichls-kanst-2026-09-05",
           "title": "Nicholls State vs. Kansas State",
-          "ml_home": 0.9865,
-          "ml_away": 0.0135,
-          "ml_home_american": -7307,
-          "ml_away_american": 7307,
+          "ml_home": 0.9485,
+          "ml_away": 0.0515,
+          "ml_home_american": -1842,
+          "ml_away_american": 1842,
           "spread": -40.5,
-          "spread_p_home": 0.32
+          "spread_p_home": 0.36
         }
       }
     },
@@ -2816,7 +3294,7 @@
           "ml_home_american": -317,
           "ml_away_american": 317,
           "spread": -8.5,
-          "spread_p_home": 0.51
+          "spread_p_home": 0.52
         }
       }
     },
@@ -2854,12 +3332,12 @@
           "slug": "cfb-murst-mtnst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-murst-mtnst-2026-09-05",
           "title": "Murray State vs. Middle Tennessee",
-          "ml_home": 0.92,
-          "ml_away": 0.08,
-          "ml_home_american": -1150,
-          "ml_away_american": 1150,
+          "ml_home": 0.905,
+          "ml_away": 0.095,
+          "ml_home_american": -953,
+          "ml_away_american": 953,
           "spread": -20.5,
-          "spread_p_home": 0.485
+          "spread_p_home": 0.505
         }
       }
     },
@@ -2897,12 +3375,12 @@
           "slug": "cfb-houbap-rice-2026-09-05",
           "url": "https://polymarket.com/event/cfb-houbap-rice-2026-09-05",
           "title": "Houston Christian vs. Rice",
-          "ml_home": 0.93,
-          "ml_away": 0.07,
-          "ml_home_american": -1329,
-          "ml_away_american": 1329,
+          "ml_home": 0.945,
+          "ml_away": 0.055,
+          "ml_home_american": -1718,
+          "ml_away_american": 1718,
           "spread": -23.5,
-          "spread_p_home": 0.305
+          "spread_p_home": 0.395
         }
       }
     },
@@ -3012,10 +3490,10 @@
           "slug": "cfb-msrst-txam-2026-09-05",
           "url": "https://polymarket.com/event/cfb-msrst-txam-2026-09-05",
           "title": "Missouri State vs. Texas A&M",
-          "ml_home": 0.9865,
-          "ml_away": 0.0135,
-          "ml_home_american": -7307,
-          "ml_away_american": 7307,
+          "ml_home": 0.9695,
+          "ml_away": 0.0305,
+          "ml_home_american": -3179,
+          "ml_away_american": 3179,
           "spread": -40.5,
           "spread_p_home": 0.505
         }
@@ -3055,12 +3533,12 @@
           "slug": "cfb-abchr-txtech-2026-09-05",
           "url": "https://polymarket.com/event/cfb-abchr-txtech-2026-09-05",
           "title": "Abilene Christian vs. Texas Tech",
-          "ml_home": 0.8525,
-          "ml_away": 0.1475,
-          "ml_home_american": -578,
-          "ml_away_american": 578,
+          "ml_home": 0.9595,
+          "ml_away": 0.0405,
+          "ml_home_american": -2369,
+          "ml_away_american": 2369,
           "spread": -42.5,
-          "spread_p_home": 0.465
+          "spread_p_home": 0.495
         }
       }
     },
@@ -3098,10 +3576,10 @@
           "slug": "cfb-smho-troy-2026-09-05",
           "url": "https://polymarket.com/event/cfb-smho-troy-2026-09-05",
           "title": "Sam Houston vs. Troy",
-          "ml_home": 0.87,
-          "ml_away": 0.13,
-          "ml_home_american": -669,
-          "ml_away_american": 669,
+          "ml_home": 0.88,
+          "ml_away": 0.12,
+          "ml_home_american": -733,
+          "ml_away_american": 733,
           "spread": -16.5,
           "spread_p_home": 0.51
         }
@@ -3146,7 +3624,7 @@
           "ml_home_american": -506,
           "ml_away_american": 506,
           "spread": -12.5,
-          "spread_p_home": 0.465
+          "spread_p_home": 0.42
         }
       }
     },
@@ -3184,12 +3662,12 @@
           "slug": "cfb-ausp-vand-2026-09-05",
           "url": "https://polymarket.com/event/cfb-ausp-vand-2026-09-05",
           "title": "Austin Peay vs. Vanderbilt",
-          "ml_home": 0.95,
-          "ml_away": 0.05,
-          "ml_home_american": -1900,
-          "ml_away_american": 1900,
+          "ml_home": 0.97,
+          "ml_away": 0.03,
+          "ml_home_american": -3233,
+          "ml_away_american": 3233,
           "spread": -30.5,
-          "spread_p_home": 0.48
+          "spread_p_home": 0.47
         }
       }
     },
@@ -3227,12 +3705,12 @@
           "slug": "cfb-clmsn-lsu-2026-09-05",
           "url": "https://polymarket.com/event/cfb-clmsn-lsu-2026-09-05",
           "title": "Clemson vs. LSU",
-          "ml_home": 0.78,
-          "ml_away": 0.22,
-          "ml_home_american": -355,
-          "ml_away_american": 355,
+          "ml_home": 0.785,
+          "ml_away": 0.215,
+          "ml_home_american": -365,
+          "ml_away_american": 365,
           "spread": -9.5,
-          "spread_p_home": 0.54
+          "spread_p_home": 0.535
         }
       }
     },
@@ -3318,7 +3796,7 @@
           "ml_home_american": -1718,
           "ml_away_american": 1718,
           "spread": -28.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.32
         }
       }
     },
@@ -3404,7 +3882,7 @@
           "ml_home_american": -22122,
           "ml_away_american": 22122,
           "spread": -50.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.61
         }
       }
     },
@@ -3447,7 +3925,7 @@
           "ml_home_american": -1718,
           "ml_away_american": 1718,
           "spread": -27.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.585
         }
       }
     },
@@ -3480,15 +3958,25 @@
       "home_win_prob_raw": 0.944,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UTUBYU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05utubyu",
+          "title": "Utah Tech vs BYU",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-dxst-byu-2026-09-05",
           "url": "https://polymarket.com/event/cfb-dxst-byu-2026-09-05",
           "title": "Utah Tech vs. BYU",
-          "ml_home": 0.987,
-          "ml_away": 0.013,
-          "ml_home_american": -7592,
-          "ml_away_american": 7592,
+          "ml_home": 0.962,
+          "ml_away": 0.038,
+          "ml_home_american": -2532,
+          "ml_away_american": 2532,
           "spread": -47.5,
           "spread_p_home": 0.505
         }
@@ -3523,6 +4011,16 @@
       "home_win_prob_raw": 0.8121,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05LAMULL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05lamull",
+          "title": "Lamar vs Louisiana",
+          "ml_home": 0.92,
+          "ml_away": 0.085,
+          "ml_home_american": -1150,
+          "ml_away_american": 1076
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-lamar-loulaf-2026-09-05",
@@ -3566,15 +4064,25 @@
       "home_win_prob_raw": 0.92,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05HAMPMD",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05hampmd",
+          "title": "Hampton vs Maryland",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-hamp-mary-2026-09-05",
           "url": "https://polymarket.com/event/cfb-hamp-mary-2026-09-05",
           "title": "Hampton vs. Maryland",
-          "ml_home": 0.9015,
-          "ml_away": 0.0985,
-          "ml_home_american": -915,
-          "ml_away_american": 915,
+          "ml_home": 0.942,
+          "ml_away": 0.058,
+          "ml_home_american": -1624,
+          "ml_away_american": 1624,
           "spread": -45.5,
           "spread_p_home": 0.495
         }
@@ -3609,15 +4117,25 @@
       "home_win_prob_raw": 0.618,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05SDSTNW",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05sdstnw",
+          "title": "South Dakota St. vs Northwestern",
+          "ml_home": 0.835,
+          "ml_away": 0.175,
+          "ml_home_american": -506,
+          "ml_away_american": 471
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-sdkst-nw-2026-09-05",
           "url": "https://polymarket.com/event/cfb-sdkst-nw-2026-09-05",
           "title": "South Dakota State vs. Northwestern",
-          "ml_home": 0.845,
-          "ml_away": 0.155,
-          "ml_home_american": -545,
-          "ml_away_american": 545,
+          "ml_home": 0.85,
+          "ml_away": 0.15,
+          "ml_home_american": -567,
+          "ml_away_american": 567,
           "spread": -12.5,
           "spread_p_home": 0.5
         }
@@ -3652,17 +4170,27 @@
       "home_win_prob_raw": 0.8341,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05MHUNMSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05mhunmsu",
+          "title": "Mercyhurst vs New Mexico St.",
+          "ml_home": 0.965,
+          "ml_away": 0.045,
+          "ml_home_american": -2757,
+          "ml_away_american": 2122
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-mhud34ce7-nmxst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-mhud34ce7-nmxst-2026-09-05",
           "title": "Mercyhurst vs. New Mexico State",
-          "ml_home": 0.595,
-          "ml_away": 0.405,
-          "ml_home_american": -147,
-          "ml_away_american": 147,
+          "ml_home": 0.68,
+          "ml_away": 0.32,
+          "ml_home_american": -213,
+          "ml_away_american": 212,
           "spread": -24.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.505
         }
       }
     },
@@ -3695,15 +4223,25 @@
       "home_win_prob_raw": 0.9147,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05NAUARIZ",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05nauariz",
+          "title": "Northern Arizona vs Arizona",
+          "ml_home": 0.965,
+          "ml_away": 0.035,
+          "ml_home_american": -2757,
+          "ml_away_american": 2757
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-narz-arz-2026-09-05",
           "url": "https://polymarket.com/event/cfb-narz-arz-2026-09-05",
           "title": "Northern Arizona vs. Arizona",
-          "ml_home": 0.9755,
-          "ml_away": 0.0245,
-          "ml_home_american": -3982,
-          "ml_away_american": 3982,
+          "ml_home": 0.938,
+          "ml_away": 0.062,
+          "ml_home_american": -1513,
+          "ml_away_american": 1513,
           "spread": -31.5,
           "spread_p_home": 0.5
         }
@@ -3738,15 +4276,25 @@
       "home_win_prob_raw": 0.9272,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05PRSTSDSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05prstsdsu",
+          "title": "Portland St. vs San Diego St.",
+          "ml_home": 0.97,
+          "ml_away": 0.025,
+          "ml_home_american": -3233,
+          "ml_away_american": 3900
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-portst-sdst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-portst-sdst-2026-09-05",
           "title": "Portland State vs. San Diego State",
-          "ml_home": 0.7,
-          "ml_away": 0.3,
-          "ml_home_american": -233,
-          "ml_away_american": 233,
+          "ml_home": 0.72,
+          "ml_away": 0.28,
+          "ml_home_american": -257,
+          "ml_away_american": 257,
           "spread": -40.5,
           "spread_p_home": 0.5
         }
@@ -3781,6 +4329,16 @@
       "home_win_prob_raw": 0.9329,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05MORGASU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05morgasu",
+          "title": "Morgan St. vs Arizona St.",
+          "ml_home": 0.985,
+          "ml_away": 0.015,
+          "ml_home_american": -6567,
+          "ml_away_american": 6567
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-morgst-arzst-2026-09-05",
@@ -3824,17 +4382,27 @@
       "home_win_prob_raw": 0.4812,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UNLVHAW",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05unlvhaw",
+          "title": "UNLV vs Hawai'i",
+          "ml_home": 0.425,
+          "ml_away": 0.575,
+          "ml_home_american": 135,
+          "ml_away_american": -135
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-unlv-hawaii-2026-09-05",
           "url": "https://polymarket.com/event/cfb-unlv-hawaii-2026-09-05",
           "title": "UNLV vs. Hawai'i",
-          "ml_home": 0.425,
-          "ml_away": 0.575,
-          "ml_home_american": 135,
-          "ml_away_american": -135,
+          "ml_home": 0.42,
+          "ml_away": 0.58,
+          "ml_home_american": 138,
+          "ml_away_american": -138,
           "spread": 3.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.54
         }
       }
     },
@@ -3867,6 +4435,16 @@
       "home_win_prob_raw": 0.707,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05CMUUNM",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05cmuunm",
+          "title": "Central Michigan vs New Mexico",
+          "ml_home": 0.78,
+          "ml_away": 0.215,
+          "ml_home_american": -355,
+          "ml_away_american": 365
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-cmich-nmx-2026-09-05",
@@ -3910,15 +4488,25 @@
       "home_win_prob_raw": 0.8977,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05MVSUSAC",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05mvsusac",
+          "title": "Mississippi Valley St. vs Sacramento St.",
+          "ml_home": 0.98,
+          "ml_away": 0.015,
+          "ml_home_american": -4900,
+          "ml_away_american": 6567
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-msvlst-sacst-2026-09-05",
           "url": "https://polymarket.com/event/cfb-msvlst-sacst-2026-09-05",
           "title": "Mississippi Valley State vs. Sacramento State",
-          "ml_home": 0.742,
-          "ml_away": 0.258,
-          "ml_home_american": -288,
-          "ml_away_american": 288,
+          "ml_home": 0.7755,
+          "ml_away": 0.2245,
+          "ml_home_american": -345,
+          "ml_away_american": 345,
           "spread": -35.5,
           "spread_p_home": 0.5
         }
@@ -3953,6 +4541,16 @@
       "home_win_prob_raw": 0.4982,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05UCLACAL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05uclacal",
+          "title": "UCLA vs California",
+          "ml_home": 0.465,
+          "ml_away": 0.545,
+          "ml_home_american": 115,
+          "ml_away_american": -120
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-ucla-cah-2026-09-05",
@@ -3996,15 +4594,25 @@
       "home_win_prob_raw": 0.5182,
       "calibration": "temperature",
       "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP05WKUNEV",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05wkunev",
+          "title": "Western Kentucky vs Nevada",
+          "ml_home": 0.445,
+          "ml_away": 0.545,
+          "ml_home_american": 125,
+          "ml_away_american": -120
+        },
         "polymarket": {
           "source": "polymarket",
           "slug": "cfb-wkent-nevada-2026-09-05",
           "url": "https://polymarket.com/event/cfb-wkent-nevada-2026-09-05",
           "title": "Western Kentucky vs. Nevada",
-          "ml_home": 0.45,
-          "ml_away": 0.55,
-          "ml_home_american": 122,
-          "ml_away_american": -122,
+          "ml_home": 0.44,
+          "ml_away": 0.56,
+          "ml_home_american": 127,
+          "ml_away_american": -127,
           "spread": 2.5,
           "spread_p_home": 0.505
         }
@@ -4128,12 +4736,12 @@
           "slug": "cfb-lou-miss-2026-09-06",
           "url": "https://polymarket.com/event/cfb-lou-miss-2026-09-06",
           "title": "Louisville vs. Ole Miss",
-          "ml_home": 0.705,
-          "ml_away": 0.295,
-          "ml_home_american": -239,
-          "ml_away_american": 239,
+          "ml_home": 0.7,
+          "ml_away": 0.3,
+          "ml_home_american": -233,
+          "ml_away_american": 233,
           "spread": -6.5,
-          "spread_p_home": 0.515
+          "spread_p_home": 0.525
         }
       }
     },
@@ -4171,12 +4779,12 @@
           "slug": "cfb-smu-flst-2026-09-07",
           "url": "https://polymarket.com/event/cfb-smu-flst-2026-09-07",
           "title": "SMU vs. Florida State",
-          "ml_home": 0.41,
-          "ml_away": 0.59,
-          "ml_home_american": 144,
-          "ml_away_american": -144,
+          "ml_home": 0.405,
+          "ml_away": 0.595,
+          "ml_home_american": 147,
+          "ml_away_american": -147,
           "spread": 2.5,
-          "spread_p_home": 0.5
+          "spread_p_home": 0.52
         }
       }
     },
@@ -4207,7 +4815,19 @@
       "away_pom": -47.84,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9626,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP10FAMUMIA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep10famumia",
+          "title": "Florida A&M vs Miami (FL)",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900
+        }
+      }
     },
     {
       "season": 2026,
@@ -4352,7 +4972,20 @@
       "away_pom": 15.58,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4888,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP11MIZZKU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep11mizzku",
+          "title": "Missouri vs Kansas",
+          "ml_home": 0.31,
+          "ml_away": 0.695,
+          "ml_home_american": 223,
+          "ml_away_american": -228,
+          "spread": 6.5
+        }
+      }
     },
     {
       "season": 2026,
@@ -4381,7 +5014,19 @@
       "away_pom": -36.66,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8854,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12MHUUNM",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mhuunm",
+          "title": "Mercyhurst vs New Mexico",
+          "ml_home": 0.595,
+          "ml_away": 0.385,
+          "ml_home_american": -147,
+          "ml_away_american": 160
+        }
+      }
     },
     {
       "season": 2026,
@@ -4439,7 +5084,19 @@
       "away_pom": 5.12,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4799,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12USFARMY",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12usfarmy",
+          "title": "South Florida vs Army",
+          "ml_home": 0.455,
+          "ml_away": 0.51,
+          "ml_home_american": 120,
+          "ml_away_american": -104
+        }
+      }
     },
     {
       "season": 2026,
@@ -4497,7 +5154,19 @@
       "away_pom": -38.32,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9607,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12HOWIND",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12howind",
+          "title": "Howard vs Indiana",
+          "ml_home": 0.995,
+          "ml_away": 0.005,
+          "ml_home_american": -19900,
+          "ml_away_american": 19900
+        }
+      }
     },
     {
       "season": 2026,
@@ -4526,7 +5195,19 @@
       "away_pom": -3.9,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7607,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WSUKSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wsuksu",
+          "title": "Washington St. vs Kansas St.",
+          "ml_home": 0.81,
+          "ml_away": 0.19,
+          "ml_home_american": -426,
+          "ml_away_american": 426
+        }
+      }
     },
     {
       "season": 2026,
@@ -4555,7 +5236,19 @@
       "away_pom": -31.22,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7344,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WOFKENT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wofkent",
+          "title": "Wofford vs Kent St.",
+          "ml_home": 0.76,
+          "ml_away": 0.235,
+          "ml_home_american": -317,
+          "ml_away_american": 326
+        }
+      }
     },
     {
       "season": 2026,
@@ -4584,7 +5277,21 @@
       "away_pom": 18.19,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4893,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12OKLAMICH",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12oklamich",
+          "title": "Oklahoma vs Michigan",
+          "ml_home": 0.5,
+          "ml_away": 0.51,
+          "ml_home_american": -100,
+          "ml_away_american": -104,
+          "spread": -1.5,
+          "spread_p_home": 0.475
+        }
+      }
     },
     {
       "season": 2026,
@@ -4613,7 +5320,19 @@
       "away_pom": -28.96,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8729,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ETSUUNC",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12etsuunc",
+          "title": "East Tennessee St. vs North Carolina",
+          "ml_home": 0.925,
+          "ml_away": 0.075,
+          "ml_home_american": -1233,
+          "ml_away_american": 1233
+        }
+      }
     },
     {
       "season": 2026,
@@ -4642,7 +5361,20 @@
       "away_pom": 24.48,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.1765,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12OREOKST",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12oreokst",
+          "title": "Oregon vs Oklahoma St.",
+          "ml_home": 0.215,
+          "ml_away": 0.8,
+          "ml_home_american": 365,
+          "ml_away_american": -400,
+          "spread": 17.5
+        }
+      }
     },
     {
       "season": 2026,
@@ -4671,7 +5403,19 @@
       "away_pom": -0.07,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.5777,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WAKEPUR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wakepur",
+          "title": "Wake Forest vs Purdue",
+          "ml_home": 0.47,
+          "ml_away": 0.505,
+          "ml_home_american": 113,
+          "ml_away_american": -102
+        }
+      }
     },
     {
       "season": 2026,
@@ -4700,7 +5444,19 @@
       "away_pom": 21.12,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.2402,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12PSUTEM",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12psutem",
+          "title": "Penn St. vs Temple",
+          "ml_home": 0.125,
+          "ml_away": 0.875,
+          "ml_home_american": 700,
+          "ml_away_american": -700
+        }
+      }
     },
     {
       "season": 2026,
@@ -4729,7 +5485,19 @@
       "away_pom": 7.44,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7098,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ASUTXAM",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12asutxam",
+          "title": "Arizona St. vs Texas A&M",
+          "ml_home": 0.865,
+          "ml_away": 0.155,
+          "ml_home_american": -641,
+          "ml_away_american": 545
+        }
+      }
     },
     {
       "season": 2026,
@@ -4758,7 +5526,19 @@
       "away_pom": -0.38,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.5946,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ODUVT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12oduvt",
+          "title": "Old Dominion vs Virginia Tech",
+          "ml_home": 0.825,
+          "ml_away": 0.17,
+          "ml_home_american": -471,
+          "ml_away_american": 488
+        }
+      }
     },
     {
       "season": 2026,
@@ -4787,7 +5567,19 @@
       "away_pom": -12.26,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8878,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WKUUGA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wkuuga",
+          "title": "Western Kentucky vs Georgia",
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900
+        }
+      }
     },
     {
       "season": 2026,
@@ -4816,7 +5608,19 @@
       "away_pom": -37.13,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8494,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12COLGCMU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12colgcmu",
+          "title": "Colgate vs Central Michigan",
+          "ml_home": 0.605,
+          "ml_away": 0.39,
+          "ml_home_american": -153,
+          "ml_away_american": 156
+        }
+      }
     },
     {
       "season": 2026,
@@ -4845,7 +5649,19 @@
       "away_pom": -33.04,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8659,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12HCMOH",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12hcmoh",
+          "title": "Holy Cross vs Miami (OH)",
+          "ml_home": 0.74,
+          "ml_away": 0.24,
+          "ml_home_american": -285,
+          "ml_away_american": 317
+        }
+      }
     },
     {
       "season": 2026,
@@ -4903,7 +5719,19 @@
       "away_pom": -30.35,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7523,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12STONBALL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12stonball",
+          "title": "Stony Brook vs Ball St.",
+          "ml_home": 0.745,
+          "ml_away": 0.24,
+          "ml_home_american": -292,
+          "ml_away_american": 317
+        }
+      }
     },
     {
       "season": 2026,
@@ -4932,7 +5760,19 @@
       "away_pom": -42.1,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8167,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12RMUAKR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12rmuakr",
+          "title": "Robert Morris vs Akron",
+          "ml_home": 0.705,
+          "ml_away": 0.255,
+          "ml_home_american": -239,
+          "ml_away_american": 292
+        }
+      }
     },
     {
       "season": 2026,
@@ -4961,7 +5801,19 @@
       "away_pom": 12.18,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6074,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ARIZBYU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arizbyu",
+          "title": "Arizona vs BYU",
+          "ml_home": 0.685,
+          "ml_away": 0.315,
+          "ml_home_american": -217,
+          "ml_away_american": 217
+        }
+      }
     },
     {
       "season": 2026,
@@ -4990,7 +5842,19 @@
       "away_pom": -28.31,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8962,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WEBCOLO",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12webcolo",
+          "title": "Weber St. vs Colorado",
+          "ml_home": 0.86,
+          "ml_away": 0.13,
+          "ml_home_american": -614,
+          "ml_away_american": 669
+        }
+      }
     },
     {
       "season": 2026,
@@ -5019,7 +5883,19 @@
       "away_pom": 1.47,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.639,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12DUKEILL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12dukeill",
+          "title": "Duke vs Illinois",
+          "ml_home": 0.605,
+          "ml_away": 0.39,
+          "ml_home_american": -153,
+          "ml_away_american": 156
+        }
+      }
     },
     {
       "season": 2026,
@@ -5048,7 +5924,19 @@
       "away_pom": -45.99,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9294,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12WAGJMU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wagjmu",
+          "title": "Wagner vs James Madison",
+          "ml_home": 0.93,
+          "ml_away": 0.075,
+          "ml_home_american": -1329,
+          "ml_away_american": 1233
+        }
+      }
     },
     {
       "season": 2026,
@@ -5077,7 +5965,19 @@
       "away_pom": 17.98,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4085,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ALAUK",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12alauk",
+          "title": "Alabama vs Kentucky",
+          "ml_home": 0.17,
+          "ml_away": 0.825,
+          "ml_home_american": 488,
+          "ml_away_american": -471
+        }
+      }
     },
     {
       "season": 2026,
@@ -5106,7 +6006,19 @@
       "away_pom": -35.85,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.71,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12SHUMASS",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12shumass",
+          "title": "Sacred Heart vs UMass",
+          "ml_home": 0.49,
+          "ml_away": 0.49,
+          "ml_home_american": 104,
+          "ml_away_american": 104
+        }
+      }
     },
     {
       "season": 2026,
@@ -5135,7 +6047,19 @@
       "away_pom": -17.71,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.808,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12EMUMSU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12emumsu",
+          "title": "Eastern Michigan vs Michigan St.",
+          "ml_home": 0.78,
+          "ml_away": 0.225,
+          "ml_home_american": -355,
+          "ml_away_american": 344
+        }
+      }
     },
     {
       "season": 2026,
@@ -5164,7 +6088,19 @@
       "away_pom": 5.15,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6341,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12MSSTMINN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12msstminn",
+          "title": "Mississippi St. vs Minnesota",
+          "ml_home": 0.475,
+          "ml_away": 0.475,
+          "ml_home_american": 111,
+          "ml_away_american": 111
+        }
+      }
     },
     {
       "season": 2026,
@@ -5193,7 +6129,19 @@
       "away_pom": -14.83,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9115,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12RICEND",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ricend",
+          "title": "Rice vs Notre Dame",
+          "ml_home": 0.975,
+          "ml_away": 0.025,
+          "ml_home_american": -3900,
+          "ml_away_american": 3900
+        }
+      }
     },
     {
       "season": 2026,
@@ -5222,7 +6170,19 @@
       "away_pom": 7.33,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6246,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12UCFPITT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ucfpitt",
+          "title": "UCF vs Pittsburgh",
+          "ml_home": 0.675,
+          "ml_away": 0.315,
+          "ml_home_american": -208,
+          "ml_away_american": 217
+        }
+      }
     },
     {
       "season": 2026,
@@ -5251,7 +6211,19 @@
       "away_pom": -1.69,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6121,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12CALSYR",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12calsyr",
+          "title": "California vs Syracuse",
+          "ml_home": 0.48,
+          "ml_away": 0.525,
+          "ml_home_american": 108,
+          "ml_away_american": -111
+        }
+      }
     },
     {
       "season": 2026,
@@ -5280,7 +6252,19 @@
       "away_pom": -2.61,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.5892,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12UTSATXST",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12utsatxst",
+          "title": "UTSA vs Texas St.",
+          "ml_home": 0.5,
+          "ml_away": 0.475,
+          "ml_home_american": -100,
+          "ml_away_american": 111
+        }
+      }
     },
     {
       "season": 2026,
@@ -5309,7 +6293,19 @@
       "away_pom": -33.94,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9186,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12CCSUTOL",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ccsutol",
+          "title": "Central Connecticut St. vs Toledo",
+          "ml_home": 0.79,
+          "ml_away": 0.21,
+          "ml_home_american": -376,
+          "ml_away_american": 376
+        }
+      }
     },
     {
       "season": 2026,
@@ -5338,7 +6334,19 @@
       "away_pom": -17.38,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7009,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ULMUAB",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ulmuab",
+          "title": "Louisiana-Monroe vs UAB",
+          "ml_home": 0.49,
+          "ml_away": 0.49,
+          "ml_home_american": 104,
+          "ml_away_american": 104
+        }
+      }
     },
     {
       "season": 2026,
@@ -5367,7 +6375,19 @@
       "away_pom": 4.13,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4985,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12MDCONN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mdconn",
+          "title": "Maryland vs UConn",
+          "ml_home": 0.45,
+          "ml_away": 0.505,
+          "ml_home_american": 122,
+          "ml_away_american": -102
+        }
+      }
     },
     {
       "season": 2026,
@@ -5396,7 +6416,19 @@
       "away_pom": -9.72,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8447,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12USUWASH",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12usuwash",
+          "title": "Utah St. vs Washington",
+          "ml_home": 0.875,
+          "ml_away": 0.125,
+          "ml_home_american": -700,
+          "ml_away_american": 700
+        }
+      }
     },
     {
       "season": 2026,
@@ -5425,7 +6457,19 @@
       "away_pom": 0.85,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6194,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12UNLVUNT",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12unlvunt",
+          "title": "UNLV vs North Texas",
+          "ml_home": 0.41,
+          "ml_away": 0.55,
+          "ml_home_american": 144,
+          "ml_away_american": -122
+        }
+      }
     },
     {
       "season": 2026,
@@ -5454,7 +6498,19 @@
       "away_pom": -16.56,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8833,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12UCDSMU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ucdsmu",
+          "title": "UC Davis vs SMU",
+          "ml_home": 0.93,
+          "ml_away": 0.075,
+          "ml_home_american": -1329,
+          "ml_away_american": 1233
+        }
+      }
     },
     {
       "season": 2026,
@@ -5483,7 +6539,19 @@
       "away_pom": -22.9,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7868,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ALSTTROY",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12alsttroy",
+          "title": "Alabama St. vs Troy",
+          "ml_home": 0.805,
+          "ml_away": 0.23,
+          "ml_home_american": -413,
+          "ml_away_american": 335
+        }
+      }
     },
     {
       "season": 2026,
@@ -5512,7 +6580,19 @@
       "away_pom": -30.1,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8452,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12UNCOWYO",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12uncowyo",
+          "title": "Northern Colorado vs Wyoming",
+          "ml_home": 0.88,
+          "ml_away": 0.12,
+          "ml_home_american": -733,
+          "ml_away_american": 733
+        }
+      }
     },
     {
       "season": 2026,
@@ -5541,7 +6621,19 @@
       "away_pom": -14.9,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8879,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12DELVAN",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12delvan",
+          "title": "Delaware vs Vanderbilt",
+          "ml_home": 0.84,
+          "ml_away": 0.145,
+          "ml_home_american": -525,
+          "ml_away_american": 590
+        }
+      }
     },
     {
       "season": 2026,
@@ -6440,7 +7532,19 @@
       "away_pom": -41.63,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9463,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12PVBAY",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12pvbay",
+          "title": "Prairie View A&M vs Baylor",
+          "ml_home": 0.985,
+          "ml_away": 0.02,
+          "ml_home_american": -6567,
+          "ml_away_american": 4900
+        }
+      }
     },
     {
       "season": 2026,
@@ -6469,7 +7573,19 @@
       "away_pom": -39.81,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.9466,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12GRAMTCU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12gramtcu",
+          "title": "Grambling St. vs TCU",
+          "ml_home": 0.945,
+          "ml_away": 0.015,
+          "ml_home_american": -1718,
+          "ml_away_american": 6567
+        }
+      }
     },
     {
       "season": 2026,
@@ -6498,7 +7614,19 @@
       "away_pom": -43.49,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8782,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12TXSOUTEP",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12txsoutep",
+          "title": "Texas Southern vs UTEP",
+          "ml_home": 0.745,
+          "ml_away": 0.32,
+          "ml_home_american": -292,
+          "ml_away_american": 212
+        }
+      }
     },
     {
       "season": 2026,
@@ -6527,7 +7655,19 @@
       "away_pom": -3.04,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.4781,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12NDSUAFA",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ndsuafa",
+          "title": "North Dakota St. vs Air Force",
+          "ml_home": 0.485,
+          "ml_away": 0.505,
+          "ml_home_american": 106,
+          "ml_away_american": -102
+        }
+      }
     },
     {
       "season": 2026,
@@ -6556,7 +7696,19 @@
       "away_pom": 5.43,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7342,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ARKUTAH",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arkutah",
+          "title": "Arkansas vs Utah",
+          "ml_home": 0.685,
+          "ml_away": 0.31,
+          "ml_home_american": -217,
+          "ml_away_american": 223
+        }
+      }
     },
     {
       "season": 2026,
@@ -6585,7 +7737,19 @@
       "away_pom": -18.36,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7651,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12SACFRES",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12sacfres",
+          "title": "Sacramento St. vs Fresno St.",
+          "ml_home": 0.63,
+          "ml_away": 0.365,
+          "ml_home_american": -170,
+          "ml_away_american": 174
+        }
+      }
     },
     {
       "season": 2026,
@@ -6614,7 +7778,19 @@
       "away_pom": -5.32,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.433,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12MTSTNEV",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mtstnev",
+          "title": "Montana St. vs Nevada",
+          "ml_home": 0.32,
+          "ml_away": 0.73,
+          "ml_home_american": 212,
+          "ml_away_american": -270
+        }
+      }
     },
     {
       "season": 2026,
@@ -6643,7 +7819,19 @@
       "away_pom": -14.35,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.8913,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP12ULLUSC",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ullusc",
+          "title": "Louisiana vs USC",
+          "ml_home": 0.93,
+          "ml_away": 0.075,
+          "ml_home_american": -1329,
+          "ml_away_american": 1233
+        }
+      }
     },
     {
       "season": 2026,
@@ -6672,7 +7860,19 @@
       "away_pom": -15.44,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.6927,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP13NMSUHAW",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep13nmsuhaw",
+          "title": "New Mexico St. vs Hawai'i",
+          "ml_home": 0.73,
+          "ml_away": 0.275,
+          "ml_home_american": -270,
+          "ml_away_american": 264
+        }
+      }
     },
     {
       "season": 2026,
@@ -6759,7 +7959,19 @@
       "away_pom": 2.73,
       "engine": "tabpfn-3",
       "home_win_prob_raw": 0.7667,
-      "calibration": "temperature"
+      "calibration": "temperature",
+      "books": {
+        "kalshi": {
+          "source": "kalshi",
+          "slug": "KXNCAAFGAME-26SEP18HOUTTU",
+          "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep18houttu",
+          "title": "Houston vs Texas Tech",
+          "ml_home": 0.83,
+          "ml_away": 0.19,
+          "ml_home_american": -488,
+          "ml_away_american": 426
+        }
+      }
     },
     {
       "season": 2026,
@@ -27062,14 +28274,15 @@
       "calibration": "temperature"
     }
   ],
-  "scored_at": "2026-08-30T17:51:08+00:00",
+  "scored_at": "2026-08-30T22:26:40+00:00",
   "books": {
-    "source": "polymarket",
-    "series_id": 12756,
-    "pulled_at": "2026-08-30T19:16:40.773081+00:00",
-    "events": 184,
-    "matched": 95,
-    "logged": 95,
-    "note": "Display only. Do not train on Polymarket or any market line."
+    "source": "kalshi",
+    "pulled_at": "2026-08-31T01:26:47.922809+00:00",
+    "events": {
+      "kalshi": 263
+    },
+    "matched": 145,
+    "logged": 145,
+    "note": "Display only. Do not train on Kalshi, Polymarket, or any market line."
   }
 }

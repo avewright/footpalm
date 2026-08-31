@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
+from datetime import date, datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
 
 from footpalm.cfbd import load_dotenv
 from footpalm.draft import colleges_match, list_picks, lookup as draft_lookup, person_key
@@ -23,8 +26,11 @@ DEFAULT_MODEL = "deepseek-v4-flash"
 FALLBACK_MODEL = "deepseek-chat"
 MAX_ROUNDS = 10
 MAX_GAMES = 24
+MAX_EV = 16
 HOST = "127.0.0.1"
 PORT = 8765
+ET = ZoneInfo("America/New_York")
+JUICE = 110
 
 SYSTEM = """You work like a coding agent over FootPalm files. Search, then open, then list. No greeting. No capability list.
 
@@ -32,14 +38,16 @@ Pom = points vs an average FBS team on a neutral field. Elo is not the board. Sp
 
 1. search — find a name, team, pick, or game. Read the hits. Do not guess.
 2. open — one record. Use the kind and name from search.
-3. list — a board: ratings, games, leaders, draft, people, backtest. One table.
-4. show — a chart only if they asked for one. list/open already draw the card.
+3. list — a board: ratings, games, leaders, draft, people, backtest, money. One table or scatter.
+4. show — a chart only if they asked for one. scatter for x vs y. list/open already draw the card.
 
 The card is the answer. One or two sentences. Never restate card rows, numbered picks, or a markdown table.
 
 Default season is {season}. Last year for teams and player stats is {last_year}. Draft last year is the {draft_year} NFL draft. Do not pass year={last_year} for draft unless they said the {last_year} draft.
 Player stats: rushing, receiving, yac, yac_avg, passing. yac_avg is YAC per catch-point play. 2026 has no play-by-play; boards stop at {last_year}.
 A draft miss is "not in the file", not "went undrafted". Many stayed in school. Not a ratings input.
+
+Picks, EV, Saturday, weekend, upcoming: the slate card is already drawn. Do not catalog. Do not list again. Do not open research or backtest. Do not list a finished week.
 """
 
 TOOLS = [
@@ -99,7 +107,7 @@ TOOLS = [
                 "properties": {
                     "source": {
                         "type": "string",
-                        "enum": ["ratings", "games", "leaders", "draft", "people", "backtest"],
+                        "enum": ["ratings", "games", "leaders", "draft", "people", "backtest", "money"],
                     },
                     "season": {"type": "integer"},
                     "n": {"type": "integer"},
@@ -120,6 +128,8 @@ TOOLS = [
                     "week": {"type": "integer"},
                     "upsets": {"type": "boolean"},
                     "completed": {"type": "boolean"},
+                    "when": {"type": "string", "enum": ["upcoming", "saturday", "weekend"]},
+                    "sort": {"type": "string", "enum": ["date", "ev", "week"]},
                     "names": {"type": "array", "items": {"type": "string"}},
                 },
                 "required": ["source"],
@@ -134,8 +144,23 @@ TOOLS = [
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "kind": {"type": "string", "enum": ["stats", "table", "bars", "line", "graph"]},
+                    "kind": {"type": "string", "enum": ["stats", "table", "bars", "line", "graph", "scatter"]},
                     "title": {"type": "string"},
+                    "x_label": {"type": "string"},
+                    "y_label": {"type": "string"},
+                    "points": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "label": {"type": "string"},
+                                "x": {"type": "number"},
+                                "y": {"type": "number"},
+                                "hint": {"type": "string"},
+                            },
+                            "required": ["label", "x", "y"],
+                        },
+                    },
                     "items": {
                         "type": "array",
                         "items": {
@@ -230,10 +255,20 @@ def _slim_game(row: dict) -> dict:
         "spread",
         "engine",
         "completed",
+        "start",
     )
     out = {k: row.get(k) for k in keep if k in row}
     if out.get("completed") is None:
         out["completed"] = row.get("actual_home") is not None
+    if row.get("start"):
+        out["when"] = _fmt_when(row)
+    side = _ats_side(row)
+    mkt = _market_spread(row)
+    if mkt is not None:
+        out["mkt"] = mkt
+    if side:
+        out["pick"] = _bet_label(side)
+        out["ev"] = round(side["ev"], 3)
     return out
 
 
@@ -275,6 +310,168 @@ def _game_score_line(game: dict) -> str:
     if away is None or home is None:
         return ""
     return f"{away}-{home}"
+
+
+def _signed(n: float) -> str:
+    return f"{n:+.1f}"
+
+
+def _ev_pct(ev: float) -> str:
+    return f"{ev * 100:+.0f}%"
+
+
+def _clip(p: float) -> float:
+    return min(1 - 1e-6, max(1e-6, p))
+
+
+def _market_spread(game: dict) -> float | None:
+    books = game.get("books") or {}
+    for src in ("kalshi", "polymarket"):
+        raw = (books.get(src) or {}).get("spread")
+        if raw is None:
+            continue
+        try:
+            return float(raw)
+        except (TypeError, ValueError):
+            return None
+    raw = game.get("spread")
+    if raw is None:
+        return None
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return None
+
+
+def _ats_side(game: dict) -> dict | None:
+    spread = _market_spread(game)
+    if spread is None:
+        return None
+    pred = float(game.get("pred_margin") or 0)
+    p_home_win = float(game.get("home_win_prob") or 0.5)
+    z = math.log(_clip(p_home_win) / (1 - _clip(p_home_win)))
+    if abs(z) < 1e-9 or abs(pred) < 1e-6 or (pred > 0) != (z > 0):
+        sigma = 14.5
+    else:
+        sigma = min(22.0, max(10.0, pred / z))
+    p_home = 1 / (1 + math.exp(-(pred + spread) / sigma))
+    take_home = p_home >= 0.5
+    p_cover = p_home if take_home else 1 - p_home
+    return {
+        "who": game.get("home") if take_home else game.get("away"),
+        "line": spread if take_home else -spread,
+        "ev": p_cover * (100 / JUICE) - (1 - p_cover),
+        "p_cover": p_cover,
+    }
+
+
+def _bet_label(side: dict) -> str:
+    return f"{side['who']} {_signed(side['line'])}"
+
+
+def _parse_start(game: dict) -> datetime | None:
+    raw = game.get("start")
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _et_date(game: dict) -> date | None:
+    start = _parse_start(game)
+    if start is None:
+        return None
+    if start.tzinfo is None:
+        start = start.replace(tzinfo=timezone.utc)
+    return start.astimezone(ET).date()
+
+
+def _next_saturday(now: datetime | None = None) -> date:
+    now = now or datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    local = now.astimezone(ET)
+    days = (5 - local.weekday()) % 7
+    if days == 0 and local.weekday() != 5:
+        days = 7
+    if local.weekday() == 6:
+        days = 6
+    return (local + timedelta(days=days)).date()
+
+
+def _when_dates(when: str | None, now: datetime | None = None) -> set[date] | None:
+    if not when:
+        return None
+    w = when.strip().lower()
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", w):
+        return {date.fromisoformat(w)}
+    if w in {"saturday", "sat"}:
+        return {_next_saturday(now)}
+    if w == "weekend":
+        sat = _next_saturday(now)
+        return {sat - timedelta(days=1), sat, sat + timedelta(days=1)}
+    return None
+
+
+def _fmt_when(game: dict) -> str:
+    day = _et_date(game)
+    if day is None:
+        return ""
+    return f"{day.month}/{day.day}"
+
+
+def _unplayed(game: dict) -> bool:
+    return game.get("actual_home") is None and not game.get("completed")
+
+
+def _want_scatter(question: str) -> bool:
+    q = question or ""
+    if not re.search(r"\b(nil|payroll|roster)\b", q, re.I):
+        return False
+    return bool(re.search(r"\b(vs|versus|against|scatter|plot|graph|chart|visuali[sz]e)\b", q, re.I))
+
+
+def _live_slate(question: str) -> bool:
+    q = question or ""
+    if re.search(r"\blast (year|season)\b", q, re.I):
+        return False
+    return bool(
+        re.search(
+            r"\b(saturday|sat|weekend|upcoming|slate|projections?|highest ev|\bev\b|bets?|picks?)\b",
+            q,
+            re.I,
+        )
+    )
+
+
+def _live_season(warehouse: Warehouse, fallback: int) -> int:
+    years = warehouse.seasons()
+    for year in reversed(years):
+        if any(_unplayed(g) for g in warehouse.games(year)):
+            return year
+    return years[-1] if years else fallback
+
+
+def _slate_title(title: str) -> bool:
+    return bool(re.match(r"^(Games|Saturday|Weekend|Upcoming|Highest EV)\b", title or ""))
+
+
+def _matchup_title(title: str) -> bool:
+    return " at " in (title or "") and "·" not in (title or "")
+
+
+def _card_rank(card: dict) -> int:
+    title = card.get("title") or ""
+    cols = card.get("columns") or []
+    if "EV" in cols or "Highest EV" in title:
+        return 3
+    if _slate_title(title):
+        return 2
+    if _matchup_title(title):
+        return 1
+    return 0
 
 
 _MD_TABLE = re.compile(r"(?m)(?:^\s*\|.*\|\s*$\n?)+")
@@ -324,9 +521,30 @@ def _clean_answer(text: str, cards: list) -> str:
     return re.sub(r"\s+", " ", out).strip()
 
 
-def _prune_cards(cards: list) -> list:
+def _prune_cards(cards: list, question: str = "") -> list:
+    q = question or ""
+    want_research = bool(re.search(r"\b(research|promoted|temperature|holdout)\b", q, re.I))
+    want_backtest = bool(re.search(r"\b(backtest|brier)\b", q, re.I))
     tables = {c.get("title") for c in cards if c.get("kind") == "table"}
-    return [c for c in cards if not (c.get("kind") == "stats" and c.get("title") in tables)]
+    kept: list[dict] = []
+    slates: list[dict] = []
+    for card in cards:
+        title = card.get("title") or ""
+        if card.get("kind") == "stats" and title in tables:
+            continue
+        if title == "Research" and not want_research:
+            continue
+        if title.startswith("Backtest") and not want_backtest:
+            continue
+        if card.get("kind") == "table" and (_slate_title(title) or _matchup_title(title)):
+            slates.append(card)
+            continue
+        kept.append(card)
+    if slates:
+        best = max(_card_rank(c) for c in slates)
+        ranked = [c for c in slates if _card_rank(c) == best]
+        kept.append(ranked[-1])
+    return kept[:3]
 
 
 def _with_yac_avg(row: dict) -> dict:
@@ -440,9 +658,11 @@ class Warehouse:
 
 
 class Session:
-    def __init__(self, warehouse: Warehouse, season: int):
+    def __init__(self, warehouse: Warehouse, season: int, question: str = "", now: datetime | None = None):
         self.wh = warehouse
         self.season = season
+        self.question = question or ""
+        self.now = now
         self.cards: list[dict] = []
 
     def _year(self, season: int | None) -> int:
@@ -567,8 +787,27 @@ class Session:
         week: int | None = None,
         upsets: bool = False,
         completed: bool | None = None,
+        when: str | None = None,
+        sort: str | None = None,
     ) -> dict:
-        year = self._year(season)
+        live = _live_slate(self.question)
+        if live and not re.search(r"\b20\d{2}\b", self.question):
+            year = self.season
+        else:
+            year = self._year(season)
+        if live and team is None and week is None:
+            if completed is None:
+                completed = False
+            if not when:
+                q = self.question.lower()
+                if re.search(r"\bsat(urday)?\b", q):
+                    when = "saturday"
+                elif "weekend" in q:
+                    when = "weekend"
+                else:
+                    when = "upcoming"
+            if not sort:
+                sort = "ev" if re.search(r"\b(ev|bet|bets|pick|picks)\b", self.question, re.I) else "date"
         games = self.wh.games(year)
         name = None
         if team:
@@ -578,9 +817,12 @@ class Session:
         if week is not None:
             games = [g for g in games if g.get("week") == week]
         if completed is True:
-            games = [g for g in games if g.get("actual_home") is not None]
+            games = [g for g in games if not _unplayed(g)]
         if completed is False:
-            games = [g for g in games if g.get("actual_home") is None]
+            games = [g for g in games if _unplayed(g)]
+        days = _when_dates(when, self.now)
+        if days:
+            games = [g for g in games if _et_date(g) in days]
         if upsets:
             picked = []
             for game in games:
@@ -591,7 +833,29 @@ class Session:
                 if (p < 0.4 and won == 1) or (p > 0.6 and won == 0):
                     picked.append(game)
             games = picked
-        return {"season": year, "team": name, "n": len(games), "games": [_slim_game(g) for g in games[:MAX_GAMES]]}
+        keyed = []
+        for game in games:
+            start = _parse_start(game)
+            side = _ats_side(game)
+            keyed.append((game, start.timestamp() if start else 0, side["ev"] if side else -99, game.get("week") or 0))
+        key = (sort or "date").lower()
+        if key == "ev":
+            keyed.sort(key=lambda row: (-row[2], row[1]))
+        elif key == "week":
+            keyed.sort(key=lambda row: (row[3], row[1]))
+        else:
+            keyed.sort(key=lambda row: (row[1], row[3]))
+        take = MAX_EV if key == "ev" else MAX_GAMES
+        slim = [_slim_game(g) for g, *_ in keyed[:take]]
+        return {
+            "season": year,
+            "team": name,
+            "when": when,
+            "sort": key,
+            "n": len(keyed),
+            "shown": len(slim),
+            "games": slim,
+        }
 
     def get_game(self, home: str, away: str, season: int | None = None, week: int | None = None) -> dict:
         year = self._year(season)
@@ -1087,6 +1351,8 @@ class Session:
         week: int | None = None,
         upsets: bool = False,
         completed: bool | None = None,
+        when: str | None = None,
+        sort: str | None = None,
         names: list | None = None,
     ) -> dict:
         src = (source or "").lower()
@@ -1117,24 +1383,61 @@ class Session:
                 )
             return out
         if src in {"games", "slate"}:
-            out = self.list_games(season=season, team=team, week=week, upsets=upsets, completed=completed)
+            out = self.list_games(
+                season=season,
+                team=team,
+                week=week,
+                upsets=upsets,
+                completed=completed,
+                when=when,
+                sort=sort,
+            )
             games = out.get("games") or []
             if games:
-                self.show(
-                    "table",
-                    f"Games · {out.get('season')}",
-                    columns=["Wk", "Away", "Home", "Pred", "Actual"],
-                    rows=[
-                        [
-                            g.get("week"),
-                            g.get("away"),
-                            g.get("home"),
-                            g.get("pred_margin"),
-                            _game_score_line(g),
-                        ]
-                        for g in games[:32]
-                    ],
-                )
+                ev_board = bool(out.get("when") or out.get("sort") == "ev")
+                if ev_board:
+                    title = {
+                        "saturday": "Saturday",
+                        "weekend": "Weekend",
+                        "upcoming": "Upcoming",
+                    }.get(out.get("when") or "", "Games")
+                    if out.get("sort") == "ev":
+                        title = f"Highest EV · {title} · {out.get('season')}"
+                    else:
+                        title = f"{title} · {out.get('season')}"
+                    self.show(
+                        "table",
+                        title,
+                        columns=["When", "Away", "Home", "Us", "Mkt", "Pick", "EV"],
+                        rows=[
+                            [
+                                g.get("when") or "",
+                                g.get("away"),
+                                g.get("home"),
+                                _signed(-float(g["pred_margin"])) if g.get("pred_margin") is not None else "",
+                                _signed(g["mkt"]) if g.get("mkt") is not None else "",
+                                g.get("pick") or "",
+                                _ev_pct(g["ev"]) if g.get("ev") is not None else "",
+                            ]
+                            for g in games
+                        ],
+                    )
+                else:
+                    self.show(
+                        "table",
+                        f"Games · {out.get('season')}",
+                        columns=["Wk", "Away", "Home", "Pred", "Actual"],
+                        rows=[
+                            [
+                                g.get("week"),
+                                g.get("away"),
+                                g.get("home"),
+                                g.get("pred_margin"),
+                                _game_score_line(g),
+                            ]
+                            for g in games[:32]
+                        ],
+                    )
             return out
         if src in {"leaders", "stats"}:
             return self.leaders(stat or "rushing", season=season, n=n or 10, team=team)
@@ -1195,12 +1498,39 @@ class Session:
                 ],
             )
             return out
+        if src in {"money", "nil"}:
+            return self.money_plot(season=season)
         if src == "research":
             return self.open_record(kind="research")
         return {
             "error": f"unknown source {source!r}",
-            "have": ["ratings", "games", "leaders", "draft", "people", "backtest"],
+            "have": ["ratings", "games", "leaders", "draft", "people", "backtest", "money"],
         }
+
+    def money_plot(self, season: int | None = None) -> dict:
+        year = self._year(season)
+        data = self.wh.ratings(year)
+        if not data:
+            return {"error": f"no ratings for {year}"}
+        points = []
+        for row in data.get("teams") or []:
+            nil = row.get("nil_roster")
+            pom = row.get("pom", row.get("palm"))
+            name = row.get("team")
+            if nil is None or pom is None or not name:
+                continue
+            points.append(
+                {
+                    "label": name,
+                    "x": round(float(nil) / 1_000_000, 1),
+                    "y": round(float(pom), 1),
+                    "hint": row.get("conf") or "",
+                }
+            )
+        if not points:
+            return {"error": f"no NIL on {year} ratings"}
+        self.show("scatter", f"NIL vs Pom · {year}", x_label="Roster $M", y_label="Pom", points=points)
+        return {"season": year, "n": len(points), "x": "nil_roster", "y": "pom"}
 
     def research(self) -> dict:
         data = self.wh._load("research.json")
@@ -1224,6 +1554,9 @@ class Session:
         rows: list | None = None,
         nodes: list | None = None,
         edges: list | None = None,
+        points: list | None = None,
+        x_label: str | None = None,
+        y_label: str | None = None,
     ) -> dict:
         card = {"kind": kind, "title": title}
         if kind in {"stats", "bars", "line"}:
@@ -1234,6 +1567,18 @@ class Session:
         if kind == "graph":
             card["nodes"] = (nodes or [])[:20]
             card["edges"] = (edges or [])[:36]
+        if kind == "scatter":
+            card["points"] = (points or [])[:160]
+            card["x_label"] = x_label or ""
+            card["y_label"] = y_label or ""
+        if kind == "table" and _slate_title(title):
+            existing = [c for c in self.cards if _slate_title(c.get("title") or "")]
+            incoming = _card_rank({"title": title, "columns": columns or []})
+            if existing and incoming < max(_card_rank(c) for c in existing):
+                return {"ok": True, "n": len(self.cards)}
+            self.cards = [
+                c for c in self.cards if not _slate_title(c.get("title") or "") and not _matchup_title(c.get("title") or "")
+            ]
         if any(c.get("kind") == kind and c.get("title") == title for c in self.cards):
             return {"ok": True, "n": len(self.cards)}
         if kind == "stats" and any(c.get("kind") == "table" and c.get("title") == title for c in self.cards):
@@ -1323,7 +1668,7 @@ def _last_user(messages: list[dict]) -> str:
     return ""
 
 
-def resolve_ask_season(question: str, season: int) -> tuple[int, int]:
+def resolve_ask_season(question: str, season: int, live: int | None = None) -> tuple[int, int]:
     last_year = season - 1 if season > 2014 else season
     draft_only = bool(
         re.search(r"\b(draft|drafted)\b", question or "", re.I)
@@ -1331,16 +1676,26 @@ def resolve_ask_season(question: str, season: int) -> tuple[int, int]:
     )
     if question and re.search(r"\blast (year|season)\b", question, re.I) and not draft_only:
         return last_year, last_year
+    if _live_slate(question or "") and live and not re.search(r"\b20\d{2}\b", question or ""):
+        year = live
+        return year, year - 1 if year > 2014 else year
     return season, last_year
 
 
 def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
     last = _last_user(messages)
+    live = _live_season(warehouse, season)
+    season, last_year = resolve_ask_season(last, season, live=live)
+    session = Session(warehouse, season, question=last)
+    if _live_slate(last):
+        session.list_board("games")
+    if _want_scatter(last):
+        session.list_board("money")
+        if session.cards:
+            return {"text": "", "cards": session.cards, "tools": ["list"], "model": "local"}
     key = api_key()
     if not key:
         raise RuntimeError("DEEPSEEK is missing. Put it in .env.")
-    season, last_year = resolve_ask_season(last, season)
-    session = Session(warehouse, season)
     draft_years = (warehouse.draft() or {}).get("years") or []
     draft_year = max(draft_years) if draft_years else season
     history = [{"role": "system", "content": SYSTEM.format(season=season, last_year=last_year, draft_year=draft_year)}]
@@ -1368,7 +1723,7 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
         history.append({k: message[k] for k in message if k in {"role", "content", "tool_calls", "reasoning_content"}})
         calls = message.get("tool_calls") or []
         if not calls:
-            cards = _prune_cards(session.cards)
+            cards = _prune_cards(session.cards, last)
             text = _clean_answer(message.get("content") or "", cards)
             return {"text": text, "cards": cards, "tools": used, "model": model}
         for call in calls:
@@ -1449,6 +1804,8 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, ask(self.warehouse, messages, season))
         except RuntimeError as exc:
             self._send(502, {"error": str(exc)})
+        except Exception as exc:
+            self._send(500, {"error": str(exc)})
 
 
 def serve(root: Path | None = None, host: str = HOST, port: int = PORT) -> None:

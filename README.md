@@ -35,10 +35,18 @@ Scores (no TabPFN refit):
 
 ```bash
 uv run python -m footpalm.score
-uv run python -m footpalm.score --install
+uv run python -m footpalm.cron --install
 ```
 
-`score` pulls CFBD games/lines, stamps finals onto the frozen projections, and writes `live.json`. `--install` loads a macOS launchd job every 2 hours.
+`cron --install` loads three macOS launchd jobs:
+
+- **Kalshi lines** every 15 minutes. Free. This is the live EV number.
+- **Score** every 2 hours. Stamps finals. CFBD `games`/`lines` only if the cache is stale (6h Mon–Thu, 3h Fri–Sun).
+- **Project** Tuesday 10am local. Refits TabPFN. If the Mac was asleep, Wednesday’s score job catches it.
+
+CFBD free tier is ~1000 calls/month. Auto jobs only hit `games` + `lines` (2 calls). They do **not** pull the other eight satellite datasets. Usage is written to `data/processed/cfbd-usage.json`. Stay under ~350/month. Manual `footpalm.score` still refreshes immediately. `footpalm.build` and `project --refresh` are not for cron — those can dump 10+ calls per season.
+
+Kalshi is free and uncapped. Polymarket still updates on the 2h score job. EV prefers Kalshi, then Polymarket, then the CFBD line.
 
 `fetch` keeps cfbfastR play-by-play in `data/raw/` and caches CFBD facts in `data/raw/cfbd/`. Ratings still read only the parquet. Put `CFBD_API_KEY` in `.env`.
 

@@ -26,6 +26,7 @@ def _warehouse(tmp_path: Path) -> Warehouse:
                         "tempo": 61.1,
                         "sos": 6.5,
                         "luck": 0.02,
+                        "nil_roster": 40420000,
                     },
                     {
                         "rank": 20,
@@ -41,6 +42,7 @@ def _warehouse(tmp_path: Path) -> Warehouse:
                         "tempo": 64.0,
                         "sos": 5.0,
                         "luck": -0.01,
+                        "nil_roster": 22100000,
                     },
                 ],
             }
@@ -75,6 +77,30 @@ def _warehouse(tmp_path: Path) -> Warehouse:
                         "actual_away": 6,
                         "actual_margin": 46,
                         "home_won": 1,
+                    },
+                    {
+                        "season": 2025,
+                        "week": 2,
+                        "home": "Indiana",
+                        "away": "North Texas",
+                        "pred_margin": 21.4,
+                        "home_win_prob": 0.86,
+                        "spread": -40.5,
+                        "start": "2026-09-05T16:00:00.000Z",
+                        "completed": False,
+                        "books": {"polymarket": {"spread": -40.5}},
+                    },
+                    {
+                        "season": 2025,
+                        "week": 2,
+                        "home": "Nebraska",
+                        "away": "Ohio",
+                        "pred_margin": 14.9,
+                        "home_win_prob": 0.78,
+                        "spread": -23.5,
+                        "start": "2026-09-05T19:30:00.000Z",
+                        "completed": False,
+                        "books": {"polymarket": {"spread": -23.5}},
                     },
                 ],
             }
@@ -210,7 +236,14 @@ def test_show_collects_cards(tmp_path: Path):
         nodes=[{"id": "Ohio State"}, {"id": "Michigan"}],
         edges=[{"source": "Ohio State", "target": "Michigan", "label": "+3"}],
     )
-    assert [c["kind"] for c in session.cards] == ["stats", "bars", "table", "line", "graph"]
+    session.show(
+        "scatter",
+        "NIL vs Pom",
+        x_label="Roster $M",
+        y_label="Pom",
+        points=[{"label": "Ohio State", "x": 40.4, "y": 31.2}],
+    )
+    assert [c["kind"] for c in session.cards] == ["stats", "bars", "table", "line", "graph", "scatter"]
 
 
 def test_catalog_and_research(tmp_path: Path):
@@ -281,6 +314,9 @@ def test_resolve_ask_season_keeps_draft_on_current():
     season, last = resolve_ask_season("rushing leaders last year", 2026)
     assert season == 2025
     assert last == 2025
+    season, last = resolve_ask_season("highest ev bets for next saturday", 2025, live=2026)
+    assert season == 2026
+    assert last == 2025
 
 
 def test_clean_answer_drops_markdown_table():
@@ -333,6 +369,18 @@ def test_clean_answer_drops_numbered_dump():
     )
     assert [c["kind"] for c in cards] == ["table"]
 
+    junk = _prune_cards(
+        [
+            {"kind": "table", "title": "Games · 2025", "columns": ["Wk"], "rows": []},
+            {"kind": "table", "title": "Highest EV · Saturday · 2026", "columns": ["EV"], "rows": []},
+            {"kind": "stats", "title": "Research", "items": []},
+            {"kind": "stats", "title": "Backtest · 2025", "items": []},
+            {"kind": "table", "title": "North Texas at Indiana", "rows": []},
+        ],
+        "highest ev bets for next saturday",
+    )
+    assert [c["title"] for c in junk] == ["Highest EV · Saturday · 2026"]
+
 
 def test_search_open_list(tmp_path: Path):
     session = Session(_warehouse(tmp_path), 2025)
@@ -365,5 +413,45 @@ def test_player_dossier_and_board(tmp_path: Path):
     assert board["drafted"] == 1
     assert board["portal"] == 1
     assert board["missing"] == []
+
+
+def test_saturday_ev_board(tmp_path: Path):
+    from datetime import datetime, timezone
+
+    from footpalm.ask import _next_saturday
+
+    assert _next_saturday(datetime(2026, 8, 30, 18, tzinfo=timezone.utc)).isoformat() == "2026-09-05"
+    session = Session(
+        _warehouse(tmp_path),
+        2025,
+        question="What are my projections and highest ev bets for next saturday",
+        now=datetime(2026, 8, 30, 18, tzinfo=timezone.utc),
+    )
+    out = session.list_board("games")
+    assert out["when"] == "saturday"
+    assert out["sort"] == "ev"
+    assert out["n"] == 2
+    assert [g["away"] for g in out["games"]] == ["North Texas", "Ohio"]
+    card = next(c for c in session.cards if c["kind"] == "table")
+    assert card["title"] == "Highest EV · Saturday · 2025"
+    assert card["columns"] == ["When", "Away", "Home", "Us", "Mkt", "Pick", "EV"]
+    session.list_board("games", season=2025, completed=True)
+    assert len([c for c in session.cards if c["kind"] == "table"]) == 1
+    assert session.cards[-1]["title"] == "Highest EV · Saturday · 2025"
+
+
+def test_money_scatter(tmp_path: Path):
+    from footpalm.ask import _want_scatter
+
+    assert _want_scatter("visualize NIL on the teams vs Pom 2025")
+    assert not _want_scatter("who is ranked first")
+    session = Session(_warehouse(tmp_path), 2025)
+    out = session.list_board("money")
+    assert out["n"] == 2
+    card = session.cards[-1]
+    assert card["kind"] == "scatter"
+    assert card["title"] == "NIL vs Pom · 2025"
+    assert card["points"][0]["label"] == "Ohio State"
+    assert card["points"][0]["x"] == 40.4
 
 
