@@ -876,7 +876,7 @@ tr:hover td.team {
   display: block;
   width: 100%;
   height: auto;
-  margin: 0 0 20px;
+  margin: 8px 0 24px;
 }
 
 .loso-num,
@@ -908,9 +908,8 @@ tr:hover td.team {
 }
 
 .loso-lab {
-  font-size: 11px;
-  fill: var(--good);
-  cursor: pointer;
+  font-size: 12px;
+  fill: var(--ink);
 }
 
 .loso-lab.is-on {
@@ -921,7 +920,7 @@ tr:hover td.team {
 .loso-pick {
   display: grid;
   grid-template-columns: minmax(16rem, 1fr) minmax(16rem, 1fr);
-  gap: 24px 40px;
+  gap: 28px 48px;
   align-items: start;
   padding-top: 16px;
   border-top: 1px solid var(--line);

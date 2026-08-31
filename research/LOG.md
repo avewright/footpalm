@@ -55,7 +55,6 @@ No NIL. No market line.
 
 Trees are not the live model.
 
-
 ## LOSO (diagnostic, not live)
 
 Menu locked from ten 2025/2026 March Madness writeups before this score. Leave-one-season-out on 2014–2025 FBS–FBS. Walk-forward features only.
@@ -65,8 +64,9 @@ Menu locked from ten 2025/2026 March Madness writeups before this score. Leave-o
 | logistic | 0.1835 | 0.1817 | -0.0018 | False |
 | lightgbm | 0.1854 | 0.184 | -0.0014 | False |
 | xgboost | 0.1843 | 0.1831 | -0.0012 | False |
+| tabpfn | 0.1852 | 0.1842 | -0.001 | False |
 
-Pooled permutation on extras+loso (2025 fold):
+Permutation on extras+loso (2025 fold):
 
 | feature | LightGBM | XGBoost |
 |---|---|---|
@@ -89,39 +89,7 @@ Pooled permutation on extras+loso (2025 fold):
 | logistic/extras+loso | 0.1817 | 0.5376 | 0.1817 |
 | lightgbm/extras+loso | 0.184 | 0.5439 | 0.1842 |
 | xgboost/extras+loso | 0.1831 | 0.541 | 0.1832 |
-
-would_promote=False live_promoted=False. Do not carve a subset after seeing LOSO.
-
-## Conference (diagnostic, not live)
-
-Menu locked from the LOSO permutation before this score. Conference axis only. Leave-one-season-out on 2014–2025 FBS–FBS. Walk-forward features only.
-
-| family | extras | extras+conf | Δ | pass |
-|---|---|---|---|---|
-| logistic | 0.1835 | 0.1822 | -0.0013 | False |
-| lightgbm | 0.1854 | 0.1836 | -0.0018 | False |
-| xgboost | 0.1843 | 0.1826 | -0.0017 | False |
-
-Permutation on extras+conf (2025 fold):
-
-| feature | LightGBM | XGBoost |
-|---|---|---|
-| conf_pom_diff | +0.0054 | +0.0063 |
-| conf_elo_diff | -0.0007 | -0.0002 |
-| p4_diff | -0.0004 | -0.0004 |
-| same_conf | -0.0001 | -0.0000 |
-| conf_win_diff | +0.0001 | +0.0002 |
-| conf_margin_diff | +0.0003 | +0.0012 |
-| ooc_win_diff | +0.0001 | +0.0000 |
-| ooc_margin_diff | +0.0009 | +0.0006 |
-
-| model | pooled Brier | pooled logloss | mean season Brier |
-|---|---|---|---|
-| logistic/extras | 0.1835 | 0.544 | 0.1836 |
-| lightgbm/extras | 0.1854 | 0.5492 | 0.1857 |
-| xgboost/extras | 0.1843 | 0.5455 | 0.1844 |
-| logistic/extras+conf | 0.1822 | 0.5391 | 0.1823 |
-| lightgbm/extras+conf | 0.1836 | 0.5427 | 0.1838 |
-| xgboost/extras+conf | 0.1826 | 0.54 | 0.1827 |
+| tabpfn/extras | 0.1852 | 0.5503 | 0.1853 |
+| tabpfn/extras+loso | 0.1842 | 0.5475 | 0.1842 |
 
 would_promote=False live_promoted=False. Do not carve a subset after seeing LOSO.

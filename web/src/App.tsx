@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AskView } from "./AskView";
 import { GamesView } from "./GamesView";
 import { GameView } from "./GameView";
-import { LosoView } from "./LosoView";
+import { LosoView, tabpfnFile } from "./LosoView";
 import { MoneyView } from "./MoneyView";
 import { RatingsTable } from "./RatingsTable";
 import { TeamView } from "./TeamView";
@@ -50,6 +50,7 @@ export function App() {
   const [money, setMoney] = useState<MoneyFile | null>(null);
   const [loso, setLoso] = useState<LosoFile | null>(null);
   const [confpass, setConfpass] = useState<LosoFile | null>(null);
+  const [tabpfn, setTabpfn] = useState<LosoFile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [askTick, setAskTick] = useState(0);
 
@@ -94,9 +95,11 @@ export function App() {
     Promise.all([
       loadJson<LosoFile | null>("/data/losopass.json", null),
       loadJson<LosoFile | null>("/data/confpass.json", null),
-    ]).then(([a, b]) => {
+      loadJson<{ seasons?: [] } | null>("/data/backtest-summary.json", null),
+    ]).then(([a, b, back]) => {
       setLoso(a);
       setConfpass(b);
+      setTabpfn(tabpfnFile(back));
     });
   }, []);
 
@@ -191,15 +194,16 @@ export function App() {
       )}
       {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
       {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
-      {tab === "loso" && (loso || confpass) && (
+      {tab === "loso" && (tabpfn || loso || confpass) && (
         <LosoView
           files={[
+            ...(tabpfn ? [{ pass: "tabpfn", data: tabpfn }] : []),
             ...(loso ? [{ pass: "loso", data: loso }] : []),
             ...(confpass ? [{ pass: "conference", data: confpass }] : []),
           ]}
         />
       )}
-      {tab === "loso" && !loso && !confpass && <p className="lede-note">No LOSO file yet.</p>}
+      {tab === "loso" && !tabpfn && !loso && !confpass && <p className="lede-note">No LOSO file yet.</p>}
 
       {tab === "ratings" && (
         <details className="glossary">

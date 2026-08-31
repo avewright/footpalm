@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import argparse
+import json
 from pathlib import Path
 
 import numpy as np
@@ -20,9 +22,12 @@ SETS = (
     ("extras", "X_full", ALL_NAMES),
     ("extras+loso", "X_loso", LOSO_ALL),
 )
+TREE_FAMILIES = ("logistic", "lightgbm", "xgboost")
+FAMILIES = (*TREE_FAMILIES, "tabpfn")
 CLIP = (0.02, 0.98)
 LR_ITERS = 40
 LR_RIDGE = 1.0
+TABPFN_T_TAIL = 400
 
 
 def _fit_lr(X: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -55,6 +60,58 @@ def _predict_lr(X: np.ndarray, beta: np.ndarray, mu: np.ndarray, sd: np.ndarray)
     design = np.column_stack([np.ones(len(X)), scaled])
     z = np.clip(design @ beta, -30.0, 30.0)
     return 1.0 / (1.0 + np.exp(-z))
+
+
+def _tabpfn_cache(root: Path, set_name: str, year: int) -> Path:
+    return root / "data" / "cache" / "loso-tabpfn" / set_name / f"{year}.npz"
+
+
+def _predict_tabpfn(
+    X_tr: np.ndarray,
+    y_tr: np.ndarray,
+    m_tr: np.ndarray,
+    X_te: np.ndarray,
+    *,
+    cache: Path | None = None,
+) -> tuple[np.ndarray, np.ndarray]:
+    if cache is not None and cache.exists():
+        packed = np.load(cache)
+        if int(packed["n_train"]) == len(X_tr) and int(packed["n_hold"]) == len(X_te):
+            print(f"    cache {cache.name}", flush=True)
+            return packed["p_tr"], packed["p_te"]
+    from footpalm.board import _tabpfn_predict
+
+    tail = min(TABPFN_T_TAIL, len(X_tr))
+    pred = np.vstack([X_tr[-tail:], X_te])
+    p, _m = _tabpfn_predict(X_tr, y_tr, m_tr, pred)
+    p_tr, p_te = p[:tail], p[tail:]
+    if cache is not None:
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        np.savez(cache, p_tr=p_tr, p_te=p_te, n_train=len(X_tr), n_hold=len(X_te))
+    return p_tr, p_te
+
+
+def _predict_family(
+    family: str,
+    X_tr: np.ndarray,
+    y_tr: np.ndarray,
+    m_tr: np.ndarray,
+    X_te: np.ndarray,
+    *,
+    cache: Path | None = None,
+) -> tuple[np.ndarray, np.ndarray, object]:
+    if family == "logistic":
+        beta, mu, sd = _fit_lr(X_tr, y_tr)
+        return _predict_lr(X_tr, beta, mu, sd), _predict_lr(X_te, beta, mu, sd), None
+    if family == "lightgbm":
+        clf, _reg = _fit_lgbm(X_tr, y_tr, y_tr)
+        return clf.predict_proba(X_tr)[:, 1], clf.predict_proba(X_te)[:, 1], clf
+    if family == "xgboost":
+        clf, _reg = _fit_xgb(X_tr, y_tr, y_tr)
+        return clf.predict_proba(X_tr)[:, 1], clf.predict_proba(X_te)[:, 1], clf
+    if family == "tabpfn":
+        return (*_predict_tabpfn(X_tr, y_tr, m_tr, X_te, cache=cache), None)
+    raise SystemExit(f"unknown family {family}")
 
 
 def _loso_masks(season: np.ndarray, fbs: np.ndarray) -> list[tuple[int, np.ndarray, np.ndarray]]:
@@ -124,19 +181,29 @@ def score_sets(
     blurb: str,
     stem: str,
     protocol: str,
+    families: tuple[str, ...] = TREE_FAMILIES,
+    merge_existing: bool = False,
 ) -> dict:
     root = _repo_root()
     payload = _load_features(root)
     season = np.asarray(payload["season"])
     fbs = np.asarray(payload["fbs"])
     y = np.asarray(payload["y_win"], dtype=float)
+    margin = np.asarray(payload["y_margin"], dtype=float)
     folds = _loso_masks(season, fbs)
     rows = []
     packed: dict[str, dict] = {}
+    dests = (root / "data" / "processed" / f"{stem}.json", root / "web" / "public" / "data" / f"{stem}.json")
+    existing = None
+    if merge_existing:
+        for dest in dests:
+            if dest.exists():
+                existing = json.loads(dest.read_text())
+                break
 
     for set_name, key, names in sets:
         X = np.asarray(payload[key], dtype=float)
-        for family in ("logistic", "lightgbm", "xgboost"):
+        for family in families:
             oof_y: list[np.ndarray] = []
             oof_p: list[np.ndarray] = []
             oof_t: list[np.ndarray] = []
@@ -145,24 +212,12 @@ def score_sets(
             hold_2025 = None
             clf_2025 = None
             for year, train, hold in folds:
-                X_tr, y_tr = X[train], y[train]
+                X_tr, y_tr, m_tr = X[train], y[train], margin[train]
                 X_te, y_te = X[hold], y[hold]
-                if family == "logistic":
-                    beta, mu, sd = _fit_lr(X_tr, y_tr)
-                    p_tr = _predict_lr(X_tr, beta, mu, sd)
-                    p_te = _predict_lr(X_te, beta, mu, sd)
-                    model = None
-                elif family == "lightgbm":
-                    clf, _reg = _fit_lgbm(X_tr, y_tr, y_tr)
-                    p_tr = clf.predict_proba(X_tr)[:, 1]
-                    p_te = clf.predict_proba(X_te)[:, 1]
-                    model = clf
-                else:
-                    clf, _reg = _fit_xgb(X_tr, y_tr, y_tr)
-                    p_tr = clf.predict_proba(X_tr)[:, 1]
-                    p_te = clf.predict_proba(X_te)[:, 1]
-                    model = clf
-                t = _fit_temperature(y_tr, p_tr)
+                cache = _tabpfn_cache(root, set_name, year) if family == "tabpfn" else None
+                p_tr, p_te, model = _predict_family(family, X_tr, y_tr, m_tr, X_te, cache=cache)
+                y_cal = y_tr[-len(p_tr) :]
+                t = _fit_temperature(y_cal, p_tr)
                 p_cal = apply("temperature", p_te, p_te, {"T": t})
                 p_clip = np.clip(p_te, CLIP[0], CLIP[1])
                 hold_metrics = _metrics(y_te, p_te)
@@ -209,11 +264,33 @@ def score_sets(
                 f"mean-season {packed_row['mean_season_brier']:.4f}",
                 flush=True,
             )
+            if family == "tabpfn":
+                on_disk = existing
+                if on_disk is None:
+                    for dest in dests:
+                        if dest.exists():
+                            on_disk = json.loads(dest.read_text())
+                            break
+                trees = [r for r in rows if r["engine"] != "tabpfn"]
+                if not trees:
+                    trees = [r for r in (on_disk or {}).get("rows", []) if r.get("engine") != "tabpfn"]
+                tabpfn_done = [
+                    {k: v for k, v in row.items() if k not in {"hold_2025", "clf_2025"}}
+                    for row in rows
+                    if row["engine"] == "tabpfn"
+                ]
+                body = dict(on_disk or {})
+                body["rows"] = trees + tabpfn_done
+                body["protocol"] = protocol
+                for dest in dests:
+                    _write_json(dest, body)
 
     comparisons = []
-    for family in ("logistic", "lightgbm", "xgboost"):
-        extras = packed[f"{family}/extras"]
-        full = packed[f"{family}/{candidate}"]
+    for family in families:
+        extras = packed.get(f"{family}/extras")
+        full = packed.get(f"{family}/{candidate}")
+        if extras is None or full is None:
+            continue
         drop = extras["pooled"]["brier"] - full["pooled"]["brier"]
         passed = drop >= PROMOTE_BRIER and full["pooled"]["logloss"] <= extras["pooled"]["logloss"]
         row = {
@@ -234,7 +311,9 @@ def score_sets(
 
     perm = {}
     for family in ("lightgbm", "xgboost"):
-        item = packed[f"{family}/{candidate}"]
+        item = packed.get(f"{family}/{candidate}")
+        if not item:
+            continue
         hold = item.get("hold_2025")
         clf = item.get("clf_2025")
         if hold is None or clf is None:
@@ -242,24 +321,32 @@ def score_sets(
         X_te, y_te, names = hold
         perm[family] = {r["feature"]: r["brier_increase"] for r in _perm_brier(clf, X_te, y_te, names)}
 
+    keep_rows = [r for r in (existing or {}).get("rows", []) if r.get("engine") not in families]
+    keep_comp = [c for c in (existing or {}).get("comparisons", []) if c.get("family") not in families]
+    if not perm and existing:
+        perm = existing.get("perm") or {}
+    all_comp = keep_comp + comparisons
     report = {
         "protocol": protocol,
         "features": feature_names,
-        "comparisons": comparisons,
-        "rows": [{k: v for k, v in row.items() if k not in {"hold_2025", "clf_2025"}} for row in rows],
+        "comparisons": all_comp,
+        "rows": keep_rows + [{k: v for k, v in row.items() if k not in {"hold_2025", "clf_2025"}} for row in rows],
         "perm": perm,
-        "would_promote": any(row["pass"] for row in comparisons),
+        "would_promote": any(row["pass"] for row in all_comp if row["family"] in TREE_FAMILIES),
         "promoted": False,
         "note": "Do not carve a subset after seeing LOSO. Live TabPFN stays on extras.",
     }
-    _write_json(root / "data" / "processed" / f"{stem}.json", report)
-    _write_json(root / "web" / "public" / "data" / f"{stem}.json", report)
+    if existing and "loso_features" in existing:
+        report["loso_features"] = existing["loso_features"]
+    for dest in dests:
+        _write_json(dest, report)
     _append_log(root, report, heading=heading, blurb=blurb, candidate=candidate, names=feature_names)
     print(f"  would_promote={report['would_promote']} live_promoted={report['promoted']}")
     return report
 
 
-def run() -> dict:
+def run(*, families: tuple[str, ...] = FAMILIES, merge_existing: bool = False) -> dict:
+    tabpfn = "tabpfn" in families
     return score_sets(
         SETS,
         candidate="extras+loso",
@@ -272,13 +359,25 @@ def run() -> dict:
         stem="losopass",
         protocol=(
             "LOSO menu locked before the score. Fit on all other seasons, score each "
-            "2014–2025 FBS–FBS season once. Trees + logistic. Not live TabPFN."
+            "2014–2025 FBS–FBS season once. Trees + logistic"
+            + (" + TabPFN-3 (LOSO, not walk-forward)." if tabpfn else ". Not live TabPFN.")
         ),
+        families=families,
+        merge_existing=merge_existing,
     )
 
 
 def main() -> None:
-    run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--tabpfn-only", action="store_true", help="score TabPFN-3 and merge into losopass.json")
+    parser.add_argument("--no-tabpfn", action="store_true", help="trees + logistic only")
+    args = parser.parse_args()
+    if args.tabpfn_only:
+        run(families=("tabpfn",), merge_existing=True)
+    elif args.no_tabpfn:
+        run(families=TREE_FAMILIES)
+    else:
+        run()
 
 
 if __name__ == "__main__":

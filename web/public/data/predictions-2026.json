@@ -718,7 +718,7 @@
           "ml_home_american": -19900,
           "ml_away_american": 19900,
           "spread": -54.5,
-          "spread_p_home": 0.495
+          "spread_p_home": 0.485
         },
         "polymarket": {
           "source": "polymarket",
@@ -1036,9 +1036,9 @@
           "slug": "KXNCAAFGAME-26SEP04TOLMSU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04tolmsu",
           "title": "Toledo vs Michigan St.",
-          "ml_home": 0.785,
+          "ml_home": 0.78,
           "ml_away": 0.225,
-          "ml_home_american": -365,
+          "ml_home_american": -355,
           "ml_away_american": 344,
           "spread": -10.5,
           "spread_p_home": 0.475
@@ -1147,9 +1147,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep04miastan",
           "title": "Miami (FL) vs Stanford",
           "ml_home": 0.055,
-          "ml_away": 0.955,
+          "ml_away": 0.945,
           "ml_home_american": 1718,
-          "ml_away_american": -2122,
+          "ml_away_american": -1718,
           "spread": 24.5
         },
         "polymarket": {
@@ -1366,9 +1366,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05tarlbgsu",
           "title": "Tarleton St. vs Bowling Green",
           "ml_home": 0.555,
-          "ml_away": 0.44,
+          "ml_away": 0.445,
           "ml_home_american": -125,
-          "ml_away_american": 127,
+          "ml_away_american": 125,
           "spread": -2.5,
           "spread_p_home": 0.505
         },
@@ -1589,8 +1589,8 @@
           "ml_away": 0.065,
           "ml_home_american": -1438,
           "ml_away_american": 1438,
-          "spread": -23.5,
-          "spread_p_home": 0.505
+          "spread": -24.5,
+          "spread_p_home": 0.465
         },
         "polymarket": {
           "source": "polymarket",
@@ -1750,9 +1750,9 @@
           "slug": "KXNCAAFGAME-26SEP05CCARWVU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ccarwvu",
           "title": "Coastal Carolina vs West Virginia",
-          "ml_home": 0.93,
+          "ml_home": 0.925,
           "ml_away": 0.075,
-          "ml_home_american": -1329,
+          "ml_home_american": -1233,
           "ml_away_american": 1233,
           "spread": -21.5,
           "spread_p_home": 0.485
@@ -1810,7 +1810,7 @@
           "ml_home_american": -19900,
           "ml_away_american": 19900,
           "spread": -50.5,
-          "spread_p_home": 0.505
+          "spread_p_home": 0.485
         },
         "polymarket": {
           "source": "polymarket",
@@ -1860,9 +1860,9 @@
           "slug": "KXNCAAFGAME-26SEP05MOHPITT",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05mohpitt",
           "title": "Miami (OH) vs Pittsburgh",
-          "ml_home": 0.865,
+          "ml_home": 0.87,
           "ml_away": 0.145,
-          "ml_home_american": -641,
+          "ml_home_american": -669,
           "ml_away_american": 590,
           "spread": -16.5,
           "spread_p_home": 0.505
@@ -1919,8 +1919,8 @@
           "ml_away": 0.015,
           "ml_home_american": -6567,
           "ml_away_american": 6567,
-          "spread": -36.5,
-          "spread_p_home": 0.495
+          "spread": -35.5,
+          "spread_p_home": 0.51
         },
         "polymarket": {
           "source": "polymarket",
@@ -2085,7 +2085,7 @@
           "ml_home_american": -2122,
           "ml_away_american": 2122,
           "spread": -23.5,
-          "spread_p_home": 0.495
+          "spread_p_home": 0.49
         },
         "polymarket": {
           "source": "polymarket",
@@ -2195,7 +2195,7 @@
           "ml_home_american": -19900,
           "ml_away_american": 19900,
           "spread": -45.5,
-          "spread_p_home": 0.52
+          "spread_p_home": 0.525
         },
         "polymarket": {
           "source": "polymarket",
@@ -2554,7 +2554,7 @@
           "ml_home_american": -3900,
           "ml_away_american": 6567,
           "spread": -38.5,
-          "spread_p_home": 0.51
+          "spread_p_home": 0.505
         },
         "polymarket": {
           "source": "polymarket",
@@ -2664,7 +2664,7 @@
           "ml_home_american": -1718,
           "ml_away_american": 1718,
           "spread": -24.5,
-          "spread_p_home": 0.495
+          "spread_p_home": 0.485
         },
         "polymarket": {
           "source": "polymarket",
@@ -4599,10 +4599,10 @@
           "slug": "KXNCAAFGAME-26SEP05WKUNEV",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05wkunev",
           "title": "Western Kentucky vs Nevada",
-          "ml_home": 0.445,
-          "ml_away": 0.545,
-          "ml_home_american": 125,
-          "ml_away_american": -120
+          "ml_home": 0.45,
+          "ml_away": 0.55,
+          "ml_home_american": 122,
+          "ml_away_american": -122
         },
         "polymarket": {
           "source": "polymarket",
@@ -5021,10 +5021,10 @@
           "slug": "KXNCAAFGAME-26SEP12MHUUNM",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mhuunm",
           "title": "Mercyhurst vs New Mexico",
-          "ml_home": 0.595,
-          "ml_away": 0.365,
-          "ml_home_american": -147,
-          "ml_away_american": 174
+          "ml_home": 0.62,
+          "ml_away": 0.375,
+          "ml_home_american": -163,
+          "ml_away_american": 167
         }
       }
     },
@@ -5092,9 +5092,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12usfarmy",
           "title": "South Florida vs Army",
           "ml_home": 0.485,
-          "ml_away": 0.49,
+          "ml_away": 0.495,
           "ml_home_american": 106,
-          "ml_away_american": 104
+          "ml_away_american": 102
         }
       }
     },
@@ -5202,10 +5202,10 @@
           "slug": "KXNCAAFGAME-26SEP12WSUKSU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wsuksu",
           "title": "Washington St. vs Kansas St.",
-          "ml_home": 0.79,
-          "ml_away": 0.205,
-          "ml_home_american": -376,
-          "ml_away_american": 388
+          "ml_home": 0.795,
+          "ml_away": 0.2,
+          "ml_home_american": -388,
+          "ml_away_american": 400
         }
       }
     },
@@ -5243,9 +5243,9 @@
           "slug": "KXNCAAFGAME-26SEP12WOFKENT",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wofkent",
           "title": "Wofford vs Kent St.",
-          "ml_home": 0.755,
+          "ml_home": 0.75,
           "ml_away": 0.245,
-          "ml_home_american": -308,
+          "ml_home_american": -300,
           "ml_away_american": 308
         }
       }
@@ -5411,9 +5411,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wakepur",
           "title": "Wake Forest vs Purdue",
           "ml_home": 0.425,
-          "ml_away": 0.57,
+          "ml_away": 0.555,
           "ml_home_american": 135,
-          "ml_away_american": -133
+          "ml_away_american": -125
         }
       }
     },
@@ -5534,9 +5534,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12oduvt",
           "title": "Old Dominion vs Virginia Tech",
           "ml_home": 0.825,
-          "ml_away": 0.17,
+          "ml_away": 0.175,
           "ml_home_american": -471,
-          "ml_away_american": 488
+          "ml_away_american": 471
         }
       }
     },
@@ -5615,10 +5615,10 @@
           "slug": "KXNCAAFGAME-26SEP12COLGCMU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12colgcmu",
           "title": "Colgate vs Central Michigan",
-          "ml_home": 0.825,
-          "ml_away": 0.175,
-          "ml_home_american": -471,
-          "ml_away_american": 471
+          "ml_home": 0.83,
+          "ml_away": 0.165,
+          "ml_home_american": -488,
+          "ml_away_american": 506
         }
       }
     },
@@ -5656,10 +5656,10 @@
           "slug": "KXNCAAFGAME-26SEP12HCMOH",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12hcmoh",
           "title": "Holy Cross vs Miami (OH)",
-          "ml_home": 0.83,
-          "ml_away": 0.17,
-          "ml_home_american": -488,
-          "ml_away_american": 488
+          "ml_home": 0.825,
+          "ml_away": 0.165,
+          "ml_home_american": -471,
+          "ml_away_american": 506
         }
       }
     },
@@ -5726,10 +5726,10 @@
           "slug": "KXNCAAFGAME-26SEP12STONBALL",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12stonball",
           "title": "Stony Brook vs Ball St.",
-          "ml_home": 0.75,
-          "ml_away": 0.24,
-          "ml_home_american": -300,
-          "ml_away_american": 317
+          "ml_home": 0.755,
+          "ml_away": 0.245,
+          "ml_home_american": -308,
+          "ml_away_american": 308
         }
       }
     },
@@ -5767,10 +5767,10 @@
           "slug": "KXNCAAFGAME-26SEP12RMUAKR",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12rmuakr",
           "title": "Robert Morris vs Akron",
-          "ml_home": 0.695,
-          "ml_away": 0.31,
-          "ml_home_american": -228,
-          "ml_away_american": 223
+          "ml_home": 0.69,
+          "ml_away": 0.305,
+          "ml_home_american": -223,
+          "ml_away_american": 228
         }
       }
     },
@@ -5808,10 +5808,10 @@
           "slug": "KXNCAAFGAME-26SEP12ARIZBYU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arizbyu",
           "title": "Arizona vs BYU",
-          "ml_home": 0.71,
-          "ml_away": 0.295,
-          "ml_home_american": -245,
-          "ml_away_american": 239
+          "ml_home": 0.715,
+          "ml_away": 0.29,
+          "ml_home_american": -251,
+          "ml_away_american": 245
         }
       }
     },
@@ -5890,10 +5890,10 @@
           "slug": "KXNCAAFGAME-26SEP12DUKEILL",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12dukeill",
           "title": "Duke vs Illinois",
-          "ml_home": 0.715,
-          "ml_away": 0.305,
-          "ml_home_american": -251,
-          "ml_away_american": 228
+          "ml_home": 0.705,
+          "ml_away": 0.3,
+          "ml_home_american": -239,
+          "ml_away_american": 233
         }
       }
     },
@@ -5932,9 +5932,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wagjmu",
           "title": "Wagner vs James Madison",
           "ml_home": 0.925,
-          "ml_away": 0.085,
+          "ml_away": 0.08,
           "ml_home_american": -1233,
-          "ml_away_american": 1076
+          "ml_away_american": 1150
         }
       }
     },
@@ -6014,9 +6014,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12shumass",
           "title": "Sacred Heart vs UMass",
           "ml_home": 0.49,
-          "ml_away": 0.505,
+          "ml_away": 0.485,
           "ml_home_american": 104,
-          "ml_away_american": -102
+          "ml_away_american": 106
         }
       }
     },
@@ -6054,10 +6054,10 @@
           "slug": "KXNCAAFGAME-26SEP12EMUMSU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12emumsu",
           "title": "Eastern Michigan vs Michigan St.",
-          "ml_home": 0.775,
-          "ml_away": 0.18,
-          "ml_home_american": -344,
-          "ml_away_american": 456
+          "ml_home": 0.815,
+          "ml_away": 0.19,
+          "ml_home_american": -441,
+          "ml_away_american": 426
         }
       }
     },
@@ -6095,10 +6095,10 @@
           "slug": "KXNCAAFGAME-26SEP12MSSTMINN",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12msstminn",
           "title": "Mississippi St. vs Minnesota",
-          "ml_home": 0.665,
-          "ml_away": 0.345,
-          "ml_home_american": -199,
-          "ml_away_american": 190
+          "ml_home": 0.61,
+          "ml_away": 0.39,
+          "ml_home_american": -156,
+          "ml_away_american": 156
         }
       }
     },
@@ -6177,10 +6177,10 @@
           "slug": "KXNCAAFGAME-26SEP12UCFPITT",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ucfpitt",
           "title": "UCF vs Pittsburgh",
-          "ml_home": 0.675,
-          "ml_away": 0.315,
-          "ml_home_american": -208,
-          "ml_away_american": 217
+          "ml_home": 0.67,
+          "ml_away": 0.335,
+          "ml_home_american": -203,
+          "ml_away_american": 199
         }
       }
     },
@@ -6219,9 +6219,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12calsyr",
           "title": "California vs Syracuse",
           "ml_home": 0.495,
-          "ml_away": 0.515,
+          "ml_away": 0.51,
           "ml_home_american": 102,
-          "ml_away_american": -106
+          "ml_away_american": -104
         }
       }
     },
@@ -6260,9 +6260,9 @@
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12utsatxst",
           "title": "UTSA vs Texas St.",
           "ml_home": 0.595,
-          "ml_away": 0.4,
+          "ml_away": 0.395,
           "ml_home_american": -147,
-          "ml_away_american": 150
+          "ml_away_american": 153
         }
       }
     },
@@ -6341,10 +6341,10 @@
           "slug": "KXNCAAFGAME-26SEP12ULMUAB",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ulmuab",
           "title": "Louisiana-Monroe vs UAB",
-          "ml_home": 0.675,
-          "ml_away": 0.305,
-          "ml_home_american": -208,
-          "ml_away_american": 228
+          "ml_home": 0.68,
+          "ml_away": 0.31,
+          "ml_home_american": -212,
+          "ml_away_american": 223
         }
       }
     },
@@ -6382,10 +6382,10 @@
           "slug": "KXNCAAFGAME-26SEP12MDCONN",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mdconn",
           "title": "Maryland vs UConn",
-          "ml_home": 0.49,
-          "ml_away": 0.495,
-          "ml_home_american": 104,
-          "ml_away_american": 102
+          "ml_home": 0.445,
+          "ml_away": 0.515,
+          "ml_home_american": 125,
+          "ml_away_american": -106
         }
       }
     },
@@ -6464,10 +6464,10 @@
           "slug": "KXNCAAFGAME-26SEP12UNLVUNT",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12unlvunt",
           "title": "UNLV vs North Texas",
-          "ml_home": 0.37,
-          "ml_away": 0.625,
-          "ml_home_american": 170,
-          "ml_away_american": -167
+          "ml_home": 0.335,
+          "ml_away": 0.67,
+          "ml_home_american": 199,
+          "ml_away_american": -203
         }
       }
     },
@@ -6587,9 +6587,9 @@
           "slug": "KXNCAAFGAME-26SEP12UNCOWYO",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12uncowyo",
           "title": "Northern Colorado vs Wyoming",
-          "ml_home": 0.88,
+          "ml_home": 0.875,
           "ml_away": 0.125,
-          "ml_home_american": -733,
+          "ml_home_american": -700,
           "ml_away_american": 700
         }
       }
@@ -6628,10 +6628,10 @@
           "slug": "KXNCAAFGAME-26SEP12DELVAN",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12delvan",
           "title": "Delaware vs Vanderbilt",
-          "ml_home": 0.815,
-          "ml_away": 0.18,
-          "ml_home_american": -441,
-          "ml_away_american": 456
+          "ml_home": 0.85,
+          "ml_away": 0.14,
+          "ml_home_american": -567,
+          "ml_away_american": 614
         }
       }
     },
@@ -7662,9 +7662,9 @@
           "slug": "KXNCAAFGAME-26SEP12NDSUAFA",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ndsuafa",
           "title": "North Dakota St. vs Air Force",
-          "ml_home": 0.47,
+          "ml_home": 0.48,
           "ml_away": 0.52,
-          "ml_home_american": 113,
+          "ml_home_american": 108,
           "ml_away_american": -108
         }
       }
@@ -7703,10 +7703,10 @@
           "slug": "KXNCAAFGAME-26SEP12ARKUTAH",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arkutah",
           "title": "Arkansas vs Utah",
-          "ml_home": 0.695,
-          "ml_away": 0.32,
-          "ml_home_american": -228,
-          "ml_away_american": 212
+          "ml_home": 0.715,
+          "ml_away": 0.29,
+          "ml_home_american": -251,
+          "ml_away_american": 245
         }
       }
     },
@@ -7785,9 +7785,9 @@
           "slug": "KXNCAAFGAME-26SEP12MTSTNEV",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mtstnev",
           "title": "Montana St. vs Nevada",
-          "ml_home": 0.255,
+          "ml_home": 0.275,
           "ml_away": 0.74,
-          "ml_home_american": 292,
+          "ml_home_american": 264,
           "ml_away_american": -285
         }
       }
@@ -7966,10 +7966,10 @@
           "slug": "KXNCAAFGAME-26SEP18HOUTTU",
           "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep18houttu",
           "title": "Houston vs Texas Tech",
-          "ml_home": 0.82,
-          "ml_away": 0.19,
-          "ml_home_american": -456,
-          "ml_away_american": 426
+          "ml_home": 0.83,
+          "ml_away": 0.185,
+          "ml_home_american": -488,
+          "ml_away_american": 441
         }
       }
     },
@@ -28277,7 +28277,7 @@
   "scored_at": "2026-08-30T22:25:49+00:00",
   "books": {
     "source": "kalshi",
-    "pulled_at": "2026-08-31T13:33:30.766235+00:00",
+    "pulled_at": "2026-08-31T13:57:07.052861+00:00",
     "events": {
       "kalshi": 263
     },
