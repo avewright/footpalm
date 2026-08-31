@@ -1,0 +1,1019 @@
+{
+  "source": "espn-site",
+  "season": 2026,
+  "note": "Pre-game snapshots. Locked at kickoff. Do not train TabPFN on ESPN FPI, DK, or weather.",
+  "games": {
+    "id:401864494": {
+      "home": "USC",
+      "away": "San Jos\u00e9 State",
+      "start": "2026-08-29T19:00:00.000Z",
+      "espn_id": "401864494",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": true,
+      "snaps": []
+    },
+    "id:401856663": {
+      "home": "Missouri",
+      "away": "Arkansas-Pine Bluff",
+      "start": "2026-09-04T00:00:00.000Z",
+      "espn_id": "401856663",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -54.5,
+            "total": 60.5,
+            "details": "MIZ -54.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -54.5,
+        "total": 60.5,
+        "details": "MIZ -54.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856768": {
+      "home": "Utah",
+      "away": "Idaho",
+      "start": "2026-09-04T01:00:00.000Z",
+      "espn_id": "401856768",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -34.5,
+            "total": 57.5,
+            "details": "UTAH -34.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -34.5,
+        "total": 57.5,
+        "details": "UTAH -34.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856664": {
+      "home": "Oklahoma",
+      "away": "UTEP",
+      "start": "2026-09-05T00:00:00.000Z",
+      "espn_id": "401856664",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -41.5,
+            "total": 50.5,
+            "details": "OU -41.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -41.5,
+        "total": 50.5,
+        "details": "OU -41.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858206": {
+      "home": "Stanford",
+      "away": "Miami",
+      "start": "2026-09-05T01:00:00.000Z",
+      "espn_id": "401858206",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": 24.5,
+            "total": 47.5,
+            "details": "MIA -24.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": 24.5,
+        "total": 47.5,
+        "details": "MIA -24.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858436": {
+      "home": "USC",
+      "away": "Fresno State",
+      "start": "2026-09-05T01:00:00.000Z",
+      "espn_id": "401858436",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -22.5,
+            "total": 51.5,
+            "details": "USC -22.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -22.5,
+        "total": 51.5,
+        "details": "USC -22.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856634": {
+      "home": "Alabama",
+      "away": "East Carolina",
+      "start": "2026-09-05T16:00:00.000Z",
+      "espn_id": "401856634",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Bryant-Denny Stadium",
+            "city": "Tuscaloosa",
+            "state": "AL",
+            "grass": true,
+            "temperature": 86.0,
+            "gust": 2.0,
+            "precipitation": 5.0,
+            "condition": "2"
+          },
+          "fpi": {
+            "home_win": 0.946,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -28.5,
+            "total": 52.5,
+            "details": "ALA -28.5",
+            "over_odds": -115.0,
+            "under_odds": -105.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Bryant-Denny Stadium",
+        "city": "Tuscaloosa",
+        "state": "AL",
+        "grass": true,
+        "temperature": 86.0,
+        "gust": 2.0,
+        "precipitation": 5.0,
+        "condition": "2"
+      },
+      "fpi": {
+        "home_win": 0.946,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -28.5,
+        "total": 52.5,
+        "details": "ALA -28.5",
+        "over_odds": -115.0,
+        "under_odds": -105.0
+      },
+      "venue": {
+        "venue": "Bryant-Denny Stadium",
+        "city": "Tuscaloosa",
+        "state": "AL",
+        "grass": true
+      }
+    },
+    "id:401856778": {
+      "home": "Houston",
+      "away": "Oregon State",
+      "start": "2026-09-05T16:00:00.000Z",
+      "espn_id": "401856778",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -20.5,
+            "total": 50.5,
+            "details": "HOU -20.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -20.5,
+        "total": 50.5,
+        "details": "HOU -20.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858425": {
+      "home": "Indiana",
+      "away": "North Texas",
+      "start": "2026-09-05T16:00:00.000Z",
+      "espn_id": "401858425",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Memorial Stadium (Bloomington, IN)",
+            "city": "Bloomington",
+            "state": "IN",
+            "grass": false,
+            "temperature": 82.0,
+            "gust": 2.0,
+            "precipitation": 5.0,
+            "condition": "4"
+          },
+          "fpi": {
+            "home_win": 0.982,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -40.5,
+            "total": 55.5,
+            "details": "IU -40.5",
+            "over_odds": -115.0,
+            "under_odds": -105.0
+          },
+          "qbs": {
+            "home": [
+              {
+                "name": "Jacob Bell",
+                "jersey": "12",
+                "year": "Freshman",
+                "group": "offense"
+              },
+              {
+                "name": "Tyler Cherry",
+                "jersey": "15",
+                "year": "Freshman",
+                "group": "offense"
+              },
+              {
+                "name": "Maverick Geske",
+                "jersey": "14",
+                "year": "Freshman",
+                "group": "offense"
+              },
+              {
+                "name": "Josh Hoover",
+                "jersey": "10",
+                "year": "Senior",
+                "group": "offense"
+              },
+              {
+                "name": "Grant Wilson",
+                "jersey": "2",
+                "year": "Senior",
+                "group": "offense"
+              }
+            ]
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Memorial Stadium (Bloomington, IN)",
+        "city": "Bloomington",
+        "state": "IN",
+        "grass": false,
+        "temperature": 82.0,
+        "gust": 2.0,
+        "precipitation": 5.0,
+        "condition": "4"
+      },
+      "fpi": {
+        "home_win": 0.982,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -40.5,
+        "total": 55.5,
+        "details": "IU -40.5",
+        "over_odds": -115.0,
+        "under_odds": -105.0
+      },
+      "qbs": {
+        "home": [
+          {
+            "name": "Jacob Bell",
+            "jersey": "12",
+            "year": "Freshman",
+            "group": "offense"
+          },
+          {
+            "name": "Tyler Cherry",
+            "jersey": "15",
+            "year": "Freshman",
+            "group": "offense"
+          },
+          {
+            "name": "Maverick Geske",
+            "jersey": "14",
+            "year": "Freshman",
+            "group": "offense"
+          },
+          {
+            "name": "Josh Hoover",
+            "jersey": "10",
+            "year": "Senior",
+            "group": "offense"
+          },
+          {
+            "name": "Grant Wilson",
+            "jersey": "2",
+            "year": "Senior",
+            "group": "offense"
+          }
+        ]
+      },
+      "venue": {
+        "venue": "Memorial Stadium (Bloomington, IN)",
+        "city": "Bloomington",
+        "state": "IN",
+        "grass": false
+      }
+    },
+    "id:401858432": {
+      "home": "Ohio State",
+      "away": "Ball State",
+      "start": "2026-09-05T16:30:00.000Z",
+      "espn_id": "401858432",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Ohio Stadium",
+            "city": "Columbus",
+            "state": "OH",
+            "grass": false,
+            "temperature": 72.0,
+            "gust": 2.0,
+            "precipitation": 62.0,
+            "condition": "12"
+          },
+          "fpi": {
+            "home_win": 0.997,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -50.5,
+            "total": 56.5,
+            "details": "OSU -50.5",
+            "over_odds": -105.0,
+            "under_odds": -115.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Ohio Stadium",
+        "city": "Columbus",
+        "state": "OH",
+        "grass": false,
+        "temperature": 72.0,
+        "gust": 2.0,
+        "precipitation": 62.0,
+        "condition": "12"
+      },
+      "fpi": {
+        "home_win": 0.997,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -50.5,
+        "total": 56.5,
+        "details": "OSU -50.5",
+        "over_odds": -105.0,
+        "under_odds": -115.0
+      },
+      "venue": {
+        "venue": "Ohio Stadium",
+        "city": "Columbus",
+        "state": "OH",
+        "grass": false
+      }
+    },
+    "id:401856658": {
+      "home": "Georgia",
+      "away": "Tennessee State",
+      "start": "2026-09-05T19:00:00.000Z",
+      "espn_id": "401856658",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -46.5,
+            "total": 56.5,
+            "details": "UGA -46.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -46.5,
+        "total": 56.5,
+        "details": "UGA -46.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858433": {
+      "home": "Oregon",
+      "away": "Boise State",
+      "start": "2026-09-05T19:30:00.000Z",
+      "espn_id": "401858433",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Autzen Stadium",
+            "city": "Eugene",
+            "state": "OR",
+            "grass": false,
+            "temperature": 61.0,
+            "gust": 2.0,
+            "precipitation": 42.0,
+            "condition": "13"
+          },
+          "fpi": {
+            "home_win": 0.948,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -24.5,
+            "total": 51.5,
+            "details": "ORE -24.5",
+            "over_odds": -110.0,
+            "under_odds": -110.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Autzen Stadium",
+        "city": "Eugene",
+        "state": "OR",
+        "grass": false,
+        "temperature": 61.0,
+        "gust": 2.0,
+        "precipitation": 42.0,
+        "condition": "13"
+      },
+      "fpi": {
+        "home_win": 0.948,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -24.5,
+        "total": 51.5,
+        "details": "ORE -24.5",
+        "over_odds": -110.0,
+        "under_odds": -110.0
+      },
+      "venue": {
+        "venue": "Autzen Stadium",
+        "city": "Eugene",
+        "state": "OR",
+        "grass": false
+      }
+    },
+    "id:401858434": {
+      "home": "Penn State",
+      "away": "Marshall",
+      "start": "2026-09-05T19:30:00.000Z",
+      "espn_id": "401858434",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Beaver Stadium",
+            "city": "University Park",
+            "state": "PA",
+            "grass": true,
+            "temperature": 75.0,
+            "gust": 13.0,
+            "precipitation": 7.0,
+            "condition": "3"
+          },
+          "fpi": {
+            "home_win": 0.955,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -24.5,
+            "total": 52.5,
+            "details": "PSU -24.5",
+            "over_odds": -112.0,
+            "under_odds": -108.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Beaver Stadium",
+        "city": "University Park",
+        "state": "PA",
+        "grass": true,
+        "temperature": 75.0,
+        "gust": 13.0,
+        "precipitation": 7.0,
+        "condition": "3"
+      },
+      "fpi": {
+        "home_win": 0.955,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -24.5,
+        "total": 52.5,
+        "details": "PSU -24.5",
+        "over_odds": -112.0,
+        "under_odds": -108.0
+      },
+      "venue": {
+        "venue": "Beaver Stadium",
+        "city": "University Park",
+        "state": "PA",
+        "grass": true
+      }
+    },
+    "id:401856666": {
+      "home": "Tennessee",
+      "away": "Furman",
+      "start": "2026-09-05T19:30:00.000Z",
+      "espn_id": "401856666",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -46.5,
+            "total": 66.5,
+            "details": "TENN -46.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -46.5,
+        "total": 66.5,
+        "details": "TENN -46.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856667": {
+      "home": "Texas",
+      "away": "Texas State",
+      "start": "2026-09-05T19:30:00.000Z",
+      "espn_id": "401856667",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "DKR-Texas Memorial Stadium",
+            "city": "Austin",
+            "state": "TX",
+            "grass": false,
+            "temperature": 97.0,
+            "gust": 8.0,
+            "precipitation": 11.0,
+            "condition": "2"
+          },
+          "fpi": {
+            "home_win": 0.984,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -30.5,
+            "total": 59.5,
+            "details": "TEX -30.5",
+            "over_odds": -112.0,
+            "under_odds": -108.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "DKR-Texas Memorial Stadium",
+        "city": "Austin",
+        "state": "TX",
+        "grass": false,
+        "temperature": 97.0,
+        "gust": 8.0,
+        "precipitation": 11.0,
+        "condition": "2"
+      },
+      "fpi": {
+        "home_win": 0.984,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -30.5,
+        "total": 59.5,
+        "details": "TEX -30.5",
+        "over_odds": -112.0,
+        "under_odds": -108.0
+      },
+      "venue": {
+        "venue": "DKR-Texas Memorial Stadium",
+        "city": "Austin",
+        "state": "TX",
+        "grass": false
+      }
+    },
+    "id:401858426": {
+      "home": "Iowa",
+      "away": "Northern Illinois",
+      "start": "2026-09-05T20:15:00.000Z",
+      "espn_id": "401858426",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -31.5,
+            "total": 45.5,
+            "details": "IOWA -31.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -31.5,
+        "total": 45.5,
+        "details": "IOWA -31.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856668": {
+      "home": "Texas A&M",
+      "away": "Missouri State",
+      "start": "2026-09-05T23:00:00.000Z",
+      "espn_id": "401856668",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -41.5,
+            "total": 53.5,
+            "details": "TA&M -41.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -41.5,
+        "total": 53.5,
+        "details": "TA&M -41.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856770": {
+      "home": "Texas Tech",
+      "away": "Abilene Christian",
+      "start": "2026-09-05T23:00:00.000Z",
+      "espn_id": "401856770",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -42.5,
+            "total": 59.5,
+            "details": "TTU -42.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -42.5,
+        "total": 59.5,
+        "details": "TTU -42.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856660": {
+      "home": "LSU",
+      "away": "Clemson",
+      "start": "2026-09-05T23:30:00.000Z",
+      "espn_id": "401856660",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -10.5,
+            "total": 51.5,
+            "details": "LSU -10.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -10.5,
+        "total": 51.5,
+        "details": "LSU -10.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858428": {
+      "home": "Michigan",
+      "away": "Western Michigan",
+      "start": "2026-09-05T23:30:00.000Z",
+      "espn_id": "401858428",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "weather": {
+            "venue": "Michigan Stadium",
+            "city": "Ann Arbor",
+            "state": "MI",
+            "grass": false,
+            "temperature": 76.0,
+            "gust": 13.0,
+            "precipitation": 14.0,
+            "condition": "1"
+          },
+          "fpi": {
+            "home_win": 0.937,
+            "source": "espn-fpi"
+          },
+          "odds": {
+            "source": "draftkings",
+            "spread": -27.5,
+            "total": 48.5,
+            "details": "MICH -27.5",
+            "over_odds": -110.0,
+            "under_odds": -110.0
+          }
+        }
+      ],
+      "weather": {
+        "venue": "Michigan Stadium",
+        "city": "Ann Arbor",
+        "state": "MI",
+        "grass": false,
+        "temperature": 76.0,
+        "gust": 13.0,
+        "precipitation": 14.0,
+        "condition": "1"
+      },
+      "fpi": {
+        "home_win": 0.937,
+        "source": "espn-fpi"
+      },
+      "odds": {
+        "source": "draftkings",
+        "spread": -27.5,
+        "total": 48.5,
+        "details": "MICH -27.5",
+        "over_odds": -110.0,
+        "under_odds": -110.0
+      },
+      "venue": {
+        "venue": "Michigan Stadium",
+        "city": "Ann Arbor",
+        "state": "MI",
+        "grass": false
+      }
+    },
+    "id:401856775": {
+      "home": "BYU",
+      "away": "Utah Tech",
+      "start": "2026-09-06T00:00:00.000Z",
+      "espn_id": "401856775",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -51.5,
+            "total": 59.5,
+            "details": "BYU -51.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -51.5,
+        "total": 59.5,
+        "details": "BYU -51.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858437": {
+      "home": "Washington",
+      "away": "Washington State",
+      "start": "2026-09-06T20:00:00.000Z",
+      "espn_id": "401858437",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -23.5,
+            "total": 50.5,
+            "details": "WASH -23.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -23.5,
+        "total": 50.5,
+        "details": "WASH -23.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858438": {
+      "home": "Notre Dame",
+      "away": "Wisconsin",
+      "start": "2026-09-06T23:30:00.000Z",
+      "espn_id": "401858438",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -20.5,
+            "total": 47.5,
+            "details": "ND -20.5",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -20.5,
+        "total": 47.5,
+        "details": "ND -20.5",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401856661": {
+      "home": "Ole Miss",
+      "away": "Louisville",
+      "start": "2026-09-06T23:30:00.000Z",
+      "espn_id": "401856661",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": -7.0,
+            "total": 55.5,
+            "details": "MISS -7",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": -7.0,
+        "total": 55.5,
+        "details": "MISS -7",
+        "over_odds": null,
+        "under_odds": null
+      }
+    },
+    "id:401858212": {
+      "home": "Florida State",
+      "away": "SMU",
+      "start": "2026-09-07T23:30:00.000Z",
+      "espn_id": "401858212",
+      "logged_at": "2026-08-31T17:58:49.648316+00:00",
+      "locked": false,
+      "snaps": [
+        {
+          "at": "2026-08-31T17:58:49.648316+00:00",
+          "odds": {
+            "source": "draftkings",
+            "spread": 3.0,
+            "total": 53.5,
+            "details": "SMU -3",
+            "over_odds": null,
+            "under_odds": null
+          }
+        }
+      ],
+      "odds": {
+        "source": "draftkings",
+        "spread": 3.0,
+        "total": 53.5,
+        "details": "SMU -3",
+        "over_odds": null,
+        "under_odds": null
+      }
+    }
+  },
+  "updated_at": "2026-08-31T17:58:49.871946+00:00"
+}

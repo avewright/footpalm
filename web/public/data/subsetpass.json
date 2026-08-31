@@ -1,0 +1,869 @@
+{
+  "protocol": "Subset scan. Groups locked before the score. Select on 2024. Score 2025 after. Trees only. Not live.",
+  "candidates": [
+    "to_margin_diff",
+    "ypc_diff",
+    "play_speed_diff",
+    "sec_per_play_diff",
+    "margin_momentum_diff",
+    "win_streak_diff",
+    "fg_avg_make_diff",
+    "fg_make_adj_diff",
+    "punt_rate_diff",
+    "punt_yds_diff",
+    "plays_pg_diff"
+  ],
+  "groups": {
+    "pace": [
+      "to_margin_diff",
+      "ypc_diff",
+      "play_speed_diff",
+      "sec_per_play_diff"
+    ],
+    "specials": [
+      "margin_momentum_diff",
+      "win_streak_diff",
+      "fg_avg_make_diff",
+      "fg_make_adj_diff",
+      "punt_rate_diff",
+      "punt_yds_diff",
+      "plays_pg_diff"
+    ],
+    "clocks": [
+      "play_speed_diff",
+      "sec_per_play_diff"
+    ],
+    "rush": [
+      "ypc_diff"
+    ],
+    "ball": [
+      "to_margin_diff"
+    ],
+    "punts": [
+      "punt_rate_diff",
+      "punt_yds_diff"
+    ],
+    "kicks": [
+      "fg_avg_make_diff",
+      "fg_make_adj_diff"
+    ],
+    "form": [
+      "margin_momentum_diff",
+      "win_streak_diff"
+    ],
+    "plays": [
+      "plays_pg_diff"
+    ],
+    "all": [
+      "to_margin_diff",
+      "ypc_diff",
+      "play_speed_diff",
+      "sec_per_play_diff",
+      "margin_momentum_diff",
+      "win_streak_diff",
+      "fg_avg_make_diff",
+      "fg_make_adj_diff",
+      "punt_rate_diff",
+      "punt_yds_diff",
+      "plays_pg_diff"
+    ]
+  },
+  "inner_year": 2024,
+  "holdout_year": 2025,
+  "inner_best_group": "rush",
+  "inner": [
+    {
+      "set": "extras",
+      "kind": "baseline",
+      "lightgbm": {
+        "brier": 0.1938
+      },
+      "xgboost": {
+        "brier": 0.192
+      }
+    },
+    {
+      "set": "pace",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1929
+      },
+      "lightgbm_delta": -0.0009,
+      "xgboost": {
+        "brier": 0.1921
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "specials",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1946
+      },
+      "lightgbm_delta": 0.0008,
+      "xgboost": {
+        "brier": 0.1929
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "clocks",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1929
+      },
+      "lightgbm_delta": -0.0009,
+      "xgboost": {
+        "brier": 0.1929
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "rush",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1923
+      },
+      "lightgbm_delta": -0.0015,
+      "xgboost": {
+        "brier": 0.1916
+      },
+      "xgboost_delta": -0.0004
+    },
+    {
+      "set": "ball",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1943
+      },
+      "lightgbm_delta": 0.0005,
+      "xgboost": {
+        "brier": 0.1915
+      },
+      "xgboost_delta": -0.0005
+    },
+    {
+      "set": "punts",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1928
+      },
+      "lightgbm_delta": -0.001,
+      "xgboost": {
+        "brier": 0.1917
+      },
+      "xgboost_delta": -0.0003
+    },
+    {
+      "set": "kicks",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1922
+      },
+      "lightgbm_delta": -0.0016,
+      "xgboost": {
+        "brier": 0.1923
+      },
+      "xgboost_delta": 0.0003
+    },
+    {
+      "set": "form",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1947
+      },
+      "lightgbm_delta": 0.0009,
+      "xgboost": {
+        "brier": 0.1919
+      },
+      "xgboost_delta": -0.0001
+    },
+    {
+      "set": "plays",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1931
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1917
+      },
+      "xgboost_delta": -0.0003
+    },
+    {
+      "set": "all",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.195
+      },
+      "lightgbm_delta": 0.0012,
+      "xgboost": {
+        "brier": 0.1936
+      },
+      "xgboost_delta": 0.0016
+    },
+    {
+      "set": "to_margin_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1943
+      },
+      "lightgbm_delta": 0.0005,
+      "xgboost": {
+        "brier": 0.1915
+      },
+      "xgboost_delta": -0.0005
+    },
+    {
+      "set": "ypc_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1923
+      },
+      "lightgbm_delta": -0.0015,
+      "xgboost": {
+        "brier": 0.1916
+      },
+      "xgboost_delta": -0.0004
+    },
+    {
+      "set": "play_speed_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1936
+      },
+      "lightgbm_delta": -0.0002,
+      "xgboost": {
+        "brier": 0.1923
+      },
+      "xgboost_delta": 0.0003
+    },
+    {
+      "set": "sec_per_play_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1939
+      },
+      "lightgbm_delta": 0.0001,
+      "xgboost": {
+        "brier": 0.1928
+      },
+      "xgboost_delta": 0.0008
+    },
+    {
+      "set": "margin_momentum_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1941
+      },
+      "lightgbm_delta": 0.0003,
+      "xgboost": {
+        "brier": 0.1941
+      },
+      "xgboost_delta": 0.0021
+    },
+    {
+      "set": "win_streak_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1936
+      },
+      "lightgbm_delta": -0.0002,
+      "xgboost": {
+        "brier": 0.1931
+      },
+      "xgboost_delta": 0.0011
+    },
+    {
+      "set": "fg_avg_make_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1921
+      },
+      "lightgbm_delta": -0.0017,
+      "xgboost": {
+        "brier": 0.1912
+      },
+      "xgboost_delta": -0.0008
+    },
+    {
+      "set": "fg_make_adj_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1938
+      },
+      "lightgbm_delta": 0.0,
+      "xgboost": {
+        "brier": 0.1934
+      },
+      "xgboost_delta": 0.0014
+    },
+    {
+      "set": "punt_rate_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1925
+      },
+      "lightgbm_delta": -0.0013,
+      "xgboost": {
+        "brier": 0.1921
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "punt_yds_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1931
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1919
+      },
+      "xgboost_delta": -0.0001
+    },
+    {
+      "set": "plays_pg_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1931
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1917
+      },
+      "xgboost_delta": -0.0003
+    },
+    {
+      "set": "all-to_margin_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1937
+      },
+      "lightgbm_delta": -0.0001,
+      "xgboost": {
+        "brier": 0.1929
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "all-ypc_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1937
+      },
+      "lightgbm_delta": -0.0001,
+      "xgboost": {
+        "brier": 0.1934
+      },
+      "xgboost_delta": 0.0014
+    },
+    {
+      "set": "all-play_speed_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1937
+      },
+      "lightgbm_delta": -0.0001,
+      "xgboost": {
+        "brier": 0.194
+      },
+      "xgboost_delta": 0.002
+    },
+    {
+      "set": "all-sec_per_play_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.194
+      },
+      "lightgbm_delta": 0.0002,
+      "xgboost": {
+        "brier": 0.1925
+      },
+      "xgboost_delta": 0.0005
+    },
+    {
+      "set": "all-margin_momentum_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1941
+      },
+      "lightgbm_delta": 0.0003,
+      "xgboost": {
+        "brier": 0.1928
+      },
+      "xgboost_delta": 0.0008
+    },
+    {
+      "set": "all-win_streak_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1926
+      },
+      "lightgbm_delta": -0.0012,
+      "xgboost": {
+        "brier": 0.1937
+      },
+      "xgboost_delta": 0.0017
+    },
+    {
+      "set": "all-fg_avg_make_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1945
+      },
+      "lightgbm_delta": 0.0007,
+      "xgboost": {
+        "brier": 0.1929
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "all-fg_make_adj_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1937
+      },
+      "lightgbm_delta": -0.0001,
+      "xgboost": {
+        "brier": 0.1919
+      },
+      "xgboost_delta": -0.0001
+    },
+    {
+      "set": "all-punt_rate_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1956
+      },
+      "lightgbm_delta": 0.0018,
+      "xgboost": {
+        "brier": 0.1938
+      },
+      "xgboost_delta": 0.0018
+    },
+    {
+      "set": "all-punt_yds_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1932
+      },
+      "lightgbm_delta": -0.0006,
+      "xgboost": {
+        "brier": 0.193
+      },
+      "xgboost_delta": 0.001
+    },
+    {
+      "set": "all-plays_pg_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1953
+      },
+      "lightgbm_delta": 0.0015,
+      "xgboost": {
+        "brier": 0.1933
+      },
+      "xgboost_delta": 0.0013
+    }
+  ],
+  "holdout": [
+    {
+      "set": "extras",
+      "kind": "baseline",
+      "lightgbm": {
+        "brier": 0.1845
+      },
+      "xgboost": {
+        "brier": 0.1834
+      }
+    },
+    {
+      "set": "pace",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1828
+      },
+      "lightgbm_delta": -0.0017,
+      "xgboost": {
+        "brier": 0.1814
+      },
+      "xgboost_delta": -0.002
+    },
+    {
+      "set": "specials",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1843
+      },
+      "lightgbm_delta": -0.0002,
+      "xgboost": {
+        "brier": 0.1835
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "clocks",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1835
+      },
+      "lightgbm_delta": -0.001,
+      "xgboost": {
+        "brier": 0.183
+      },
+      "xgboost_delta": -0.0004
+    },
+    {
+      "set": "rush",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1837
+      },
+      "lightgbm_delta": -0.0008,
+      "xgboost": {
+        "brier": 0.1835
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "ball",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1838
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1827
+      },
+      "xgboost_delta": -0.0007
+    },
+    {
+      "set": "punts",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1841
+      },
+      "lightgbm_delta": -0.0004,
+      "xgboost": {
+        "brier": 0.1833
+      },
+      "xgboost_delta": -0.0001
+    },
+    {
+      "set": "kicks",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1851
+      },
+      "lightgbm_delta": 0.0006,
+      "xgboost": {
+        "brier": 0.184
+      },
+      "xgboost_delta": 0.0006
+    },
+    {
+      "set": "form",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1837
+      },
+      "lightgbm_delta": -0.0008,
+      "xgboost": {
+        "brier": 0.1837
+      },
+      "xgboost_delta": 0.0003
+    },
+    {
+      "set": "plays",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1839
+      },
+      "lightgbm_delta": -0.0006,
+      "xgboost": {
+        "brier": 0.1843
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "all",
+      "kind": "group",
+      "lightgbm": {
+        "brier": 0.1836
+      },
+      "lightgbm_delta": -0.0009,
+      "xgboost": {
+        "brier": 0.182
+      },
+      "xgboost_delta": -0.0014
+    },
+    {
+      "set": "to_margin_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1838
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1827
+      },
+      "xgboost_delta": -0.0007
+    },
+    {
+      "set": "ypc_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1837
+      },
+      "lightgbm_delta": -0.0008,
+      "xgboost": {
+        "brier": 0.1835
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "play_speed_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1843
+      },
+      "lightgbm_delta": -0.0002,
+      "xgboost": {
+        "brier": 0.1838
+      },
+      "xgboost_delta": 0.0004
+    },
+    {
+      "set": "sec_per_play_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1843
+      },
+      "lightgbm_delta": -0.0002,
+      "xgboost": {
+        "brier": 0.1835
+      },
+      "xgboost_delta": 0.0001
+    },
+    {
+      "set": "margin_momentum_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1838
+      },
+      "lightgbm_delta": -0.0007,
+      "xgboost": {
+        "brier": 0.1834
+      },
+      "xgboost_delta": 0.0
+    },
+    {
+      "set": "win_streak_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1853
+      },
+      "lightgbm_delta": 0.0008,
+      "xgboost": {
+        "brier": 0.1839
+      },
+      "xgboost_delta": 0.0005
+    },
+    {
+      "set": "fg_avg_make_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1846
+      },
+      "lightgbm_delta": 0.0001,
+      "xgboost": {
+        "brier": 0.184
+      },
+      "xgboost_delta": 0.0006
+    },
+    {
+      "set": "fg_make_adj_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1845
+      },
+      "lightgbm_delta": 0.0,
+      "xgboost": {
+        "brier": 0.1836
+      },
+      "xgboost_delta": 0.0002
+    },
+    {
+      "set": "punt_rate_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1844
+      },
+      "lightgbm_delta": -0.0001,
+      "xgboost": {
+        "brier": 0.183
+      },
+      "xgboost_delta": -0.0004
+    },
+    {
+      "set": "punt_yds_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1834
+      },
+      "lightgbm_delta": -0.0011,
+      "xgboost": {
+        "brier": 0.1843
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "plays_pg_diff",
+      "kind": "single",
+      "lightgbm": {
+        "brier": 0.1839
+      },
+      "lightgbm_delta": -0.0006,
+      "xgboost": {
+        "brier": 0.1843
+      },
+      "xgboost_delta": 0.0009
+    },
+    {
+      "set": "all-to_margin_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1828
+      },
+      "lightgbm_delta": -0.0017,
+      "xgboost": {
+        "brier": 0.1822
+      },
+      "xgboost_delta": -0.0012
+    },
+    {
+      "set": "all-ypc_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1834
+      },
+      "lightgbm_delta": -0.0011,
+      "xgboost": {
+        "brier": 0.1824
+      },
+      "xgboost_delta": -0.001
+    },
+    {
+      "set": "all-play_speed_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1837
+      },
+      "lightgbm_delta": -0.0008,
+      "xgboost": {
+        "brier": 0.1811
+      },
+      "xgboost_delta": -0.0023
+    },
+    {
+      "set": "all-sec_per_play_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1837
+      },
+      "lightgbm_delta": -0.0008,
+      "xgboost": {
+        "brier": 0.1829
+      },
+      "xgboost_delta": -0.0005
+    },
+    {
+      "set": "all-margin_momentum_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1842
+      },
+      "lightgbm_delta": -0.0003,
+      "xgboost": {
+        "brier": 0.182
+      },
+      "xgboost_delta": -0.0014
+    },
+    {
+      "set": "all-win_streak_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1829
+      },
+      "lightgbm_delta": -0.0016,
+      "xgboost": {
+        "brier": 0.1816
+      },
+      "xgboost_delta": -0.0018
+    },
+    {
+      "set": "all-fg_avg_make_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1833
+      },
+      "lightgbm_delta": -0.0012,
+      "xgboost": {
+        "brier": 0.1816
+      },
+      "xgboost_delta": -0.0018
+    },
+    {
+      "set": "all-fg_make_adj_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1845
+      },
+      "lightgbm_delta": 0.0,
+      "xgboost": {
+        "brier": 0.182
+      },
+      "xgboost_delta": -0.0014
+    },
+    {
+      "set": "all-punt_rate_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1847
+      },
+      "lightgbm_delta": 0.0002,
+      "xgboost": {
+        "brier": 0.1817
+      },
+      "xgboost_delta": -0.0017
+    },
+    {
+      "set": "all-punt_yds_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1833
+      },
+      "lightgbm_delta": -0.0012,
+      "xgboost": {
+        "brier": 0.1818
+      },
+      "xgboost_delta": -0.0016
+    },
+    {
+      "set": "all-plays_pg_diff",
+      "kind": "drop",
+      "lightgbm": {
+        "brier": 0.1833
+      },
+      "lightgbm_delta": -0.0012,
+      "xgboost": {
+        "brier": 0.1818
+      },
+      "xgboost_delta": -0.0016
+    }
+  ],
+  "tabpfn": [],
+  "promoted": false,
+  "note": "TabPFN batch skipped (hung). Do not promote a 2025 winner that was not the 2024 pick."
+}

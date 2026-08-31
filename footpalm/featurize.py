@@ -13,6 +13,8 @@ from footpalm.form import (
     CRAFT_NAMES,
     EXTRA_NAMES,
     FULL_CRAFT_ALL,
+    GLM4_ALL,
+    GLM4_NAMES,
     LOSO_ALL,
     LOSO_NAMES,
     SIGNAL_ALL,
@@ -22,6 +24,8 @@ from footpalm.form import (
     FormBook,
     time_features,
 )
+from footpalm.pace import PACE_ALL, PACE_NAMES, PaceBook, load_snaps
+from footpalm.specials import SPECIAL_ALL, SPECIAL_NAMES, SpecialsBook, load_specials
 from footpalm.predict import FEATURE_NAMES
 from footpalm.project import history_path
 
@@ -66,21 +70,32 @@ def load_prediction_games(root: Path) -> list[dict]:
 
 
 def walk_form(
-    games: list[dict], X_locked: np.ndarray
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    games: list[dict],
+    X_locked: np.ndarray,
+    *,
+    pace_by_game: dict[int, dict] | None = None,
+    specials_by_game: dict[int, dict] | None = None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     if len(games) != len(X_locked):
         raise SystemExit(f"games n={len(games)} != locked features n={len(X_locked)}")
     form = FormBook()
+    pace_book = PaceBook()
+    specials_book = SpecialsBook()
     extras = np.zeros((len(games), len(EXTRA_NAMES)), dtype=float)
     signal = np.zeros((len(games), len(SIGNAL_NAMES)), dtype=float)
     craft = np.zeros((len(games), len(CRAFT_NAMES)), dtype=float)
     loso = np.zeros((len(games), len(LOSO_NAMES)), dtype=float)
     conf = np.zeros((len(games), len(CONF_NAMES)), dtype=float)
+    glm4 = np.zeros((len(games), len(GLM4_NAMES)), dtype=float)
+    pace = np.zeros((len(games), len(PACE_NAMES)), dtype=float)
+    specials = np.zeros((len(games), len(SPECIAL_NAMES)), dtype=float)
     i = 0
     while i < len(games):
         season = int(games[i]["season"])
         if i == 0 or int(games[i - 1]["season"]) != season:
             form.new_season()
+            pace_book.new_season()
+            specials_book.new_season()
         slate = int(games[i]["slate"])
         start = i
         while i < len(games) and int(games[i]["season"]) == season and int(games[i]["slate"]) == slate:
@@ -95,12 +110,15 @@ def walk_form(
             signal[j] = form.signal(games[j]["home"], games[j]["away"], slate)
             craft[j] = form.craft(games[j]["home"], games[j]["away"], slate, X_locked[j])
             loso[j] = form.loso(games[j]["home"], games[j]["away"], slate)
+            glm4[j] = form.glm4(games[j]["home"], games[j]["away"])
             conf[j] = form.conference(
                 games[j]["home"],
                 games[j]["away"],
                 str(games[j].get("home_conf") or ""),
                 str(games[j].get("away_conf") or ""),
             )
+            pace[j] = pace_book.vector(games[j]["home"], games[j]["away"])
+            specials[j] = specials_book.vector(games[j]["home"], games[j]["away"])
         for j in batch:
             game = games[j]
             if game.get("actual_margin") is None:
@@ -119,11 +137,22 @@ def walk_form(
                 home_conf=str(game.get("home_conf") or ""),
                 away_conf=str(game.get("away_conf") or ""),
             )
-    return extras, signal, craft, loso, conf
+            gid = game.get("game_id")
+            snaps = pace_by_game.get(int(gid)) if pace_by_game and gid is not None else None
+            pace_book.apply(snaps, game["home"], game["away"])
+            spec = specials_by_game.get(int(gid)) if specials_by_game and gid is not None else None
+            specials_book.apply(
+                spec,
+                game["home"],
+                game["away"],
+                home_won=bool(game.get("home_won")),
+                margin=float(game["actual_margin"]),
+            )
+    return extras, signal, craft, loso, conf, glm4, pace, specials
 
 
 def extras_from_games(games: list[dict], X_locked: np.ndarray) -> np.ndarray:
-    extras, _signal, _craft, _loso, _conf = walk_form(games, X_locked)
+    extras, _signal, _craft, _loso, _conf, _glm4, _pace, _specials = walk_form(games, X_locked)
     return extras
 
 
@@ -138,7 +167,9 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
     counts = season_game_counts(root)
     if sum(counts.values()) != len(X_locked):
         raise SystemExit(f"history n={len(X_locked)} != prediction rows {sum(counts.values())}")
-    extras, signal, craft, loso, conf = walk_form(games, X_locked)
+    extras, signal, craft, loso, conf, glm4, pace, specials = walk_form(
+        games, X_locked, pace_by_game=load_snaps(root), specials_by_game=load_specials(root)
+    )
     clock = np.vstack([time_features(int(g["season"]), int(g.get("week") or 0)) for g in games])
     seasons = np.array([int(g["season"]) for g in games], dtype=int)
     fbs = np.array([bool(g.get("fbs_fbs")) for g in games])
@@ -149,6 +180,9 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
     X_full_craft = np.concatenate([X_full, craft], axis=1)
     X_loso = np.concatenate([X_full, loso], axis=1)
     X_conf = np.concatenate([X_full, conf], axis=1)
+    X_glm4 = np.concatenate([X_full, glm4], axis=1)
+    X_pace = np.concatenate([X_full, pace], axis=1)
+    X_specials = np.concatenate([X_full, specials], axis=1)
     return {
         "X_locked": X_locked,
         "X_full": X_full,
@@ -158,12 +192,18 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
         "X_full_craft": X_full_craft,
         "X_loso": X_loso,
         "X_conf": X_conf,
+        "X_glm4": X_glm4,
+        "X_pace": X_pace,
+        "X_specials": X_specials,
         "extras": extras,
         "signal": signal,
         "time": clock,
         "craft": craft,
         "loso": loso,
         "conf": conf,
+        "glm4": glm4,
+        "pace": pace,
+        "specials": specials,
         "y_win": y_win,
         "y_margin": y_margin,
         "season": seasons,
@@ -191,11 +231,18 @@ def save_matrix(root: Path, payload: dict[str, np.ndarray]) -> Path:
         loso_full_names=np.array(LOSO_ALL),
         conf_names=np.array(CONF_NAMES),
         conf_full_names=np.array(CONF_ALL),
+        glm4_names=np.array(GLM4_NAMES),
+        glm4_full_names=np.array(GLM4_ALL),
+        pace_names=np.array(PACE_NAMES),
+        pace_full_names=np.array(PACE_ALL),
+        special_names=np.array(SPECIAL_NAMES),
+        special_full_names=np.array(SPECIAL_ALL),
     )
     print(
         f"wrote {dest} n={len(payload['y_win'])} extras={len(EXTRA_NAMES)} "
         f"signal={len(SIGNAL_NAMES)} time={len(TIME_NAMES)} craft={len(CRAFT_NAMES)} "
-        f"loso={len(LOSO_NAMES)} conf={len(CONF_NAMES)}"
+        f"loso={len(LOSO_NAMES)} conf={len(CONF_NAMES)} glm4={len(GLM4_NAMES)} pace={len(PACE_NAMES)} "
+        f"specials={len(SPECIAL_NAMES)}"
     )
     return dest
 

@@ -1,0 +1,1001 @@
+{
+  "protocol": "Expanding-year screen. train = season < hold. Score 2015\u20132025 FBS\u2013FBS. Walk-forward features only. Promote if pooled Brier drops \u2265 0.002, log loss does not rise, and the drop is not one year (median season \u0394 < 0 or \u2265 8 years better). Trees + logistic. Not live TabPFN.",
+  "mode": "expanding-year",
+  "features": [
+    "glm_quality_diff",
+    "glm_sum",
+    "elo_ratio",
+    "log_margin_diff",
+    "conf_pom_diff",
+    "tier_win_diff",
+    "form10_win_diff",
+    "close_x_margin",
+    "late_win_diff",
+    "yoy_margin_diff"
+  ],
+  "comparisons": [
+    {
+      "family": "logistic",
+      "locked_brier": 0.184,
+      "full_brier": 0.1824,
+      "locked_logloss": 0.5447,
+      "full_logloss": 0.54,
+      "delta_brier": -0.0016,
+      "years": 11,
+      "years_better": 9,
+      "median_season_delta": -0.002,
+      "pass": false
+    },
+    {
+      "family": "lightgbm",
+      "locked_brier": 0.1864,
+      "full_brier": 0.1849,
+      "locked_logloss": 0.5521,
+      "full_logloss": 0.548,
+      "delta_brier": -0.0015,
+      "years": 11,
+      "years_better": 7,
+      "median_season_delta": -0.0014,
+      "pass": false
+    },
+    {
+      "family": "xgboost",
+      "locked_brier": 0.1853,
+      "full_brier": 0.1844,
+      "locked_logloss": 0.5489,
+      "full_logloss": 0.5458,
+      "delta_brier": -0.0009,
+      "years": 11,
+      "years_better": 10,
+      "median_season_delta": -0.0009,
+      "pass": false
+    }
+  ],
+  "rows": [
+    {
+      "id": "logistic/extras",
+      "engine": "logistic",
+      "set": "extras",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7168,
+        "brier": 0.184,
+        "logloss": 0.5447
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7168,
+        "brier": 0.1841,
+        "logloss": 0.5448
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7168,
+        "brier": 0.184,
+        "logloss": 0.5448
+      },
+      "mean_season_brier": 0.1841,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1774,
+          "logloss": 0.5348,
+          "brier_T": 0.1777,
+          "brier_clip": 0.1775,
+          "T": 0.9856
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.1948,
+          "logloss": 0.5722,
+          "brier_T": 0.1949,
+          "brier_clip": 0.1948,
+          "T": 0.9954
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1863,
+          "logloss": 0.548,
+          "brier_T": 0.1864,
+          "brier_clip": 0.1863,
+          "T": 0.9975
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.1746,
+          "logloss": 0.5184,
+          "brier_T": 0.1746,
+          "brier_clip": 0.1746,
+          "T": 0.9986
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.1682,
+          "logloss": 0.5074,
+          "brier_T": 0.1682,
+          "brier_clip": 0.1682,
+          "T": 0.9989
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.1865,
+          "logloss": 0.5582,
+          "brier_T": 0.1865,
+          "brier_clip": 0.1865,
+          "T": 0.999
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.1852,
+          "logloss": 0.5469,
+          "brier_T": 0.1852,
+          "brier_clip": 0.1852,
+          "T": 0.9991
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.1958,
+          "logloss": 0.5738,
+          "brier_T": 0.1958,
+          "brier_clip": 0.1958,
+          "T": 0.9992
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1829,
+          "logloss": 0.5419,
+          "brier_T": 0.1829,
+          "brier_clip": 0.1829,
+          "T": 0.9993
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.1918,
+          "logloss": 0.5596,
+          "brier_T": 0.1918,
+          "brier_clip": 0.1918,
+          "T": 0.9994
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1815,
+          "logloss": 0.5354,
+          "brier_T": 0.1815,
+          "brier_clip": 0.1815,
+          "T": 0.9995
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.7199,
+          "brier": 0.1806,
+          "logloss": 0.5344
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.7113,
+          "brier": 0.1898,
+          "logloss": 0.5604
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7199,
+          "brier": 0.1809,
+          "logloss": 0.5365
+        }
+      }
+    },
+    {
+      "id": "lightgbm/extras",
+      "engine": "lightgbm",
+      "set": "extras",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7134,
+        "brier": 0.1864,
+        "logloss": 0.5521
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7134,
+        "brier": 0.1953,
+        "logloss": 0.6072
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7134,
+        "brier": 0.1864,
+        "logloss": 0.5521
+      },
+      "mean_season_brier": 0.1865,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1826,
+          "logloss": 0.5443,
+          "brier_T": 0.2061,
+          "brier_clip": 0.1826,
+          "T": 0.4515
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.1921,
+          "logloss": 0.5719,
+          "brier_T": 0.2139,
+          "brier_clip": 0.1921,
+          "T": 0.5307
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1866,
+          "logloss": 0.5536,
+          "brier_T": 0.2,
+          "brier_clip": 0.1866,
+          "T": 0.5795
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.1785,
+          "logloss": 0.5263,
+          "brier_T": 0.1891,
+          "brier_clip": 0.1785,
+          "T": 0.6316
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.1704,
+          "logloss": 0.5147,
+          "brier_T": 0.1749,
+          "brier_clip": 0.1704,
+          "T": 0.6563
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.1924,
+          "logloss": 0.5768,
+          "brier_T": 0.1988,
+          "brier_clip": 0.1924,
+          "T": 0.7072
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.1888,
+          "logloss": 0.5585,
+          "brier_T": 0.1948,
+          "brier_clip": 0.1887,
+          "T": 0.7212
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.1953,
+          "logloss": 0.573,
+          "brier_T": 0.2004,
+          "brier_clip": 0.1953,
+          "T": 0.7479
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1868,
+          "logloss": 0.553,
+          "brier_T": 0.1895,
+          "brier_clip": 0.1868,
+          "T": 0.7654
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.1938,
+          "logloss": 0.5664,
+          "brier_T": 0.1973,
+          "brier_clip": 0.1938,
+          "T": 0.7819
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1845,
+          "logloss": 0.5425,
+          "brier_T": 0.1863,
+          "brier_clip": 0.1845,
+          "T": 0.7877
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.7143,
+          "brier": 0.1835,
+          "logloss": 0.5424
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.704,
+          "brier": 0.1922,
+          "logloss": 0.5681
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7208,
+          "brier": 0.1829,
+          "logloss": 0.5433
+        }
+      }
+    },
+    {
+      "id": "xgboost/extras",
+      "engine": "xgboost",
+      "set": "extras",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7173,
+        "brier": 0.1853,
+        "logloss": 0.5489
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7173,
+        "brier": 0.1874,
+        "logloss": 0.5577
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7173,
+        "brier": 0.1853,
+        "logloss": 0.549
+      },
+      "mean_season_brier": 0.1853,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1797,
+          "logloss": 0.5393,
+          "brier_T": 0.1793,
+          "brier_clip": 0.1797,
+          "T": 0.8575
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.1906,
+          "logloss": 0.5639,
+          "brier_T": 0.1956,
+          "brier_clip": 0.1906,
+          "T": 0.8066
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1857,
+          "logloss": 0.5512,
+          "brier_T": 0.1897,
+          "brier_clip": 0.1857,
+          "T": 0.8082
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.1789,
+          "logloss": 0.5278,
+          "brier_T": 0.182,
+          "brier_clip": 0.1789,
+          "T": 0.8162
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.1691,
+          "logloss": 0.5086,
+          "brier_T": 0.1702,
+          "brier_clip": 0.1691,
+          "T": 0.8315
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.1891,
+          "logloss": 0.5671,
+          "brier_T": 0.1916,
+          "brier_clip": 0.1891,
+          "T": 0.8369
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.187,
+          "logloss": 0.5552,
+          "brier_T": 0.1895,
+          "brier_clip": 0.187,
+          "T": 0.8454
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.197,
+          "logloss": 0.5767,
+          "brier_T": 0.1996,
+          "brier_clip": 0.197,
+          "T": 0.8507
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1862,
+          "logloss": 0.5531,
+          "brier_T": 0.1874,
+          "brier_clip": 0.1862,
+          "T": 0.8527
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.192,
+          "logloss": 0.5615,
+          "brier_T": 0.1936,
+          "brier_clip": 0.192,
+          "T": 0.8586
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1834,
+          "logloss": 0.5397,
+          "brier_T": 0.1842,
+          "brier_clip": 0.1834,
+          "T": 0.8668
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.723,
+          "brier": 0.1808,
+          "logloss": 0.5365
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.7065,
+          "brier": 0.1924,
+          "logloss": 0.5675
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7236,
+          "brier": 0.1815,
+          "logloss": 0.5395
+        }
+      }
+    },
+    {
+      "id": "logistic/extras+loso",
+      "engine": "logistic",
+      "set": "extras+loso",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7206,
+        "brier": 0.1824,
+        "logloss": 0.54
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7206,
+        "brier": 0.1824,
+        "logloss": 0.5401
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7206,
+        "brier": 0.1824,
+        "logloss": 0.54
+      },
+      "mean_season_brier": 0.1824,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1745,
+          "logloss": 0.5276,
+          "brier_T": 0.1747,
+          "brier_clip": 0.1745,
+          "T": 0.9867
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.1923,
+          "logloss": 0.5683,
+          "brier_T": 0.1924,
+          "brier_clip": 0.1923,
+          "T": 0.9956
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1829,
+          "logloss": 0.5405,
+          "brier_T": 0.1829,
+          "brier_clip": 0.1829,
+          "T": 0.9975
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.1745,
+          "logloss": 0.5166,
+          "brier_T": 0.1745,
+          "brier_clip": 0.1745,
+          "T": 0.9983
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.1697,
+          "logloss": 0.5096,
+          "brier_T": 0.1697,
+          "brier_clip": 0.1697,
+          "T": 0.9986
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.1848,
+          "logloss": 0.5484,
+          "brier_T": 0.1848,
+          "brier_clip": 0.1848,
+          "T": 0.9987
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.1832,
+          "logloss": 0.5403,
+          "brier_T": 0.1832,
+          "brier_clip": 0.1832,
+          "T": 0.9987
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.1921,
+          "logloss": 0.5649,
+          "brier_T": 0.1921,
+          "brier_clip": 0.1921,
+          "T": 0.999
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1808,
+          "logloss": 0.5371,
+          "brier_T": 0.1808,
+          "brier_clip": 0.1808,
+          "T": 0.999
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.1924,
+          "logloss": 0.5596,
+          "brier_T": 0.1924,
+          "brier_clip": 0.1924,
+          "T": 0.9989
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1796,
+          "logloss": 0.5298,
+          "brier_T": 0.1796,
+          "brier_clip": 0.1796,
+          "T": 0.9994
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.7318,
+          "brier": 0.1763,
+          "logloss": 0.523
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.7138,
+          "brier": 0.1875,
+          "logloss": 0.5537
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7211,
+          "brier": 0.181,
+          "logloss": 0.5365
+        }
+      }
+    },
+    {
+      "id": "lightgbm/extras+loso",
+      "engine": "lightgbm",
+      "set": "extras+loso",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7147,
+        "brier": 0.1849,
+        "logloss": 0.548
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7147,
+        "brier": 0.1948,
+        "logloss": 0.6132
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7147,
+        "brier": 0.1849,
+        "logloss": 0.548
+      },
+      "mean_season_brier": 0.185,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1796,
+          "logloss": 0.5329,
+          "brier_T": 0.2059,
+          "brier_clip": 0.1796,
+          "T": 0.4362
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.192,
+          "logloss": 0.5731,
+          "brier_T": 0.2147,
+          "brier_clip": 0.192,
+          "T": 0.4905
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1871,
+          "logloss": 0.5548,
+          "brier_T": 0.204,
+          "brier_clip": 0.1871,
+          "T": 0.5418
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.1758,
+          "logloss": 0.5183,
+          "brier_T": 0.1883,
+          "brier_clip": 0.1757,
+          "T": 0.6079
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.1705,
+          "logloss": 0.5153,
+          "brier_T": 0.176,
+          "brier_clip": 0.1705,
+          "T": 0.6307
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.191,
+          "logloss": 0.5756,
+          "brier_T": 0.1964,
+          "brier_clip": 0.191,
+          "T": 0.6773
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.1848,
+          "logloss": 0.5472,
+          "brier_T": 0.1907,
+          "brier_clip": 0.1848,
+          "T": 0.7053
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.1905,
+          "logloss": 0.5628,
+          "brier_T": 0.1947,
+          "brier_clip": 0.1905,
+          "T": 0.732
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1869,
+          "logloss": 0.5546,
+          "brier_T": 0.1903,
+          "brier_clip": 0.1869,
+          "T": 0.7344
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.1942,
+          "logloss": 0.566,
+          "brier_T": 0.1995,
+          "brier_clip": 0.1942,
+          "T": 0.7525
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1827,
+          "logloss": 0.5361,
+          "brier_T": 0.1851,
+          "brier_clip": 0.1827,
+          "T": 0.7633
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.7255,
+          "brier": 0.1781,
+          "logloss": 0.5271
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.7061,
+          "brier": 0.1902,
+          "logloss": 0.5636
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7168,
+          "brier": 0.1836,
+          "logloss": 0.5448
+        }
+      }
+    },
+    {
+      "id": "xgboost/extras+loso",
+      "engine": "xgboost",
+      "set": "extras+loso",
+      "mode": "expanding-year",
+      "pooled": {
+        "n": 7967,
+        "accuracy": 0.7182,
+        "brier": 0.1844,
+        "logloss": 0.5458
+      },
+      "pooled_T": {
+        "n": 7967,
+        "accuracy": 0.7182,
+        "brier": 0.1869,
+        "logloss": 0.556
+      },
+      "pooled_clip": {
+        "n": 7967,
+        "accuracy": 0.7182,
+        "brier": 0.1844,
+        "logloss": 0.5458
+      },
+      "mean_season_brier": 0.1845,
+      "seasons": [
+        {
+          "season": 2015,
+          "n": 717,
+          "brier": 0.1794,
+          "logloss": 0.5389,
+          "brier_T": 0.1792,
+          "brier_clip": 0.1794,
+          "T": 0.8458
+        },
+        {
+          "season": 2016,
+          "n": 706,
+          "brier": 0.19,
+          "logloss": 0.5615,
+          "brier_T": 0.1959,
+          "brier_clip": 0.19,
+          "T": 0.7827
+        },
+        {
+          "season": 2017,
+          "n": 731,
+          "brier": 0.1844,
+          "logloss": 0.5479,
+          "brier_T": 0.1889,
+          "brier_clip": 0.1844,
+          "T": 0.791
+        },
+        {
+          "season": 2018,
+          "n": 731,
+          "brier": 0.178,
+          "logloss": 0.5245,
+          "brier_T": 0.1818,
+          "brier_clip": 0.178,
+          "T": 0.8061
+        },
+        {
+          "season": 2019,
+          "n": 733,
+          "brier": 0.171,
+          "logloss": 0.5135,
+          "brier_T": 0.1727,
+          "brier_clip": 0.171,
+          "T": 0.8182
+        },
+        {
+          "season": 2020,
+          "n": 489,
+          "brier": 0.1881,
+          "logloss": 0.5622,
+          "brier_T": 0.1902,
+          "brier_clip": 0.1881,
+          "T": 0.8252
+        },
+        {
+          "season": 2021,
+          "n": 731,
+          "brier": 0.1853,
+          "logloss": 0.5494,
+          "brier_T": 0.1878,
+          "brier_clip": 0.1853,
+          "T": 0.8336
+        },
+        {
+          "season": 2022,
+          "n": 734,
+          "brier": 0.193,
+          "logloss": 0.5666,
+          "brier_T": 0.1953,
+          "brier_clip": 0.193,
+          "T": 0.8413
+        },
+        {
+          "season": 2023,
+          "n": 792,
+          "brier": 0.1853,
+          "logloss": 0.5497,
+          "brier_T": 0.1867,
+          "brier_clip": 0.1853,
+          "T": 0.8409
+        },
+        {
+          "season": 2024,
+          "n": 796,
+          "brier": 0.1914,
+          "logloss": 0.5569,
+          "brier_T": 0.1939,
+          "brier_clip": 0.1914,
+          "T": 0.8495
+        },
+        {
+          "season": 2025,
+          "n": 807,
+          "brier": 0.1832,
+          "logloss": 0.5378,
+          "brier_T": 0.1845,
+          "brier_clip": 0.1832,
+          "T": 0.8474
+        }
+      ],
+      "slices": {
+        "early": {
+          "n": 1603,
+          "accuracy": 0.7261,
+          "brier": 0.1784,
+          "logloss": 0.5284
+        },
+        "mid": {
+          "n": 2865,
+          "accuracy": 0.7051,
+          "brier": 0.1908,
+          "logloss": 0.5627
+        },
+        "late": {
+          "n": 3499,
+          "accuracy": 0.7254,
+          "brier": 0.1819,
+          "logloss": 0.5399
+        }
+      }
+    }
+  ],
+  "perm": {
+    "lightgbm": {
+      "pom_diff": 0.01706,
+      "conf_pom_diff": 0.00539,
+      "avg_margin_diff": 0.00503,
+      "form4_margin_diff": 0.00388,
+      "elo_ratio": 0.00166,
+      "elo_diff": 0.00157,
+      "log_margin_diff": 0.00098,
+      "sos_diff": 0.0009,
+      "tempo_diff": 0.00057,
+      "away_pom": 0.00055,
+      "yoy_margin_diff": 0.00053,
+      "glm_quality_diff": 0.00046,
+      "tier_win_diff": 0.00042,
+      "home_pom": 0.00029,
+      "late_win_diff": 0.00024,
+      "form4_win_diff": 0.00022,
+      "form10_win_diff": 0.00016,
+      "st_diff": 8e-05,
+      "home_games": 3e-05,
+      "winpct_diff": 3e-05,
+      "close_x_margin": -3e-05,
+      "is_home": -0.00013,
+      "adjd_diff": -0.00023,
+      "glm_sum": -0.00028,
+      "quality_win_diff": -0.00029,
+      "rest_diff": -0.0003,
+      "close_win_diff": -0.00031,
+      "adjo_diff": -0.00034,
+      "luck_diff": -0.00044,
+      "away_games": -0.0007
+    },
+    "xgboost": {
+      "pom_diff": 0.01709,
+      "conf_pom_diff": 0.00628,
+      "avg_margin_diff": 0.00413,
+      "form4_margin_diff": 0.00348,
+      "elo_diff": 0.00202,
+      "sos_diff": 0.00135,
+      "elo_ratio": 0.00131,
+      "glm_quality_diff": 0.00056,
+      "tempo_diff": 0.00035,
+      "is_home": 0.0003,
+      "away_games": 0.00029,
+      "log_margin_diff": 0.00023,
+      "home_games": 8e-05,
+      "tier_win_diff": 8e-05,
+      "winpct_diff": 4e-05,
+      "quality_win_diff": 2e-05,
+      "yoy_margin_diff": 2e-05,
+      "form10_win_diff": 1e-05,
+      "adjo_diff": -0.0,
+      "form4_win_diff": 0.0,
+      "late_win_diff": 0.0,
+      "home_pom": -1e-05,
+      "away_pom": -5e-05,
+      "close_x_margin": -6e-05,
+      "adjd_diff": -0.00015,
+      "close_win_diff": -0.00016,
+      "luck_diff": -0.00026,
+      "st_diff": -0.00034,
+      "rest_diff": -0.00049,
+      "glm_sum": -0.00081
+    }
+  },
+  "would_promote": false,
+  "promoted": false,
+  "note": "Expanding-year fit: train season < hold. Peek-LOSO is an audit only. Live TabPFN stays on extras until a slate walk-forward also clears the bar."
+}

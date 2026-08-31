@@ -54,6 +54,32 @@ export type MarketBook = {
 
 export type PolyBook = MarketBook;
 
+export type EspnQb = {
+  name: string;
+  jersey?: string | null;
+  year?: string | null;
+};
+
+export type EspnSnap = {
+  logged_at?: string;
+  locked?: boolean;
+  snaps?: number;
+  weather?: {
+    venue?: string | null;
+    city?: string | null;
+    state?: string | null;
+    grass?: boolean | null;
+    temperature?: number | null;
+    gust?: number | null;
+    precipitation?: number | null;
+    condition?: string | null;
+  };
+  venue?: { venue?: string; city?: string; state?: string; grass?: boolean };
+  qbs?: { home?: EspnQb[]; away?: EspnQb[] };
+  fpi?: { home_win?: number; pred_margin?: number; source?: string };
+  odds?: { source?: string; spread?: number | null; total?: number | null; details?: string };
+};
+
 export type GamePred = {
   season: number;
   slate: number;
@@ -81,6 +107,7 @@ export type GamePred = {
   spread: number | null;
   engine: string;
   books?: { kalshi?: MarketBook; polymarket?: MarketBook };
+  espn?: EspnSnap;
   models?: Partial<Record<"lightgbm" | "xgboost" | "tabpfn" | "ensemble", ModelPick>>;
 };
 
@@ -164,10 +191,12 @@ export type LosoRow = {
   id: string;
   engine: string;
   set: string;
+  mode?: string;
   pooled: { n: number; accuracy: number; brier: number; logloss: number };
   pooled_T?: { brier: number; logloss: number };
   mean_season_brier: number;
   seasons: LosoSeason[];
+  slices?: Record<string, { n: number; brier: number; logloss: number }>;
 };
 
 export type LosoFile = {

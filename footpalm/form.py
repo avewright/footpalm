@@ -123,6 +123,15 @@ CONF_NAMES = [
 ]
 CONF_ALL = ALL_NAMES + CONF_NAMES
 
+# Locked before the GLM4 score. Same BT as LOSO, each number its own column.
+GLM4_NAMES = [
+    "glm_home",
+    "glm_away",
+    "glm_diff",
+    "glm_sum",
+]
+GLM4_ALL = ALL_NAMES + GLM4_NAMES
+
 TIME_ORIGIN = 2014
 TIME_WEEK_DENOM = 52
 TIME_NAMES = ["year_idx", "week52"]
@@ -489,6 +498,10 @@ class FormBook:
         if self._glm is None:
             self._glm = self._solve_glm()
         return float(self._glm.get(team, 0.0))
+
+    def glm4(self, home: str, away: str) -> np.ndarray:
+        glm_h, glm_a = self.glm_of(home), self.glm_of(away)
+        return np.array([glm_h, glm_a, glm_h - glm_a, glm_h + glm_a], dtype=float)
 
     def conf_pom_of(self, team: str) -> float:
         conference = self.conf.get(team, "")

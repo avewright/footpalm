@@ -2,7 +2,63 @@ import { formatAmerican, signed } from "./format";
 import { evPct, gameFacts, hitTone, lineOf, MODEL_IDS, pct, pickOf, pp, tone } from "./game";
 import { prettyWhen } from "./score";
 import { TeamLink } from "./TeamView";
-import type { GamePred } from "./types";
+import type { EspnQb, GamePred } from "./types";
+
+function qbLine(rows?: EspnQb[]) {
+  if (!rows?.length) return "—";
+  return rows
+    .slice(0, 3)
+    .map((q) => [q.name, q.year].filter(Boolean).join(" "))
+    .join(", ");
+}
+
+function espnNote(game: GamePred) {
+  const e = game.espn;
+  if (!e) return "";
+  const bits: string[] = [];
+  const w = e.weather;
+  if (w?.temperature != null) bits.push(`${Math.round(w.temperature)}°`);
+  if (w?.precipitation != null) bits.push(`${Math.round(w.precipitation)}% rain`);
+  if (w?.city) bits.push(w.city);
+  if (e.locked) bits.push("locked at kickoff");
+  return bits.length ? ` · ESPN ${bits.join(" · ")}` : "";
+}
+
+function espnBlock(game: GamePred) {
+  const e = game.espn;
+  if (!e) return null;
+  const w = e.weather;
+  return (
+    <div className="slip-cols">
+      <section>
+        <h3>ESPN weather</h3>
+        <Row label="Temp" value={w?.temperature == null ? "—" : `${Math.round(w.temperature)}°`} />
+        <Row label="Wind" value={w?.gust == null ? "—" : `${w.gust} mph gust`} />
+        <Row label="Rain" value={w?.precipitation == null ? "—" : `${Math.round(w.precipitation)}%`} />
+        <Row
+          label="Field"
+          value={[w?.venue || e.venue?.venue, w?.grass === false ? "turf" : w?.grass ? "grass" : null]
+            .filter(Boolean)
+            .join(" · ") || "—"}
+        />
+      </section>
+      <section>
+        <h3>ESPN context</h3>
+        <Row label={game.home} value={qbLine(e.qbs?.home)} />
+        <Row label={game.away} value={qbLine(e.qbs?.away)} />
+        <Row
+          label="FPI"
+          value={
+            e.fpi?.home_win == null
+              ? "—"
+              : `${Math.round(e.fpi.home_win * 100)}% home${e.fpi.pred_margin != null ? ` · ${e.fpi.pred_margin > 0 ? "+" : ""}${e.fpi.pred_margin}` : ""}`
+          }
+        />
+        <Row label="DK" value={e.odds?.details || (e.odds?.spread != null ? String(e.odds.spread) : "—")} />
+      </section>
+    </div>
+  );
+}
 
 function Row({ label, value, tone: t }: { label: string; value: string; tone?: string }) {
   return (
@@ -79,7 +135,10 @@ export function GameView({
         {score ? ` · Final ${score}` : " · Upcoming"}
         {game.engine ? ` · ${game.engine}` : ""}
         {book ? ` · Vegas via ${book}` : ""}
+        {espnNote(game)}
       </p>
+
+      {espnBlock(game)}
 
       <div className="table-wrap team-sched odds-compare">
         <table>

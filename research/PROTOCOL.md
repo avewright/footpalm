@@ -4,18 +4,20 @@ Goal: lower Brier without overfitting.
 
 ## Rules
 
-1. Fit parameters on **all walk-forward FBS games before 2025** (2014–2024 when those years exist).
-2. Freeze them. Score **2025 walk-forward FBS games** once.
-3. Do not add NIL, spreads, or week dummies to the live model.
-4. Do not grid-search a kitchen sink and pick the winner after seeing 2025.
-5. Candidates are listed below before the run. That is the whole menu.
-6. Promote only if 2025 Brier drops by at least **0.002** and 2025 log loss does not get worse.
-7. If two candidates pass, keep the one with fewer parameters.
-8. **2026 is live.** Project it from 2025 Pom + TabPFN trained on 2014–2025. Do not fit calibration on 2026. Refresh the slate weekly.
+1. Features are walk-forward (prior slates only). Fits are too: never train on a later season or a later week of the hold year.
+2. **Screen** on expanding-year (`train = season < Y`, score Y, 2015–2025, 2014 is train-only). Logistic + locked trees.
+3. **Confirm** live TabPFN only with slate walk-forward (`train = season < Y or (season == Y and slate < this)`).
+4. **Audit** peek-LOSO (`season != Y`) is an upper bound. If it beats walk-forward, the gap is leakage. Never promote from it.
+5. Do not add NIL, spreads, or week dummies to the live model.
+6. Do not grid-search a kitchen sink and pick the winner after seeing any hold year.
+7. Candidates are listed below before the run. That is the whole menu.
+8. Promote only if pooled Brier drops by at least **0.002**, pooled log loss does not rise, and the drop is not one year (median season Δ < 0, or better in at least **8** scored years). Never promote from a slice (early / mid / late / 2025-only).
+9. If two candidates pass, keep the one with fewer parameters.
+10. **2026 is live.** Project it from 2025 Pom + TabPFN trained on 2014–2025. Do not fit calibration on 2026. Refresh the slate weekly.
 
 ## Why more seasons
 
-One year of calibration can look perfect and still miss a year shift. Fitting on 2014–2024 is still out-of-sample for 2025.
+One year of calibration can look perfect and still miss a year shift. Expanding-year scores every season after 2014. A 2025-only number is a slice, not the promote.
 
 ## Why Brier, not ATS
 
@@ -149,11 +151,11 @@ Score, listed before the run:
 
 Do not carve a subset after seeing 2025. Promote extras+craft on the usual Brier ≥ 0.002 drop and no worse log loss vs extras, on the trees. Promote into live TabPFN only if the walk-forward extras+craft number also clears that bar vs extras-walk. Fail = stop.
 
-## LOSO (diagnostic)
+## LOSO menu (diagnostic)
 
 Locked before this score. Whole menu. Walk-forward features, prior slates only. No spread. No NIL. No week dummy. No Massey/SP+/talent ordinals.
 
-Validation is **leave-one-season-out**: for each season 2014–2025, fit on the other seasons, score that season’s FBS–FBS games once. Report pooled Brier and the unweighted mean of season Briers. That is the 2025 1st / 2026 1st / 2026 3rd validation, not a 2025-only peek.
+**Promote on expanding-year**, not peek-LOSO. For each season 2015–2025, fit on earlier seasons only, score that year’s FBS–FBS once. Report pooled Brier, mean of season Briers, and slices (weeks ≤3 / 4–8 / ≥9). Peek-LOSO (`fit on the other seasons`, including the future) is an audit only — March Madness copied a fold that leaks in weekly CFB.
 
 One idea from each of ten March Madness writeups, translated to CFB:
 
@@ -172,11 +174,12 @@ One idea from each of ten March Madness writeups, translated to CFB:
 
 Score, listed before the run:
 
-- extras vs extras+loso on LightGBM, XGBoost, and logistic
-- LOSO pooled Brier and mean-of-seasons Brier
-- per fold: temperature (T fit on the other seasons) and clip `[0.02, 0.98]` (2026 2nd)
+- extras vs extras+loso on LightGBM, XGBoost, and logistic, expanding-year
+- pooled Brier, mean-of-seasons Brier, early/mid/late slices
+- per fold: temperature (T fit on earlier seasons only) and clip `[0.02, 0.98]` (2026 2nd)
+- peek-LOSO as an audit, not a promote
 
-Do not carve a subset after seeing LOSO. Promote extras+loso on the usual Brier ≥ 0.002 drop and no worse log loss vs extras, on the **pooled** LOSO number. Do not add these to live TabPFN from this pass.
+Do not carve a subset after seeing the score. Promote extras+loso on the expanding-year bar (pooled Δ ≤ −0.002, log loss not worse, not one year). Do not add these to live TabPFN from the tree screen. Live still needs slate walk-forward.
 
 ## Conference (diagnostic)
 
@@ -195,7 +198,74 @@ Locked from the LOSO permutation *before this score*. `conf_pom` was the only co
 
 Incoming Pom and conference are registered for the current slate before features are read. That is not a result leak.
 
-Score extras vs extras+conf on logistic, LightGBM, and XGBoost, leave-one-season-out, 2014–2025 FBS–FBS. Same promotion bar on the pooled number. Do not carve. Do not add to live TabPFN from this pass.
+Score extras vs extras+conf on logistic, LightGBM, and XGBoost, **expanding-year**, 2015–2025 FBS–FBS. Same promotion bar on the expanding-year number. Peek-LOSO conference numbers are an audit. Do not carve. Do not add to live TabPFN from this pass.
+
+## Pace (diagnostic)
+
+Locked before this score. Whole menu. Walk-forward from prior slates' play-by-play only. Garbage-filtered. No spread. No NIL. No week dummy. No Massey/SP+/talent ordinals.
+
+cfbfastR has no blitz flag. This menu is turnovers, rushing efficiency, and two clocks.
+
+| id | what |
+|---|---|
+| to_margin_diff | Season mean takeaways − giveaways per game. `turnover==1`. |
+| ypc_diff | Offense yards per carry. `yds_rushed` on `rush==1`, not sacks. |
+| play_speed_diff | Mean wallclock seconds between snaps, same possession and period, gaps in [3, 55]. Faster is lower. |
+| sec_per_play_diff | Mean game-clock seconds consumed per scrimmage play, same period, dt in [1, 40]. |
+
+Score extras vs extras+pace on LightGBM, XGBoost, and TabPFN-3 batch (2014–2024 train, 2025 FBS–FBS once). Walk-forward TabPFN on extras+pace. Promote extras+pace on the trees if Brier drops ≥ 0.002 and log loss does not rise vs extras. Promote into live TabPFN only if that walk-forward also clears the bar vs extras-walk (0.1865 / 0.5529). Do not carve. Fail = stop.
+
+## Specials (diagnostic)
+
+Locked before this score. New menu. Do not fold into pace after seeing pace trees. Walk-forward, prior slates only. Garbage-filtered PBP. No spread. No NIL. No week dummy.
+
+| id | what |
+|---|---|
+| margin_momentum_diff | Last-4 mean margin minus season mean margin. 0 if fewer than 2 games. |
+| win_streak_diff | Signed streak: +n wins or −n losses. Resets on a result of the other kind. |
+| fg_avg_make_diff | Mean made field-goal distance (`yds_fg`). |
+| fg_make_adj_diff | FG make rate minus `fg_make_prob` (distance-adjusted residual). Probabilities >1 treated as percents. |
+| punt_rate_diff | Punts / (scrimmage plays + punts). |
+| punt_yds_diff | Mean `yds_punted`. |
+| plays_pg_diff | Mean offensive scrimmage plays per game. Not the locked tempo rating. |
+
+Score extras vs extras+specials on LightGBM, XGBoost, and TabPFN-3 batch. Walk-forward TabPFN on extras+specials. Same promote bar vs extras / extras-walk. Do not carve. Fail = stop.
+
+## Subsets (diagnostic)
+
+Not a promotion pass. Pace + specials columns only. Selection year is **2024** (train 2014–2023). 2025 is scored after the 2024 ranking is written. A 2025 winner that was not the 2024 pick cannot be promoted.
+
+Locked groups, before either year is scored:
+
+| id | columns |
+|---|---|
+| pace | to_margin, ypc, play_speed, sec_per_play |
+| specials | momentum, streak, fg_avg_make, fg_make_adj, punt_rate, punt_yds, plays_pg |
+| clocks | play_speed, sec_per_play |
+| rush | ypc |
+| ball | to_margin |
+| punts | punt_rate, punt_yds |
+| kicks | fg_avg_make, fg_make_adj |
+| form | momentum, streak |
+| plays | plays_pg |
+| all | pace + specials |
+
+Also score each column alone, and drop-one from `all`, on 2024 then 2025. LightGBM + XGBoost. TabPFN batch only on extras, `all`, and the 2024-best group. Do not promote from this pass.
+
+## GLM4 (diagnostic)
+
+Locked before this score. Whole menu. Walk-forward, prior slates only. No spread. No NIL. No week dummy.
+
+LOSO already had `glm_quality_diff` and `glm_sum` inside a ten-column sink. That failed. This menu is GLM only, and each number is its own column. Same ridge logistic Bradley–Terry as LOSO (`λ=1`, 25 IRLS, mean-centered). 0 if the team has no games yet.
+
+| id | what |
+|---|---|
+| glm_home | Home team's GLM strength |
+| glm_away | Away team's GLM strength |
+| glm_diff | `glm_home − glm_away` |
+| glm_sum | `glm_home + glm_away` |
+
+Score extras vs extras+glm4 on logistic, LightGBM, and XGBoost, **expanding-year**, 2015–2025 FBS–FBS. Same promotion bar on the expanding-year number. Do not carve. Do not add to live TabPFN from this pass.
 
 ## Note
 

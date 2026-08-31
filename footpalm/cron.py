@@ -1,4 +1,4 @@
-"""Local launchd jobs. Kalshi often, CFBD rarely, TabPFN once a week.
+"""Local launchd jobs. Kalshi often, ESPN/CFBD on score, TabPFN once a week.
 
     uv run python -m footpalm.cron --install
 
@@ -173,6 +173,12 @@ def run_project(root: Path, season: int = LIVE_SEASON) -> dict:
 
     payload = project_live(root, season=season, refresh=False)
     run_markets(root, season=season, sources=("kalshi",))
+    from footpalm.espn import run as run_espn
+
+    try:
+        run_espn(root, season=season)
+    except Exception as exc:
+        print(f"espn harvest: {exc}", flush=True)
     return payload
 
 

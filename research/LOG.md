@@ -93,3 +93,154 @@ Permutation on extras+loso (2025 fold):
 | tabpfn/extras+loso | 0.1842 | 0.5475 | 0.1842 |
 
 would_promote=False live_promoted=False. Do not carve a subset after seeing LOSO.
+
+## Specials (diagnostic, not live)
+
+Menu locked before this score. Momentum, win streak, FG make distance, distance-adjusted FG residual, punt rate, punt yards, plays per game. Walk-forward. 2014–2024 train, 2025 FBS–FBS once.
+
+| family | extras | extras+specials | Δ | pass |
+|---|---|---|---|---|
+| lightgbm | 0.1845 | 0.1843 | -0.0002 | False |
+| xgboost | 0.1834 | 0.1835 | 0.0001 | False |
+| tabpfn | 0.1861 | 0.1853 | -0.0008 | False |
+
+Permutation on extras+specials:
+
+| feature | LightGBM | XGBoost |
+|---|---|---|
+| margin_momentum_diff | -0.0004 | +0.0005 |
+| win_streak_diff | -0.0004 | -0.0001 |
+| fg_avg_make_diff | -0.0001 | +0.0006 |
+| fg_make_adj_diff | +0.0003 | -0.0003 |
+| punt_rate_diff | +0.0013 | +0.0010 |
+| punt_yds_diff | +0.0002 | +0.0002 |
+| plays_pg_diff | +0.0002 | -0.0002 |
+
+| model | 2025 Brier | logloss |
+|---|---|---|
+| lightgbm/extras | 0.1845 | 0.5425 |
+| lightgbm/extras+T | 0.1863 | 0.5471 |
+| xgboost/extras | 0.1834 | 0.5397 |
+| xgboost/extras+T | 0.1842 | 0.5407 |
+| tabpfn/extras | 0.1861 | 0.552 |
+| tabpfn/extras+T | 0.1814 | 0.5335 |
+| lightgbm/extras+specials | 0.1843 | 0.5418 |
+| lightgbm/extras+specials+T | 0.1869 | 0.5484 |
+| xgboost/extras+specials | 0.1835 | 0.5402 |
+| xgboost/extras+specials+T | 0.1846 | 0.5421 |
+| tabpfn/extras+specials | 0.1853 | 0.5503 |
+| tabpfn/extras+specials+T | 0.1809 | 0.5317 |
+| tabpfn/extras+specials-walk | 0.1855 | 0.5507 |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing 2025.
+
+## Subsets (diagnostic, not live)
+
+2024 selects. 2025 scores after. 2024-best group=`rush`.
+
+| set | 2024 LGBM Δ | 2024 XGB Δ | 2025 LGBM Δ | 2025 XGB Δ |
+|---|---|---|---|---|
+| extras |  |  |  |  |
+| pace | -0.0009 | 0.0001 | -0.0017 | -0.002 |
+| specials | 0.0008 | 0.0009 | -0.0002 | 0.0001 |
+| clocks | -0.0009 | 0.0009 | -0.001 | -0.0004 |
+| rush | -0.0015 | -0.0004 | -0.0008 | 0.0001 |
+| ball | 0.0005 | -0.0005 | -0.0007 | -0.0007 |
+| punts | -0.001 | -0.0003 | -0.0004 | -0.0001 |
+| kicks | -0.0016 | 0.0003 | 0.0006 | 0.0006 |
+| form | 0.0009 | -0.0001 | -0.0008 | 0.0003 |
+| plays | -0.0007 | -0.0003 | -0.0006 | 0.0009 |
+| all | 0.0012 | 0.0016 | -0.0009 | -0.0014 |
+| to_margin_diff | 0.0005 | -0.0005 | -0.0007 | -0.0007 |
+| ypc_diff | -0.0015 | -0.0004 | -0.0008 | 0.0001 |
+| play_speed_diff | -0.0002 | 0.0003 | -0.0002 | 0.0004 |
+| sec_per_play_diff | 0.0001 | 0.0008 | -0.0002 | 0.0001 |
+| margin_momentum_diff | 0.0003 | 0.0021 | -0.0007 | 0.0 |
+| win_streak_diff | -0.0002 | 0.0011 | 0.0008 | 0.0005 |
+| fg_avg_make_diff | -0.0017 | -0.0008 | 0.0001 | 0.0006 |
+| fg_make_adj_diff | 0.0 | 0.0014 | 0.0 | 0.0002 |
+| punt_rate_diff | -0.0013 | 0.0001 | -0.0001 | -0.0004 |
+| punt_yds_diff | -0.0007 | -0.0001 | -0.0011 | 0.0009 |
+| plays_pg_diff | -0.0007 | -0.0003 | -0.0006 | 0.0009 |
+
+Drop-one from all (Δ vs extras):
+
+| dropped | 2024 LGBM Δ | 2025 LGBM Δ |
+|---|---|---|
+| to_margin_diff | -0.0001 | -0.0017 |
+| ypc_diff | -0.0001 | -0.0011 |
+| play_speed_diff | -0.0001 | -0.0008 |
+| sec_per_play_diff | 0.0002 | -0.0008 |
+| margin_momentum_diff | 0.0003 | -0.0003 |
+| win_streak_diff | -0.0012 | -0.0016 |
+| fg_avg_make_diff | 0.0007 | -0.0012 |
+| fg_make_adj_diff | -0.0001 | 0.0 |
+| punt_rate_diff | 0.0018 | 0.0002 |
+| punt_yds_diff | -0.0006 | -0.0012 |
+| plays_pg_diff | 0.0015 | -0.0012 |
+
+promoted=False. Not a promotion pass.
+
+## Expanding-year (leak-free)
+
+Same extras vs extras+loso menu. Fit only on earlier seasons (`season < Y`), score that year's FBS–FBS. 2014 is train-only. Not peek-LOSO. Not live TabPFN.
+
+| family | extras | extras+loso | Δ | years better | median Δ | pass |
+|---|---|---|---|---|---|---|
+| logistic | 0.184 | 0.1824 | -0.0016 | 9/11 | -0.002 | False |
+| lightgbm | 0.1864 | 0.1849 | -0.0015 | 7/11 | -0.0014 | False |
+| xgboost | 0.1853 | 0.1844 | -0.0009 | 10/11 | -0.0009 | False |
+
+| model | pooled Brier | pooled logloss | mean season Brier |
+|---|---|---|---|
+| logistic/extras | 0.184 | 0.5447 | 0.1841 |
+| lightgbm/extras | 0.1864 | 0.5521 | 0.1865 |
+| xgboost/extras | 0.1853 | 0.5489 | 0.1853 |
+| logistic/extras+loso | 0.1824 | 0.54 | 0.1824 |
+| lightgbm/extras+loso | 0.1849 | 0.548 | 0.185 |
+| xgboost/extras+loso | 0.1844 | 0.5458 | 0.1845 |
+
+Pooled slices (weeks ≤3 / 4–8 / ≥9):
+
+| model | early | mid | late |
+|---|---|---|---|
+| logistic/extras | 0.1806 | 0.1898 | 0.1809 |
+| lightgbm/extras | 0.1835 | 0.1922 | 0.1829 |
+| xgboost/extras | 0.1808 | 0.1924 | 0.1815 |
+| logistic/extras+loso | 0.1763 | 0.1875 | 0.181 |
+| lightgbm/extras+loso | 0.1781 | 0.1902 | 0.1836 |
+| xgboost/extras+loso | 0.1784 | 0.1908 | 0.1819 |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing the expanding-year score.
+
+## GLM4 (diagnostic, not live)
+
+Menu locked before this score. Same ridge Bradley–Terry as LOSO, but each number is its own column: glm_home, glm_away, glm_diff, glm_sum. Expanding-year on 2014–2025 FBS–FBS. Walk-forward features only.
+
+| family | extras | extras+glm4 | Δ | years better | median Δ | pass |
+|---|---|---|---|---|---|---|
+| logistic | 0.184 | 0.1833 | -0.0007 | 9/11 | -0.001 | False |
+| lightgbm | 0.1864 | 0.1865 | 0.0001 | 5/11 | 0.0 | False |
+| xgboost | 0.1853 | 0.1852 | -0.0001 | 4/11 | 0.0006 | False |
+
+| model | pooled Brier | pooled logloss | mean season Brier |
+|---|---|---|---|
+| logistic/extras | 0.184 | 0.5447 | 0.1841 |
+| lightgbm/extras | 0.1864 | 0.5521 | 0.1865 |
+| xgboost/extras | 0.1853 | 0.5489 | 0.1853 |
+| logistic/extras+glm4 | 0.1833 | 0.5424 | 0.1833 |
+| lightgbm/extras+glm4 | 0.1865 | 0.552 | 0.1867 |
+| xgboost/extras+glm4 | 0.1852 | 0.5487 | 0.1853 |
+
+Pooled slices (weeks ≤3 / 4–8 / ≥9):
+
+| model | early | mid | late |
+|---|---|---|---|
+| logistic/extras | 0.1806 | 0.1898 | 0.1809 |
+| lightgbm/extras | 0.1835 | 0.1922 | 0.1829 |
+| xgboost/extras | 0.1808 | 0.1924 | 0.1815 |
+| logistic/extras+glm4 | 0.1811 | 0.1889 | 0.1796 |
+| lightgbm/extras+glm4 | 0.1836 | 0.1911 | 0.1839 |
+| xgboost/extras+glm4 | 0.1807 | 0.1916 | 0.182 |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing the expanding-year score.

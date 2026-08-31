@@ -11,12 +11,15 @@ from footpalm.form import (
     CRAFT_NAMES,
     EXTRA_NAMES,
     CONF_NAMES,
+    GLM4_NAMES,
     LOSO_NAMES,
     SIGNAL_ALL,
     SIGNAL_NAMES,
     TIME_ALL,
     TIME_NAMES,
 )
+from footpalm.pace import PACE_NAMES
+from footpalm.specials import SPECIAL_NAMES
 from footpalm.predict import FEATURE_NAMES
 from footpalm.project import history_path
 from footpalm.research import PROMOTE_BRIER
@@ -77,6 +80,12 @@ def _load_features(root: Path) -> dict[str, np.ndarray]:
             or existing["loso"].shape[1] != len(LOSO_NAMES)
             or "X_conf" not in existing.files
             or existing["conf"].shape[1] != len(CONF_NAMES)
+            or "X_glm4" not in existing.files
+            or existing["glm4"].shape[1] != len(GLM4_NAMES)
+            or "X_pace" not in existing.files
+            or existing["pace"].shape[1] != len(PACE_NAMES)
+            or "X_specials" not in existing.files
+            or existing["specials"].shape[1] != len(SPECIAL_NAMES)
         )
     if need:
         print("features-history missing or stale — building extras + signal")

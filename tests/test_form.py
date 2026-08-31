@@ -9,6 +9,7 @@ from footpalm.form import (
     ELO_TANH,
     EXTRA_NAMES,
     FORM_SOS_SCALE,
+    GLM4_NAMES,
     LOSO_NAMES,
     PROD_SCALE,
     SIGNAL_NAMES,
@@ -396,6 +397,23 @@ def test_tier_and_trim_helpers():
     assert tier_win_points(-20.0) == 0.25
     assert trim_mean([1.0, 2.0, 3.0]) == 2.0
     assert trim_mean([0.0, 1.0, 2.0, 3.0, 100.0]) < 20.0
+
+
+def test_glm4_puts_each_number_in_its_own_column():
+    form = FormBook()
+    before = form.glm4("Alpha", "Beta")
+    assert len(before) == 4
+    assert list(GLM4_NAMES) == ["glm_home", "glm_away", "glm_diff", "glm_sum"]
+    assert np.allclose(before, 0.0)
+    _play(form, "Alpha", "Beta", 21.0)
+    vec = form.glm4("Alpha", "Beta")
+    home, away, diff, total = vec
+    assert home > 0
+    assert away < 0
+    assert diff == home - away
+    assert total == home + away
+    assert vec[GLM4_NAMES.index("glm_home")] == home
+    assert vec[GLM4_NAMES.index("glm_away")] == away
 
 
 def test_loso_is_walk_forward_and_uses_prior_year():

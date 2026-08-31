@@ -72,12 +72,18 @@ function engineName(engine: string) {
 
 function knobs(trial: Trial) {
   const t = trial.row.seasons.find((s) => s.T != null)?.T;
+  const expanding = trial.pass === "walk" || trial.row.mode === "expanding-year";
   if (trial.row.engine === "tabpfn") {
-    const loso = trial.pass === "loso" || trial.pass === "conference";
-    const fit = loso ? "LOSO, last 8000 of other seasons" : "walk-forward extras, last 8000";
+    const fit = expanding
+      ? "expanding-year, last 8000 of earlier seasons"
+      : trial.pass === "tabpfn"
+        ? "walk-forward extras, last 8000"
+        : "peek-LOSO, last 8000 of other seasons (audit)";
     return t != null ? `TabPFN-3 ${fit}. Temperature T=${t}` : `TabPFN-3 ${fit}`;
   }
-  return trial.row.engine === "logistic" ? "Ridge 1.0, 40 IRLS steps" : "200 trees, depth 4, learning rate 0.05";
+  const fit = expanding ? "Expanding-year, train season < hold. " : trial.pass === "loso" || trial.pass === "conference" ? "Peek-LOSO audit. " : "";
+  const base = trial.row.engine === "logistic" ? "Ridge 1.0, 40 IRLS steps" : "200 trees, depth 4, learning rate 0.05";
+  return `${fit}${base}`;
 }
 
 function trialsOf(files: { pass: string; data: LosoFile }[]): Trial[] {
@@ -222,6 +228,9 @@ function Stats({ row }: { row: LosoRow }) {
     { label: "Accuracy", value: `${(row.pooled.accuracy * 100).toFixed(1)}%` },
     { label: "Games", value: String(row.pooled.n) },
   ];
+  if (row.slices?.early) items.push({ label: "Early ≤3", value: row.slices.early.brier.toFixed(4) });
+  if (row.slices?.mid) items.push({ label: "Mid 4–8", value: row.slices.mid.brier.toFixed(4) });
+  if (row.slices?.late) items.push({ label: "Late ≥9", value: row.slices.late.brier.toFixed(4) });
   return (
     <dl className="loso-stats">
       {items.map((item) => (
@@ -243,7 +252,8 @@ export function LosoView({ files }: { files: { pass: string; data: LosoFile }[] 
   return (
     <div className="loso">
       <p className="lede-note">
-        {trials.length} trials. Mean of season Briers. Green is a new low. Click a point.
+        {trials.length} trials. Leak-free: walk-forward TabPFN and expanding-year screen. Mean of
+        season Briers. Green is a new low. Click a point.
       </p>
       <Chart trials={trials} selected={picked} onPick={setPicked} />
       {trial && (
