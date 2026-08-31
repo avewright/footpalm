@@ -222,7 +222,7 @@
       "home": "Georgia Tech",
       "away": "Colorado",
       "start": "2026-09-04T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -253,7 +253,7 @@
       "home": "Minnesota",
       "away": "Eastern Illinois",
       "start": "2026-09-04T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -277,14 +277,14 @@
         "ml_home_american": -19900,
         "ml_away_american": 19900,
         "spread": -43.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.5
       }
     },
     "id:401856663": {
       "home": "Missouri",
       "away": "Arkansas-Pine Bluff",
       "start": "2026-09-04T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -308,14 +308,14 @@
         "ml_home_american": -19900,
         "ml_away_american": 19900,
         "spread": -54.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401858424": {
       "home": "Illinois",
       "away": "UAB",
       "start": "2026-09-04T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -339,14 +339,14 @@
         "ml_home_american": -2757,
         "ml_away_american": 2757,
         "spread": -27.5,
-        "spread_p_home": 0.535
+        "spread_p_home": 0.525
       }
     },
     "id:401856768": {
       "home": "Utah",
       "away": "Idaho",
       "start": "2026-09-04T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -366,9 +366,9 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep03idhoutah",
         "title": "Idaho vs Utah",
         "ml_home": 0.995,
-        "ml_away": 0.005,
+        "ml_away": 0.015,
         "ml_home_american": -19900,
-        "ml_away_american": 19900,
+        "ml_away_american": 6567,
         "spread": -33.5,
         "spread_p_home": 0.515
       }
@@ -434,7 +434,7 @@
       "home": "Michigan State",
       "away": "Toledo",
       "start": "2026-09-05T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -457,15 +457,15 @@
         "ml_away": 0.225,
         "ml_home_american": -365,
         "ml_away_american": 344,
-        "spread": -9.5,
-        "spread_p_home": 0.515
+        "spread": -10.5,
+        "spread_p_home": 0.475
       }
     },
     "id:401856664": {
       "home": "Oklahoma",
       "away": "UTEP",
       "start": "2026-09-05T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -489,14 +489,14 @@
         "ml_home_american": -19900,
         "ml_away_american": 19900,
         "spread": -41.5,
-        "spread_p_home": 0.505
+        "spread_p_home": 0.515
       }
     },
     "id:401858206": {
       "home": "Stanford",
       "away": "Miami",
       "start": "2026-09-05T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -526,7 +526,7 @@
       "home": "USC",
       "away": "Fresno State",
       "start": "2026-09-05T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -550,14 +550,14 @@
         "ml_home_american": -1233,
         "ml_away_american": 1233,
         "spread": -21.5,
-        "spread_p_home": 0.51
+        "spread_p_home": 0.5
       }
     },
     "id:401856634": {
       "home": "Alabama",
       "away": "East Carolina",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -577,9 +577,9 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ecuala",
         "title": "East Carolina vs Alabama",
         "ml_home": 0.985,
-        "ml_away": 0.015,
+        "ml_away": 0.025,
         "ml_home_american": -6567,
-        "ml_away_american": 6567,
+        "ml_away_american": 3900,
         "spread": -28.5,
         "spread_p_home": 0.505
       }
@@ -588,7 +588,7 @@
       "home": "Army",
       "away": "Bryant",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -611,7 +611,7 @@
         "ml_away": 0.015,
         "ml_home_american": -6567,
         "ml_away_american": 6567,
-        "spread": -38.5,
+        "spread": -36.5,
         "spread_p_home": 0.485
       }
     },
@@ -619,7 +619,7 @@
       "home": "Bowling Green",
       "away": "Tarleton State",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -639,9 +639,9 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05tarlbgsu",
         "title": "Tarleton St. vs Bowling Green",
         "ml_home": 0.555,
-        "ml_away": 0.445,
+        "ml_away": 0.44,
         "ml_home_american": -125,
-        "ml_away_american": 125,
+        "ml_away_american": 127,
         "spread": -2.5,
         "spread_p_home": 0.505
       }
@@ -650,7 +650,7 @@
       "home": "Houston",
       "away": "Oregon State",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -674,14 +674,14 @@
         "ml_home_american": -1233,
         "ml_away_american": 1233,
         "spread": -20.5,
-        "spread_p_home": 0.51
+        "spread_p_home": 0.515
       }
     },
     "id:401858425": {
       "home": "Indiana",
       "away": "North Texas",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -700,10 +700,10 @@
         "slug": "KXNCAAFGAME-26SEP05UNTIND",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05untind",
         "title": "North Texas vs Indiana",
-        "ml_home": 0.995,
-        "ml_away": 0.005,
-        "ml_home_american": -19900,
-        "ml_away_american": 19900,
+        "ml_home": 0.985,
+        "ml_away": 0.015,
+        "ml_home_american": -6567,
+        "ml_away_american": 6567,
         "spread": -40.5,
         "spread_p_home": 0.495
       }
@@ -712,7 +712,7 @@
       "home": "James Madison",
       "away": "Liberty",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -736,14 +736,14 @@
         "ml_home_american": -239,
         "ml_away_american": 228,
         "spread": -6.5,
-        "spread_p_home": 0.505
+        "spread_p_home": 0.515
       }
     },
     "id:401858430": {
       "home": "Nebraska",
       "away": "Ohio",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -763,9 +763,9 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ohioneb",
         "title": "Ohio vs Nebraska",
         "ml_home": 0.935,
-        "ml_away": 0.055,
+        "ml_away": 0.065,
         "ml_home_american": -1438,
-        "ml_away_american": 1718,
+        "ml_away_american": 1438,
         "spread": -23.5,
         "spread_p_home": 0.505
       }
@@ -774,7 +774,7 @@
       "home": "Syracuse",
       "away": "New Hampshire",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -798,14 +798,14 @@
         "ml_home_american": -3900,
         "ml_away_american": 3900,
         "spread": -32.5,
-        "spread_p_home": 0.5
+        "spread_p_home": 0.495
       }
     },
     "id:401861962": {
       "home": "UConn",
       "away": "Lafayette",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -824,19 +824,19 @@
         "slug": "KXNCAAFGAME-26SEP05LAFCONN",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05lafconn",
         "title": "Lafayette vs UConn",
-        "ml_home": 0.895,
+        "ml_home": 0.905,
         "ml_away": 0.085,
-        "ml_home_american": -852,
+        "ml_home_american": -953,
         "ml_away_american": 1076,
         "spread": -19.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401856780": {
       "home": "West Virginia",
       "away": "Coastal Carolina",
       "start": "2026-09-05T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -856,9 +856,9 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ccarwvu",
         "title": "Coastal Carolina vs West Virginia",
         "ml_home": 0.93,
-        "ml_away": 0.07,
+        "ml_away": 0.075,
         "ml_home_american": -1329,
-        "ml_away_american": 1329,
+        "ml_away_american": 1233,
         "spread": -21.5,
         "spread_p_home": 0.485
       }
@@ -867,7 +867,7 @@
       "home": "Ohio State",
       "away": "Ball State",
       "start": "2026-09-05T16:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -898,7 +898,7 @@
       "home": "Pittsburgh",
       "away": "Miami (OH)",
       "start": "2026-09-05T16:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -929,7 +929,7 @@
       "home": "South Carolina",
       "away": "Kent State",
       "start": "2026-09-05T16:45:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -953,14 +953,14 @@
         "ml_home_american": -6567,
         "ml_away_american": 6567,
         "spread": -36.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401864496": {
       "home": "Air Force",
       "away": "Duquesne",
       "start": "2026-09-05T17:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -984,14 +984,14 @@
         "ml_home_american": -3900,
         "ml_away_american": 3900,
         "spread": -30.5,
-        "spread_p_home": 0.48
+        "spread_p_home": 0.495
       }
     },
     "id:401856779": {
       "home": "Iowa State",
       "away": "Southeast Missouri State",
       "start": "2026-09-05T17:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1014,15 +1014,15 @@
         "ml_away": 0.035,
         "ml_home_american": -2757,
         "ml_away_american": 2757,
-        "spread": -29.5,
-        "spread_p_home": 0.485
+        "spread": -30.5,
+        "spread_p_home": 0.49
       }
     },
     "id:401856659": {
       "home": "Kentucky",
       "away": "Youngstown State",
       "start": "2026-09-05T17:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1041,19 +1041,19 @@
         "slug": "KXNCAAFGAME-26SEP05YSUUK",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05ysuuk",
         "title": "Youngstown St. vs Kentucky",
-        "ml_home": 0.95,
+        "ml_home": 0.955,
         "ml_away": 0.045,
-        "ml_home_american": -1900,
+        "ml_home_american": -2122,
         "ml_away_american": 2122,
         "spread": -23.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401862698": {
       "home": "Temple",
       "away": "Rhode Island",
       "start": "2026-09-05T18:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1077,14 +1077,14 @@
         "ml_home_american": -413,
         "ml_away_american": 413,
         "spread": -10.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401856658": {
       "home": "Georgia",
       "away": "Tennessee State",
       "start": "2026-09-05T19:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1108,14 +1108,14 @@
         "ml_home_american": -19900,
         "ml_away_american": 19900,
         "spread": -45.5,
-        "spread_p_home": 0.515
+        "spread_p_home": 0.52
       }
     },
     "id:401856636": {
       "home": "Auburn",
       "away": "Baylor",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1135,18 +1135,18 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05bayaub",
         "title": "Baylor vs Auburn",
         "ml_home": 0.725,
-        "ml_away": 0.295,
+        "ml_away": 0.285,
         "ml_home_american": -264,
-        "ml_away_american": 239,
-        "spread": -6.5,
-        "spread_p_home": 0.535
+        "ml_away_american": 251,
+        "spread": -7.5,
+        "spread_p_home": 0.465
       }
     },
     "id:401862694": {
       "home": "Charlotte",
       "away": "The Citadel",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1170,14 +1170,14 @@
         "ml_home_american": -1233,
         "ml_away_american": 1233,
         "spread": -17.5,
-        "spread_p_home": 0.495
+        "spread_p_home": 0.5
       }
     },
     "id:401856777": {
       "home": "Cincinnati",
       "away": "Boston College",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1201,14 +1201,14 @@
         "ml_home_american": -264,
         "ml_away_american": 251,
         "spread": -7.5,
-        "spread_p_home": 0.475
+        "spread_p_home": 0.485
       }
     },
     "id:401858209": {
       "home": "Duke",
       "away": "Tulane",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1239,7 +1239,7 @@
       "home": "Navy",
       "away": "Towson",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1270,7 +1270,7 @@
       "home": "North Dakota State",
       "away": "Fordham",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1294,14 +1294,14 @@
         "ml_home_american": -3900,
         "ml_away_american": 6567,
         "spread": -38.5,
-        "spread_p_home": 0.48
+        "spread_p_home": 0.51
       }
     },
     "id:401858433": {
       "home": "Oregon",
       "away": "Boise State",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1325,14 +1325,14 @@
         "ml_home_american": -2122,
         "ml_away_american": 2122,
         "spread": -24.5,
-        "spread_p_home": 0.49
+        "spread_p_home": 0.485
       }
     },
     "id:401858434": {
       "home": "Penn State",
       "away": "Marshall",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1356,14 +1356,14 @@
         "ml_home_american": -1718,
         "ml_away_american": 1718,
         "spread": -24.5,
-        "spread_p_home": 0.485
+        "spread_p_home": 0.495
       }
     },
     "id:401856666": {
       "home": "Tennessee",
       "away": "Furman",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1382,11 +1382,11 @@
         "slug": "KXNCAAFGAME-26SEP05FURTENN",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05furtenn",
         "title": "Furman vs Tennessee",
-        "ml_home": 0.995,
-        "ml_away": 0.01,
-        "ml_home_american": -19900,
-        "ml_away_american": 9900,
-        "spread": -45.5,
+        "ml_home": 0.99,
+        "ml_away": 0.015,
+        "ml_home_american": -9900,
+        "ml_away_american": 6567,
+        "spread": -48.5,
         "spread_p_home": 0.495
       }
     },
@@ -1413,7 +1413,7 @@
       "home": "UTSA",
       "away": "UT Rio Grande Valley",
       "start": "2026-09-05T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1444,7 +1444,7 @@
       "home": "Tulsa",
       "away": "Oklahoma State",
       "start": "2026-09-05T19:45:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1474,7 +1474,7 @@
       "home": "Arkansas",
       "away": "North Alabama",
       "start": "2026-09-05T20:15:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1505,7 +1505,7 @@
       "home": "Iowa",
       "away": "Northern Illinois",
       "start": "2026-09-05T20:15:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1935,7 +1935,7 @@
       "home": "BYU",
       "away": "Utah Tech",
       "start": "2026-09-06T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1964,7 +1964,7 @@
       "home": "Louisiana",
       "away": "Lamar",
       "start": "2026-09-06T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -1993,7 +1993,7 @@
       "home": "Maryland",
       "away": "Hampton",
       "start": "2026-09-06T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2022,7 +2022,7 @@
       "home": "Northwestern",
       "away": "South Dakota State",
       "start": "2026-09-06T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2042,16 +2042,16 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05sdstnw",
         "title": "South Dakota St. vs Northwestern",
         "ml_home": 0.835,
-        "ml_away": 0.175,
+        "ml_away": 0.185,
         "ml_home_american": -506,
-        "ml_away_american": 471
+        "ml_away_american": 441
       }
     },
     "id:401870790": {
       "home": "New Mexico State",
       "away": "Mercyhurst",
       "start": "2026-09-06T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2080,7 +2080,7 @@
       "home": "Arizona",
       "away": "Northern Arizona",
       "start": "2026-09-06T01:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2109,7 +2109,7 @@
       "home": "San Diego State",
       "away": "Portland State",
       "start": "2026-09-06T01:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2128,9 +2128,9 @@
         "slug": "KXNCAAFGAME-26SEP05PRSTSDSU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05prstsdsu",
         "title": "Portland St. vs San Diego St.",
-        "ml_home": 0.97,
+        "ml_home": 0.975,
         "ml_away": 0.025,
-        "ml_home_american": -3233,
+        "ml_home_american": -3900,
         "ml_away_american": 3900
       }
     },
@@ -2138,7 +2138,7 @@
       "home": "Arizona State",
       "away": "Morgan State",
       "start": "2026-09-06T02:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2167,7 +2167,7 @@
       "home": "Hawai'i",
       "away": "UNLV",
       "start": "2026-09-06T02:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2186,17 +2186,17 @@
         "slug": "KXNCAAFGAME-26SEP05UNLVHAW",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05unlvhaw",
         "title": "UNLV vs Hawai'i",
-        "ml_home": 0.425,
-        "ml_away": 0.575,
-        "ml_home_american": 135,
-        "ml_away_american": -135
+        "ml_home": 0.415,
+        "ml_away": 0.58,
+        "ml_home_american": 141,
+        "ml_away_american": -138
       }
     },
     "id:401864498": {
       "home": "New Mexico",
       "away": "Central Michigan",
       "start": "2026-09-06T02:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2215,9 +2215,9 @@
         "slug": "KXNCAAFGAME-26SEP05CMUUNM",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep05cmuunm",
         "title": "Central Michigan vs New Mexico",
-        "ml_home": 0.78,
+        "ml_home": 0.785,
         "ml_away": 0.215,
-        "ml_home_american": -355,
+        "ml_home_american": -365,
         "ml_away_american": 365
       }
     },
@@ -2225,7 +2225,7 @@
       "home": "Sacramento State",
       "away": "Mississippi Valley State",
       "start": "2026-09-06T02:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2254,7 +2254,7 @@
       "home": "California",
       "away": "UCLA",
       "start": "2026-09-06T02:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2283,7 +2283,7 @@
       "home": "Nevada",
       "away": "Western Kentucky",
       "start": "2026-09-06T02:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "polymarket": {
         "source": "polymarket",
@@ -2386,7 +2386,7 @@
       "home": "Miami",
       "away": "Florida A&M",
       "start": "2026-09-11T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2403,17 +2403,17 @@
       "home": "Kansas",
       "away": "Missouri",
       "start": "2026-09-12T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP11MIZZKU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep11mizzku",
         "title": "Missouri vs Kansas",
-        "ml_home": 0.31,
-        "ml_away": 0.695,
-        "ml_home_american": 223,
-        "ml_away_american": -228,
+        "ml_home": 0.315,
+        "ml_away": 0.69,
+        "ml_home_american": 217,
+        "ml_away_american": -223,
         "spread": 6.5
       }
     },
@@ -2421,7 +2421,7 @@
       "home": "New Mexico",
       "away": "Mercyhurst",
       "start": "2026-09-12T04:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2429,33 +2429,33 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mhuunm",
         "title": "Mercyhurst vs New Mexico",
         "ml_home": 0.595,
-        "ml_away": 0.385,
+        "ml_away": 0.365,
         "ml_home_american": -147,
-        "ml_away_american": 160
+        "ml_away_american": 174
       }
     },
     "id:401862702": {
       "home": "Army",
       "away": "South Florida",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12USFARMY",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12usfarmy",
         "title": "South Florida vs Army",
-        "ml_home": 0.455,
-        "ml_away": 0.51,
-        "ml_home_american": 120,
-        "ml_away_american": -104
+        "ml_home": 0.485,
+        "ml_away": 0.49,
+        "ml_home_american": 106,
+        "ml_away_american": 104
       }
     },
     "id:401858439": {
       "home": "Indiana",
       "away": "Howard",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2472,41 +2472,41 @@
       "home": "Kansas State",
       "away": "Washington State",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12WSUKSU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wsuksu",
         "title": "Washington St. vs Kansas St.",
-        "ml_home": 0.81,
-        "ml_away": 0.19,
-        "ml_home_american": -426,
-        "ml_away_american": 426
+        "ml_home": 0.79,
+        "ml_away": 0.205,
+        "ml_home_american": -376,
+        "ml_away_american": 388
       }
     },
     "id:401866416": {
       "home": "Kent State",
       "away": "Wofford",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12WOFKENT",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wofkent",
         "title": "Wofford vs Kent St.",
-        "ml_home": 0.76,
-        "ml_away": 0.235,
-        "ml_home_american": -317,
-        "ml_away_american": 326
+        "ml_home": 0.755,
+        "ml_away": 0.245,
+        "ml_home_american": -308,
+        "ml_away_american": 308
       }
     },
     "id:401856679": {
       "home": "Michigan",
       "away": "Oklahoma",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2525,34 +2525,34 @@
       "home": "North Carolina",
       "away": "East Tennessee State",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ETSUUNC",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12etsuunc",
         "title": "East Tennessee St. vs North Carolina",
-        "ml_home": 0.925,
-        "ml_away": 0.075,
-        "ml_home_american": -1233,
-        "ml_away_american": 1233
+        "ml_home": 0.92,
+        "ml_away": 0.08,
+        "ml_home_american": -1150,
+        "ml_away_american": 1150
       }
     },
     "id:401856782": {
       "home": "Oklahoma State",
       "away": "Oregon",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12OREOKST",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12oreokst",
         "title": "Oregon vs Oklahoma St.",
-        "ml_home": 0.215,
-        "ml_away": 0.8,
-        "ml_home_american": 365,
-        "ml_away_american": -400,
+        "ml_home": 0.145,
+        "ml_away": 0.87,
+        "ml_home_american": 590,
+        "ml_away_american": -669,
         "spread": 17.5
       }
     },
@@ -2560,24 +2560,24 @@
       "home": "Purdue",
       "away": "Wake Forest",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12WAKEPUR",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wakepur",
         "title": "Wake Forest vs Purdue",
-        "ml_home": 0.47,
-        "ml_away": 0.505,
-        "ml_home_american": 113,
-        "ml_away_american": -102
+        "ml_home": 0.425,
+        "ml_away": 0.57,
+        "ml_home_american": 135,
+        "ml_away_american": -133
       }
     },
     "id:401858442": {
       "home": "Temple",
       "away": "Penn State",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2594,24 +2594,24 @@
       "home": "Texas A&M",
       "away": "Arizona State",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ASUTXAM",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12asutxam",
         "title": "Arizona St. vs Texas A&M",
-        "ml_home": 0.865,
-        "ml_away": 0.155,
-        "ml_home_american": -641,
-        "ml_away_american": 545
+        "ml_home": 0.86,
+        "ml_away": 0.15,
+        "ml_home_american": -614,
+        "ml_away_american": 567
       }
     },
     "id:401858221": {
       "home": "Virginia Tech",
       "away": "Old Dominion",
       "start": "2026-09-12T16:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2628,7 +2628,7 @@
       "home": "Georgia",
       "away": "Western Kentucky",
       "start": "2026-09-12T16:45:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2645,50 +2645,50 @@
       "home": "Central Michigan",
       "away": "Colgate",
       "start": "2026-09-12T17:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12COLGCMU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12colgcmu",
         "title": "Colgate vs Central Michigan",
-        "ml_home": 0.605,
-        "ml_away": 0.39,
-        "ml_home_american": -153,
-        "ml_away_american": 156
+        "ml_home": 0.825,
+        "ml_away": 0.175,
+        "ml_home_american": -471,
+        "ml_away_american": 471
       }
     },
     "id:401866417": {
       "home": "Miami (OH)",
       "away": "Holy Cross",
       "start": "2026-09-12T17:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12HCMOH",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12hcmoh",
         "title": "Holy Cross vs Miami (OH)",
-        "ml_home": 0.74,
-        "ml_away": 0.24,
-        "ml_home_american": -285,
-        "ml_away_american": 317
+        "ml_home": 0.83,
+        "ml_away": 0.17,
+        "ml_home_american": -488,
+        "ml_away_american": 488
       }
     },
     "id:401866413": {
       "home": "Ball State",
       "away": "Stony Brook",
       "start": "2026-09-12T18:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12STONBALL",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12stonball",
         "title": "Stony Brook vs Ball St.",
-        "ml_home": 0.745,
+        "ml_home": 0.75,
         "ml_away": 0.24,
-        "ml_home_american": -292,
+        "ml_home_american": -300,
         "ml_away_american": 317
       }
     },
@@ -2696,109 +2696,109 @@
       "home": "Akron",
       "away": "Robert Morris",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12RMUAKR",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12rmuakr",
         "title": "Robert Morris vs Akron",
-        "ml_home": 0.705,
-        "ml_away": 0.255,
-        "ml_home_american": -239,
-        "ml_away_american": 292
+        "ml_home": 0.695,
+        "ml_away": 0.31,
+        "ml_home_american": -228,
+        "ml_away_american": 223
       }
     },
     "id:401856810": {
       "home": "BYU",
       "away": "Arizona",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ARIZBYU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arizbyu",
         "title": "Arizona vs BYU",
-        "ml_home": 0.685,
-        "ml_away": 0.315,
-        "ml_home_american": -217,
-        "ml_away_american": 217
+        "ml_home": 0.71,
+        "ml_away": 0.295,
+        "ml_home_american": -245,
+        "ml_away_american": 239
       }
     },
     "id:401856785": {
       "home": "Colorado",
       "away": "Weber State",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12WEBCOLO",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12webcolo",
         "title": "Weber St. vs Colorado",
-        "ml_home": 0.86,
-        "ml_away": 0.13,
-        "ml_home_american": -614,
-        "ml_away_american": 669
+        "ml_home": 0.895,
+        "ml_away": 0.1,
+        "ml_home_american": -852,
+        "ml_away_american": 900
       }
     },
     "id:401858217": {
       "home": "Illinois",
       "away": "Duke",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12DUKEILL",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12dukeill",
         "title": "Duke vs Illinois",
-        "ml_home": 0.605,
-        "ml_away": 0.39,
-        "ml_home_american": -153,
-        "ml_away_american": 156
+        "ml_home": 0.715,
+        "ml_away": 0.305,
+        "ml_home_american": -251,
+        "ml_away_american": 228
       }
     },
     "id:401867929": {
       "home": "James Madison",
       "away": "Wagner",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12WAGJMU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12wagjmu",
         "title": "Wagner vs James Madison",
-        "ml_home": 0.93,
-        "ml_away": 0.075,
-        "ml_home_american": -1329,
-        "ml_away_american": 1233
+        "ml_home": 0.925,
+        "ml_away": 0.085,
+        "ml_home_american": -1233,
+        "ml_away_american": 1076
       }
     },
     "id:401856674": {
       "home": "Kentucky",
       "away": "Alabama",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ALAUK",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12alauk",
         "title": "Alabama vs Kentucky",
-        "ml_home": 0.17,
-        "ml_away": 0.825,
-        "ml_home_american": 488,
-        "ml_away_american": -471
+        "ml_home": 0.195,
+        "ml_away": 0.8,
+        "ml_home_american": 413,
+        "ml_away_american": -400
       }
     },
     "id:401866420": {
       "home": "Massachusetts",
       "away": "Sacred Heart",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2806,50 +2806,50 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12shumass",
         "title": "Sacred Heart vs UMass",
         "ml_home": 0.49,
-        "ml_away": 0.49,
+        "ml_away": 0.505,
         "ml_home_american": 104,
-        "ml_away_american": 104
+        "ml_away_american": -102
       }
     },
     "id:401858440": {
       "home": "Michigan State",
       "away": "Eastern Michigan",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12EMUMSU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12emumsu",
         "title": "Eastern Michigan vs Michigan St.",
-        "ml_home": 0.78,
-        "ml_away": 0.225,
-        "ml_home_american": -355,
-        "ml_away_american": 344
+        "ml_home": 0.775,
+        "ml_away": 0.18,
+        "ml_home_american": -344,
+        "ml_away_american": 456
       }
     },
     "id:401856677": {
       "home": "Minnesota",
       "away": "Mississippi State",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12MSSTMINN",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12msstminn",
         "title": "Mississippi St. vs Minnesota",
-        "ml_home": 0.475,
-        "ml_away": 0.475,
-        "ml_home_american": 111,
-        "ml_away_american": 111
+        "ml_home": 0.665,
+        "ml_away": 0.345,
+        "ml_home_american": -199,
+        "ml_away_american": 190
       }
     },
     "id:401859184": {
       "home": "Notre Dame",
       "away": "Rice",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2866,7 +2866,7 @@
       "home": "Pittsburgh",
       "away": "UCF",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2883,92 +2883,92 @@
       "home": "Syracuse",
       "away": "California",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12CALSYR",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12calsyr",
         "title": "California vs Syracuse",
-        "ml_home": 0.48,
-        "ml_away": 0.525,
-        "ml_home_american": 108,
-        "ml_away_american": -111
+        "ml_home": 0.495,
+        "ml_away": 0.515,
+        "ml_home_american": 102,
+        "ml_away_american": -106
       }
     },
     "id:401860884": {
       "home": "Texas State",
       "away": "UTSA",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12UTSATXST",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12utsatxst",
         "title": "UTSA vs Texas St.",
-        "ml_home": 0.5,
-        "ml_away": 0.475,
-        "ml_home_american": -100,
-        "ml_away_american": 111
+        "ml_home": 0.595,
+        "ml_away": 0.4,
+        "ml_home_american": -147,
+        "ml_away_american": 150
       }
     },
     "id:401866419": {
       "home": "Toledo",
       "away": "Central Connecticut",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12CCSUTOL",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ccsutol",
         "title": "Central Connecticut St. vs Toledo",
-        "ml_home": 0.79,
-        "ml_away": 0.21,
-        "ml_home_american": -376,
-        "ml_away_american": 376
+        "ml_home": 0.91,
+        "ml_away": 0.095,
+        "ml_home_american": -1011,
+        "ml_away_american": 953
       }
     },
     "id:401862708": {
       "home": "UAB",
       "away": "UL Monroe",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ULMUAB",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ulmuab",
         "title": "Louisiana-Monroe vs UAB",
-        "ml_home": 0.49,
-        "ml_away": 0.49,
-        "ml_home_american": 104,
-        "ml_away_american": 104
+        "ml_home": 0.675,
+        "ml_away": 0.305,
+        "ml_home_american": -208,
+        "ml_away_american": 228
       }
     },
     "id:401858444": {
       "home": "UConn",
       "away": "Maryland",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12MDCONN",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mdconn",
         "title": "Maryland vs UConn",
-        "ml_home": 0.45,
-        "ml_away": 0.505,
-        "ml_home_american": 122,
-        "ml_away_american": -102
+        "ml_home": 0.49,
+        "ml_away": 0.495,
+        "ml_home_american": 104,
+        "ml_away_american": 102
       }
     },
     "id:401858446": {
       "home": "Washington",
       "away": "Utah State",
       "start": "2026-09-12T19:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -2976,33 +2976,33 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12usuwash",
         "title": "Utah St. vs Washington",
         "ml_home": 0.875,
-        "ml_away": 0.125,
+        "ml_away": 0.13,
         "ml_home_american": -700,
-        "ml_away_american": 700
+        "ml_away_american": 669
       }
     },
     "id:401862705": {
       "home": "North Texas",
       "away": "UNLV",
       "start": "2026-09-12T19:45:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12UNLVUNT",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12unlvunt",
         "title": "UNLV vs North Texas",
-        "ml_home": 0.41,
-        "ml_away": 0.55,
-        "ml_home_american": 144,
-        "ml_away_american": -122
+        "ml_home": 0.37,
+        "ml_away": 0.625,
+        "ml_home_american": 170,
+        "ml_away_american": -167
       }
     },
     "id:401858223": {
       "home": "SMU",
       "away": "UC Davis",
       "start": "2026-09-12T20:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -3019,24 +3019,24 @@
       "home": "Troy",
       "away": "Alabama State",
       "start": "2026-09-12T20:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ALSTTROY",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12alsttroy",
         "title": "Alabama St. vs Troy",
-        "ml_home": 0.805,
-        "ml_away": 0.23,
-        "ml_home_american": -413,
-        "ml_away_american": 335
+        "ml_home": 0.84,
+        "ml_away": 0.145,
+        "ml_home_american": -525,
+        "ml_away_american": 590
       }
     },
     "id:401864506": {
       "home": "Wyoming",
       "away": "Northern Colorado",
       "start": "2026-09-12T20:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -3044,50 +3044,50 @@
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12uncowyo",
         "title": "Northern Colorado vs Wyoming",
         "ml_home": 0.88,
-        "ml_away": 0.12,
+        "ml_away": 0.125,
         "ml_home_american": -733,
-        "ml_away_american": 733
+        "ml_away_american": 700
       }
     },
     "id:401856684": {
       "home": "Vanderbilt",
       "away": "Delaware",
       "start": "2026-09-12T20:15:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12DELVAN",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12delvan",
         "title": "Delaware vs Vanderbilt",
-        "ml_home": 0.84,
-        "ml_away": 0.145,
-        "ml_home_american": -525,
-        "ml_away_american": 590
+        "ml_home": 0.815,
+        "ml_away": 0.18,
+        "ml_home_american": -441,
+        "ml_away_american": 456
       }
     },
     "id:401856784": {
       "home": "Baylor",
       "away": "Prairie View A&M",
       "start": "2026-09-13T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12PVBAY",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12pvbay",
         "title": "Prairie View A&M vs Baylor",
-        "ml_home": 0.985,
-        "ml_away": 0.02,
-        "ml_home_american": -6567,
-        "ml_away_american": 4900
+        "ml_home": 0.98,
+        "ml_away": 0.015,
+        "ml_home_american": -4900,
+        "ml_away_american": 6567
       }
     },
     "id:401856789": {
       "home": "TCU",
       "away": "Grambling",
       "start": "2026-09-13T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -3104,92 +3104,92 @@
       "home": "UTEP",
       "away": "Texas Southern",
       "start": "2026-09-13T01:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12TXSOUTEP",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12txsoutep",
         "title": "Texas Southern vs UTEP",
-        "ml_home": 0.745,
-        "ml_away": 0.32,
-        "ml_home_american": -292,
-        "ml_away_american": 212
+        "ml_home": 0.74,
+        "ml_away": 0.325,
+        "ml_home_american": -285,
+        "ml_away_american": 208
       }
     },
     "id:401864502": {
       "home": "Air Force",
       "away": "North Dakota State",
       "start": "2026-09-13T02:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12NDSUAFA",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12ndsuafa",
         "title": "North Dakota St. vs Air Force",
-        "ml_home": 0.485,
-        "ml_away": 0.505,
-        "ml_home_american": 106,
-        "ml_away_american": -102
+        "ml_home": 0.47,
+        "ml_away": 0.52,
+        "ml_home_american": 113,
+        "ml_away_american": -108
       }
     },
     "id:401856670": {
       "home": "Utah",
       "away": "Arkansas",
       "start": "2026-09-13T02:15:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12ARKUTAH",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12arkutah",
         "title": "Arkansas vs Utah",
-        "ml_home": 0.685,
-        "ml_away": 0.31,
-        "ml_home_american": -217,
-        "ml_away_american": 223
+        "ml_home": 0.695,
+        "ml_away": 0.32,
+        "ml_home_american": -228,
+        "ml_away_american": 212
       }
     },
     "id:401860883": {
       "home": "Fresno State",
       "away": "Sacramento State",
       "start": "2026-09-13T02:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12SACFRES",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12sacfres",
         "title": "Sacramento St. vs Fresno St.",
-        "ml_home": 0.63,
-        "ml_away": 0.365,
-        "ml_home_american": -170,
-        "ml_away_american": 174
+        "ml_home": 0.615,
+        "ml_away": 0.385,
+        "ml_home_american": -160,
+        "ml_away_american": 160
       }
     },
     "id:401864500": {
       "home": "Nevada",
       "away": "Montana State",
       "start": "2026-09-13T02:30:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP12MTSTNEV",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep12mtstnev",
         "title": "Montana St. vs Nevada",
-        "ml_home": 0.32,
-        "ml_away": 0.73,
-        "ml_home_american": 212,
-        "ml_away_american": -270
+        "ml_home": 0.255,
+        "ml_away": 0.74,
+        "ml_home_american": 292,
+        "ml_away_american": -285
       }
     },
     "id:401858445": {
       "home": "USC",
       "away": "Louisiana",
       "start": "2026-09-13T03:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
@@ -3206,36 +3206,36 @@
       "home": "Hawai'i",
       "away": "New Mexico State",
       "start": "2026-09-13T03:59:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP13NMSUHAW",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep13nmsuhaw",
         "title": "New Mexico St. vs Hawai'i",
-        "ml_home": 0.73,
-        "ml_away": 0.275,
-        "ml_home_american": -270,
-        "ml_away_american": 264
+        "ml_home": 0.725,
+        "ml_away": 0.285,
+        "ml_home_american": -264,
+        "ml_away_american": 251
       }
     },
     "id:401856811": {
       "home": "Texas Tech",
       "away": "Houston",
       "start": "2026-09-19T00:00:00.000Z",
-      "logged_at": "2026-08-31T01:26:47.936681+00:00",
+      "logged_at": "2026-08-31T13:33:28.413571+00:00",
       "locked": false,
       "kalshi": {
         "source": "kalshi",
         "slug": "KXNCAAFGAME-26SEP18HOUTTU",
         "url": "https://kalshi.com/markets/kxncaafgame/kxncaafgame-26sep18houttu",
         "title": "Houston vs Texas Tech",
-        "ml_home": 0.83,
+        "ml_home": 0.82,
         "ml_away": 0.19,
-        "ml_home_american": -488,
+        "ml_home_american": -456,
         "ml_away_american": 426
       }
     }
   },
-  "updated_at": "2026-08-31T01:26:51.569159+00:00"
+  "updated_at": "2026-08-31T13:33:30.773958+00:00"
 }

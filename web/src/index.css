@@ -853,6 +853,109 @@ tr:hover td.team {
   font-weight: 600;
 }
 
+.loso-kicker {
+  margin: 0 0 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.loso-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.loso-blurb {
+  margin: 0 0 16px;
+  max-width: 42em;
+  line-height: 1.5;
+}
+
+.loso-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 20px;
+}
+
+.loso-num,
+.loso-axis {
+  font-size: 11px;
+  fill: var(--muted);
+}
+
+.loso-step {
+  stroke: var(--good);
+  stroke-width: 2;
+}
+
+.loso-hit {
+  cursor: pointer;
+}
+
+.loso-dot {
+  fill: var(--line-strong);
+}
+
+.loso-dot.is-kept {
+  fill: var(--good);
+}
+
+.loso-dot.is-on {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.loso-lab {
+  font-size: 11px;
+  fill: var(--good);
+  cursor: pointer;
+}
+
+.loso-lab.is-on {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.loso-pick {
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) minmax(16rem, 1fr);
+  gap: 24px 40px;
+  align-items: start;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.loso-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin: 0;
+}
+
+.loso-stats dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.loso-stats dd {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.loso-years {
+  max-height: 320px;
+}
+
+@media (max-width: 720px) {
+  .loso-pick {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ask-card {
   margin: 0 0 12px;
 }

@@ -150,6 +150,35 @@ export type IndexFile = {
   seasons: { season: number; teams: number }[];
 };
 
+export type LosoSeason = {
+  season: number;
+  n: number;
+  brier: number;
+  logloss: number;
+  brier_T?: number;
+  brier_clip?: number;
+  T?: number;
+};
+
+export type LosoRow = {
+  id: string;
+  engine: string;
+  set: string;
+  pooled: { n: number; accuracy: number; brier: number; logloss: number };
+  pooled_T?: { brier: number; logloss: number };
+  mean_season_brier: number;
+  seasons: LosoSeason[];
+};
+
+export type LosoFile = {
+  protocol: string;
+  loso_features?: string[];
+  features?: string[];
+  rows: LosoRow[];
+  perm?: Record<string, Record<string, number>>;
+  note?: string;
+};
+
 export type MoneyFile = {
   source: string;
   note: string;

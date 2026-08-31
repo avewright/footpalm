@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { AskView } from "./AskView";
 import { GamesView } from "./GamesView";
 import { GameView } from "./GameView";
-import { GraphView } from "./GraphView";
+import { LosoView } from "./LosoView";
 import { MoneyView } from "./MoneyView";
 import { RatingsTable } from "./RatingsTable";
 import { TeamView } from "./TeamView";
 import { findGame } from "./game";
 import { signed } from "./format";
-import type { GamePred, GraphFile, IndexFile, MoneyFile, RatingsFile } from "./types";
+import type { GamePred, IndexFile, LosoFile, MoneyFile, RatingsFile } from "./types";
 
-const TABS = ["ratings", "games", "graph", "ask", "money"] as const;
+const TABS = ["ratings", "games", "ask", "money", "loso"] as const;
 type Tab = (typeof TABS)[number];
 type View = Tab | "team" | "game";
 
 const TAB_LABEL: Record<Tab, string> = {
   ratings: "Ratings",
   games: "Games",
-  graph: "Graph",
   ask: "Ask",
   money: "Money",
+  loso: "LOSO",
 };
 
 function search() {
@@ -47,8 +47,9 @@ export function App() {
   const [game, setGame] = useState(() => search().get("game") ?? "");
   const [ratings, setRatings] = useState<RatingsFile | null>(null);
   const [games, setGames] = useState<GamePred[]>([]);
-  const [graph, setGraph] = useState<GraphFile | null>(null);
   const [money, setMoney] = useState<MoneyFile | null>(null);
+  const [loso, setLoso] = useState<LosoFile | null>(null);
+  const [confpass, setConfpass] = useState<LosoFile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [askTick, setAskTick] = useState(0);
 
@@ -78,18 +79,26 @@ export function App() {
     Promise.all([
       loadJson<RatingsFile | null>(`/data/ratings-${season}.json`, null),
       loadJson<{ games: GamePred[] }>(`/data/predictions-${season}.json`, { games: [] }),
-      loadJson<GraphFile | null>(`/data/graph-${season}.json`, null),
       loadJson<MoneyFile | null>("/data/money.json", null),
     ])
-      .then(([rt, pred, g, m]) => {
+      .then(([rt, pred, m]) => {
         setRatings(rt);
         setGames(pred?.games ?? []);
-        setGraph(g);
         setMoney(m);
         if (!rt) setError(`missing ${season} ratings — run the build`);
       })
       .catch((err: Error) => setError(err.message));
   }, [season]);
+
+  useEffect(() => {
+    Promise.all([
+      loadJson<LosoFile | null>("/data/losopass.json", null),
+      loadJson<LosoFile | null>("/data/confpass.json", null),
+    ]).then(([a, b]) => {
+      setLoso(a);
+      setConfpass(b);
+    });
+  }, []);
 
   function openTeam(name: string) {
     if (tab !== "team") setBack(tab);
@@ -135,7 +144,7 @@ export function App() {
               New chat
             </button>
           )}
-          {tab !== "team" && tab !== "game" && (
+          {tab !== "team" && tab !== "game" && tab !== "loso" && (
             <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
               {seasons.map((year) => (
                 <option key={year} value={year}>
@@ -147,7 +156,7 @@ export function App() {
         </div>
       </header>
 
-      {tab !== "ask" && tab !== "team" && tab !== "game" && (
+      {tab !== "ask" && tab !== "team" && tab !== "game" && tab !== "loso" && (
         <p className="meta">
           {ratings
             ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
@@ -180,12 +189,17 @@ export function App() {
           </button>
         </p>
       )}
-      {tab === "graph" && graph && (
-        <GraphView graph={graph} team={team} onSelectTeam={setTeam} onOpenTeam={openTeam} />
-      )}
-      {tab === "graph" && !graph && <p className="lede-note">No graph file for {season} yet.</p>}
       {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
       {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
+      {tab === "loso" && (loso || confpass) && (
+        <LosoView
+          files={[
+            ...(loso ? [{ pass: "loso", data: loso }] : []),
+            ...(confpass ? [{ pass: "conference", data: confpass }] : []),
+          ]}
+        />
+      )}
+      {tab === "loso" && !loso && !confpass && <p className="lede-note">No LOSO file yet.</p>}
 
       {tab === "ratings" && (
         <details className="glossary">

@@ -87,3 +87,9 @@ Traceback (most recent call last):
   File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1347, in do_open
     raise URLError(err)
 urllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=145 logged=145 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=145 logged=145 season=2026
