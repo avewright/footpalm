@@ -111,6 +111,63 @@ export type GamePred = {
   models?: Partial<Record<"lightgbm" | "xgboost" | "tabpfn" | "ensemble", ModelPick>>;
 };
 
+export type UnitPpa = {
+  overall?: number | null;
+  passing?: number | null;
+  rushing?: number | null;
+  firstDown?: number | null;
+  secondDown?: number | null;
+  thirdDown?: number | null;
+  fourthDown?: number | null;
+};
+
+export type UnitStats = {
+  games?: number;
+  totalYards?: number;
+  totalYardsOpponent?: number;
+  netPassingYards?: number;
+  netPassingYardsOpponent?: number;
+  rushingYards?: number;
+  rushingYardsOpponent?: number;
+  passAttempts?: number;
+  passAttemptsOpponent?: number;
+  passCompletions?: number;
+  passCompletionsOpponent?: number;
+  rushingAttempts?: number;
+  rushingAttemptsOpponent?: number;
+  passingTDs?: number;
+  passingTDsOpponent?: number;
+  rushingTDs?: number;
+  rushingTDsOpponent?: number;
+  thirdDowns?: number;
+  thirdDownsOpponent?: number;
+  thirdDownConversions?: number;
+  thirdDownConversionsOpponent?: number;
+  sacks?: number;
+  sacksOpponent?: number;
+  tacklesForLoss?: number;
+  tacklesForLossOpponent?: number;
+  turnovers?: number;
+  turnoversOpponent?: number;
+  firstDowns?: number;
+  firstDownsOpponent?: number;
+};
+
+export type UnitTeam = {
+  team: string;
+  conf?: string;
+  offense: UnitPpa;
+  defense: UnitPpa;
+  stats: UnitStats;
+};
+
+export type UnitsFile = {
+  season: number;
+  source: string;
+  n: number;
+  teams: UnitTeam[];
+};
+
 export type GraphFile = {
   season: number;
   note: string;

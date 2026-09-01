@@ -166,7 +166,9 @@ export function App() {
       {tab === "ratings" && ratings?.method && <p className="lede-note">{ratings.method}</p>}
 
       {tab === "ratings" && ratings && <RatingsTable data={ratings} onOpenTeam={openTeam} />}
-      {tab === "games" && <GamesView games={games} onOpenTeam={openTeam} onOpenGame={openGame} />}
+      {tab === "games" && (
+        <GamesView games={games} ratings={ratings} onOpenTeam={openTeam} onOpenGame={openGame} />
+      )}
       {tab === "team" && team && (
         <TeamView
           team={team}
@@ -180,7 +182,9 @@ export function App() {
           games={games}
         />
       )}
-      {tab === "game" && selected && <GameView game={selected} onOpenTeam={openTeam} onClose={closeGame} />}
+      {tab === "game" && selected && (
+        <GameView game={selected} ratings={ratings} onOpenTeam={openTeam} onClose={closeGame} />
+      )}
       {tab === "game" && game && !selected && (
         <p className="lede-note">
           No game {game} in {season}.{" "}
