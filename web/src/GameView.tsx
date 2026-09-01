@@ -6,6 +6,7 @@ import { MatchupViz } from "./MatchupViz";
 import { prettyWhen } from "./score";
 import { TeamLink } from "./TeamView";
 import { UnitsView } from "./UnitsView";
+import { pickOfModel, predMargin, type UserModel } from "./mymodel";
 import type { EspnQb, GamePred, RatingsFile, UnitsFile } from "./types";
 
 function qbLine(rows?: EspnQb[]) {
@@ -87,16 +88,19 @@ function WinMeter({ game }: { game: GamePred }) {
 export function GameView({
   game,
   ratings,
+  userModel,
   onOpenTeam,
   onClose,
 }: {
   game: GamePred;
   ratings: RatingsFile | null;
+  userModel?: UserModel | null;
   onOpenTeam: (team: string) => void;
   onClose: () => void;
 }) {
   const teams = teamMap(ratings);
   const a = gameAnalytics(game, teams);
+  const yours = pickOfModel(userModel, game);
   const when = prettyWhen(game.start);
   const models = MODEL_IDS.map((id) => ({ id, pick: pickOf(game, id) })).filter((row) => row.pick);
   const vegas = marketSpread(game) ?? game.espn?.odds?.spread ?? null;
@@ -182,9 +186,15 @@ export function GameView({
           <dt>Vegas Line</dt>
           <dd>{favoriteLine(game.home, game.away, vegas)}</dd>
         </div>
-        <div title="FootPalm implied spread, shown as the favorite.">
+        <div
+          title={
+            yours
+              ? `${userModel?.name ?? "Your model"} implied spread, from the uploaded slate.`
+              : "Upload a score slate on My Model."
+          }
+        >
           <dt>Your Prediction</dt>
-          <dd>{favoriteLine(game.home, game.away, -game.pred_margin)}</dd>
+          <dd>{yours ? favoriteLine(game.home, game.away, -predMargin(yours)) : "—"}</dd>
         </div>
       </dl>
 
@@ -233,6 +243,14 @@ export function GameView({
               <td>{signed(game.pred_margin)}</td>
               <td>{a.predTotal.toFixed(1)}</td>
             </tr>
+            {yours && (
+              <tr>
+                <td className="left">{userModel?.name ?? "Your model"}</td>
+                <td>{yours.home_win_prob == null ? "—" : pct(yours.home_win_prob)}</td>
+                <td>{signed(predMargin(yours))}</td>
+                <td>{(yours.pred_away + yours.pred_home).toFixed(1)}</td>
+              </tr>
+            )}
             {a.fpiWin != null && (
               <tr>
                 <td className="left">ESPN FPI</td>

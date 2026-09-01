@@ -86,7 +86,8 @@ input:focus-visible {
   flex: 1;
 }
 
-.tabs button {
+.tabs button,
+.tab-link {
   appearance: none;
   border: 0;
   background: none;
@@ -95,7 +96,8 @@ input:focus-visible {
   cursor: pointer;
 }
 
-.tabs button[aria-pressed="true"] {
+.tabs button[aria-pressed="true"],
+.tab-link[aria-pressed="true"] {
   color: var(--ink);
   box-shadow: inset 0 -1px 0 var(--ink);
 }
@@ -265,6 +267,49 @@ td.left {
   border-color: var(--ink);
   color: var(--bg);
   position: relative;
+}
+
+.mine-steps {
+  margin: 0 0 16px;
+  padding-left: 1.2em;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mine-steps li {
+  margin: 0 0 8px;
+}
+
+.mine-steps li:last-child {
+  margin-bottom: 0;
+}
+
+.mine-steps strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.mine-steps code {
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.mine-drop {
+  margin: 0 0 16px;
+  padding: 18px 12px;
+  border: 1px dashed var(--line-strong);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.mine-drop.is-drag {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.mine .table-wrap {
+  max-height: calc(100vh - 280px);
 }
 
 .table-wrap {
