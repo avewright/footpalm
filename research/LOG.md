@@ -244,3 +244,81 @@ Pooled slices (weeks ≤3 / 4–8 / ≥9):
 | xgboost/extras+glm4 | 0.1807 | 0.1916 | 0.182 |
 
 would_promote=False live_promoted=False. Do not carve a subset after seeing the expanding-year score.
+
+## QScale (experiment, not live)
+
+Synthetic train rows from regulation quarter scores, scaled to 4 quarters. Same extras X. TabPFN-3 batch, 2014–2024 train, 2025 FBS–FBS once. T fit on real train labels in the fitted window.
+
+| model | 2025 Brier | logloss | n_train | n_real |
+|---|---|---|---|---|
+| tabpfn/extras | 0.1861 | 0.552 | 8000 | 8000 |
+| tabpfn/extras+T | 0.181 | 0.5332 |  |  |
+| tabpfn/qscale | 0.2105 | 0.6064 | 8000 | 810 |
+| tabpfn/qscale+T | 0.2313 | 0.7005 |  |  |
+| tabpfn/qscale-pairs | 0.2102 | 0.6057 | 8000 | 1226 |
+| tabpfn/qscale-pairs+T | 0.2204 | 0.645 |  |  |
+| tabpfn/qscale-block | 0.2094 | 0.6042 | 7999 | 810 |
+| tabpfn/qscale-block+T | 0.2298 | 0.6953 |  |  |
+
+| id | extras | candidate | Δ | pass |
+|---|---|---|---|---|
+| tabpfn/qscale | 0.1861 | 0.2105 | 0.0244 | False |
+| tabpfn/qscale-pairs | 0.1861 | 0.2102 | 0.0241 | False |
+| tabpfn/qscale-block | 0.1861 | 0.2094 | 0.0233 | False |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing 2025.
+
+## QScale2 (experiment, not live)
+
+Consecutive clock only: real halves (×2) and consecutive three-quarter groups (×4/3). Same extras X. TabPFN-3 batch, 2014–2024 train, 2025 FBS–FBS once. T fit on real train labels in the fitted window.
+
+| model | 2025 Brier | logloss | n_train | n_real |
+|---|---|---|---|---|
+| tabpfn/extras | 0.1861 | 0.552 | 8000 | 8000 |
+| tabpfn/extras+T | 0.181 | 0.5332 |  |  |
+| tabpfn/qscale-halves | 0.1992 | 0.5797 | 8000 | 2827 |
+| tabpfn/qscale-halves+T | 0.2116 | 0.6262 |  |  |
+| tabpfn/qscale-three | 0.2094 | 0.6041 | 8000 | 2777 |
+| tabpfn/qscale-three+T | 0.2374 | 0.7518 |  |  |
+| tabpfn/qscale-halves+three | 0.2049 | 0.5941 | 8000 | 1692 |
+| tabpfn/qscale-halves+three+T | 0.2169 | 0.6444 |  |  |
+
+| id | extras | candidate | Δ | pass |
+|---|---|---|---|---|
+| tabpfn/qscale-halves | 0.1861 | 0.1992 | 0.0131 | False |
+| tabpfn/qscale-three | 0.1861 | 0.2094 | 0.0233 | False |
+| tabpfn/qscale-halves+three | 0.1861 | 0.2049 | 0.0188 | False |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing 2025.
+
+## QB (diagnostic, not live)
+
+Menu locked before this score. QB state only: this-season EPA/play with the expected starter, change vs last season modal, log1p starts, prior EPA any team. Garbage-filtered, walk-forward PBP, prior slates only. No spread / NIL / week dummy. Expected starter = modal passer from most recent completed game, else last season modal. Expanding-year on 2014–2025 FBS–FBS.
+
+| family | extras | extras+qb | Δ | years better | median Δ | pass |
+|---|---|---|---|---|---|---|
+| logistic | 0.184 | 0.1856 | 0.0016 | 6/11 | -0.0008 | False |
+| lightgbm | 0.1864 | 0.1869 | 0.0005 | 5/11 | 0.0 | False |
+| xgboost | 0.1853 | 0.1854 | 0.0001 | 4/11 | 0.0 | False |
+
+| model | pooled Brier | pooled logloss | mean season Brier |
+|---|---|---|---|
+| logistic/extras | 0.184 | 0.5447 | 0.1841 |
+| lightgbm/extras | 0.1864 | 0.5521 | 0.1865 |
+| xgboost/extras | 0.1853 | 0.5489 | 0.1853 |
+| logistic/extras+qb | 0.1856 | 0.5496 | 0.1856 |
+| lightgbm/extras+qb | 0.1869 | 0.5531 | 0.1871 |
+| xgboost/extras+qb | 0.1854 | 0.5492 | 0.1854 |
+
+Pooled slices (weeks ≤3 / 4–8 / ≥9):
+
+| model | early | mid | late |
+|---|---|---|---|
+| logistic/extras | 0.1806 | 0.1898 | 0.1809 |
+| lightgbm/extras | 0.1835 | 0.1922 | 0.1829 |
+| xgboost/extras | 0.1808 | 0.1924 | 0.1815 |
+| logistic/extras+qb | 0.182 | 0.1918 | 0.1822 |
+| lightgbm/extras+qb | 0.1824 | 0.1928 | 0.1841 |
+| xgboost/extras+qb | 0.1809 | 0.1929 | 0.1812 |
+
+would_promote=False live_promoted=False. Do not carve a subset after seeing the expanding-year score.

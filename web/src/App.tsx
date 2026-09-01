@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { AskView } from "./AskView";
 import { GamesView } from "./GamesView";
 import { GameView } from "./GameView";
-import { LosoView, tabpfnFile } from "./LosoView";
 import { MoneyView } from "./MoneyView";
 import { MyModelView } from "./MyModelView";
 import { RatingsTable } from "./RatingsTable";
@@ -10,9 +9,9 @@ import { TeamView } from "./TeamView";
 import { findGame } from "./game";
 import { signed } from "./format";
 import { clearUserModel, loadUserModel, saveUserModel, type UserModel } from "./mymodel";
-import type { GamePred, IndexFile, LosoFile, MoneyFile, RatingsFile } from "./types";
+import type { GamePred, IndexFile, MoneyFile, RatingsFile } from "./types";
 
-const TABS = ["ratings", "games", "mine", "ask", "money", "loso"] as const;
+const TABS = ["ratings", "games", "mine", "ask", "money"] as const;
 type Tab = (typeof TABS)[number];
 type View = Tab | "team" | "game";
 
@@ -22,7 +21,6 @@ const TAB_LABEL: Record<Tab, string> = {
   mine: "My Model",
   ask: "Ask",
   money: "Money",
-  loso: "Walk",
 };
 
 function search() {
@@ -51,8 +49,6 @@ export function App() {
   const [ratings, setRatings] = useState<RatingsFile | null>(null);
   const [games, setGames] = useState<GamePred[]>([]);
   const [money, setMoney] = useState<MoneyFile | null>(null);
-  const [walkpass, setWalkpass] = useState<LosoFile | null>(null);
-  const [tabpfn, setTabpfn] = useState<LosoFile | null>(null);
   const [userModel, setUserModel] = useState<UserModel | null>(() =>
     loadUserModel(Number(search().get("season")) || 2026),
   );
@@ -99,16 +95,6 @@ export function App() {
   useEffect(() => {
     setUserModel(loadUserModel(season));
   }, [season]);
-
-  useEffect(() => {
-    Promise.all([
-      loadJson<LosoFile | null>("/data/walkpass.json", null),
-      loadJson<{ seasons?: [] } | null>("/data/backtest-summary.json", null),
-    ]).then(([walk, back]) => {
-      setWalkpass(walk);
-      setTabpfn(tabpfnFile(back));
-    });
-  }, []);
 
   function openTeam(name: string) {
     if (tab !== "team") setBack(tab);
@@ -163,7 +149,7 @@ export function App() {
           <button type="button" className="tab-link" aria-pressed={tab === "mine"} onClick={() => setTab("mine")}>
             My Model
           </button>
-          {tab !== "team" && tab !== "game" && tab !== "loso" && (
+          {tab !== "team" && tab !== "game" && (
             <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
               {seasons.map((year) => (
                 <option key={year} value={year}>
@@ -175,7 +161,7 @@ export function App() {
         </div>
       </header>
 
-      {tab !== "ask" && tab !== "team" && tab !== "game" && tab !== "loso" && tab !== "mine" && (
+      {tab !== "ask" && tab !== "team" && tab !== "game" && tab !== "mine" && (
         <p className="meta">
           {ratings
             ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
@@ -230,15 +216,6 @@ export function App() {
       )}
       {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
       {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
-      {tab === "loso" && (tabpfn || walkpass) && (
-        <LosoView
-          files={[
-            ...(tabpfn ? [{ pass: "tabpfn", data: tabpfn }] : []),
-            ...(walkpass ? [{ pass: "walk", data: walkpass }] : []),
-          ]}
-        />
-      )}
-      {tab === "loso" && !tabpfn && !walkpass && <p className="lede-note">No walk-forward file yet.</p>}
 
       {tab === "ratings" && (
         <details className="glossary">

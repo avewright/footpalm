@@ -25,6 +25,7 @@ from footpalm.form import (
     time_features,
 )
 from footpalm.pace import PACE_ALL, PACE_NAMES, PaceBook, load_snaps
+from footpalm.qb import QB_ALL, QB_NAMES, QBBook, load_snaps as load_qb_snaps
 from footpalm.specials import SPECIAL_ALL, SPECIAL_NAMES, SpecialsBook, load_specials
 from footpalm.predict import FEATURE_NAMES
 from footpalm.project import history_path
@@ -75,12 +76,14 @@ def walk_form(
     *,
     pace_by_game: dict[int, dict] | None = None,
     specials_by_game: dict[int, dict] | None = None,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    qb_by_game: dict[int, dict] | None = None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     if len(games) != len(X_locked):
         raise SystemExit(f"games n={len(games)} != locked features n={len(X_locked)}")
     form = FormBook()
     pace_book = PaceBook()
     specials_book = SpecialsBook()
+    qb_book = QBBook()
     extras = np.zeros((len(games), len(EXTRA_NAMES)), dtype=float)
     signal = np.zeros((len(games), len(SIGNAL_NAMES)), dtype=float)
     craft = np.zeros((len(games), len(CRAFT_NAMES)), dtype=float)
@@ -89,6 +92,7 @@ def walk_form(
     glm4 = np.zeros((len(games), len(GLM4_NAMES)), dtype=float)
     pace = np.zeros((len(games), len(PACE_NAMES)), dtype=float)
     specials = np.zeros((len(games), len(SPECIAL_NAMES)), dtype=float)
+    qb = np.zeros((len(games), len(QB_NAMES)), dtype=float)
     i = 0
     while i < len(games):
         season = int(games[i]["season"])
@@ -96,6 +100,7 @@ def walk_form(
             form.new_season()
             pace_book.new_season()
             specials_book.new_season()
+            qb_book.new_season()
         slate = int(games[i]["slate"])
         start = i
         while i < len(games) and int(games[i]["season"]) == season and int(games[i]["slate"]) == slate:
@@ -119,6 +124,7 @@ def walk_form(
             )
             pace[j] = pace_book.vector(games[j]["home"], games[j]["away"])
             specials[j] = specials_book.vector(games[j]["home"], games[j]["away"])
+            qb[j] = qb_book.vector(games[j]["home"], games[j]["away"])
         for j in batch:
             game = games[j]
             if game.get("actual_margin") is None:
@@ -148,11 +154,13 @@ def walk_form(
                 home_won=bool(game.get("home_won")),
                 margin=float(game["actual_margin"]),
             )
-    return extras, signal, craft, loso, conf, glm4, pace, specials
+            qbs = qb_by_game.get(int(gid)) if qb_by_game and gid is not None else None
+            qb_book.apply(qbs, game["home"], game["away"])
+    return extras, signal, craft, loso, conf, glm4, pace, specials, qb
 
 
 def extras_from_games(games: list[dict], X_locked: np.ndarray) -> np.ndarray:
-    extras, _signal, _craft, _loso, _conf, _glm4, _pace, _specials = walk_form(games, X_locked)
+    extras, _signal, _craft, _loso, _conf, _glm4, _pace, _specials, _qb = walk_form(games, X_locked)
     return extras
 
 
@@ -167,8 +175,8 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
     counts = season_game_counts(root)
     if sum(counts.values()) != len(X_locked):
         raise SystemExit(f"history n={len(X_locked)} != prediction rows {sum(counts.values())}")
-    extras, signal, craft, loso, conf, glm4, pace, specials = walk_form(
-        games, X_locked, pace_by_game=load_snaps(root), specials_by_game=load_specials(root)
+    extras, signal, craft, loso, conf, glm4, pace, specials, qb = walk_form(
+        games, X_locked, pace_by_game=load_snaps(root), specials_by_game=load_specials(root), qb_by_game=load_qb_snaps(root)
     )
     clock = np.vstack([time_features(int(g["season"]), int(g.get("week") or 0)) for g in games])
     seasons = np.array([int(g["season"]) for g in games], dtype=int)
@@ -183,6 +191,7 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
     X_glm4 = np.concatenate([X_full, glm4], axis=1)
     X_pace = np.concatenate([X_full, pace], axis=1)
     X_specials = np.concatenate([X_full, specials], axis=1)
+    X_qb = np.concatenate([X_full, qb], axis=1)
     return {
         "X_locked": X_locked,
         "X_full": X_full,
@@ -195,6 +204,7 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
         "X_glm4": X_glm4,
         "X_pace": X_pace,
         "X_specials": X_specials,
+        "X_qb": X_qb,
         "extras": extras,
         "signal": signal,
         "time": clock,
@@ -204,6 +214,7 @@ def build_matrix(root: Path | None = None) -> dict[str, np.ndarray]:
         "glm4": glm4,
         "pace": pace,
         "specials": specials,
+        "qb": qb,
         "y_win": y_win,
         "y_margin": y_margin,
         "season": seasons,
@@ -237,12 +248,14 @@ def save_matrix(root: Path, payload: dict[str, np.ndarray]) -> Path:
         pace_full_names=np.array(PACE_ALL),
         special_names=np.array(SPECIAL_NAMES),
         special_full_names=np.array(SPECIAL_ALL),
+        qb_names=np.array(QB_NAMES),
+        qb_full_names=np.array(QB_ALL),
     )
     print(
         f"wrote {dest} n={len(payload['y_win'])} extras={len(EXTRA_NAMES)} "
         f"signal={len(SIGNAL_NAMES)} time={len(TIME_NAMES)} craft={len(CRAFT_NAMES)} "
         f"loso={len(LOSO_NAMES)} conf={len(CONF_NAMES)} glm4={len(GLM4_NAMES)} pace={len(PACE_NAMES)} "
-        f"specials={len(SPECIAL_NAMES)}"
+        f"specials={len(SPECIAL_NAMES)} qb={len(QB_NAMES)}"
     )
     return dest
 

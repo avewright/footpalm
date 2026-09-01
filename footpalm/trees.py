@@ -19,6 +19,7 @@ from footpalm.form import (
     TIME_NAMES,
 )
 from footpalm.pace import PACE_NAMES
+from footpalm.qb import QB_NAMES
 from footpalm.specials import SPECIAL_NAMES
 from footpalm.predict import FEATURE_NAMES
 from footpalm.project import history_path
@@ -86,6 +87,8 @@ def _load_features(root: Path) -> dict[str, np.ndarray]:
             or existing["pace"].shape[1] != len(PACE_NAMES)
             or "X_specials" not in existing.files
             or existing["specials"].shape[1] != len(SPECIAL_NAMES)
+            or "X_qb" not in existing.files
+            or existing["qb"].shape[1] != len(QB_NAMES)
         )
     if need:
         print("features-history missing or stale — building extras + signal")

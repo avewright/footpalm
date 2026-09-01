@@ -1,0 +1,209 @@
+{
+  "generated_at": "2026-09-01T12:51:33+00:00",
+  "experiment": true,
+  "menu": "consec",
+  "heading": "QScale2 (experiment, not live)",
+  "blurb": "Consecutive clock only: real halves (\u00d72) and consecutive three-quarter groups (\u00d74/3). Same extras X. TabPFN-3 batch, 2014\u20132024 train, 2025 FBS\u2013FBS once. T fit on real train labels in the fitted window.",
+  "promoted": false,
+  "would_promote": false,
+  "protocol": "QScale2 experiment. Halves Q1+Q2 / Q3+Q4 and consecutive threes Q1\u2013Q3 / Q2\u2013Q4. Same extras X. TabPFN-3 last 8000. Score real 2025 FBS\u2013FBS. Not live.",
+  "coverage": {
+    "train_games": 9014,
+    "train_with_quarters": 8947,
+    "quarter_games": 12593,
+    "hold_fbs": 807
+  },
+  "rows": [
+    {
+      "id": "tabpfn/extras",
+      "train": {
+        "n": 8000,
+        "accuracy": 0.7648,
+        "brier": 0.1645,
+        "logloss": 0.4999
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.1861,
+        "logloss": 0.552
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras",
+      "experiment": true,
+      "n_train": 8000,
+      "n_train_real": 8000
+    },
+    {
+      "id": "tabpfn/extras+T",
+      "train": {
+        "n": 8000,
+        "accuracy": 0.7648,
+        "brier": 0.1588,
+        "logloss": 0.4795
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.7187,
+        "brier": 0.181,
+        "logloss": 0.5332
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "extras",
+      "T": 0.6215,
+      "experiment": true
+    },
+    {
+      "id": "tabpfn/qscale-halves",
+      "train": {
+        "n": 2827,
+        "accuracy": 0.9399,
+        "brier": 0.0981,
+        "logloss": 0.3451
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6828,
+        "brier": 0.1992,
+        "logloss": 0.5797
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-halves",
+      "experiment": true,
+      "n_train": 8000,
+      "n_train_real": 2827
+    },
+    {
+      "id": "tabpfn/qscale-halves+T",
+      "train": {
+        "n": 2827,
+        "accuracy": 0.9399,
+        "brier": 0.0567,
+        "logloss": 0.2024
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6828,
+        "brier": 0.2116,
+        "logloss": 0.6262
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-halves",
+      "T": 0.4,
+      "experiment": true
+    },
+    {
+      "id": "tabpfn/qscale-three",
+      "train": {
+        "n": 2777,
+        "accuracy": 0.9319,
+        "brier": 0.0959,
+        "logloss": 0.3369
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6704,
+        "brier": 0.2094,
+        "logloss": 0.6041
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-three",
+      "experiment": true,
+      "n_train": 8000,
+      "n_train_real": 2777
+    },
+    {
+      "id": "tabpfn/qscale-three+T",
+      "train": {
+        "n": 2777,
+        "accuracy": 0.9319,
+        "brier": 0.0568,
+        "logloss": 0.1989
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6704,
+        "brier": 0.2374,
+        "logloss": 0.7518
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-three",
+      "T": 0.4,
+      "experiment": true
+    },
+    {
+      "id": "tabpfn/qscale-halves+three",
+      "train": {
+        "n": 1692,
+        "accuracy": 0.9527,
+        "brier": 0.0942,
+        "logloss": 0.335
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6654,
+        "brier": 0.2049,
+        "logloss": 0.5941
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-halves+three",
+      "experiment": true,
+      "n_train": 8000,
+      "n_train_real": 1692
+    },
+    {
+      "id": "tabpfn/qscale-halves+three+T",
+      "train": {
+        "n": 1692,
+        "accuracy": 0.9527,
+        "brier": 0.0508,
+        "logloss": 0.1868
+      },
+      "holdout": {
+        "n": 807,
+        "accuracy": 0.6654,
+        "brier": 0.2169,
+        "logloss": 0.6444
+      },
+      "delta_holdout_brier": null,
+      "engine": "tabpfn",
+      "set": "qscale-halves+three",
+      "T": 0.4,
+      "experiment": true
+    }
+  ],
+  "comparisons": [
+    {
+      "family": "tabpfn",
+      "id": "tabpfn/qscale-halves",
+      "locked_brier": 0.1861,
+      "full_brier": 0.1992,
+      "delta_brier": 0.0131,
+      "pass": false
+    },
+    {
+      "family": "tabpfn",
+      "id": "tabpfn/qscale-three",
+      "locked_brier": 0.1861,
+      "full_brier": 0.2094,
+      "delta_brier": 0.0233,
+      "pass": false
+    },
+    {
+      "family": "tabpfn",
+      "id": "tabpfn/qscale-halves+three",
+      "locked_brier": 0.1861,
+      "full_brier": 0.2049,
+      "delta_brier": 0.0188,
+      "pass": false
+    }
+  ],
+  "note": "Experiment. Do not promote. Do not carve after 2025."
+}

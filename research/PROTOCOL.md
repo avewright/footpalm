@@ -267,6 +267,59 @@ LOSO already had `glm_quality_diff` and `glm_sum` inside a ten-column sink. That
 
 Score extras vs extras+glm4 on logistic, LightGBM, and XGBoost, **expanding-year**, 2015–2025 FBS–FBS. Same promotion bar on the expanding-year number. Do not carve. Do not add to live TabPFN from this pass.
 
+## QScale (experiment, not live)
+
+Not a feature. Extra **training rows** from regulation quarter scores. Same pregame extras X. New y only. Score only real 2025 FBS–FBS games. Do not write these rows onto the live board.
+
+PBP periods 1–4. OT ignored. Quarter points = period-end score minus previous period-end. Skip a game’s synth if any quarter is missing or negative. Drop synth ties.
+
+| id | slices | scale |
+|---|---|---|
+| singles | C(4,1) = Q1, Q2, Q3, Q4 | ×4 |
+| pairs | C(4,2) = every two-quarter combo | ×2 |
+
+Example: 7–0 in Q1 → 28–0. 20–10 at half → 40–20. Q1 7–0 plus Q3 3–7 → 20–14.
+
+TabPFN-3 still fits the last 8,000 rows. Locked variants, before this score:
+
+| id | train rows |
+|---|---|
+| extras | real 2014–2024 only (baseline) |
+| qscale | real + all 10 slices, chronological, last 8,000 |
+| qscale-pairs | real + 6 pair slices, chronological, last 8,000 |
+| qscale-block | walk backward from the end of train; take each game’s real+all-10 bundle until 8,000; do not split a bundle |
+
+Temperature T is fit on **real** train labels in the fitted window only, not on synth y. Same 0.002 Brier bar vs extras batch. Fail = stop. Do not promote from this pass. Live still needs slate walk-forward.
+
+## QScale2 (experiment, not live)
+
+New menu after QScale failed. Not a carve of the 10-slice set. Consecutive clock only. Same extras X. Score real 2025 FBS–FBS. Not live.
+
+| id | slices | scale |
+|---|---|---|
+| halves | Q1+Q2, Q3+Q4 | ×2 |
+| three | Q1+Q2+Q3, Q2+Q3+Q4 | ×4/3 |
+| halves+three | both | ×2 and ×4/3 |
+
+No singles. No Q1+Q3. Drop synth ties. TabPFN-3 last 8,000, chronological. T on real train labels in the window. Same 0.002 bar vs extras batch. Fail = stop.
+
+## QB (diagnostic, not live)
+
+Locked before this score. Whole menu. Walk-forward PBP only. Prior slates only. No spread. No NIL. No week dummy. No Massey/SP+/talent. Do not peek at this game’s passer. Garbage-filtered, same as pace (`footpalm/plays.py` `_garbage` + dead/penalty/non-offense drops). Passer column is `passer_player_name` (see `footpalm/leaders.py`). `pass==1` and name notna. EPA from `EPA`. Normalize passer names (strip / casefold) so “J. Daniels” drift doesn’t fork identity; keep it boring. Skip a team-game snap if no passer attempts. Features stay 0 until a prior slate exists.
+
+| id | what |
+|---|---|
+| qb_epa_diff | This-season EPA/play with the expected starter. 0 if none. |
+| qb_change | 1 if expected starter ≠ last season’s modal passer, else 0. New QB / no last-season passer = 1. |
+| qb_starts | log1p(starts with this expected QB this season). |
+| qb_prior_epa | That QB’s EPA/play last season, any team. 0 if unknown. |
+
+All four are home − away. Expected starter at kickoff = modal passer (most `pass==1` attempts) from that team’s most recent completed game. If none this season, last season’s modal passer. Never this game’s PBP.
+
+`new_season`: clear this-season starts and this-season EPA-by-QB. Keep last-season modal passer and last-season EPA-by-QB map. Then last season’s modal becomes the “last season” pointer.
+
+Score extras vs extras+qb on logistic, LightGBM, and XGBoost, **expanding-year**, 2015–2025 FBS–FBS. Same promotion bar on the expanding-year number. Do not carve. Do not add to live TabPFN from this pass.
+
 ## Note
 
 2025 calibration buckets were inspected before the first protocol was written. The menu is still the standard 0–2 parameter calibration set, not a 2025-tuned list. 2025 is used only as a frozen score.
