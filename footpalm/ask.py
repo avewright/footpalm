@@ -28,7 +28,7 @@ MAX_ROUNDS = 10
 MAX_GAMES = 24
 MAX_EV = 16
 HOST = "127.0.0.1"
-PORT = 8765
+PORT = 8766
 ET = ZoneInfo("America/New_York")
 JUICE = 110
 

@@ -6,12 +6,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:8765",
+        target: "http://127.0.0.1:8766",
         configure(proxy) {
           proxy.on("error", (_err, _req, res) => {
             if (res && "writeHead" in res && !res.headersSent) {
               res.writeHead(502, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ error: "Ask server is not running on :8765" }));
+              res.end(JSON.stringify({ error: "Ask server is not running on :8766" }));
             }
           });
         },
