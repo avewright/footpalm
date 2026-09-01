@@ -9,6 +9,7 @@ export type ScoreCard = {
   atsL: number;
   brier: number | null;
   mae: number | null;
+  residual: number | null;
 };
 
 export function etDay(start?: string | null): string | null {
@@ -54,6 +55,8 @@ export function summarize(games: GamePred[]): ScoreCard {
   let atsN = 0;
   let brier = 0;
   let mae = 0;
+  let residual = 0;
+  let residualN = 0;
   for (const g of played) {
     const su = suHit(g);
     if (su) suW += 1;
@@ -65,7 +68,11 @@ export function summarize(games: GamePred[]): ScoreCard {
     }
     const y = g.home_won ?? 0;
     brier += (g.home_win_prob - y) ** 2;
-    if (g.actual_margin != null) mae += Math.abs(g.pred_margin - g.actual_margin);
+    if (g.actual_margin != null) {
+      mae += Math.abs(g.pred_margin - g.actual_margin);
+      residual += g.actual_margin - g.pred_margin;
+      residualN += 1;
+    }
   }
   const n = played.length;
   return {
@@ -76,6 +83,7 @@ export function summarize(games: GamePred[]): ScoreCard {
     atsL: atsN - atsW,
     brier: n ? brier / n : null,
     mae: n ? mae / n : null,
+    residual: residualN ? residual / residualN : null,
   };
 }
 

@@ -1,7 +1,7 @@
 import { atsHit, atsSide, betLabel, marketMl, marketMlAmerican, marketSpread, mlPlay } from "./ev";
 import { american, formatAmerican, signed } from "./format";
 import { isFinal, suHit } from "./score";
-import type { GamePred, ModelPick } from "./types";
+import type { GamePred, ModelPick, RatingsFile, TeamRow } from "./types";
 
 export const MODEL_IDS = ["lightgbm", "xgboost", "tabpfn"] as const;
 
@@ -91,5 +91,74 @@ export function gameFacts(g: GamePred) {
     done: isFinal(g),
     score: isFinal(g) ? `${g.actual_away?.toFixed(0)}–${g.actual_home?.toFixed(0)}` : null,
     pred: `${g.pred_away.toFixed(0)}–${g.pred_home.toFixed(0)}`,
+  };
+}
+
+export function teamMap(ratings: RatingsFile | null | undefined): Map<string, TeamRow> {
+  return new Map(ratings?.teams.map((row) => [row.team, row]) ?? []);
+}
+
+export function pomOf(row: TeamRow) {
+  return Number(row.pom ?? row.palm ?? 0);
+}
+
+export type GameAnalytics = {
+  done: boolean;
+  score: string | null;
+  pred: string;
+  predTotal: number;
+  actualTotal: number | null;
+  residual: number | null;
+  totalError: number | null;
+  pomGap: number | null;
+  homeFav: boolean;
+  favorite: string;
+  favP: number;
+  su: boolean | null;
+  home: TeamRow | null;
+  away: TeamRow | null;
+  tempo: number | null;
+  listedTotal: number | null;
+  fpiWin: number | null;
+  fpiMargin: number | null;
+  consensusWin: number | null;
+  consensusMargin: number | null;
+  venue: string | null;
+};
+
+export function gameAnalytics(g: GamePred, teams?: Map<string, TeamRow>): GameAnalytics {
+  const home = teams?.get(g.home) ?? null;
+  const away = teams?.get(g.away) ?? null;
+  const done = isFinal(g);
+  const predTotal = g.pred_home + g.pred_away;
+  const actualTotal =
+    done && g.actual_home != null && g.actual_away != null ? g.actual_home + g.actual_away : null;
+  const homeFav = g.home_win_prob >= 0.5;
+  const listed = g.espn?.odds?.total;
+  const book = g.books?.kalshi ?? g.books?.polymarket;
+  const venue =
+    g.espn?.weather?.venue || g.espn?.venue?.venue || [g.espn?.venue?.city, g.espn?.venue?.state].filter(Boolean).join(", ") || null;
+  return {
+    done,
+    score: done ? `${g.actual_away?.toFixed(0)}–${g.actual_home?.toFixed(0)}` : null,
+    pred: `${g.pred_away.toFixed(0)}–${g.pred_home.toFixed(0)}`,
+    predTotal,
+    actualTotal,
+    residual: done && g.actual_margin != null ? g.actual_margin - g.pred_margin : null,
+    totalError: actualTotal != null ? actualTotal - predTotal : null,
+    pomGap: g.home_pom != null && g.away_pom != null ? g.home_pom - g.away_pom : null,
+    homeFav,
+    favorite: homeFav ? g.home : g.away,
+    favP: homeFav ? g.home_win_prob : 1 - g.home_win_prob,
+    su: suHit(g),
+    home,
+    away,
+    tempo: home != null && away != null ? (home.tempo + away.tempo) / 2 : (home?.tempo ?? away?.tempo ?? null),
+    listedTotal: listed != null && !Number.isNaN(listed) ? listed : null,
+    fpiWin: g.espn?.fpi?.home_win ?? null,
+    fpiMargin: g.espn?.fpi?.pred_margin ?? null,
+    consensusWin: book?.ml_home ?? null,
+    consensusMargin: marketSpread(g) != null ? -(marketSpread(g) as number) : g.spread != null ? -g.spread : null,
+    venue,
   };
 }

@@ -1,102 +1,138 @@
-import { formatAmerican, signed } from "./format";
-import { evPct, gameFacts, hitTone, lineOf, MODEL_IDS, pct, pickOf, pp, tone } from "./game";
+import { useEffect, useState } from "react";
+import { signed } from "./format";
+import { gameAnalytics, hitTone, MODEL_IDS, pct, pickOf, teamMap } from "./game";
+import { marketSpread } from "./ev";
+import { MatchupViz } from "./MatchupViz";
 import { prettyWhen } from "./score";
 import { TeamLink } from "./TeamView";
-import type { EspnQb, GamePred } from "./types";
+import { UnitsView } from "./UnitsView";
+import { pickOfModel, predMargin, type UserModel } from "./mymodel";
+import type { EspnQb, GamePred, RatingsFile, UnitsFile } from "./types";
 
 function qbLine(rows?: EspnQb[]) {
   if (!rows?.length) return "—";
   return rows
     .slice(0, 3)
-    .map((q) => [q.name, q.year].filter(Boolean).join(" "))
-    .join(", ");
+    .map((q) => {
+      const year = q.year ? ` ${q.year}` : "";
+      const jersey = q.jersey ? ` #${q.jersey}` : "";
+      return `${q.name}${jersey}${year}`;
+    })
+    .join(" · ");
 }
 
-function espnNote(game: GamePred) {
-  const e = game.espn;
-  if (!e) return "";
+function favoriteLine(home: string, away: string, homeSpread: number | null | undefined) {
+  if (homeSpread == null || Number.isNaN(homeSpread)) return "—";
+  if (Math.abs(homeSpread) < 0.05) return "PK";
+  return homeSpread < 0 ? `${home} ${signed(homeSpread)}` : `${away} ${signed(-homeSpread)}`;
+}
+
+function weatherBits(game: GamePred) {
+  const w = game.espn?.weather;
+  if (!w) return [];
   const bits: string[] = [];
-  const w = e.weather;
-  if (w?.temperature != null) bits.push(`${Math.round(w.temperature)}°`);
-  if (w?.precipitation != null) bits.push(`${Math.round(w.precipitation)}% rain`);
-  if (w?.city) bits.push(w.city);
-  if (e.locked) bits.push("locked at kickoff");
-  return bits.length ? ` · ESPN ${bits.join(" · ")}` : "";
+  if (w.temperature != null) bits.push(`${Math.round(w.temperature)}°`);
+  if (w.gust != null) bits.push(`${Math.round(w.gust)} mph wind`);
+  if (w.precipitation != null) bits.push(`${Math.round(w.precipitation)}% rain`);
+  if (w.condition && !/^\d+$/.test(w.condition)) bits.push(w.condition);
+  if (w.city) bits.push([w.city, w.state].filter(Boolean).join(", "));
+  return bits;
 }
 
-function espnBlock(game: GamePred) {
-  const e = game.espn;
-  if (!e) return null;
-  const w = e.weather;
+function Row({
+  label,
+  value,
+  tone: t,
+  hint,
+}: {
+  label: string;
+  value: string;
+  tone?: string;
+  hint?: string;
+}) {
   return (
-    <div className="slip-cols">
-      <section>
-        <h3>ESPN weather</h3>
-        <Row label="Temp" value={w?.temperature == null ? "—" : `${Math.round(w.temperature)}°`} />
-        <Row label="Wind" value={w?.gust == null ? "—" : `${w.gust} mph gust`} />
-        <Row label="Rain" value={w?.precipitation == null ? "—" : `${Math.round(w.precipitation)}%`} />
-        <Row
-          label="Field"
-          value={[w?.venue || e.venue?.venue, w?.grass === false ? "turf" : w?.grass ? "grass" : null]
-            .filter(Boolean)
-            .join(" · ") || "—"}
-        />
-      </section>
-      <section>
-        <h3>ESPN context</h3>
-        <Row label={game.home} value={qbLine(e.qbs?.home)} />
-        <Row label={game.away} value={qbLine(e.qbs?.away)} />
-        <Row
-          label="FPI"
-          value={
-            e.fpi?.home_win == null
-              ? "—"
-              : `${Math.round(e.fpi.home_win * 100)}% home${e.fpi.pred_margin != null ? ` · ${e.fpi.pred_margin > 0 ? "+" : ""}${e.fpi.pred_margin}` : ""}`
-          }
-        />
-        <Row label="DK" value={e.odds?.details || (e.odds?.spread != null ? String(e.odds.spread) : "—")} />
-      </section>
-    </div>
-  );
-}
-
-function Row({ label, value, tone: t }: { label: string; value: string; tone?: string }) {
-  return (
-    <div className="slip-row">
+    <div className="slip-row" title={hint}>
       <span className="quiet">{label}</span>
       <span className={t}>{value}</span>
     </div>
   );
 }
 
+function WinMeter({ game }: { game: GamePred }) {
+  const homeP = game.home_win_prob;
+  const awayP = 1 - homeP;
+  return (
+    <div
+      className="win-meter"
+      role="img"
+      aria-label={`${game.away} ${pct(awayP)}, ${game.home} ${pct(homeP)}`}
+    >
+      <div className="win-meter-away" style={{ flexGrow: Math.max(awayP, 0.04), flexBasis: 0 }}>
+        {awayP >= 0.12 ? (
+          <span>
+            {game.away} {pct(awayP)}
+          </span>
+        ) : null}
+      </div>
+      <div className="win-meter-home" style={{ flexGrow: Math.max(homeP, 0.04), flexBasis: 0 }}>
+        {homeP >= 0.12 ? (
+          <span>
+            {game.home} {pct(homeP)}
+          </span>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 export function GameView({
   game,
+  ratings,
+  userModel,
   onOpenTeam,
   onClose,
 }: {
   game: GamePred;
+  ratings: RatingsFile | null;
+  userModel?: UserModel | null;
   onOpenTeam: (team: string) => void;
   onClose: () => void;
 }) {
-  const { ens, play, ml, us, mkt, mktAm, ourAm, dSpread, dMl, lean, agree, hit, su, pick, done, score } =
-    gameFacts(game);
+  const teams = teamMap(ratings);
+  const a = gameAnalytics(game, teams);
+  const yours = pickOfModel(userModel, game);
   const when = prettyWhen(game.start);
   const models = MODEL_IDS.map((id) => ({ id, pick: pickOf(game, id) })).filter((row) => row.pick);
-  const book = game.books?.kalshi ? "Kalshi" : game.books?.polymarket ? "Polymarket" : null;
+  const vegas = marketSpread(game) ?? game.espn?.odds?.spread ?? null;
+  const weather = weatherBits(game);
+  const field = [
+    game.espn?.weather?.venue || game.espn?.venue?.venue,
+    game.espn?.weather?.grass === false || game.espn?.venue?.grass === false
+      ? "turf"
+      : game.espn?.weather?.grass || game.espn?.venue?.grass
+        ? "grass"
+        : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+  const kind = a.done ? "Analytics Breakdown" : "Analytics Preview";
+  const lede = a.done
+    ? `${game.away} ${a.score ?? ""} ${game.home}. Model had ${a.favorite} at ${pct(a.favP)} / ${signed(a.homeFav ? game.pred_margin : -game.pred_margin)}. Residual ${a.residual == null ? "—" : signed(a.residual)}${a.su === false ? ". Upset." : "."}`
+    : `${a.favorite} ${pct(a.favP)} to win, projected ${a.pred} (${signed(game.pred_margin)} home).${a.pomGap != null ? ` Pom gap ${signed(a.pomGap)}.` : ""}`;
+  const [units, setUnits] = useState<UnitsFile[]>([]);
 
-  function side(home: boolean) {
-    const flip = home ? 1 : -1;
-    const vegasLine = mkt == null ? null : mkt * flip;
-    const ourLine = us == null ? null : us * flip;
-    const vegasMl = mktAm ? (home ? mktAm.home : mktAm.away) : null;
-    const ourMl = ourAm ? (home ? ourAm.home : ourAm.away) : null;
-    const lineGap = dSpread == null ? null : dSpread * flip;
-    const mlGap = dMl == null ? null : dMl * flip;
-    return { vegasLine, ourLine, vegasMl, ourMl, lineGap, mlGap };
-  }
-
-  const away = side(false);
-  const home = side(true);
+  useEffect(() => {
+    const years = [game.season, game.season - 1];
+    Promise.all(
+      years.map((year) =>
+        fetch(`/data/units-${year}.json`)
+          .then((res) => (res.ok ? res.json() : null))
+          .catch(() => null),
+      ),
+    ).then((rows) => {
+      setUnits((rows as (UnitsFile | null)[]).filter((row): row is UnitsFile => Boolean(row?.teams?.length)));
+    });
+  }, [game.season]);
 
   return (
     <div className="game-page">
@@ -104,140 +140,183 @@ export function GameView({
         <button type="button" className="team-back" onClick={onClose}>
           Back
         </button>
+        <h1>{kind}</h1>
+        <span className="quiet">
+          Week {game.week}
+          {game.neutral ? " · Neutral" : ""}
+          {when ? ` · ${when}` : ""}
+          {game.engine ? ` · ${game.engine}` : ""}
+        </span>
       </div>
 
       <div className="game-board">
         <div className="game-side">
           <TeamLink team={game.away} onOpen={onOpenTeam} />
           {game.away_conf && <span className="quiet">{game.away_conf}</span>}
-          <div className="game-score">{done ? game.actual_away?.toFixed(0) : "—"}</div>
+          <div className="game-score">{a.done ? game.actual_away?.toFixed(0) : "—"}</div>
           <div className="quiet">Pred {game.pred_away.toFixed(1)}</div>
           {game.away_pom != null && <div className="quiet">Pom {signed(game.away_pom)}</div>}
         </div>
         <div className="game-at">
           <div>{game.neutral ? "vs" : "@"}</div>
-          <div className="quiet">
-            Week {game.week}
-            {game.neutral ? " · Neutral" : ""}
-          </div>
+          <div className="quiet">{a.done ? "Final" : "Upcoming"}</div>
         </div>
         <div className="game-side">
           <TeamLink team={game.home} onOpen={onOpenTeam} />
           {game.home_conf && <span className="quiet">{game.home_conf}</span>}
-          <div className="game-score">{done ? game.actual_home?.toFixed(0) : "—"}</div>
+          <div className="game-score">{a.done ? game.actual_home?.toFixed(0) : "—"}</div>
           <div className="quiet">Pred {game.pred_home.toFixed(1)}</div>
           {game.home_pom != null && <div className="quiet">Pom {signed(game.home_pom)}</div>}
         </div>
       </div>
 
-      <p className="lede-note">
-        {when ?? `Week ${game.week}`}
-        {score ? ` · Final ${score}` : " · Upcoming"}
-        {game.engine ? ` · ${game.engine}` : ""}
-        {book ? ` · Vegas via ${book}` : ""}
-        {espnNote(game)}
-      </p>
+      <WinMeter game={game} />
+      <p className="lede-note">{lede}</p>
 
-      {espnBlock(game)}
+      <dl className="team-stats">
+        <div title="Actual final score, away then home.">
+          <dt>Final</dt>
+          <dd className={a.done ? hitTone(a.su) : undefined}>{a.score ?? "—"}</dd>
+        </div>
+        <div title="Model predicted score, away then home.">
+          <dt>Projected</dt>
+          <dd>{a.pred}</dd>
+        </div>
+        <div title="Listed spread, shown as the favorite.">
+          <dt>Vegas Line</dt>
+          <dd>{favoriteLine(game.home, game.away, vegas)}</dd>
+        </div>
+        <div
+          title={
+            yours
+              ? `${userModel?.name ?? "Your model"} implied spread, from the uploaded slate.`
+              : "Upload a score slate on My Model."
+          }
+        >
+          <dt>Your Prediction</dt>
+          <dd>{yours ? favoriteLine(game.home, game.away, -predMargin(yours)) : "—"}</dd>
+        </div>
+      </dl>
 
-      <div className="table-wrap team-sched odds-compare">
+      {a.home && a.away && (
+        <>
+          <h2 className="team-sched-title">Matchup</h2>
+          <MatchupViz
+            home={a.home}
+            away={a.away}
+            homeName={game.home}
+            awayName={game.away}
+            league={ratings?.teams ?? []}
+            onOpenTeam={onOpenTeam}
+          />
+        </>
+      )}
+
+      {units.length > 0 && (
+        <UnitsView
+          homeName={game.home}
+          awayName={game.away}
+          homeRow={a.home}
+          awayRow={a.away}
+          predHome={game.pred_home}
+          predAway={game.pred_away}
+          files={units}
+          onOpenTeam={onOpenTeam}
+        />
+      )}
+
+      <h2 className="team-sched-title">Forecasts</h2>
+      <div className="table-wrap team-sched">
         <table>
           <thead>
             <tr>
-              <th className="left" rowSpan={2} />
-              <th className="group split" colSpan={2}>
-                Vegas
-              </th>
-              <th className="group split" colSpan={2}>
-                Our Prediction
-              </th>
-              <th className="group split" colSpan={2}>
-                Difference
-              </th>
-            </tr>
-            <tr>
-              <th className="split">Line</th>
-              <th>ML</th>
-              <th className="split">Line</th>
-              <th>ML</th>
-              <th className="split">Line</th>
-              <th>ML</th>
+              <th className="left">Source</th>
+              <th title="Predicted probability the home team wins.">Home win%</th>
+              <th title="Predicted home minus away. Positive means home is favored.">Home margin</th>
+              <th title="Predicted combined points.">Total</th>
             </tr>
           </thead>
           <tbody>
-            {(
-              [
-                [game.away, away],
-                [game.home, home],
-              ] as const
-            ).map(([team, row]) => (
-              <tr key={team} className={lean === team ? "lean" : undefined}>
-                <td className="left">
-                  <TeamLink team={team} onOpen={onOpenTeam} />
-                </td>
-                <td className="split">{lineOf(row.vegasLine)}</td>
-                <td>{row.vegasMl == null ? "—" : formatAmerican(row.vegasMl)}</td>
-                <td className="split">{lineOf(row.ourLine)}</td>
-                <td>{row.ourMl == null ? "—" : formatAmerican(row.ourMl)}</td>
-                <td className={`split${lean === team ? " good" : ""}`}>{lineOf(row.lineGap)}</td>
-                <td className={lean === team ? "good" : undefined}>{row.mlGap == null ? "—" : pp(row.mlGap)}</td>
+            <tr>
+              <td className="left">FootPalm</td>
+              <td>{pct(game.home_win_prob)}</td>
+              <td>{signed(game.pred_margin)}</td>
+              <td>{a.predTotal.toFixed(1)}</td>
+            </tr>
+            {yours && (
+              <tr>
+                <td className="left">{userModel?.name ?? "Your model"}</td>
+                <td>{yours.home_win_prob == null ? "—" : pct(yours.home_win_prob)}</td>
+                <td>{signed(predMargin(yours))}</td>
+                <td>{(yours.pred_away + yours.pred_home).toFixed(1)}</td>
               </tr>
-            ))}
+            )}
+            {a.fpiWin != null && (
+              <tr>
+                <td className="left">ESPN FPI</td>
+                <td>{pct(a.fpiWin)}</td>
+                <td>{a.fpiMargin == null ? "—" : signed(a.fpiMargin)}</td>
+                <td>—</td>
+              </tr>
+            )}
+            {(a.consensusWin != null || a.consensusMargin != null) && (
+              <tr>
+                <td className="left">Consensus</td>
+                <td>{a.consensusWin == null ? "—" : pct(a.consensusWin)}</td>
+                <td>{a.consensusMargin == null ? "—" : signed(a.consensusMargin)}</td>
+                <td>{a.listedTotal == null ? "—" : a.listedTotal.toFixed(1)}</td>
+              </tr>
+            )}
+            {a.done && (
+              <tr>
+                <td className="left">Actual</td>
+                <td>{game.home_won == null ? "—" : pct(game.home_won)}</td>
+                <td>{game.actual_margin == null ? "—" : signed(game.actual_margin)}</td>
+                <td>{a.actualTotal == null ? "—" : a.actualTotal.toFixed(0)}</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
-      {lean && (
-        <p className="odds-lean">
-          We are {dSpread != null ? `${Math.abs(dSpread).toFixed(1)} pts` : ""}
-          {dSpread != null && dMl != null ? " and " : ""}
-          {dMl != null ? pp(Math.abs(dMl)) : ""} higher on {lean} than Vegas.
+      {(a.consensusWin != null || a.consensusMargin != null || game.espn?.locked) && (
+        <p className="lede-note">
+          {a.consensusWin != null || a.consensusMargin != null
+            ? "Consensus is the listed market number, shown as another forecast — not a recommendation."
+            : ""}
+          {game.espn?.locked ? " ESPN context was locked at kickoff." : ""}
         </p>
       )}
 
-      <div className="slip-cols">
-        <section>
-          <h3>Spread play</h3>
-          <Row label="Bet" value={pick ?? "—"} tone={hitTone(hit)} />
-          {done ? (
-            <Row label="Result" value={hit == null ? "—" : hit ? "Covered" : "Missed"} tone={hitTone(hit)} />
-          ) : (
-            <Row label="EV" value={play ? evPct(play.ev) : "—"} tone={tone(play?.ev)} />
-          )}
-          {!done && (
+      {(weather.length > 0 || field || game.espn?.qbs) && (
+        <div className="slip-cols">
+          <section>
+            <h3>Context</h3>
             <Row
-              label="Agree"
-              value={play ? `${agree} of 3 models` : "—"}
-              tone={agree === 3 ? "good" : agree <= 1 && play ? "bad" : undefined}
+              label="Field"
+              value={field || a.venue || "—"}
+              hint="Venue and surface from ESPN, locked at kickoff when available."
             />
-          )}
-        </section>
-        <section>
-          <h3>Moneyline play</h3>
-          {done ? (
-            <>
-              <Row
-                label="Pick"
-                value={
-                  ens
-                    ? `${ens.home_win_prob >= 0.5 ? game.home : game.away} ${pct(ens.home_win_prob >= 0.5 ? ens.home_win_prob : 1 - ens.home_win_prob)}`
-                    : "—"
-                }
-                tone={hitTone(su)}
-              />
-              <Row label="Result" value={su == null ? "—" : su ? "Won" : "Lost"} tone={hitTone(su)} />
-            </>
-          ) : (
-            <>
-              <Row
-                label="Bet"
-                value={ml ? `${ml.who} ${ml.mktAmerican > 0 ? "+" : ""}${ml.mktAmerican}` : "—"}
-                tone={tone(ml?.edge, "pp")}
-              />
-              <Row label="Edge" value={ml ? pp(ml.edge) : "—"} tone={tone(ml?.edge, "pp")} />
-            </>
-          )}
-        </section>
-      </div>
+            <Row
+              label="Weather"
+              value={weather.length ? weather.join(" · ") : "—"}
+              hint="Kickoff weather from ESPN: temperature, wind, rain chance, and condition."
+            />
+          </section>
+          <section>
+            <h3>Quarterbacks</h3>
+            <Row
+              label={game.home}
+              value={qbLine(game.espn?.qbs?.home)}
+              hint={`${game.home} quarterbacks listed by ESPN for this game.`}
+            />
+            <Row
+              label={game.away}
+              value={qbLine(game.espn?.qbs?.away)}
+              hint={`${game.away} quarterbacks listed by ESPN for this game.`}
+            />
+          </section>
+        </div>
+      )}
 
       {models.length > 0 && (
         <>
@@ -247,8 +326,8 @@ export function GameView({
               <thead>
                 <tr>
                   <th className="left">Model</th>
-                  <th>Home margin</th>
-                  <th>Home win</th>
+                  <th title="That model's predicted home minus away.">Home margin</th>
+                  <th title="That model's predicted home win probability.">Home win</th>
                 </tr>
               </thead>
               <tbody>

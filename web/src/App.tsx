@@ -4,19 +4,22 @@ import { GamesView } from "./GamesView";
 import { GameView } from "./GameView";
 import { LosoView, tabpfnFile } from "./LosoView";
 import { MoneyView } from "./MoneyView";
+import { MyModelView } from "./MyModelView";
 import { RatingsTable } from "./RatingsTable";
 import { TeamView } from "./TeamView";
 import { findGame } from "./game";
 import { signed } from "./format";
+import { clearUserModel, loadUserModel, saveUserModel, type UserModel } from "./mymodel";
 import type { GamePred, IndexFile, LosoFile, MoneyFile, RatingsFile } from "./types";
 
-const TABS = ["ratings", "games", "ask", "money", "loso"] as const;
+const TABS = ["ratings", "games", "mine", "ask", "money", "loso"] as const;
 type Tab = (typeof TABS)[number];
 type View = Tab | "team" | "game";
 
 const TAB_LABEL: Record<Tab, string> = {
   ratings: "Ratings",
   games: "Games",
+  mine: "My Model",
   ask: "Ask",
   money: "Money",
   loso: "Walk",
@@ -50,6 +53,9 @@ export function App() {
   const [money, setMoney] = useState<MoneyFile | null>(null);
   const [walkpass, setWalkpass] = useState<LosoFile | null>(null);
   const [tabpfn, setTabpfn] = useState<LosoFile | null>(null);
+  const [userModel, setUserModel] = useState<UserModel | null>(() =>
+    loadUserModel(Number(search().get("season")) || 2026),
+  );
   const [error, setError] = useState<string | null>(null);
   const [askTick, setAskTick] = useState(0);
 
@@ -91,6 +97,10 @@ export function App() {
   }, [season]);
 
   useEffect(() => {
+    setUserModel(loadUserModel(season));
+  }, [season]);
+
+  useEffect(() => {
     Promise.all([
       loadJson<LosoFile | null>("/data/walkpass.json", null),
       loadJson<{ seasons?: [] } | null>("/data/backtest-summary.json", null),
@@ -122,6 +132,12 @@ export function App() {
     setTab(back === "game" ? "games" : back);
   }
 
+  function onUserModel(next: UserModel | null) {
+    if (next) saveUserModel(next);
+    else clearUserModel(season);
+    setUserModel(next);
+  }
+
   const selected = findGame(games, game);
 
   return (
@@ -132,7 +148,7 @@ export function App() {
           FootPalm
         </div>
         <nav className="tabs">
-          {TABS.map((id) => (
+          {TABS.filter((id) => id !== "mine").map((id) => (
             <button key={id} type="button" aria-pressed={tab === id} onClick={() => setTab(id)}>
               {TAB_LABEL[id]}
             </button>
@@ -144,6 +160,9 @@ export function App() {
               New chat
             </button>
           )}
+          <button type="button" className="tab-link" aria-pressed={tab === "mine"} onClick={() => setTab("mine")}>
+            My Model
+          </button>
           {tab !== "team" && tab !== "game" && tab !== "loso" && (
             <select value={season} onChange={(e) => setSeason(Number(e.target.value))} aria-label="Season">
               {seasons.map((year) => (
@@ -156,7 +175,7 @@ export function App() {
         </div>
       </header>
 
-      {tab !== "ask" && tab !== "team" && tab !== "game" && tab !== "loso" && (
+      {tab !== "ask" && tab !== "team" && tab !== "game" && tab !== "loso" && tab !== "mine" && (
         <p className="meta">
           {ratings
             ? `${ratings.week === 0 ? "Week 0 · " : ""}${ratings.teams.length} teams · ${ratings.plays_per_game} plays/game · home-field ${signed(ratings.home_adv_epa * ratings.plays_per_game, 1)} pts`
@@ -166,7 +185,19 @@ export function App() {
       {tab === "ratings" && ratings?.method && <p className="lede-note">{ratings.method}</p>}
 
       {tab === "ratings" && ratings && <RatingsTable data={ratings} onOpenTeam={openTeam} />}
-      {tab === "games" && <GamesView games={games} onOpenTeam={openTeam} onOpenGame={openGame} />}
+      {tab === "games" && (
+        <GamesView games={games} ratings={ratings} onOpenTeam={openTeam} onOpenGame={openGame} />
+      )}
+      {tab === "mine" && (
+        <MyModelView
+          season={season}
+          games={games}
+          model={userModel}
+          onChange={onUserModel}
+          onOpenTeam={openTeam}
+          onOpenGame={openGame}
+        />
+      )}
       {tab === "team" && team && (
         <TeamView
           team={team}
@@ -180,7 +211,15 @@ export function App() {
           games={games}
         />
       )}
-      {tab === "game" && selected && <GameView game={selected} onOpenTeam={openTeam} onClose={closeGame} />}
+      {tab === "game" && selected && (
+        <GameView
+          game={selected}
+          ratings={ratings}
+          userModel={userModel}
+          onOpenTeam={openTeam}
+          onClose={closeGame}
+        />
+      )}
       {tab === "game" && game && !selected && (
         <p className="lede-note">
           No game {game} in {season}.{" "}
