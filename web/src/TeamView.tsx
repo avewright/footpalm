@@ -19,6 +19,30 @@ export function TeamLink({ team, onOpen }: { team: string; onOpen: (team: string
   );
 }
 
+export function ConfLink({
+  conf,
+  onOpen,
+  className,
+}: {
+  conf: string;
+  onOpen: (conf: string) => void;
+  className?: string;
+}) {
+  if (!conf) return null;
+  return (
+    <button
+      type="button"
+      className={["team-link", className].filter(Boolean).join(" ")}
+      onClick={(e) => {
+        e.stopPropagation();
+        onOpen(conf);
+      }}
+    >
+      {conf}
+    </button>
+  );
+}
+
 function pomOf(row: TeamRow) {
   return Number(row.pom ?? row.palm ?? 0);
 }
@@ -46,6 +70,7 @@ export function TeamView({
   season,
   onSeason,
   onOpen,
+  onOpenConference,
   onOpenGame,
   onClose,
   ratings,
@@ -56,6 +81,7 @@ export function TeamView({
   season: number;
   onSeason: (season: number) => void;
   onOpen: (team: string) => void;
+  onOpenConference: (conf: string) => void;
   onOpenGame: (key: string) => void;
   onClose: () => void;
   ratings: RatingsFile | null;
@@ -79,7 +105,7 @@ export function TeamView({
           Back
         </button>
         <h1>{team}</h1>
-        {row && <span className="quiet">{row.conf}</span>}
+        {row && <ConfLink conf={row.conf} onOpen={onOpenConference} className="quiet" />}
         <select value={season} onChange={(e) => onSeason(Number(e.target.value))} aria-label="Season">
           {seasons.map((year) => (
             <option key={year} value={year}>

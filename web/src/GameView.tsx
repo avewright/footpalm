@@ -4,7 +4,7 @@ import { gameAnalytics, hitTone, MODEL_IDS, pct, pickOf, teamMap } from "./game"
 import { marketSpread } from "./ev";
 import { MatchupViz } from "./MatchupViz";
 import { prettyWhen } from "./score";
-import { TeamLink } from "./TeamView";
+import { ConfLink, TeamLink } from "./TeamView";
 import { UnitsView } from "./UnitsView";
 import { pickOfModel, predMargin, type UserModel } from "./mymodel";
 import type { EspnQb, GamePred, RatingsFile, UnitsFile } from "./types";
@@ -89,18 +89,23 @@ export function GameView({
   game,
   ratings,
   userModel,
+  userModels,
   onOpenTeam,
+  onOpenConference,
   onClose,
 }: {
   game: GamePred;
   ratings: RatingsFile | null;
   userModel?: UserModel | null;
+  userModels?: UserModel[];
   onOpenTeam: (team: string) => void;
+  onOpenConference: (conf: string) => void;
   onClose: () => void;
 }) {
   const teams = teamMap(ratings);
   const a = gameAnalytics(game, teams);
   const yours = pickOfModel(userModel, game);
+  const extras = (userModels ?? []).filter((m) => m.id !== userModel?.id && pickOfModel(m, game));
   const when = prettyWhen(game.start);
   const models = MODEL_IDS.map((id) => ({ id, pick: pickOf(game, id) })).filter((row) => row.pick);
   const vegas = marketSpread(game) ?? game.espn?.odds?.spread ?? null;
@@ -152,7 +157,7 @@ export function GameView({
       <div className="game-board">
         <div className="game-side">
           <TeamLink team={game.away} onOpen={onOpenTeam} />
-          {game.away_conf && <span className="quiet">{game.away_conf}</span>}
+          {game.away_conf && <ConfLink conf={game.away_conf} onOpen={onOpenConference} className="quiet" />}
           <div className="game-score">{a.done ? game.actual_away?.toFixed(0) : "—"}</div>
           <div className="quiet">Pred {game.pred_away.toFixed(1)}</div>
           {game.away_pom != null && <div className="quiet">Pom {signed(game.away_pom)}</div>}
@@ -163,7 +168,7 @@ export function GameView({
         </div>
         <div className="game-side">
           <TeamLink team={game.home} onOpen={onOpenTeam} />
-          {game.home_conf && <span className="quiet">{game.home_conf}</span>}
+          {game.home_conf && <ConfLink conf={game.home_conf} onOpen={onOpenConference} className="quiet" />}
           <div className="game-score">{a.done ? game.actual_home?.toFixed(0) : "—"}</div>
           <div className="quiet">Pred {game.pred_home.toFixed(1)}</div>
           {game.home_pom != null && <div className="quiet">Pom {signed(game.home_pom)}</div>}
@@ -189,8 +194,8 @@ export function GameView({
         <div
           title={
             yours
-              ? `${userModel?.name ?? "Your model"} implied spread, from the uploaded slate.`
-              : "Upload a score slate on My Model."
+              ? `${userModel?.name ?? "Your model"} implied spread, from your active uploaded model.`
+              : "Log in and upload a score slate on My Model."
           }
         >
           <dt>Your Prediction</dt>
@@ -251,6 +256,18 @@ export function GameView({
                 <td>{(yours.pred_away + yours.pred_home).toFixed(1)}</td>
               </tr>
             )}
+            {extras.map((m) => {
+              const pick = pickOfModel(m, game);
+              if (!pick) return null;
+              return (
+                <tr key={m.id ?? m.name}>
+                  <td className="left">{m.name}</td>
+                  <td>{pick.home_win_prob == null ? "—" : pct(pick.home_win_prob)}</td>
+                  <td>{signed(predMargin(pick))}</td>
+                  <td>{(pick.pred_away + pick.pred_home).toFixed(1)}</td>
+                </tr>
+              );
+            })}
             {a.fpiWin != null && (
               <tr>
                 <td className="left">ESPN FPI</td>

@@ -1,11 +1,19 @@
 import { useMemo, useState } from "react";
 import { money } from "./format";
-import { TeamLink } from "./TeamView";
+import { ConfLink, TeamLink } from "./TeamView";
 import type { MoneyFile } from "./types";
 
 type Key = "team" | "conf" | "nil_roster" | "nil_all_sports" | "athletic_spend" | "staff_payroll" | "pom";
 
-export function MoneyView({ data, onOpenTeam }: { data: MoneyFile; onOpenTeam: (team: string) => void }) {
+export function MoneyView({
+  data,
+  onOpenTeam,
+  onOpenConference,
+}: {
+  data: MoneyFile;
+  onOpenTeam: (team: string) => void;
+  onOpenConference: (conf: string) => void;
+}) {
   const [sortKey, setSortKey] = useState<Key>("nil_roster");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [q, setQ] = useState("");
@@ -89,7 +97,9 @@ export function MoneyView({ data, onOpenTeam }: { data: MoneyFile; onOpenTeam: (
                 <td className="team">
                   <TeamLink team={row.team} onOpen={onOpenTeam} />
                 </td>
-                <td className="conf">{row.conf}</td>
+                <td className="conf">
+                  <ConfLink conf={row.conf} onOpen={onOpenConference} />
+                </td>
                 <td>
                   {money(row.nil_roster)}
                   {row.nil_quality === "modeled" ? " *" : ""}

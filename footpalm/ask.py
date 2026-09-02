@@ -12,9 +12,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
+from footpalm.accounts import Accounts
 from footpalm.cfbd import load_dotenv
 from footpalm.draft import colleges_match, list_picks, lookup as draft_lookup, person_key
 from footpalm.fetch import repo_root
@@ -1741,25 +1743,53 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
 
 
 def _cors(handler: BaseHTTPRequestHandler) -> None:
-    handler.send_header("Access-Control-Allow-Origin", "*")
-    handler.send_header("Access-Control-Allow-Headers", "content-type")
-    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    origin = handler.headers.get("Origin")
+    if origin:
+        handler.send_header("Access-Control-Allow-Origin", origin)
+        handler.send_header("Access-Control-Allow-Credentials", "true")
+    else:
+        handler.send_header("Access-Control-Allow-Origin", "*")
+    handler.send_header("Access-Control-Allow-Headers", "content-type, authorization")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
 
 
 class Handler(BaseHTTPRequestHandler):
     warehouse: Warehouse
+    accounts: Accounts
 
     def log_message(self, fmt: str, *args: Any) -> None:
         print(f"ask {self.address_string()} {fmt % args}")
 
-    def _send(self, code: int, payload: dict) -> None:
+    def _send(self, code: int, payload: dict, cookie: str | None = None) -> None:
         body = json.dumps(payload).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         _cors(self)
+        if cookie:
+            self.send_header("Set-Cookie", cookie)
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _read_body(self, limit: int) -> dict:
+        length = int(self.headers.get("Content-Length") or 0)
+        if length > limit:
+            self._send(413, {"error": "payload too large"})
+            raise ValueError("payload too large")
+        if length <= 0:
+            return {}
+        try:
+            return json.loads(self.rfile.read(length) or b"{}")
+        except json.JSONDecodeError:
+            self._send(400, {"error": "bad json"})
+            raise ValueError("bad json")
+
+    def _accounts(self, method: str, body: dict | None = None) -> bool:
+        result = self.accounts.dispatch(self, method, body)
+        if result is None:
+            return False
+        self._send(result["code"], result["payload"], result.get("cookie"))
+        return True
 
     def do_OPTIONS(self) -> None:
         self.send_response(204)
@@ -1767,7 +1797,9 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self) -> None:
-        if self.path.rstrip("/") == "/api/health":
+        if self._accounts("GET"):
+            return
+        if urlparse(self.path).path.rstrip("/") == "/api/health":
             years = self.warehouse.seasons()
             self._send(
                 200,
@@ -1782,17 +1814,18 @@ class Handler(BaseHTTPRequestHandler):
         self._send(404, {"error": "not found"})
 
     def do_POST(self) -> None:
-        if self.path.rstrip("/") != "/api/ask":
+        path = urlparse(self.path).path.rstrip("/")
+        try:
+            body = self._read_body(2_000_000 if path.startswith("/api/models") else 80_000)
+        except ValueError:
+            return
+        if self._accounts("POST", body):
+            return
+        if path != "/api/ask":
             self._send(404, {"error": "not found"})
             return
-        length = int(self.headers.get("Content-Length") or 0)
-        if length > 80_000:
-            self._send(413, {"error": "payload too large"})
-            return
-        try:
-            body = json.loads(self.rfile.read(length) or b"{}")
-        except json.JSONDecodeError:
-            self._send(400, {"error": "bad json"})
+        if not api_key():
+            self._send(502, {"error": "DEEPSEEK is missing. Put it in .env."})
             return
         messages = body.get("messages") or []
         if not isinstance(messages, list) or len(messages) > 24:
@@ -1807,15 +1840,27 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as exc:
             self._send(500, {"error": str(exc)})
 
+    def do_PATCH(self) -> None:
+        try:
+            body = self._read_body(80_000)
+        except ValueError:
+            return
+        if not self._accounts("PATCH", body):
+            self._send(404, {"error": "not found"})
+
+    def do_DELETE(self) -> None:
+        if not self._accounts("DELETE", {}):
+            self._send(404, {"error": "not found"})
+
 
 def serve(root: Path | None = None, host: str = HOST, port: int = PORT) -> None:
     root = root or repo_root()
     load_dotenv(root)
-    if not api_key():
-        raise SystemExit("DEEPSEEK is missing. Put it in .env.")
     Handler.warehouse = Warehouse(root)
+    Handler.accounts = Accounts(root)
     httpd = ThreadingHTTPServer((host, port), Handler)
-    print(f"ask http://{host}:{port}  seasons={Handler.warehouse.seasons()}", flush=True)
+    key = "ask on" if api_key() else "ask off — set DEEPSEEK to enable"
+    print(f"ask http://{host}:{port}  seasons={Handler.warehouse.seasons()}  {key}", flush=True)
     httpd.serve_forever()
 
 

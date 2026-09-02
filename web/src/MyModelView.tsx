@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import type { SessionUser } from "./accounts";
 import { signed } from "./format";
 import { gameKey, pct } from "./game";
 import {
@@ -38,15 +39,27 @@ function Card({ title, card }: { title: string; card: UserScore | ReturnType<typ
 export function MyModelView({
   season,
   games,
-  model,
-  onChange,
+  user,
+  models,
+  activeId,
+  onUpload,
+  onActivate,
+  onPublish,
+  onRemove,
+  onNeedLogin,
   onOpenTeam,
   onOpenGame,
 }: {
   season: number;
   games: GamePred[];
-  model: UserModel | null;
-  onChange: (next: UserModel | null) => void;
+  user: SessionUser | null;
+  models: UserModel[];
+  activeId: string | null;
+  onUpload: (model: UserModel) => Promise<void>;
+  onActivate: (id: string) => void;
+  onPublish: (id: string, published: boolean) => void;
+  onRemove: (id: string) => void;
+  onNeedLogin: () => void;
   onOpenTeam: (team: string) => void;
   onOpenGame: (key: string) => void;
 }) {
@@ -54,21 +67,24 @@ export function MyModelView({
   const [error, setError] = useState<string | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [drag, setDrag] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const slate = useMemo(() => games.filter((g) => g.fbs_fbs), [games]);
+  const selected =
+    models.find((m) => m.id === selectedId) ?? models.find((m) => m.id === activeId) ?? models[0] ?? null;
 
-  const yours = useMemo(() => (model ? scoreUserModel(slate, model) : null), [slate, model]);
+  const yours = useMemo(() => (selected ? scoreUserModel(slate, selected) : null), [slate, selected]);
   const foot = useMemo(() => {
-    if (!model) return null;
-    const covered = slate.filter((g) => pickOfModel(model, g) && isFinal(g));
+    if (!selected) return null;
+    const covered = slate.filter((g) => pickOfModel(selected, g) && isFinal(g));
     return summarize(covered);
-  }, [slate, model]);
+  }, [slate, selected]);
 
   const rows = useMemo(() => {
-    if (!model) return [];
+    if (!selected) return [];
     return slate
-      .filter((g) => pickOfModel(model, g))
+      .filter((g) => pickOfModel(selected, g))
       .sort((a, b) => a.week - b.week || a.away.localeCompare(b.away));
-  }, [slate, model]);
+  }, [slate, selected]);
 
   function downloadSlate() {
     const blob = new Blob([slateCsv(slate, season)], { type: "text/csv;charset=utf-8" });
@@ -80,12 +96,16 @@ export function MyModelView({
   }
 
   async function ingest(file: File) {
+    if (!user) {
+      onNeedLogin();
+      return;
+    }
     setError(null);
     setWarnings([]);
     try {
       const text = await file.text();
       const { model: next, warnings: notes } = parseUserModel(text, file.name, season, slate);
-      onChange(next);
+      await onUpload(next);
       setWarnings(notes);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not read that file.");
@@ -101,72 +121,72 @@ export function MyModelView({
     <div className="mine">
       <h2 className="team-sched-title">My Model</h2>
       <p className="lede-note">
-        Bring a whole-slate score model, not a game-by-game pick sheet. Download the {season} FBS slate, fill it from
-        your model, and upload the results. Matched games show up as Your Prediction on each game page. Kept in this
-        browser only.
+        Upload one or more whole-slate score models. The active model fills Your Prediction on each game page and
+        sits on the Models board. Kept under your name.
       </p>
 
-      <ol className="mine-steps">
-        <li>
-          <strong>Download the slate.</strong> Every FBS game FootPalm is scoring, with <code>game_id</code> already
-          filled.
-        </li>
-        <li>
-          <strong>Run your model.</strong> Write <code>pred_away</code> and <code>pred_home</code>. Optional:{" "}
-          <code>home_win_prob</code> (0–1), or <code>pred_margin</code> plus <code>pred_total</code> instead of scores.
-        </li>
-        <li>
-          <strong>Upload the file.</strong> CSV or JSON. A new upload replaces the previous {season} slate.
-        </li>
-      </ol>
+      {!user ? (
+        <p className="lede-note">
+          <button type="button" className="team-link" onClick={onNeedLogin}>
+            Log in
+          </button>{" "}
+          to keep your uploads separate.
+        </p>
+      ) : (
+        <>
+          <ol className="mine-steps">
+            <li>
+              <strong>Download the slate.</strong> Every FBS game FootPalm is scoring, with <code>game_id</code>{" "}
+              already filled.
+            </li>
+            <li>
+              <strong>Run your model.</strong> Write <code>pred_away</code> and <code>pred_home</code>. Optional:{" "}
+              <code>home_win_prob</code> (0–1), or <code>pred_margin</code> plus <code>pred_total</code> instead of
+              scores.
+            </li>
+            <li>
+              <strong>Upload another file</strong> whenever you have a new version. It is added to this season’s
+              library; it does not replace the others.
+            </li>
+          </ol>
 
-      <div className="toolbar">
-        <button type="button" onClick={downloadSlate}>
-          Download {season} slate
-        </button>
-        <button type="button" onClick={() => input.current?.click()}>
-          Upload results
-        </button>
-        {model && (
-          <button
-            type="button"
-            onClick={() => {
-              onChange(null);
-              setWarnings([]);
-              setError(null);
+          <div className="toolbar">
+            <button type="button" onClick={downloadSlate}>
+              Download {season} slate
+            </button>
+            <button type="button" onClick={() => input.current?.click()}>
+              Upload model
+            </button>
+            <input
+              ref={input}
+              type="file"
+              accept=".csv,.json,text/csv,application/json"
+              hidden
+              onChange={(e) => {
+                onFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
+          </div>
+
+          <div
+            className={`mine-drop${drag ? " is-drag" : ""}`}
+            onDragEnter={(e) => {
+              e.preventDefault();
+              setDrag(true);
+            }}
+            onDragOver={(e) => e.preventDefault()}
+            onDragLeave={() => setDrag(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDrag(false);
+              onFiles(e.dataTransfer.files);
             }}
           >
-            Remove slate
-          </button>
-        )}
-        <input
-          ref={input}
-          type="file"
-          accept=".csv,.json,text/csv,application/json"
-          hidden
-          onChange={(e) => {
-            onFiles(e.target.files);
-            e.target.value = "";
-          }}
-        />
-      </div>
-
-      <div
-        className={`mine-drop${drag ? " is-drag" : ""}`}
-        onDragEnter={(e) => {
-          e.preventDefault();
-          setDrag(true);
-        }}
-        onDragOver={(e) => e.preventDefault()}
-        onDragLeave={() => setDrag(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDrag(false);
-          onFiles(e.dataTransfer.files);
-        }}
-      >
-        Drop a CSV or JSON results file here.
-      </div>
+            Drop a CSV or JSON results file to add another {season} model.
+          </div>
+        </>
+      )}
 
       {error && <p className="warn">{error}</p>}
       {warnings.map((w) => (
@@ -175,14 +195,86 @@ export function MyModelView({
         </p>
       ))}
 
-      {model && (
+      {user && models.length > 0 && (
+        <div className="table-wrap team-sched">
+          <table>
+            <thead>
+              <tr>
+                <th className="left">Model</th>
+                <th>Games</th>
+                <th className="left">Source</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {models.map((m) => (
+                <tr
+                  key={m.id}
+                  className={`game-row${m.id === selected?.id ? " is-active-model" : ""}`}
+                  onClick={() => m.id && setSelectedId(m.id)}
+                >
+                  <td className="left">
+                    {m.name}
+                    {m.id === activeId ? " · active" : ""}
+                    {m.published === false ? " · private" : ""}
+                  </td>
+                  <td>
+                    {m.matched}/{slate.length}
+                  </td>
+                  <td className="left">{m.source}</td>
+                  <td className="left">
+                    {m.id && m.id !== activeId && (
+                      <button
+                        type="button"
+                        className="team-link"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onActivate(m.id as string);
+                        }}
+                      >
+                        Use on games
+                      </button>
+                    )}{" "}
+                    {m.id && (
+                      <button
+                        type="button"
+                        className="team-link"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onPublish(m.id as string, m.published === false);
+                        }}
+                      >
+                        {m.published === false ? "Publish" : "Hide"}
+                      </button>
+                    )}{" "}
+                    {m.id && (
+                      <button
+                        type="button"
+                        className="team-link"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onRemove(m.id as string);
+                        }}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {selected && (
         <>
           <p className="lede-note">
-            {model.name} · {model.matched} of {slate.length} FBS games · from {model.source}
-            {model.unmatched ? ` · ${model.unmatched} unmatched` : ""}
+            {selected.name} · {selected.matched} of {slate.length} FBS games · from {selected.source}
+            {selected.unmatched ? ` · ${selected.unmatched} unmatched` : ""}
           </p>
           <div className="score-strip">
-            {yours && <Card title={model.name} card={yours} />}
+            {yours && <Card title={selected.name} card={yours} />}
             {foot && <Card title="FootPalm on the same games" card={foot} />}
           </div>
           <div className="table-wrap">
@@ -200,7 +292,7 @@ export function MyModelView({
               </thead>
               <tbody>
                 {rows.map((g) => {
-                  const pick = pickOfModel(model, g);
+                  const pick = pickOfModel(selected, g);
                   if (!pick) return null;
                   const done = isFinal(g);
                   return (

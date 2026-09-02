@@ -11,7 +11,7 @@ export default defineConfig({
           proxy.on("error", (_err, _req, res) => {
             if (res && "writeHead" in res && !res.headersSent) {
               res.writeHead(502, { "Content-Type": "application/json" });
-              res.end(JSON.stringify({ error: "Ask server is not running on :8766" }));
+              res.end(JSON.stringify({ error: "FootPalm API is not running on :8766" }));
             }
           });
         },

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { signed } from "./format";
-import { TeamLink } from "./TeamView";
+import { ConfLink, TeamLink } from "./TeamView";
 import type { RatingsFile, SortKey, TeamRow } from "./types";
 
 const COLUMNS: { key: SortKey; label: string; title: string; cls?: string }[] = [
@@ -51,7 +51,15 @@ function cell(row: TeamRow, key: SortKey) {
   }
 }
 
-export function RatingsTable({ data, onOpenTeam }: { data: RatingsFile; onOpenTeam: (team: string) => void }) {
+export function RatingsTable({
+  data,
+  onOpenTeam,
+  onOpenConference,
+}: {
+  data: RatingsFile;
+  onOpenTeam: (team: string) => void;
+  onOpenConference: (conf: string) => void;
+}) {
   const [sortKey, setSortKey] = useState<SortKey>("pom");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [q, setQ] = useState("");
@@ -126,7 +134,13 @@ export function RatingsTable({ data, onOpenTeam }: { data: RatingsFile; onOpenTe
               <tr key={row.team}>
                 {COLUMNS.map((col) => (
                   <td key={col.key} className={col.cls}>
-                    {col.key === "team" ? <TeamLink team={row.team} onOpen={onOpenTeam} /> : cell(row, col.key)}
+                    {col.key === "team" ? (
+                      <TeamLink team={row.team} onOpen={onOpenTeam} />
+                    ) : col.key === "conf" ? (
+                      <ConfLink conf={row.conf} onOpen={onOpenConference} />
+                    ) : (
+                      cell(row, col.key)
+                    )}
                   </td>
                 ))}
               </tr>

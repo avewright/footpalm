@@ -12,6 +12,8 @@ data/raw/
 data/cache/
 *.parquet
 
+data/accounts/
+
 .DS_Store
 .env
 .env.local

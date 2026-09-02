@@ -11,6 +11,7 @@ export type UserPick = {
 };
 
 export type UserModel = {
+  id?: string;
   name: string;
   season: number;
   source: string;
@@ -18,6 +19,9 @@ export type UserModel = {
   picks: Record<string, UserPick>;
   matched: number;
   unmatched: number;
+  owner?: string;
+  published?: boolean;
+  active?: boolean;
 };
 
 export type UserScore = {

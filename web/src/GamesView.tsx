@@ -1,32 +1,9 @@
 import { useMemo, useState } from "react";
 import { signed } from "./format";
 import { gameAnalytics, gameKey, hitTone, pct, teamMap } from "./game";
-import { etDay, isFinal, lastDay, prettyDay, record, summarize } from "./score";
+import { etDay, isFinal, prettyDay } from "./score";
 import { TeamLink } from "./TeamView";
 import type { GamePred, RatingsFile } from "./types";
-
-function Card({ title, card }: { title: string; card: ReturnType<typeof summarize> }) {
-  if (!card.n) return null;
-  return (
-    <div className="score-card">
-      <h3>{title}</h3>
-      <dl className="metrics">
-        <dt title="Correct winner picks versus misses on finals.">Winner</dt>
-        <dd>{record(card.suW, card.suL)}</dd>
-        <dt title="Mean squared error of the home win probability. Lower is better. 0.25 is a coin flip.">
-          Brier
-        </dt>
-        <dd>{card.brier == null ? "—" : card.brier.toFixed(3)}</dd>
-        <dt title="Mean absolute error of the predicted home margin, in points.">Margin MAE</dt>
-        <dd>{card.mae == null ? "—" : card.mae.toFixed(1)}</dd>
-        <dt title="Mean residual: actual home margin minus predicted. Positive means home teams ran hotter than the model.">
-          Bias
-        </dt>
-        <dd>{card.residual == null ? "—" : signed(card.residual)}</dd>
-      </dl>
-    </div>
-  );
-}
 
 type SortKey = "week" | "date" | "away" | "home" | "win" | "margin" | "pom" | "tempo" | "residual";
 
@@ -43,11 +20,7 @@ export function GamesView({
 }) {
   const teams = useMemo(() => teamMap(ratings), [ratings]);
   const weeks = useMemo(() => [...new Set(games.map((g) => g.week))].sort((a, b) => a - b), [games]);
-  const finals = useMemo(() => games.filter((g) => g.fbs_fbs && isFinal(g)), [games]);
-  const hasFinals = finals.length > 0;
-  const day = lastDay(finals);
-  const last = useMemo(() => summarize(day ? finals.filter((g) => etDay(g.start) === day) : []), [finals, day]);
-  const season = useMemo(() => summarize(finals), [finals]);
+  const hasFinals = useMemo(() => games.some((g) => g.fbs_fbs && isFinal(g)), [games]);
 
   const [week, setWeek] = useState<number | "all">("all");
   const [q, setQ] = useState("");
@@ -102,12 +75,6 @@ export function GamesView({
 
   return (
     <div>
-      {hasFinals && (
-        <div className="score-strip">
-          {day && <Card title={prettyDay(day)} card={last} />}
-          <Card title="Season" card={season} />
-        </div>
-      )}
       <p className="lede-note">
         {view === "final"
           ? "Pre-game projection against the final. Winner is straight-up accuracy. Bias is mean residual (actual home margin minus predicted). Click a row for the analytics breakdown."
