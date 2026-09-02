@@ -50,6 +50,7 @@ A draft miss is "not in the file", not "went undrafted". Many stayed in school. 
 
 Picks, EV, Saturday, weekend, upcoming: the slate card is already drawn. Do not catalog. Do not list again. Do not open research or backtest. Do not list a finished week.
 If they name sides, lines, or paste a pick sheet, call submit_picks. Do not only narrate. Use list_picks to read the book they already sent.
+Now, today, what day or time: call clock. Do not guess the date.
 """
 
 TOOLS = [
@@ -242,6 +243,14 @@ TOOLS = [
         "function": {
             "name": "list_picks",
             "description": "The user's current pick book versus market and result.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "clock",
+            "description": "Current date and time in America/New_York. Use for now, today, what day, kickoff timing.",
             "parameters": {"type": "object", "properties": {}},
         },
     },
@@ -1880,6 +1889,21 @@ class Session:
             self.show("table", "Your picks", columns=["Wk", "Game", "Pick", ""], rows=table)
         return {"n": len(rows), "picks": rows}
 
+    def clock(self, now: datetime | None = None) -> dict:
+        now = now or self.now or datetime.now(timezone.utc)
+        if now.tzinfo is None:
+            now = now.replace(tzinfo=timezone.utc)
+        et = now.astimezone(ET)
+        hour = et.strftime("%I").lstrip("0") or "12"
+        return {
+            "timezone": "America/New_York",
+            "date": et.date().isoformat(),
+            "weekday": et.strftime("%A"),
+            "time": f"{hour}:{et.strftime('%M')} {et.strftime('%p')}",
+            "iso": et.isoformat(timespec="minutes"),
+            "next_saturday": _next_saturday(now).isoformat(),
+        }
+
 
 HANDLERS = {
     "catalog": lambda s, **kw: s.catalog(),
@@ -1900,6 +1924,7 @@ HANDLERS = {
     "research": lambda s, **kw: s.research(),
     "submit_picks": lambda s, **kw: s.submit_picks(**kw),
     "list_picks": lambda s, **kw: s.list_picks(),
+    "clock": lambda s, **kw: s.clock(),
 }
 
 
