@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { signed } from "./format";
 import { gameAnalytics, hitTone, MODEL_IDS, pct, pickOf, teamMap } from "./game";
-import { marketSpread } from "./ev";
+import { marketCrowd, marketSpread } from "./ev";
 import { MatchupViz } from "./MatchupViz";
 import { prettyWhen } from "./score";
 import { ConfLink, TeamLink } from "./TeamView";
 import { UnitsView } from "./UnitsView";
-import { pickOfModel, predMargin, type UserModel } from "./mymodel";
+import { hasScores, pickLabel, pickOfModel, predMargin, type UserModel } from "./mymodel";
 import type { EspnQb, GamePred, RatingsFile, UnitsFile } from "./types";
 
 function qbLine(rows?: EspnQb[]) {
@@ -109,6 +109,7 @@ export function GameView({
   const when = prettyWhen(game.start);
   const models = MODEL_IDS.map((id) => ({ id, pick: pickOf(game, id) })).filter((row) => row.pick);
   const vegas = marketSpread(game) ?? game.espn?.odds?.spread ?? null;
+  const crowd = marketCrowd(game);
   const weather = weatherBits(game);
   const field = [
     game.espn?.weather?.venue || game.espn?.venue?.venue,
@@ -187,19 +188,22 @@ export function GameView({
           <dt>Projected</dt>
           <dd>{a.pred}</dd>
         </div>
-        <div title="Listed spread, shown as the favorite.">
+        <div title="Listed spread, shown as the favorite. Percent is Kalshi/Polymarket home cover.">
           <dt>Vegas Line</dt>
-          <dd>{favoriteLine(game.home, game.away, vegas)}</dd>
+          <dd>
+            {favoriteLine(game.home, game.away, vegas)}
+            {crowd != null ? ` · ${pct(crowd)} home` : ""}
+          </dd>
         </div>
         <div
           title={
             yours
               ? `${userModel?.name ?? "Your model"} implied spread, from your active uploaded model.`
-              : "Log in and upload a score slate on My Model."
+              : "Log in and upload a score slate on My Model, or tell Ask a side."
           }
         >
           <dt>Your Prediction</dt>
-          <dd>{yours ? favoriteLine(game.home, game.away, -predMargin(yours)) : "—"}</dd>
+          <dd>{yours ? pickLabel(game, yours) : "—"}</dd>
         </div>
       </dl>
 
@@ -248,23 +252,23 @@ export function GameView({
               <td>{signed(game.pred_margin)}</td>
               <td>{a.predTotal.toFixed(1)}</td>
             </tr>
-            {yours && (
+            {yours && hasScores(yours) && (
               <tr>
                 <td className="left">{userModel?.name ?? "Your model"}</td>
                 <td>{yours.home_win_prob == null ? "—" : pct(yours.home_win_prob)}</td>
                 <td>{signed(predMargin(yours))}</td>
-                <td>{(yours.pred_away + yours.pred_home).toFixed(1)}</td>
+                <td>{((yours.pred_away ?? 0) + (yours.pred_home ?? 0)).toFixed(1)}</td>
               </tr>
             )}
             {extras.map((m) => {
               const pick = pickOfModel(m, game);
-              if (!pick) return null;
+              if (!pick || !hasScores(pick)) return null;
               return (
                 <tr key={m.id ?? m.name}>
                   <td className="left">{m.name}</td>
                   <td>{pick.home_win_prob == null ? "—" : pct(pick.home_win_prob)}</td>
                   <td>{signed(predMargin(pick))}</td>
-                  <td>{(pick.pred_away + pick.pred_home).toFixed(1)}</td>
+                  <td>{((pick.pred_away ?? 0) + (pick.pred_home ?? 0)).toFixed(1)}</td>
                 </tr>
               );
             })}

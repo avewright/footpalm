@@ -12,6 +12,12 @@ export function marketSpread(g: GamePred): number | null {
   return g.spread;
 }
 
+export function marketCrowd(g: GamePred): number | null {
+  const p = listedBook(g)?.spread_p_home;
+  if (p == null || Number.isNaN(p)) return null;
+  return p;
+}
+
 export function marketMl(g: GamePred): number | null {
   const p = listedBook(g)?.ml_home;
   if (p == null || Number.isNaN(p)) return null;

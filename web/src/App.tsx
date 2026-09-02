@@ -76,7 +76,6 @@ export function App() {
   const [modelsError, setModelsError] = useState<string | null>(null);
   const [authTick, setAuthTick] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [askTick, setAskTick] = useState(0);
 
   useEffect(() => {
     loadJson<IndexFile>("/data/index.json", { seasons: [] }).then((idx) => {
@@ -258,6 +257,16 @@ export function App() {
     await refreshModels();
   }
 
+  async function onPicks(next: UserModel) {
+    setUserModel(next);
+    if (!user) return;
+    try {
+      await onUploadModel(next);
+    } catch {
+      /* still use the pick on this page */
+    }
+  }
+
   const selected = findGame(games, game);
 
   return (
@@ -275,11 +284,6 @@ export function App() {
           ))}
         </nav>
         <div className="top-right">
-          {tab === "ask" && (
-            <button type="button" className="ask-new" onClick={() => setAskTick((n) => n + 1)}>
-              New chat
-            </button>
-          )}
           <button type="button" className="tab-link" aria-pressed={tab === "models"} onClick={() => setTab("models")}>
             Models
           </button>
@@ -391,7 +395,9 @@ export function App() {
           games={games}
         />
       )}
-      {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
+      {tab === "ask" && (
+        <AskView season={season} picks={userModel} onPicks={(next) => void onPicks(next)} onOpenTeam={openTeam} />
+      )}
       {tab === "money" && money && (
         <MoneyView data={money} onOpenTeam={openTeam} onOpenConference={openConference} />
       )}

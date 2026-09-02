@@ -408,3 +408,277 @@ markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
 wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
 wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
 markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+Traceback (most recent call last):
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1113, in _send_output
+    self.send(msg)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1057, in send
+    self.connect()
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1492, in connect
+    super().connect()
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socket.py", line 841, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socket.py", line 978, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 229, in <module>
+    main()
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 217, in main
+    run_lines(root, args.season)
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 140, in run_lines
+    return run_markets(root, season=season, sources=("kalshi",))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 501, in run
+    events_by["kalshi"] = fetch_kalshi()
+                          ^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 264, in fetch_kalshi
+    for raw in fetch_kalshi_series(KALSHI_GAME):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 177, in fetch_kalshi_series
+    page = _get(url)
+           ^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 35, in _get
+    with urlopen(req, timeout=45) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+Traceback (most recent call last):
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1344, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1358, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1404, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1113, in _send_output
+    self.send(msg)
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1057, in send
+    self.connect()
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1492, in connect
+    super().connect()
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/http/client.py", line 1023, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socket.py", line 841, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/socket.py", line 978, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 229, in <module>
+    main()
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 217, in main
+    run_lines(root, args.season)
+  File "/Users/avewright/Projects/footpalm/footpalm/cron.py", line 140, in run_lines
+    return run_markets(root, season=season, sources=("kalshi",))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 501, in run
+    events_by["kalshi"] = fetch_kalshi()
+                          ^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 264, in fetch_kalshi
+    for raw in fetch_kalshi_series(KALSHI_GAME):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 177, in fetch_kalshi_series
+    page = _get(url)
+           ^^^^^^^^^
+  File "/Users/avewright/Projects/footpalm/footpalm/markets.py", line 35, in _get
+    with urlopen(req, timeout=45) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/avewright/.local/share/uv/python/cpython-3.12.13-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1347, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026

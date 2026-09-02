@@ -14,6 +14,12 @@ export default defineConfig({
               res.end(JSON.stringify({ error: "FootPalm API is not running on :8766" }));
             }
           });
+          proxy.on("proxyRes", (proxyRes) => {
+            if (proxyRes.headers["content-type"]?.includes("event-stream")) {
+              proxyRes.headers["cache-control"] = "no-cache";
+              proxyRes.headers["x-accel-buffering"] = "no";
+            }
+          });
         },
       },
     },

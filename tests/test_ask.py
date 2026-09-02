@@ -455,3 +455,32 @@ def test_money_scatter(tmp_path: Path):
     assert card["points"][0]["x"] == 40.4
 
 
+def test_clock_is_eastern(tmp_path: Path):
+    from datetime import datetime, timezone
+
+    session = Session(_warehouse(tmp_path), 2026)
+    out = session.clock(now=datetime(2026, 9, 1, 15, 5, tzinfo=timezone.utc))
+    assert out["date"] == "2026-09-01"
+    assert out["weekday"] == "Tuesday"
+    assert out["time"] == "11:05 AM"
+    assert out["timezone"] == "America/New_York"
+    assert out["next_saturday"] == "2026-09-05"
+
+
+def test_merge_delta_joins_stream_chunks():
+    from footpalm.ask import _merge_delta
+
+    msg: dict = {"role": "assistant", "content": ""}
+    _merge_delta(msg, {"content": "Ohio "})
+    _merge_delta(msg, {"content": "State"})
+    _merge_delta(
+        msg,
+        {"tool_calls": [{"index": 0, "id": "c1", "function": {"name": "li", "arguments": ""}}]},
+    )
+    _merge_delta(msg, {"tool_calls": [{"index": 0, "function": {"name": "st", "arguments": "{\"q\""}}]})
+    assert msg["content"] == "Ohio State"
+    assert msg["tool_calls"][0]["id"] == "c1"
+    assert msg["tool_calls"][0]["function"]["name"] == "list"
+    assert msg["tool_calls"][0]["function"]["arguments"] == '{"q"'
+
+

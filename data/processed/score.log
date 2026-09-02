@@ -203,3 +203,301 @@ wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (
 wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
 wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
 stamped 0 · last 2026-08-29 SU 6-2 ATS 6-2 Brier 0.1637
+cfbd skip (age=5.5h calls=7/1000)
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
+stamped 0 · last 2026-08-29 SU 6-2 ATS 6-2 Brier 0.1637
+cfbd refresh age=15.3h calls=7/1000
+refreshing CFBD games/lines 2026
+  cfbd games 2026: 3679 rows
+  cfbd lines 2026: 933 rows
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
+stamped 0 · last 2026-08-29 SU 6-2 ATS 6-2 Brier 0.1637
+weekly project missed Tuesday — refitting TabPFN
+refreshing CFBD games/lines 2026 (2 calls)
+  cfbd games 2026: 3679 rows
+  cfbd lines 2026: 933 rows
+fitting tabpfn on 9947 extras rows
+predicting 888 games
+wrote /Users/avewright/Projects/footpalm/data/processed/ratings-2026.json (138)
+wrote /Users/avewright/Projects/footpalm/web/public/data/ratings-2026.json (138)
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/index.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/index.json (0)
+2026: 888 games, 880 unplayed, engine=tabpfn-3
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+markets sources=kalshi events={'kalshi': 263} matched=179 logged=179 season=2026
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+espn matched=25 logged=25 season=2026
+cfbd skip (age=2.2h calls=11/1000)
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
+stamped 0 · last 2026-08-29 SU 6-2 ATS 5-3 Brier 0.1548
+cfbd skip (age=4.3h calls=11/1000)
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856634: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401858425: HTTP Error 403: Forbidden
+espn summary 401858432: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
+stamped 0 · last 2026-08-29 SU 6-2 ATS 5-3 Brier 0.1548
+CFBD network error /games: <urlopen error [Errno 8] nodename nor servname provided, or not known>
+cfbd refresh age=6.8h calls=11/1000
+refreshing CFBD games/lines 2026
+cfbd refresh age=9.1h calls=11/1000
+refreshing CFBD games/lines 2026
+  cfbd games 2026: 3679 rows
+  cfbd lines 2026: 935 rows
+espn scoreboard 2026-09-02: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-03: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-04: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-05: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-06: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-07: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-11: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-12: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-13: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-17: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-18: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-19: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-20: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-24: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-25: HTTP Error 403: Forbidden
+espn scoreboard 2026-09-26: HTTP Error 403: Forbidden
+espn summary 401856663: HTTP Error 403: Forbidden
+espn summary 401856768: HTTP Error 403: Forbidden
+espn summary 401856664: HTTP Error 403: Forbidden
+espn summary 401858206: HTTP Error 403: Forbidden
+espn summary 401858436: HTTP Error 403: Forbidden
+espn summary 401856634: HTTP Error 403: Forbidden
+espn summary 401856778: HTTP Error 403: Forbidden
+espn summary 401858425: HTTP Error 403: Forbidden
+espn summary 401858432: HTTP Error 403: Forbidden
+espn summary 401856658: HTTP Error 403: Forbidden
+espn summary 401858433: HTTP Error 403: Forbidden
+espn summary 401858434: HTTP Error 403: Forbidden
+espn summary 401856666: HTTP Error 403: Forbidden
+espn summary 401856667: HTTP Error 403: Forbidden
+espn summary 401858426: HTTP Error 403: Forbidden
+espn summary 401856668: HTTP Error 403: Forbidden
+espn summary 401856770: HTTP Error 403: Forbidden
+espn summary 401856660: HTTP Error 403: Forbidden
+espn summary 401856775: HTTP Error 403: Forbidden
+espn summary 401858437: HTTP Error 403: Forbidden
+espn summary 401858438: HTTP Error 403: Forbidden
+espn summary 401856661: HTTP Error 403: Forbidden
+espn summary 401858212: HTTP Error 403: Forbidden
+wrote /Users/avewright/Projects/footpalm/data/processed/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/web/public/data/predictions-2026.json (888)
+wrote /Users/avewright/Projects/footpalm/data/processed/live.json (0)
+wrote /Users/avewright/Projects/footpalm/web/public/data/live.json (0)
+stamped 0 · last 2026-08-29 SU 6-2 ATS 5-3 Brier 0.1548
