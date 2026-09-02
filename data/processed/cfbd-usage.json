@@ -1,11 +1,11 @@
 {
   "month": "2026-09",
-  "calls": 7,
+  "calls": 11,
   "cap": 1000,
   "note": "Free tier ~1000/month. Score/project should stay under ~350. Kalshi is free.",
   "prior": {
     "month": "2026-08",
     "calls": 3
   },
-  "updated_at": "2026-09-01T22:16:26+00:00"
+  "updated_at": "2026-09-02T13:32:27+00:00"
 }

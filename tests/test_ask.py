@@ -455,3 +455,20 @@ def test_money_scatter(tmp_path: Path):
     assert card["points"][0]["x"] == 40.4
 
 
+def test_merge_delta_joins_stream_chunks():
+    from footpalm.ask import _merge_delta
+
+    msg: dict = {"role": "assistant", "content": ""}
+    _merge_delta(msg, {"content": "Ohio "})
+    _merge_delta(msg, {"content": "State"})
+    _merge_delta(
+        msg,
+        {"tool_calls": [{"index": 0, "id": "c1", "function": {"name": "li", "arguments": ""}}]},
+    )
+    _merge_delta(msg, {"tool_calls": [{"index": 0, "function": {"name": "st", "arguments": "{\"q\""}}]})
+    assert msg["content"] == "Ohio State"
+    assert msg["tool_calls"][0]["id"] == "c1"
+    assert msg["tool_calls"][0]["function"]["name"] == "list"
+    assert msg["tool_calls"][0]["function"]["arguments"] == '{"q"'
+
+

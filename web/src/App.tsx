@@ -53,7 +53,6 @@ export function App() {
     loadUserModel(Number(search().get("season")) || 2026),
   );
   const [error, setError] = useState<string | null>(null);
-  const [askTick, setAskTick] = useState(0);
 
   useEffect(() => {
     loadJson<IndexFile>("/data/index.json", { seasons: [] }).then((idx) => {
@@ -141,11 +140,6 @@ export function App() {
           ))}
         </nav>
         <div className="top-right">
-          {tab === "ask" && (
-            <button type="button" className="ask-new" onClick={() => setAskTick((n) => n + 1)}>
-              New chat
-            </button>
-          )}
           <button type="button" className="tab-link" aria-pressed={tab === "mine"} onClick={() => setTab("mine")}>
             My Model
           </button>
@@ -214,7 +208,9 @@ export function App() {
           </button>
         </p>
       )}
-      {tab === "ask" && <AskView key={askTick} season={season} onOpenTeam={openTeam} />}
+      {tab === "ask" && (
+        <AskView season={season} picks={userModel} onPicks={onUserModel} onOpenTeam={openTeam} />
+      )}
       {tab === "money" && money && <MoneyView data={money} onOpenTeam={openTeam} />}
 
       {tab === "ratings" && (

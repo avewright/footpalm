@@ -10,6 +10,7 @@ import re
 from datetime import date, datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from collections.abc import Callable
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -48,6 +49,7 @@ Player stats: rushing, receiving, yac, yac_avg, passing. yac_avg is YAC per catc
 A draft miss is "not in the file", not "went undrafted". Many stayed in school. Not a ratings input.
 
 Picks, EV, Saturday, weekend, upcoming: the slate card is already drawn. Do not catalog. Do not list again. Do not open research or backtest. Do not list a finished week.
+If they name sides, lines, or paste a pick sheet, call submit_picks. Do not only narrate. Use list_picks to read the book they already sent.
 """
 
 TOOLS = [
@@ -204,6 +206,45 @@ TOOLS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "submit_picks",
+            "description": "Add or update the user's picks. Resolve team names, then save. Use for sides, lines, or a pasted sheet.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "query": {"type": "string"},
+                                "home": {"type": "string"},
+                                "away": {"type": "string"},
+                                "week": {"type": "integer"},
+                                "side": {"type": "string", "enum": ["home", "away"]},
+                                "kind": {"type": "string", "enum": ["ats", "ml", "score"]},
+                                "line": {"type": "number"},
+                                "pred_away": {"type": "number"},
+                                "pred_home": {"type": "number"},
+                                "home_win_prob": {"type": "number"},
+                            },
+                        },
+                    },
+                },
+                "required": ["items"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "list_picks",
+            "description": "The user's current pick book versus market and result.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
 ]
 
 
@@ -269,6 +310,9 @@ def _slim_game(row: dict) -> dict:
     if side:
         out["pick"] = _bet_label(side)
         out["ev"] = round(side["ev"], 3)
+    crowd = _crowd(row)
+    if crowd is not None:
+        out["crowd"] = round(crowd, 3)
     return out
 
 
@@ -367,6 +411,73 @@ def _ats_side(game: dict) -> dict | None:
 
 def _bet_label(side: dict) -> str:
     return f"{side['who']} {_signed(side['line'])}"
+
+
+def _crowd(game: dict) -> float | None:
+    books = game.get("books") or {}
+    for src in ("kalshi", "polymarket"):
+        raw = (books.get(src) or {}).get("spread_p_home")
+        if raw is None:
+            continue
+        try:
+            return float(raw)
+        except (TypeError, ValueError):
+            return None
+    return None
+
+
+def _split_pick_query(query: str) -> tuple[str, float | None]:
+    raw = (query or "").strip()
+    m = re.search(r"^(.*?)([+-]\d+(?:\.\d+)?)\s*$", raw)
+    if m and m.group(1).strip():
+        return m.group(1).strip(), float(m.group(2))
+    return raw, None
+
+
+def _game_key(game: dict) -> str:
+    gid = game.get("game_id")
+    if gid is not None and str(gid).strip() != "":
+        return str(gid)
+    return f"{game.get('season')}-{game.get('week')}-{game.get('away')}-{game.get('home')}"
+
+
+def _empty_book(season: int) -> dict:
+    return {
+        "name": "Picks",
+        "season": season,
+        "source": "ask",
+        "uploaded_at": "",
+        "picks": {},
+        "matched": 0,
+        "unmatched": 0,
+    }
+
+
+def _coerce_book(raw: Any, season: int) -> dict:
+    book = _empty_book(season)
+    if not isinstance(raw, dict):
+        return book
+    if isinstance(raw.get("name"), str) and raw["name"].strip():
+        book["name"] = raw["name"].strip()
+    if isinstance(raw.get("source"), str):
+        book["source"] = raw["source"]
+    if isinstance(raw.get("uploaded_at"), str):
+        book["uploaded_at"] = raw["uploaded_at"]
+    picks = raw.get("picks")
+    if isinstance(picks, dict):
+        book["picks"] = {str(k): v for k, v in picks.items() if isinstance(v, dict)}
+    elif isinstance(picks, list):
+        out: dict[str, dict] = {}
+        for row in picks:
+            if not isinstance(row, dict):
+                continue
+            key = row.get("game_id")
+            if key is None:
+                continue
+            out[str(key)] = {k: v for k, v in row.items() if k != "game_id"}
+        book["picks"] = out
+    book["matched"] = len(book["picks"])
+    return book
 
 
 def _parse_start(game: dict) -> datetime | None:
@@ -658,12 +769,21 @@ class Warehouse:
 
 
 class Session:
-    def __init__(self, warehouse: Warehouse, season: int, question: str = "", now: datetime | None = None):
+    def __init__(
+        self,
+        warehouse: Warehouse,
+        season: int,
+        question: str = "",
+        now: datetime | None = None,
+        picks: dict | None = None,
+    ):
         self.wh = warehouse
         self.season = season
         self.question = question or ""
         self.now = now
         self.cards: list[dict] = []
+        self.book = _coerce_book(picks, season)
+        self.book_dirty = False
 
     def _year(self, season: int | None) -> int:
         return int(season) if season else self.season
@@ -1586,6 +1706,180 @@ class Session:
         self.cards.append(card)
         return {"ok": True, "n": len(self.cards)}
 
+    def _raw_games(self, season: int | None = None) -> list[dict]:
+        return self.wh.games(self._year(season))
+
+    def _game_by_key(self, key: str, season: int | None = None) -> dict | None:
+        for game in self._raw_games(season):
+            if _game_key(game) == str(key):
+                return game
+        return None
+
+    def _find_pick_game(
+        self,
+        query: str | None = None,
+        home: str | None = None,
+        away: str | None = None,
+        week: int | None = None,
+        season: int | None = None,
+    ) -> dict | None:
+        year = self._year(season)
+        games = self._raw_games(year)
+        if home and away:
+            homes = self.wh.resolve(home, year) or [home]
+            aways = self.wh.resolve(away, year) or [away]
+            hits = [
+                g
+                for g in games
+                if g.get("home") in homes and g.get("away") in aways and (week is None or g.get("week") == week)
+            ]
+            return hits[0] if hits else None
+        if not query:
+            return None
+        names = self.wh.resolve(query, year) or [query]
+        want = {n.lower() for n in names}
+        want.add(query.lower())
+        hits = [
+            g
+            for g in games
+            if str(g.get("home") or "").lower() in want or str(g.get("away") or "").lower() in want
+        ]
+        if week is not None:
+            hits = [g for g in hits if g.get("week") == week]
+        if len(hits) == 1:
+            return hits[0]
+        open_games = [g for g in hits if g.get("actual_home") is None and not g.get("completed")]
+        if len(open_games) == 1:
+            return open_games[0]
+        return None
+
+    def _side_of(self, game: dict, query: str | None, side: str | None) -> str | None:
+        if side in {"home", "away"}:
+            return side
+        if not query:
+            return None
+        names = self.wh.resolve(query, int(game.get("season") or self.season)) or [query]
+        for name in names:
+            if name == game.get("home"):
+                return "home"
+            if name == game.get("away"):
+                return "away"
+        q = query.lower()
+        if str(game.get("home") or "").lower() == q:
+            return "home"
+        if str(game.get("away") or "").lower() == q:
+            return "away"
+        return None
+
+    def dump_book(self) -> dict:
+        self.book["matched"] = len(self.book["picks"])
+        self.book["season"] = self.season
+        if self.book_dirty:
+            self.book["uploaded_at"] = datetime.now(timezone.utc).isoformat()
+            if not self.book.get("source"):
+                self.book["source"] = "ask"
+        return self.book
+
+    def submit_picks(self, items: list | None = None, **item: Any) -> dict:
+        rows = list(items or [])
+        if not rows and (item.get("query") or item.get("home") or item.get("side")):
+            rows = [item]
+        matched: list[dict] = []
+        unmatched: list[dict] = []
+        for raw in rows:
+            if not isinstance(raw, dict):
+                continue
+            query, qline = _split_pick_query(str(raw.get("query") or raw.get("team") or ""))
+            if raw.get("line") is None and qline is not None:
+                raw = {**raw, "line": qline}
+            game = self._find_pick_game(
+                query=query or None,
+                home=raw.get("home"),
+                away=raw.get("away"),
+                week=raw.get("week"),
+                season=raw.get("season"),
+            )
+            if not game:
+                unmatched.append({"query": raw.get("query") or raw.get("team") or raw.get("home"), "error": "no game"})
+                continue
+            kind = (raw.get("kind") or ("score" if raw.get("pred_home") is not None else "ats")).lower()
+            if kind not in {"ats", "ml", "score"}:
+                kind = "ats"
+            pick: dict[str, Any] = {"kind": kind, "home_win_prob": raw.get("home_win_prob")}
+            if kind == "score":
+                if raw.get("pred_away") is None or raw.get("pred_home") is None:
+                    unmatched.append({"query": raw.get("query"), "error": "need pred_away and pred_home"})
+                    continue
+                pick["pred_away"] = raw["pred_away"]
+                pick["pred_home"] = raw["pred_home"]
+            else:
+                side = self._side_of(game, query or raw.get("team"), raw.get("side"))
+                if not side:
+                    unmatched.append({"query": raw.get("query") or raw.get("team"), "error": "could not tell home or away"})
+                    continue
+                pick["side"] = side
+                if kind == "ats":
+                    line = raw.get("line")
+                    if line is None:
+                        mkt = _market_spread(game)
+                        line = mkt if side == "home" else (None if mkt is None else -mkt)
+                    pick["line"] = line
+            key = _game_key(game)
+            self.book["picks"][key] = pick
+            self.book_dirty = True
+            matched.append(
+                {
+                    "game": f"{game.get('away')} at {game.get('home')}",
+                    "week": game.get("week"),
+                    "kind": kind,
+                    "side": pick.get("side"),
+                    "line": pick.get("line"),
+                }
+            )
+        self.book["unmatched"] = len(unmatched)
+        return {"matched": matched, "unmatched": unmatched, "n": len(self.book["picks"])}
+
+    def list_picks(self) -> dict:
+        rows = []
+        table = []
+        for key, pick in self.book["picks"].items():
+            game = self._game_by_key(key)
+            if not game:
+                rows.append({"key": key, "error": "game gone"})
+                continue
+            side = pick.get("side")
+            who = game.get("home") if side == "home" else game.get("away") if side == "away" else ""
+            line = pick.get("line")
+            label = (
+                f"{who} ML"
+                if pick.get("kind") == "ml" and who
+                else f"{who} {_signed(line)}"
+                if who and line is not None
+                else f"{pick.get('pred_away')}-{pick.get('pred_home')}"
+            )
+            result = ""
+            if game.get("actual_home") is not None and side:
+                home_line = line if side == "home" else (-line if line is not None else _market_spread(game))
+                if home_line is not None and game.get("actual_margin") is not None:
+                    cover = float(game["actual_margin"]) + float(home_line)
+                    if abs(cover) >= 1e-9:
+                        hit = (cover > 0) if side == "home" else (cover < 0)
+                        result = "hit" if hit else "miss"
+            rows.append(
+                {
+                    "game": f"{game.get('away')} at {game.get('home')}",
+                    "week": game.get("week"),
+                    "yours": label,
+                    "mkt": _market_spread(game),
+                    "crowd": _crowd(game),
+                    "result": result or "pending",
+                }
+            )
+            table.append([game.get("week"), f"{game.get('away')} at {game.get('home')}", label, result or "pending"])
+        if table:
+            self.show("table", "Your picks", columns=["Wk", "Game", "Pick", ""], rows=table)
+        return {"n": len(rows), "picks": rows}
+
 
 HANDLERS = {
     "catalog": lambda s, **kw: s.catalog(),
@@ -1604,6 +1898,8 @@ HANDLERS = {
     "drafted": lambda s, **kw: s.drafted(**kw),
     "player": lambda s, **kw: s.player(**kw),
     "research": lambda s, **kw: s.research(),
+    "submit_picks": lambda s, **kw: s.submit_picks(**kw),
+    "list_picks": lambda s, **kw: s.list_picks(),
 }
 
 
@@ -1615,13 +1911,57 @@ def model_name() -> str:
     return (os.environ.get("DEEPSEEK_MODEL") or DEFAULT_MODEL).strip()
 
 
-def _complete(messages: list[dict], model: str, key: str) -> dict:
+def _merge_delta(message: dict, delta: dict) -> None:
+    if delta.get("role"):
+        message["role"] = delta["role"]
+    if delta.get("content"):
+        message["content"] = (message.get("content") or "") + delta["content"]
+    if delta.get("reasoning_content"):
+        message["reasoning_content"] = (message.get("reasoning_content") or "") + delta["reasoning_content"]
+    for raw in delta.get("tool_calls") or []:
+        if not isinstance(raw, dict):
+            continue
+        idx = int(raw.get("index") or 0)
+        calls = message.setdefault("tool_calls", [])
+        while len(calls) <= idx:
+            calls.append({"id": "", "type": "function", "function": {"name": "", "arguments": ""}})
+        cur = calls[idx]
+        if raw.get("id"):
+            cur["id"] = raw["id"]
+        if raw.get("type"):
+            cur["type"] = raw["type"]
+        fn = raw.get("function") or {}
+        if fn.get("name"):
+            cur["function"]["name"] += fn["name"]
+        if fn.get("arguments"):
+            cur["function"]["arguments"] += fn["arguments"]
+
+
+def _read_sse_line(resp, carry: bytes) -> tuple[bytes | None, bytes]:
+    while b"\n" not in carry:
+        chunk = resp.read(256)
+        if not chunk:
+            return None, carry
+        carry += chunk
+    line, carry = carry.split(b"\n", 1)
+    return line, carry
+
+
+def _complete(
+    messages: list[dict],
+    model: str,
+    key: str,
+    temperature: float = 0.2,
+    on_event: Callable[[dict], None] | None = None,
+) -> dict:
+    stream = on_event is not None
     body = json.dumps(
         {
             "model": model,
             "messages": messages,
             "tools": TOOLS,
-            "temperature": 0.2,
+            "temperature": temperature,
+            "stream": stream,
         }
     ).encode()
     req = Request(
@@ -1630,13 +1970,41 @@ def _complete(messages: list[dict], model: str, key: str) -> dict:
         headers={
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
-            "Accept": "application/json",
+            "Accept": "text/event-stream" if stream else "application/json",
         },
         method="POST",
     )
     try:
-        with urlopen(req, timeout=90) as resp:
-            return json.loads(resp.read().decode())
+        with urlopen(req, timeout=120) as resp:
+            if not stream:
+                return json.loads(resp.read().decode())
+            message: dict[str, Any] = {"role": "assistant", "content": ""}
+            saw_tools = False
+            carry = b""
+            while True:
+                raw, carry = _read_sse_line(resp, carry)
+                if raw is None:
+                    break
+                line = raw.decode("utf-8", errors="replace").strip()
+                if not line.startswith("data:"):
+                    continue
+                data = line[5:].strip()
+                if data == "[DONE]":
+                    break
+                try:
+                    piece = json.loads(data)
+                except json.JSONDecodeError:
+                    continue
+                delta = ((piece.get("choices") or [{}])[0] or {}).get("delta") or {}
+                before_tools = bool(message.get("tool_calls"))
+                text = delta.get("content") or ""
+                _merge_delta(message, delta)
+                if message.get("tool_calls") and not before_tools:
+                    saw_tools = True
+                    on_event({"type": "tools"})
+                elif text and not saw_tools:
+                    on_event({"type": "delta", "text": text})
+            return {"choices": [{"message": message}]}
     except HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:400]
         raise RuntimeError(f"DeepSeek {exc.code}: {detail}") from exc
@@ -1682,17 +2050,31 @@ def resolve_ask_season(question: str, season: int, live: int | None = None) -> t
     return season, last_year
 
 
-def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
+def _ask_payload(text: str, cards: list, tools: list, model: str, session: Session) -> dict:
+    out = {"text": text, "cards": cards, "tools": tools, "model": model}
+    if session.book_dirty or session.book["picks"]:
+        out["picks"] = session.dump_book()
+    return out
+
+
+def ask(
+    warehouse: Warehouse,
+    messages: list[dict],
+    season: int,
+    picks: dict | None = None,
+    mode: str = "instant",
+    on_event: Callable[[dict], None] | None = None,
+) -> dict:
     last = _last_user(messages)
     live = _live_season(warehouse, season)
     season, last_year = resolve_ask_season(last, season, live=live)
-    session = Session(warehouse, season, question=last)
+    session = Session(warehouse, season, question=last, picks=picks)
     if _live_slate(last):
         session.list_board("games")
     if _want_scatter(last):
         session.list_board("money")
         if session.cards:
-            return {"text": "", "cards": session.cards, "tools": ["list"], "model": "local"}
+            return _ask_payload("", session.cards, ["list"], "local", session)
     key = api_key()
     if not key:
         raise RuntimeError("DEEPSEEK is missing. Put it in .env.")
@@ -1703,19 +2085,25 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
         role = msg.get("role")
         text = (msg.get("content") or "").strip()
         if role in {"user", "assistant"} and text:
-            history.append({"role": role, "content": text[:2000]})
+            history.append({"role": role, "content": text[:12000 if role == "user" else 2000]})
     if len(history) < 2:
         raise RuntimeError("empty question")
 
     used: list[str] = []
     model = model_name()
-    for _ in range(MAX_ROUNDS):
+    temperature = 0.1 if mode == "deep" else 0.2
+    rounds = MAX_ROUNDS + 2 if mode == "deep" else MAX_ROUNDS
+
+    def complete() -> dict:
+        return _complete(history, model, key, temperature, on_event=on_event)
+
+    for _ in range(rounds):
         try:
-            payload = _complete(history, model, key)
+            payload = complete()
         except RuntimeError as exc:
             if model != FALLBACK_MODEL and "model" in str(exc).lower():
                 model = FALLBACK_MODEL
-                payload = _complete(history, model, key)
+                payload = complete()
             else:
                 raise
         choice = (payload.get("choices") or [{}])[0]
@@ -1725,7 +2113,7 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
         if not calls:
             cards = _prune_cards(session.cards, last)
             text = _clean_answer(message.get("content") or "", cards)
-            return {"text": text, "cards": cards, "tools": used, "model": model}
+            return _ask_payload(text, cards, used, model, session)
         for call in calls:
             fn = (call.get("function") or {}) if isinstance(call, dict) else {}
             name = fn.get("name") or ""
@@ -1737,7 +2125,7 @@ def ask(warehouse: Warehouse, messages: list[dict], season: int) -> dict:
                     "content": _run_tool(session, name, fn.get("arguments") or "{}"),
                 }
             )
-    return {"text": "Stopped after too many tool calls.", "cards": session.cards, "tools": used, "model": model}
+    return _ask_payload("Stopped after too many tool calls.", session.cards, used, model, session)
 
 
 def _cors(handler: BaseHTTPRequestHandler) -> None:
@@ -1760,6 +2148,18 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
+
+    def _begin_stream(self) -> None:
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("X-Accel-Buffering", "no")
+        _cors(self)
+        self.end_headers()
+
+    def _emit(self, payload: dict) -> None:
+        self.wfile.write(f"data: {json.dumps(payload, default=str)}\n\n".encode())
+        self.wfile.flush()
 
     def do_OPTIONS(self) -> None:
         self.send_response(204)
@@ -1800,11 +2200,31 @@ class Handler(BaseHTTPRequestHandler):
             return
         years = self.warehouse.seasons()
         season = int(body.get("season") or (years[-1] if years else 2026))
+        picks = body.get("picks") if isinstance(body.get("picks"), dict) else None
+        mode = body.get("mode") if body.get("mode") in {"instant", "deep"} else "instant"
+        stream = bool(body.get("stream"))
         try:
-            self._send(200, ask(self.warehouse, messages, season))
+            if stream:
+                self._begin_stream()
+                out = ask(self.warehouse, messages, season, picks=picks, mode=mode, on_event=self._emit)
+                self._emit({"type": "done", **out})
+                return
+            self._send(200, ask(self.warehouse, messages, season, picks=picks, mode=mode))
         except RuntimeError as exc:
+            if stream:
+                try:
+                    self._emit({"type": "error", "error": str(exc)})
+                except Exception:
+                    pass
+                return
             self._send(502, {"error": str(exc)})
         except Exception as exc:
+            if stream:
+                try:
+                    self._emit({"type": "error", "error": str(exc)})
+                except Exception:
+                    pass
+                return
             self._send(500, {"error": str(exc)})
 
 

@@ -2,7 +2,11 @@ import { useMemo, useRef, useState } from "react";
 import { signed } from "./format";
 import { gameKey, pct } from "./game";
 import {
+  exportUserModel,
+  hasScores,
+  mergeUserModel,
   parseUserModel,
+  pickLabel,
   pickOfModel,
   predMargin,
   scoreUserModel,
@@ -22,6 +26,12 @@ function Card({ title, card }: { title: string; card: UserScore | ReturnType<typ
       <dl className="metrics">
         <dt title="Correct winner picks versus misses on finals this slate covers.">Winner</dt>
         <dd>{record(card.suW, card.suL)}</dd>
+        {card.atsW + card.atsL > 0 && (
+          <>
+            <dt title="Against the spread, using the line locked on the pick.">ATS</dt>
+            <dd>{record(card.atsW, card.atsL)}</dd>
+          </>
+        )}
         <dt title="Mean squared error of home win probability, when the file includes one. Lower is better.">
           Brier
         </dt>
@@ -79,14 +89,49 @@ export function MyModelView({
     URL.revokeObjectURL(a.href);
   }
 
+  function downloadJson(book: UserModel) {
+    const blob = new Blob([exportUserModel(book)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `footpalm-picks-${book.season}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  async function askLeftover(book: UserModel, leftover: string): Promise<UserModel> {
+    const response = await fetch("/api/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        season,
+        picks: book,
+        messages: [{ role: "user", content: `Add these picks to my book:\n${leftover.slice(0, 11000)}` }],
+      }),
+    });
+    const payload = (await response.json()) as { error?: string; picks?: UserModel };
+    if (!response.ok || !payload.picks) {
+      throw new Error(payload.error || "Ask could not read the leftover rows.");
+    }
+    return payload.picks;
+  }
+
   async function ingest(file: File) {
     setError(null);
     setWarnings([]);
     try {
       const text = await file.text();
-      const { model: next, warnings: notes } = parseUserModel(text, file.name, season, slate);
+      const { model: parsed, warnings: notes, leftover } = parseUserModel(text, file.name, season, slate);
+      let next = parsed;
+      const extra = [...notes];
+      if (leftover) {
+        try {
+          next = mergeUserModel(next, await askLeftover(next, leftover));
+        } catch (err) {
+          extra.push(err instanceof Error ? err.message : "Ask could not read leftover rows.");
+        }
+      }
       onChange(next);
-      setWarnings(notes);
+      setWarnings(extra);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not read that file.");
     }
@@ -103,7 +148,7 @@ export function MyModelView({
       <p className="lede-note">
         Bring a whole-slate score model, not a game-by-game pick sheet. Download the {season} FBS slate, fill it from
         your model, and upload the results. Matched games show up as Your Prediction on each game page. Kept in this
-        browser only.
+        browser only. You can also tell Ask a side, or drop a pick list — those rows merge in.
       </p>
 
       <ol className="mine-steps">
@@ -127,6 +172,11 @@ export function MyModelView({
         <button type="button" onClick={() => input.current?.click()}>
           Upload results
         </button>
+        {model && (
+          <button type="button" onClick={() => downloadJson(model)}>
+            Export
+          </button>
+        )}
         {model && (
           <button
             type="button"
@@ -213,15 +263,18 @@ export function MyModelView({
                         <TeamLink team={g.home} onOpen={onOpenTeam} />
                       </td>
                       <td>
-                        {pick.pred_away.toFixed(1)}–{pick.pred_home.toFixed(1)}
+                        {hasScores(pick)
+                          ? `${pick.pred_away?.toFixed(1)}–${pick.pred_home?.toFixed(1)}`
+                          : pickLabel(g, pick)}
                       </td>
                       <td>
                         {g.pred_away.toFixed(1)}–{g.pred_home.toFixed(1)}
                       </td>
                       <td>{done ? `${g.actual_away?.toFixed(0)}–${g.actual_home?.toFixed(0)}` : prettyWhen(g.start) ?? "—"}</td>
                       <td>
-                        {signed(predMargin(pick))}
-                        {pick.home_win_prob != null ? ` · ${pct(pick.home_win_prob)}` : ""}
+                        {hasScores(pick)
+                          ? `${signed(predMargin(pick))}${pick.home_win_prob != null ? ` · ${pct(pick.home_win_prob)}` : ""}`
+                          : pickLabel(g, pick)}
                       </td>
                     </tr>
                   );
